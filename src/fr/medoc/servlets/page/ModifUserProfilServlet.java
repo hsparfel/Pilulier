@@ -1,11 +1,7 @@
 package fr.medoc.servlets.page;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -73,13 +69,11 @@ public class ModifUserProfilServlet extends HttpServlet {
 
 		if (session.getAttribute("login") != null) {
 
-			ArrayList<Prescription> listePrescriptionsTries = null;
-			ArrayList<String> listePrescriptionsTriesString = new ArrayList<String>();
-			ArrayList<Medicament> listeMedicamentsTries = null;
+			ArrayList<Prescription> listePrescriptions = null;
+			ArrayList<Medicament> listeMedicaments = null;
 			ArrayList<Dose> listeDoses = null;
 			ArrayList<Frequence> listeFrequences = null;
 			ArrayList<Prise> listePrises = null;
-			ArrayList<String> listePrisesString = new ArrayList<String>();
 			Utilisateur unUtilisateur = null;
 
 			try {
@@ -89,44 +83,16 @@ public class ModifUserProfilServlet extends HttpServlet {
 				unUtilisateur = utilisateurDao.findByName((String) session.getAttribute("login"));
 				System.out.println(unUtilisateur.getId());
 
-				listePrescriptionsTries = (ArrayList<Prescription>) prescriptionDao
+				listePrescriptions = (ArrayList<Prescription>) prescriptionDao
 						.findAllByUser(unUtilisateur.getId());
-				for (int i = 0; i < listePrescriptionsTries.size(); i++) {
-					Medicament unMedoc = medicamentDao
-							.findByRef(listePrescriptionsTries.get(i).getMedicament().getId());
-					int dose = listePrescriptionsTries.get(i).getNbDose();
-					Dose uneDose = doseDao.findByRef(listePrescriptionsTries.get(i).getDose().getId());
-					int frequence = listePrescriptionsTries.get(i).getNbFrequence();
-					Frequence uneFrequence = frequenceDao
-							.findByRef(listePrescriptionsTries.get(i).getFrequence().getId());
-					String prescriptionString = unMedoc.getNom() + " - " + dose + " " + uneDose.getNom() + " "
-							+ frequence + " fois par " + uneFrequence.getNom();
-					System.out.println(prescriptionString);
-					listePrescriptionsTriesString.add(prescriptionString);
-				}
+				
 
 				// System.out.println(listePrescriptionsTriesString);
-				listeMedicamentsTries = (ArrayList<Medicament>) medicamentDao
+				listeMedicaments = (ArrayList<Medicament>) medicamentDao
 						.findAllExcludedByUser((String) session.getAttribute("login"));
 
 				listePrises = (ArrayList<Prise>) priseDao.findAllLastByUser(unUtilisateur.getId());
-				for (int i = 0; i < listePrises.size(); i++) {
-					Medicament unMedoc = medicamentDao.findByRef(listePrises.get(i).getMedicament().getId());
-					String date = listePrises.get(i).getDatePrise();
-					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-					Date dateFormatDate = null;
-					;
-					try {
-						dateFormatDate = dateFormat.parse(date);
-					} catch (ParseException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					SimpleDateFormat formater = new SimpleDateFormat("EEEE, d MMM yyyy");
-					String priseString = unMedoc.getNom() + " - " + formater.format(dateFormatDate);
-					System.out.println(priseString);
-					listePrisesString.add(priseString);
-				}
+				
 
 			} catch (DAOException e) {
 				e.printStackTrace();
@@ -134,9 +100,9 @@ public class ModifUserProfilServlet extends HttpServlet {
 
 			request.setAttribute("listeFrequences", listeFrequences);
 			request.setAttribute("listeDoses", listeDoses);
-			request.setAttribute("listePrescriptionsTries", listePrescriptionsTriesString);
-			request.setAttribute("listeMedicamentsTries", listeMedicamentsTries);
-			request.setAttribute("listePrises", listePrisesString);
+			request.setAttribute("listePrescriptions", listePrescriptions);
+			request.setAttribute("listeMedicaments", listeMedicaments);
+			request.setAttribute("listePrises", listePrises);
 
 			this.getServletContext().getRequestDispatcher(JSP_PAGE).forward(request, response);
 

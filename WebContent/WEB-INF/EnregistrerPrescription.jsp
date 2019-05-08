@@ -18,7 +18,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Enregistrer des medocs</title>
+<title>Enregistrer Prescription</title>
 
 <!-- Bootstrap core CSS -->
 <link
@@ -42,46 +42,94 @@
 
 			<div class="col-xs-12 col-sm-9">
 				<div class="jumbotron">
-					<h1>Enregistrer un medicament</h1>
+					<h1>Enregistrer une prescription</h1>
+					<a href="EnregistrerMedicament" class=" btn btn-default btn-sm">Ajouter
+						Medicament</a>
 				</div>
 
-				<form action="EnregistrerMedicamentAction" method="post">
+				<form id="newMedocInList">
 					<div class="form-group row">
-						<label for="nomMedicament" class="col-2 col-form-label">Nom</label>
-						<div class="col-6">
+						<label for="idmedicament" class="col-2 col-form-label">Medicament</label>
+						<div class="col-10">
+							<select id="idmedicament" name="idmedicament" required="required"
+								class="custom-select">
+								<option disabled selected value>Sélectionnez</option>
+								<c:forEach items="${ listeMedicamentsTries }" var="medicament">
+									<option value="${ medicament.id }">${ medicament.nom }</option>
+								</c:forEach>
+							</select>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="nomMedicament" class="col-2 col-form-label">Quantité</label>
+						<div class="col-10">
 							<div class="input-group">
 								<div class="input-group-prepend">
 									<div class="input-group-text">
-										<i class="fa fa-eyedropper"></i>
+										<i class="fa fa-spoon"></i>
 									</div>
 								</div>
 								<input id="nomMedicament" name="nomMedicament"
-									placeholder="saisir le nom du medicament" type="text"
-									aria-describedby="nomMedicamentHelpBlock" required="required"
-									class="form-control">
+									placeholder="saisir la quantité" type="text"
+									required="required" class="form-control">
 							</div>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="posologieDose" class="col-2 col-form-label">Dose</label>
+						<div class="col-10">
+							<select id="posologieDose" name="posologieDose"
+								class="custom-select" required="required">
+								<option disabled selected value>Sélectionnez</option>
+								<c:forEach items="${ listeDoses }" var="dose">
+									<option value="${ dose.id }">${ dose.nom }</option>
+								</c:forEach>
+							</select>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="text" class="col-2 col-form-label">Interval</label>
+						<div class="col-10">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">
+										<i class="fa fa-clock-o"></i>
+									</div>
+								</div>
+								<input id="text" name="text" placeholder="saisir la fréquence"
+									type="text" class="form-control" required="required">
+							</div>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="posologieFrequence" class="col-2 col-form-label">Fréquence</label>
+						<div class="col-10">
+							<select id="posologieFrequence" name="posologieFrequence"
+								required="required" class="custom-select">
+								<option disabled selected value>Sélectionnez</option>
+								<c:forEach items="${ listeFrequences }" var="frequence">
+									<option value="${ frequence.id }">${ frequence.nom }</option>
+								</c:forEach>
+							</select>
 						</div>
 					</div>
 					<div class="form-group row">
 						<div class="offset-2 col-10">
 							<button name="submit" type="submit" class="btn btn-primary">Valider</button>
-							<a href="EnregistrerPrescription" id="cancel" name="cancel"
+							<a href="ModifProfilUser" id="cancel" name="cancel"
 								class="btn btn-outline-secondary">Annuler</a>
-
 						</div>
 					</div>
 				</form>
+
 			</div>
 
 			<div class="col-xs-6 col-sm-3 " id="sidebar">
 				<div class="list-group">
-					<a href="#" class="list-group-item active">Liste des
-						medicaments</a>
-
-					<c:forEach items="${ listeMedicaments }" var="medicament">
-
-						<a href="#" class="list-group-item">${ medicament.nom }</a>
-
+					<div class="list-group-item active">Liste de mes
+						prescriptions</div>
+					<c:forEach items="${ listePrescriptions }" var="prescription">
+						<div class="list-group-item">${ prescription }</div>
 					</c:forEach>
 				</div>
 			</div>

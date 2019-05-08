@@ -54,7 +54,7 @@ public class EnregistrerMedicamentAction extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		response.sendRedirect("EnregistrerMedicament");
+		response.sendRedirect("EnregistrerPrescription");
 		
 	}
 
