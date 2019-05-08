@@ -88,52 +88,46 @@ public class ModifUserProfilServlet extends HttpServlet {
 
 				unUtilisateur = utilisateurDao.findByName((String) session.getAttribute("login"));
 				System.out.println(unUtilisateur.getId());
-				
+
 				listePrescriptionsTries = (ArrayList<Prescription>) prescriptionDao
 						.findAllByUser(unUtilisateur.getId());
 				for (int i = 0; i < listePrescriptionsTries.size(); i++) {
-					 Medicament unMedoc = medicamentDao.findByRef(listePrescriptionsTries.get(i).getIdMedicament());
-					 int dose=listePrescriptionsTries.get(i).getNbDose();
-					 Dose uneDose = doseDao.findByRef(listePrescriptionsTries.get(i).getIdDose());
-					 int frequence=listePrescriptionsTries.get(i).getNbFrequence();
-					 Frequence uneFrequence =frequenceDao.findByRef(listePrescriptionsTries.get(i).getIdFrequence());
-					 String prescriptionString = unMedoc.getNom()+" - "+dose+" "+uneDose.getNom()+ " "+frequence+ " fois par "+uneFrequence.getNom();
-					 System.out.println(prescriptionString);
+					Medicament unMedoc = medicamentDao
+							.findByRef(listePrescriptionsTries.get(i).getMedicament().getId());
+					int dose = listePrescriptionsTries.get(i).getNbDose();
+					Dose uneDose = doseDao.findByRef(listePrescriptionsTries.get(i).getDose().getId());
+					int frequence = listePrescriptionsTries.get(i).getNbFrequence();
+					Frequence uneFrequence = frequenceDao
+							.findByRef(listePrescriptionsTries.get(i).getFrequence().getId());
+					String prescriptionString = unMedoc.getNom() + " - " + dose + " " + uneDose.getNom() + " "
+							+ frequence + " fois par " + uneFrequence.getNom();
+					System.out.println(prescriptionString);
 					listePrescriptionsTriesString.add(prescriptionString);
 				}
-				
+
 				// System.out.println(listePrescriptionsTriesString);
 				listeMedicamentsTries = (ArrayList<Medicament>) medicamentDao
 						.findAllExcludedByUser((String) session.getAttribute("login"));
-				
-				
+
 				listePrises = (ArrayList<Prise>) priseDao.findAllLastByUser(unUtilisateur.getId());
 				for (int i = 0; i < listePrises.size(); i++) {
-					 Medicament unMedoc = medicamentDao.findByRef(listePrises.get(i).getIdMedicament());
-					 String date =listePrises.get(i).getDatePrise();
-					 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-					 Date dateFormatDate=null;;
+					Medicament unMedoc = medicamentDao.findByRef(listePrises.get(i).getIdMedicament());
+					String date = listePrises.get(i).getDatePrise();
+					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+					Date dateFormatDate = null;
+					;
 					try {
 						dateFormatDate = dateFormat.parse(date);
 					} catch (ParseException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					 SimpleDateFormat formater = new SimpleDateFormat("EEEE, d MMM yyyy");
-					 
-					 
-					 
-					 
-					 
-					 
-					 String priseString = unMedoc.getNom()+" - "+formater.format(dateFormatDate);
-					 System.out.println(priseString);
-					 listePrisesString.add(priseString);
+					SimpleDateFormat formater = new SimpleDateFormat("EEEE, d MMM yyyy");
+					String priseString = unMedoc.getNom() + " - " + formater.format(dateFormatDate);
+					System.out.println(priseString);
+					listePrisesString.add(priseString);
 				}
-				
-				
-				
-				
+
 			} catch (DAOException e) {
 				e.printStackTrace();
 			}

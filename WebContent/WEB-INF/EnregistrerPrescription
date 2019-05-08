@@ -60,8 +60,6 @@
 									aria-describedby="nomMedicamentHelpBlock" required="required"
 									class="form-control">
 							</div>
-							<span id="nomMedicamentHelpBlock" class="form-text text-muted">3
-								caractères minimum</span>
 						</div>
 					</div>
 					<div class="form-group row">

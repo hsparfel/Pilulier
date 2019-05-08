@@ -3,48 +3,48 @@ package fr.medoc.entities;
 public class Prescription {
 
 	private static final long serialVersionUID = 1L;
-	//a revoir
-	private int idUtilisateur;
-	private int idMedicament;
-	private int nbDose;
-	private int idDose;
-	private int nbFrequence;
-	private int idFrequence;
-	
-	public Prescription(int idUtilisateur, int idMedicament, int nbDose, int idDose, int nbFrequence, int idFrequence) {
 
-		this.idUtilisateur = idUtilisateur;
-		this.idMedicament = idMedicament;
+	private Utilisateur utilisateur;
+	private Medicament medicament;
+	private int nbDose;
+	private Dose dose;
+	private int nbFrequence;
+	private Frequence frequence;
+	
+	public Prescription(Utilisateur utilisateur, Medicament medicament, int nbDose, Dose dose, int nbFrequence, Frequence frequence) {
+
+		this.utilisateur = utilisateur;
+		this.medicament = medicament;
 		this.nbDose = nbDose;
-		this.idDose = idDose;
+		this.dose = dose;
 		this.nbFrequence = nbFrequence;
-		this.idFrequence = idFrequence;
+		this.frequence = frequence;
 	}
 
 	public Prescription() {
 
-		this.idUtilisateur = 0;
-		this.idMedicament = 0;
+		this.utilisateur = null;
+		this.medicament = null;
 		this.nbDose = 0;
-		this.idDose = 0;
+		this.dose = null;
 		this.nbFrequence = 0;
-		this.idFrequence = 0;
+		this.frequence = null;
 	}
 
-	public int getIdUtilisateur() {
-		return idUtilisateur;
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
 	}
 
-	public void setIdUtilisateur(int idUtilisateur) {
-		this.idUtilisateur = idUtilisateur;
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 
-	public int getIdMedicament() {
-		return idMedicament;
+	public Medicament getMedicament() {
+		return medicament;
 	}
 
-	public void setIdMedicament(int idMedicament) {
-		this.idMedicament = idMedicament;
+	public void setMedicament(Medicament medicament) {
+		this.medicament = medicament;
 	}
 
 	public int getNbDose() {
@@ -55,12 +55,12 @@ public class Prescription {
 		this.nbDose = nbDose;
 	}
 
-	public int getIdDose() {
-		return idDose;
+	public Dose getDose() {
+		return dose;
 	}
 
-	public void setIdDose(int idDose) {
-		this.idDose = idDose;
+	public void setDose(Dose dose) {
+		this.dose = dose;
 	}
 
 	public int getNbFrequence() {
@@ -71,18 +71,21 @@ public class Prescription {
 		this.nbFrequence = nbFrequence;
 	}
 
-	public int getIdFrequence() {
-		return idFrequence;
+	public Frequence getFrequence() {
+		return frequence;
 	}
 
-	public void setIdFrequence(int idFrequence) {
-		this.idFrequence = idFrequence;
+	public void setFrequence(Frequence frequence) {
+		this.frequence = frequence;
 	}
 
 	@Override
 	public String toString() {
-		return "Prescription [idUtilisateur=" + idUtilisateur + ", idMedicament=" + idMedicament + ", nbDose=" + nbDose
-				+ ", idDose=" + idDose + ", nbFrequence=" + nbFrequence + ", idFrequence=" + idFrequence + "]";
+		return "Prescription [utilisateur=" + utilisateur + ", medicament=" + medicament + ", nbDose=" + nbDose
+				+ ", dose=" + dose + ", nbFrequence=" + nbFrequence + ", frequence=" + frequence + "]";
 	}
+
+	
+
 	
 }
