@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import fr.medoc.dao.PriseDAO;
+import fr.medoc.dao.UtilisateurDAO;
 import fr.medoc.dao.DAOFactory;
+import fr.medoc.dao.MedicamentDAO;
 import fr.medoc.entities.Prise;
 import fr.medoc.entities.Prescription;
 import fr.medoc.exception.DAOException;
@@ -43,8 +45,8 @@ public class PriseDAOImpl implements PriseDAO{
 			connexion = daoFactory.getConnection();
 			getListePrises().add(unePrise);
 			PreparedStatement pst = connexion.prepareStatement(ORDRE_INSERT + VALUES_INSERT, Statement.RETURN_GENERATED_KEYS);
-			pst.setInt(1, unePrise.getIdUtilisateur());
-			pst.setInt(2, unePrise.getIdMedicament());
+			pst.setInt(1, unePrise.getUtilisateur().getId());
+			pst.setInt(2, unePrise.getMedicament().getId());
 			pst.setString(3, unePrise.getDatePrise());
 			pst.executeUpdate();
 			rs = pst.getGeneratedKeys();
@@ -76,6 +78,14 @@ public class PriseDAOImpl implements PriseDAO{
 	public Prise findByRef (int id) throws DAOException{
 		Prise unePrise = null;
 		Connection connexion = null;
+		UtilisateurDAO unUtilisateurDAO = daoFactory.getUtilisateurDAO();
+		MedicamentDAO unMedicamentDAO = daoFactory.getMedicamentDAO();
+		
+		
+		
+		
+		
+		
 		try {
 			connexion = daoFactory.getConnection();
 			PreparedStatement pst = connexion.prepareStatement(ORDRE_FINDBYREF);
@@ -83,7 +93,7 @@ public class PriseDAOImpl implements PriseDAO{
 
 			ResultSet rs = pst.executeQuery();
 			if (rs.next()) {
-				unePrise = new Prise(rs.getInt("id_utilisateur"),rs.getInt("id_medicament"), rs.getString("date"));	
+				unePrise = new Prise(unUtilisateurDAO.findByRef(rs.getInt("id_utilisateur")),unMedicamentDAO.findByRef(rs.getInt("id_medicament")), rs.getString("date"));	
 				unePrise.setId(id);
 			} else {
 				throw new DAOException("Erreur recherche d'une prise. " );
@@ -123,13 +133,19 @@ public class PriseDAOImpl implements PriseDAO{
 	
 	
 	private void resultSetToArrayList(ResultSet resultSet)
-			throws SQLException {
+			throws SQLException, DAOException {
 
 		while (resultSet.next()) {
 			Prise a = new Prise();
+			UtilisateurDAO unUtilisateurDAO = daoFactory.getUtilisateurDAO();
+			MedicamentDAO unMedicamentDAO = daoFactory.getMedicamentDAO();
+			
+			
+			
+			
 			a.setId(resultSet.getInt("id"));
-			a.setIdUtilisateur(resultSet.getInt("id_utilisateur"));
-			a.setIdMedicament(resultSet.getInt("id_medicament"));
+			a.setUtilisateur(unUtilisateurDAO.findByRef(resultSet.getInt("id_utilisateur")));
+			a.setMedicament(unMedicamentDAO.findByRef(resultSet.getInt("id_medicament")));
 			a.setDatePrise(resultSet.getString("date"));
 			
 			getListePrises().add(a);

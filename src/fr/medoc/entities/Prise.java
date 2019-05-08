@@ -9,14 +9,14 @@ public class Prise {
 	private static final long serialVersionUID = 1L;
 	
 	private int id;
-	private int idUtilisateur;
-	private int idMedicament;
+	private Utilisateur utilisateur;
+	private Medicament medicament;
 	private String datePrise;
 	
-	public Prise(int idUtilisateur, int idMedicament, String datePrise) {
+	public Prise(Utilisateur unUtilisateur, Medicament unMedicament, String datePrise) {
 	
-		this.idUtilisateur = idUtilisateur;
-		this.idMedicament = idMedicament;
+		this.utilisateur = unUtilisateur;
+		this.medicament = unMedicament;
 		this.datePrise = datePrise;
 	}
 
@@ -25,13 +25,11 @@ public class Prise {
 		formater = new SimpleDateFormat("yyyy-MM-dd");
 		Date aujourdhui = new Date();
 		
-		this.idUtilisateur = 0;
-		this.idMedicament = 0;
+		this.utilisateur = null;
+		this.medicament = null;
 		this.datePrise = formater.format(aujourdhui);
 	}
 
-	
-	
 	public int getId() {
 		return id;
 	}
@@ -40,20 +38,20 @@ public class Prise {
 		this.id = id;
 	}
 
-	public int getIdUtilisateur() {
-		return idUtilisateur;
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
 	}
 
-	public void setIdUtilisateur(int idUtilisateur) {
-		this.idUtilisateur = idUtilisateur;
+	public void setUtilisateur(Utilisateur unUtilisateur) {
+		this.utilisateur = unUtilisateur;
 	}
 
-	public int getIdMedicament() {
-		return idMedicament;
+	public Medicament getMedicament() {
+		return medicament;
 	}
 
-	public void setIdMedicament(int idMedicament) {
-		this.idMedicament = idMedicament;
+	public void setMedicament(Medicament unMedicament) {
+		this.medicament = unMedicament;
 	}
 
 	public String getDatePrise() {
@@ -66,9 +64,17 @@ public class Prise {
 
 	@Override
 	public String toString() {
-		return "Prise [id=" + id + ", idUtilisateur=" + idUtilisateur + ", idMedicament=" + idMedicament
+		return "Prise [id=" + id + ", utilisateur=" + utilisateur + ", medicament=" + medicament
 				+ ", datePrise=" + datePrise + "]";
 	}
+
+	
+	
+	
+
+	
+
+	
 
 	
 

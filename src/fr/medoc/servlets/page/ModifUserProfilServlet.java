@@ -111,7 +111,7 @@ public class ModifUserProfilServlet extends HttpServlet {
 
 				listePrises = (ArrayList<Prise>) priseDao.findAllLastByUser(unUtilisateur.getId());
 				for (int i = 0; i < listePrises.size(); i++) {
-					Medicament unMedoc = medicamentDao.findByRef(listePrises.get(i).getIdMedicament());
+					Medicament unMedoc = medicamentDao.findByRef(listePrises.get(i).getMedicament().getId());
 					String date = listePrises.get(i).getDatePrise();
 					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 					Date dateFormatDate = null;
