@@ -116,4 +116,16 @@ public class DAOFactory {
     public PriseDAO getPriseDAO() {
         return new PriseDAOImpl(this);
     }
+    
+    public MedecinDAO getMedecinDAO() {
+        return new MedecinDAOImpl(this);
+    }
+    
+    public SpecialiteDAO getSpecialiteDAO() {
+        return new SpecialiteDAOImpl(this);
+    }
+    
+    public CabinetDAO getCabinetDAO() {
+        return new CabinetDAOImpl(this);
+    }
 }

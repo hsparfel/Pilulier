@@ -8,24 +8,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import fr.medoc.dao.MedicamentDAO;
+import fr.medoc.dao.FrequenceDAO;
 import fr.medoc.dao.DAOFactory;
-import fr.medoc.entities.Medicament;
+import fr.medoc.entities.Frequence;
 import fr.medoc.exception.DAOConfigurationException;
 import fr.medoc.exception.DAOException;
 
-@WebServlet("/EnregistrerMedicamentAction")
-public class EnregistrerMedicamentAction extends HttpServlet {
+@WebServlet("/EnregistrerFrequenceAction")
+public class EnregistrerFrequenceAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	private DAOFactory daoFactory;
-	private MedicamentDAO medicamentDao;
+	private FrequenceDAO frequenceDao;
 
 	@Override 
 	public void init() throws ServletException {
 		try {
 			daoFactory = DAOFactory.getInstance();
-			medicamentDao = daoFactory.getMedicamentDAO();
+			frequenceDao = daoFactory.getFrequenceDAO();
 		} catch (DAOConfigurationException e) {
 			e.printStackTrace();
 		}
@@ -41,12 +41,12 @@ public class EnregistrerMedicamentAction extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nomMedicament = request.getParameter("nomMedicament");
+		String nomFrequence = request.getParameter("nomFrequence");
 	
-		Medicament nouveauMedicament = new Medicament(nomMedicament);
+		Frequence nouveauFrequence = new Frequence(nomFrequence);
 		
 		try {
-			medicamentDao.ajouterMedicament(nouveauMedicament);
+			frequenceDao.ajouterFrequence(nouveauFrequence);
 		} catch (DAOException e) {
 			e.printStackTrace();
 		}

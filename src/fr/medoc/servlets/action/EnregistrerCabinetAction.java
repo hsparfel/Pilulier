@@ -8,24 +8,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import fr.medoc.dao.MedicamentDAO;
+import fr.medoc.dao.CabinetDAO;
 import fr.medoc.dao.DAOFactory;
-import fr.medoc.entities.Medicament;
+import fr.medoc.entities.Cabinet;
 import fr.medoc.exception.DAOConfigurationException;
 import fr.medoc.exception.DAOException;
 
-@WebServlet("/EnregistrerMedicamentAction")
-public class EnregistrerMedicamentAction extends HttpServlet {
+
+@WebServlet("/EnregistrerCabinetAction")
+public class EnregistrerCabinetAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	private DAOFactory daoFactory;
-	private MedicamentDAO medicamentDao;
+	private CabinetDAO cabinetDao;
 
 	@Override 
 	public void init() throws ServletException {
 		try {
 			daoFactory = DAOFactory.getInstance();
-			medicamentDao = daoFactory.getMedicamentDAO();
+			cabinetDao = daoFactory.getCabinetDAO();
 		} catch (DAOConfigurationException e) {
 			e.printStackTrace();
 		}
@@ -41,17 +42,20 @@ public class EnregistrerMedicamentAction extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nomMedicament = request.getParameter("nomMedicament");
-	
-		Medicament nouveauMedicament = new Medicament(nomMedicament);
+		String nomCabinet = request.getParameter("nomCabinet");
+		String adresseCabinet = request.getParameter("adresseCabinet");
+		String cpCabinet = request.getParameter("cpCabinet");
+		String villeCabinet = request.getParameter("villeCabinet");
+		
+		Cabinet nouveauCabinet = new Cabinet(nomCabinet,adresseCabinet,cpCabinet,villeCabinet);
 		
 		try {
-			medicamentDao.ajouterMedicament(nouveauMedicament);
+			cabinetDao.ajouterCabinet(nouveauCabinet);
 		} catch (DAOException e) {
 			e.printStackTrace();
 		}
 		
-		response.sendRedirect("EnregistrerPrescription");
+		response.sendRedirect("EnregistrerMedecin");
 		
 	}
 

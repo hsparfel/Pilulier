@@ -10,25 +10,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import fr.medoc.dao.MedicamentDAO;
+import fr.medoc.dao.SpecialiteDAO;
 import fr.medoc.dao.DAOFactory;
-import fr.medoc.entities.Medicament;
+import fr.medoc.entities.Specialite;
 import fr.medoc.exception.DAOConfigurationException;
 import fr.medoc.exception.DAOException;
 
-@WebServlet("/EnregistrerMedicament")
-public class EnregistrerMedicamentServlet extends HttpServlet {
+@WebServlet("/EnregistrerSpecialite")
+public class EnregistrerSpecialiteServlet extends HttpServlet {
 
-	private final String JSP_PAGE = "/WEB-INF/EnregistrerMedicament.jsp";
+	private final String JSP_PAGE = "/WEB-INF/EnregistrerSpecialite.jsp";
 
 	private DAOFactory daoFactory;
-	private MedicamentDAO medicamentDao;
+	private SpecialiteDAO specialiteDao;
 
 	@Override 
 	public void init() throws ServletException {
 		try {
 			daoFactory = DAOFactory.getInstance();
-			medicamentDao = daoFactory.getMedicamentDAO();
+			specialiteDao = daoFactory.getSpecialiteDAO();
 		} catch (DAOConfigurationException e) {
 			e.printStackTrace();
 		}
@@ -49,14 +49,14 @@ public class EnregistrerMedicamentServlet extends HttpServlet {
 
 		if (session.getAttribute("login") != null) {
 
-			ArrayList<Medicament> listeMedicaments = null;
+			ArrayList<Specialite> listeSpecialites = null;
 			try {
-				listeMedicaments = (ArrayList<Medicament>) medicamentDao.findAll();	
+				listeSpecialites = (ArrayList<Specialite>) specialiteDao.findAll();	
 			} catch (DAOException e) {
 				e.printStackTrace();
 			}
 
-			request.setAttribute("listeMedicaments", listeMedicaments);
+			request.setAttribute("listeSpecialites", listeSpecialites);
 
 			this.getServletContext().getRequestDispatcher(JSP_PAGE).forward(request, response);
 

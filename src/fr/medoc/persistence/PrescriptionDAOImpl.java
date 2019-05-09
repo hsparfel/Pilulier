@@ -98,6 +98,7 @@ public class PrescriptionDAOImpl implements PrescriptionDAO {
 			MedicamentDAO unMedicamentDAO = daoFactory.getMedicamentDAO();
 			DoseDAO uneDoseDAO = daoFactory.getDoseDAO();
 			FrequenceDAO uneFrequenceDAO = daoFactory.getFrequenceDAO();
+			
 			a.setUtilisateur(unUtilisateurDAO.findByRef(resultSet.getInt("id_utilisateur")));
 			a.setMedicament(unMedicamentDAO.findByRef(resultSet.getInt("id_medicament")));
 			a.setNbDose(resultSet.getInt("nb_dose"));

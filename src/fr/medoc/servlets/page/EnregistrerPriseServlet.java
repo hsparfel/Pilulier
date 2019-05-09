@@ -11,24 +11,26 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.medoc.dao.MedicamentDAO;
+import fr.medoc.dao.PriseDAO;
 import fr.medoc.dao.DAOFactory;
 import fr.medoc.entities.Medicament;
+import fr.medoc.entities.Prise;
 import fr.medoc.exception.DAOConfigurationException;
 import fr.medoc.exception.DAOException;
 
-@WebServlet("/EnregistrerMedicament")
-public class EnregistrerMedicamentServlet extends HttpServlet {
+@WebServlet("/EnregistrerPrise")
+public class EnregistrerPriseServlet extends HttpServlet {
 
-	private final String JSP_PAGE = "/WEB-INF/EnregistrerMedicament.jsp";
+	private final String JSP_PAGE = "/WEB-INF/EnregistrerPrise.jsp";
 
 	private DAOFactory daoFactory;
-	private MedicamentDAO medicamentDao;
+	private PriseDAO priseDao;
 
 	@Override 
 	public void init() throws ServletException {
 		try {
 			daoFactory = DAOFactory.getInstance();
-			medicamentDao = daoFactory.getMedicamentDAO();
+			priseDao = daoFactory.getPriseDAO();
 		} catch (DAOConfigurationException e) {
 			e.printStackTrace();
 		}
@@ -49,14 +51,14 @@ public class EnregistrerMedicamentServlet extends HttpServlet {
 
 		if (session.getAttribute("login") != null) {
 
-			ArrayList<Medicament> listeMedicaments = null;
+			ArrayList<Prise> listePrises = null;
 			try {
-				listeMedicaments = (ArrayList<Medicament>) medicamentDao.findAll();	
+				listePrises = (ArrayList<Prise>) priseDao.findAll();	
 			} catch (DAOException e) {
 				e.printStackTrace();
 			}
 
-			request.setAttribute("listeMedicaments", listeMedicaments);
+			request.setAttribute("listePrises", listePrises);
 
 			this.getServletContext().getRequestDispatcher(JSP_PAGE).forward(request, response);
 

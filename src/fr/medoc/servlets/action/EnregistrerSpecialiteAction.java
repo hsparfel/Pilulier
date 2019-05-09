@@ -8,24 +8,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import fr.medoc.dao.MedicamentDAO;
+import fr.medoc.dao.SpecialiteDAO;
 import fr.medoc.dao.DAOFactory;
-import fr.medoc.entities.Medicament;
+import fr.medoc.entities.Specialite;
 import fr.medoc.exception.DAOConfigurationException;
 import fr.medoc.exception.DAOException;
 
-@WebServlet("/EnregistrerMedicamentAction")
-public class EnregistrerMedicamentAction extends HttpServlet {
+
+@WebServlet("/EnregistrerSpecialiteAction")
+public class EnregistrerSpecialiteAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	private DAOFactory daoFactory;
-	private MedicamentDAO medicamentDao;
+	private SpecialiteDAO specialiteDao;
 
 	@Override 
 	public void init() throws ServletException {
 		try {
 			daoFactory = DAOFactory.getInstance();
-			medicamentDao = daoFactory.getMedicamentDAO();
+			specialiteDao = daoFactory.getSpecialiteDAO();
 		} catch (DAOConfigurationException e) {
 			e.printStackTrace();
 		}
@@ -41,17 +42,17 @@ public class EnregistrerMedicamentAction extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nomMedicament = request.getParameter("nomMedicament");
+		String nomSpecialite = request.getParameter("nomSpecialite");
 	
-		Medicament nouveauMedicament = new Medicament(nomMedicament);
+		Specialite nouveauSpecialite = new Specialite(nomSpecialite);
 		
 		try {
-			medicamentDao.ajouterMedicament(nouveauMedicament);
+			specialiteDao.ajouterSpecialite(nouveauSpecialite);
 		} catch (DAOException e) {
 			e.printStackTrace();
 		}
 		
-		response.sendRedirect("EnregistrerPrescription");
+		response.sendRedirect("EnregistrerMedecin");
 		
 	}
 

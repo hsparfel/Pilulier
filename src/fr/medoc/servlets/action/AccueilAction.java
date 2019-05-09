@@ -15,7 +15,6 @@ import fr.medoc.entities.Utilisateur;
 import fr.medoc.exception.DAOConfigurationException;
 import fr.medoc.exception.DAOException;
 
-
 @WebServlet("/AccueilAction")
 public class AccueilAction extends HttpServlet {
 	private DAOFactory daoFactory;
