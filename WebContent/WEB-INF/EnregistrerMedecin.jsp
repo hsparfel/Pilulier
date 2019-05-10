@@ -43,12 +43,13 @@
 			<div class="col-xs-12 col-sm-9">
 				<div class="jumbotron">
 					<h1>Enregistrer un medecin</h1>
-					<a href="EnregistrerCabinet" class=" btn btn-default btn-sm">Ajouter
-						Cabinet</a> <a href="EnregistrerSpecialite"
-						class=" btn btn-default btn-sm">Ajouter Specialite</a>
+					<a href="EnregistrerSpecialite" class=" btn btn-default btn-sm">Ajouter
+						Specialite</a> <a href="EnregistrerCabinet"
+						class=" btn btn-default btn-sm">Ajouter Cabinet</a>
 				</div>
 
-				<form id="newMedecinInList" action="EnregistrerMedecinAction" method="post">
+				<form id="newMedecinInList" action="EnregistrerMedecinAction"
+					method="post">
 					<div class="form-group row">
 						<label for="nomMedecin" class="col-2 col-form-label">Nom</label>
 						<div class="col-6">
@@ -65,18 +66,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="form-group row">
-						<label for="idCabinet" class="col-2 col-form-label">Cabinet</label>
-						<div class="col-6">
-							<select id="idCabinet" name="idCabinet" required="required"
-								class="custom-select">
-								<option disabled selected value>Sélectionner</option>
-								<c:forEach items="${ listeCabinets }" var="cabinet">
-									<option value="${ cabinet.id }">${ cabinet.nom }</option>
-								</c:forEach>
-							</select>
-						</div>
-					</div>
+
 					<div class="form-group row">
 						<label for="idSpecialite" class="col-2 col-form-label">Specialite</label>
 						<div class="col-6">
@@ -89,7 +79,18 @@
 							</select>
 						</div>
 					</div>
-					
+					<div class="form-group row">
+						<label for="idCabinet" class="col-2 col-form-label">Cabinet</label>
+						<div class="col-6">
+							<select id="idCabinet" name="idCabinet" required="required"
+								class="custom-select">
+								<option disabled selected value>Sélectionner</option>
+								<c:forEach items="${ listeCabinets }" var="cabinet">
+									<option value="${ cabinet.id }">${ cabinet.nom }</option>
+								</c:forEach>
+							</select>
+						</div>
+					</div>
 					<div class="form-group row">
 						<label for="nomTelephone" class="col-2 col-form-label">Telephone</label>
 						<div class="col-6">
@@ -105,7 +106,7 @@
 							</div>
 						</div>
 					</div>
-					
+
 					<div class="form-group row">
 						<label for="nomEmail" class="col-2 col-form-label">Email</label>
 						<div class="col-6">
@@ -115,16 +116,17 @@
 										<i class="fa fa-envelope"></i>
 									</div>
 								</div>
-								<input id="nomEmail" name="nomEmail" placeholder="saisir une valeur"
-									type="text" class="form-control" required="required">
+								<input id="nomEmail" name="nomEmail"
+									placeholder="saisir une valeur" type="text"
+									class="form-control" required="required">
 							</div>
 						</div>
 					</div>
-					
+
 					<div class="form-group row">
 						<div class="offset-2 col-6">
 							<button name="submit" type="submit" class="btn btn-primary">Valider</button>
-							<a href="EnregistrerPrescription" id="cancel" name="cancel"
+							<a href="AssocierMedecin" id="cancel" name="cancel"
 								class="btn btn-outline-secondary">Annuler</a>
 						</div>
 					</div>
@@ -136,7 +138,7 @@
 				<div class="list-group">
 					<div class="list-group-item active">Liste des medecins</div>
 					<c:forEach items="${ listeMedecins }" var="medecin">
-						<div class="list-group-item">${ medecin }</div>
+						<div class="list-group-item">${ medecin.nom }<br>${ medecin.specialite.nom }<br>${ medecin.cabinet.nom }</div>
 					</c:forEach>
 				</div>
 			</div>

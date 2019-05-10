@@ -42,46 +42,43 @@
 
 			<div class="col-xs-12 col-sm-9">
 				<div class="jumbotron">
-					<h1>Enregistrer une frequence</h1>
+					<h1>Associer un medecin</h1>
+					
+					<a href="EnregistrerMedecin" class=" btn btn-default btn-sm">Ajouter
+						Medecin</a> 
 				</div>
 
-				<form action="EnregistrerFrequenceAction" method="post">
+				<form >
 					<div class="form-group row">
-						<label for="nomFrequence" class="col-2 col-form-label">Nom</label>
+						<label for="idMedecin" class="col-2 col-form-label">Medecin</label>
 						<div class="col-6">
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<div class="input-group-text">
-										<i class="fa fa-clock-o"></i>
-									</div>
-								</div>
-								<input id="nomFrequence" name="nomFrequence"
-									placeholder="saisir le nom de la frequence" type="text"
-									aria-describedby="nomFrequenceHelpBlock" required="required"
-									class="form-control">
-							</div>
+							<select id="idMedecin" name="idMedecin" required="required"
+								class="custom-select">
+								<option disabled selected value>Sélectionner</option>
+								<c:forEach items="${ listeMedecinsExclus }" var="medecin">
+									<option value="${ medecin.id }">${ medecin.nom }</option>
+								</c:forEach>
+							</select>
 						</div>
 					</div>
+					
 					<div class="form-group row">
-						<div class="offset-2 col-10">
+						<div class="offset-2 col-6">
 							<button name="submit" type="submit" class="btn btn-primary">Valider</button>
-							<a href="EnregistrerPrescription" id="cancel" name="cancel"
+							<a href="ModifUserProfil" id="cancel" name="cancel"
 								class="btn btn-outline-secondary">Annuler</a>
-
 						</div>
 					</div>
 				</form>
+
 			</div>
 
 			<div class="col-xs-6 col-sm-3 " id="sidebar">
 				<div class="list-group">
-					<a href="#" class="list-group-item active">Liste des
-						frequences</a>
-
-					<c:forEach items="${ listeFrequences }" var="frequence">
-
-						<a href="#" class="list-group-item">${ frequence.nom }</a>
-
+					<div class="list-group-item active">Liste de mes
+						medecins</div>
+					<c:forEach items="${ listeMedecinsTries }" var="medecin">
+						<div class="list-group-item">${ medecin }- ${ medecin.specialite }</div>
 					</c:forEach>
 				</div>
 			</div>

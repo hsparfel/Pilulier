@@ -13,11 +13,13 @@ import fr.medoc.dao.UtilisateurDAO;
 import fr.medoc.dao.DAOFactory;
 import fr.medoc.dao.DoseDAO;
 import fr.medoc.dao.FrequenceDAO;
+import fr.medoc.dao.MedecinDAO;
 import fr.medoc.dao.MedicamentDAO;
 import fr.medoc.dao.PrescriptionDAO;
 import fr.medoc.dao.PriseDAO;
 import fr.medoc.entities.Dose;
 import fr.medoc.entities.Frequence;
+import fr.medoc.entities.Medecin;
 import fr.medoc.entities.Medicament;
 import fr.medoc.entities.Prescription;
 import fr.medoc.entities.Prise;
@@ -36,6 +38,7 @@ public class ModifUserProfilServlet extends HttpServlet {
 	private MedicamentDAO medicamentDao;
 	private UtilisateurDAO utilisateurDao;
 	private PriseDAO priseDao;
+	private MedecinDAO medecinDao;
 
 	@Override
 	public void init() throws ServletException {
@@ -47,7 +50,7 @@ public class ModifUserProfilServlet extends HttpServlet {
 			medicamentDao = daoFactory.getMedicamentDAO();
 			utilisateurDao = daoFactory.getUtilisateurDAO();
 			priseDao = daoFactory.getPriseDAO();
-
+			medecinDao = daoFactory.getMedecinDAO();
 		} catch (DAOConfigurationException e) {
 			e.printStackTrace();
 		}
@@ -74,12 +77,13 @@ public class ModifUserProfilServlet extends HttpServlet {
 			ArrayList<Dose> listeDoses = null;
 			ArrayList<Frequence> listeFrequences = null;
 			ArrayList<Prise> listePrises = null;
+			ArrayList<Medecin> listeMedecins = null;
 			Utilisateur unUtilisateur = null;
 
 			try {
 				listeFrequences = (ArrayList<Frequence>) frequenceDao.findAll();
 				listeDoses = (ArrayList<Dose>) doseDao.findAll();
-
+				listeMedecins = (ArrayList<Medecin>) medecinDao.findAll();
 				unUtilisateur = utilisateurDao.findByName((String) session.getAttribute("login"));
 				System.out.println(unUtilisateur.getId());
 
@@ -103,7 +107,7 @@ public class ModifUserProfilServlet extends HttpServlet {
 			request.setAttribute("listePrescriptions", listePrescriptions);
 			request.setAttribute("listeMedicaments", listeMedicaments);
 			request.setAttribute("listePrises", listePrises);
-
+			request.setAttribute("listeMedecins", listeMedecins);
 			this.getServletContext().getRequestDispatcher(JSP_PAGE).forward(request, response);
 
 		} else {

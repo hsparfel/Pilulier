@@ -20,7 +20,7 @@ public class CabinetDAOImpl implements CabinetDAO{
 	private final String ORDRE_INSERT = "insert into cabinet(Nom,adresse,cp,ville) values ";
 	private final String VALUES_INSERT = "(?,?,?,?)";
 	private final String ORDRE_DELETE = "delete from cabinet where Id = ";
-	private final String ORDRE_FINDALL = "select Id,Nom,adresse,cp,ville from cabinet";
+	private final String ORDRE_FINDALL = "select * from cabinet";
 	private final String ORDRE_FINDBYREF = "select Id,Nom,adresse,cp,ville from cabinet where Id = ?";
 	private final String ORDRE_FINDBYNAME = "select Id,Nom,adresse,cp,ville from cabinet where Nom = ?";
 	

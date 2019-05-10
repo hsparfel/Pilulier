@@ -18,7 +18,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Enregistrer des doses</title>
+<title>Pilulier</title>
 
 <!-- Bootstrap core CSS -->
 <link

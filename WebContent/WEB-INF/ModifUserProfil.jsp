@@ -18,7 +18,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Modif Profil</title>
+<title>Pilulier</title>
 
 <!-- Bootstrap core CSS -->
 <link
@@ -33,9 +33,15 @@
 		<div class="row">
 			<div class="col-xs-12 col-sm-8">
 				<div class="jumbotron">
-					<h1>Mon Profil (${ sessionScope.login })</h1>
-					<a id="BtnAddMedocInList" class=" btn btn-default btn-sm" href="EnregistrerPrescription">Ajouter
-						Prescription à ma Liste</a>
+					<h1>Mon Profil</h1>
+					
+						<a  class=" btn btn-default btn-sm" href="AssocierMedecin">Associer Medecin</a>
+						<a  class=" btn btn-default btn-sm" href="EnregistrerPrise">Ajouter
+						Prise</a>
+						<a class=" btn btn-default btn-sm" href="EnregistrerPrescription">Ajouter
+						Prescription</a>
+						<a class=" btn btn-default btn-sm" href="EnregistrerRdv">Ajouter
+						Rendez-vous</a>
 				</div>
 				
 			</div>
@@ -53,6 +59,13 @@
 						prises</div>
 					<c:forEach items="${ listePrises }" var="prise">
 						<div class="list-group-item">${ prise.medicament.getNom() } - ${ prise.datePrise }</div>
+					</c:forEach>
+
+				</div>
+				<div class="list-group">
+					<div class="list-group-item active">Liste de mes medecins</div>
+					<c:forEach items="${ listeMedecins }" var="medecin">
+						<div class="list-group-item">${ medecin.getNom() } - ${ medecin.getSpecialite().getNom() }</div>
 					</c:forEach>
 
 				</div>

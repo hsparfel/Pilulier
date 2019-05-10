@@ -42,30 +42,30 @@
 
 			<div class="col-xs-12 col-sm-9">
 				<div class="jumbotron">
-					<h1>Enregistrer une frequence</h1>
+					<h1>Enregistrer un utilisateur</h1>
 				</div>
 
-				<form action="EnregistrerFrequenceAction" method="post">
+				<form action="EnregistrerUtilisateurAction" method="post">
 					<div class="form-group row">
-						<label for="nomFrequence" class="col-2 col-form-label">Nom</label>
+						<label for="nomUtilisateur" class="col-2 col-form-label">Nom</label>
 						<div class="col-6">
 							<div class="input-group">
 								<div class="input-group-prepend">
 									<div class="input-group-text">
-										<i class="fa fa-clock-o"></i>
+										<i class="fa fa-user-circle-o"></i>
 									</div>
 								</div>
-								<input id="nomFrequence" name="nomFrequence"
-									placeholder="saisir le nom de la frequence" type="text"
-									aria-describedby="nomFrequenceHelpBlock" required="required"
+								<input id="nomUtilisateur" name="nomUtilisateur"
+									placeholder="saisir le nom de l'utilisateur" type="text"
+									aria-describedby="nomUtilisateurHelpBlock" required="required"
 									class="form-control">
 							</div>
 						</div>
 					</div>
 					<div class="form-group row">
-						<div class="offset-2 col-10">
+						<div class="offset-2 col-6">
 							<button name="submit" type="submit" class="btn btn-primary">Valider</button>
-							<a href="EnregistrerPrescription" id="cancel" name="cancel"
+							<a href="Accueil" id="cancel" name="cancel"
 								class="btn btn-outline-secondary">Annuler</a>
 
 						</div>
@@ -76,18 +76,18 @@
 			<div class="col-xs-6 col-sm-3 " id="sidebar">
 				<div class="list-group">
 					<a href="#" class="list-group-item active">Liste des
-						frequences</a>
+						utilisateurs</a>
 
-					<c:forEach items="${ listeFrequences }" var="frequence">
+					<c:forEach items="${ listeUtilisateurs }" var="utilisateur">
 
-						<a href="#" class="list-group-item">${ frequence.nom }</a>
+						<a href="#" class="list-group-item">${ utilisateur.nom }</a>
 
 					</c:forEach>
 				</div>
 			</div>
-			<!--/.sidebar-offcanvas-->
+			
 		</div>
-		<!--/row-->
+		
 
 		<hr>
 		<c:import url="footer.jsp"></c:import>

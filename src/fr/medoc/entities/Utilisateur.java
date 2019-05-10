@@ -2,22 +2,17 @@ package fr.medoc.entities;
 
 public class Utilisateur {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private int id;
-	private String login;
+	private String nom;
 
 	public Utilisateur() {
-
-		this.login="";
+		this.nom = "";
 	}
-	
-	public Utilisateur(String nom){
-		
-		this.login= nom;
+
+	public Utilisateur(String nom) {
+		this.nom = nom;
 	}
 
 	public int getId() {
@@ -28,21 +23,17 @@ public class Utilisateur {
 		this.id = id;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getNom() {
+		return nom;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 
 	@Override
 	public String toString() {
-		return "Utilisateur [login=" + login + "]";
+		return "Utilisateur [id=" + id + ", nom=" + nom + "]";
 	}
-
-	
-
-	
 
 }

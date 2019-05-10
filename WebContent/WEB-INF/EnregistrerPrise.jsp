@@ -18,7 +18,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Enregistrer des prises</title>
+<title>Pilulier</title>
 
 <!-- Bootstrap core CSS -->
 <link
@@ -65,7 +65,7 @@
 					<div class="form-group row">
 						<div class="offset-2 col-10">
 							<button name="submit" type="submit" class="btn btn-primary">Valider</button>
-							<a href="EnregistrerPrise" id="cancel" name="cancel"
+							<a href="ModifUserProfil" id="cancel" name="cancel"
 								class="btn btn-outline-secondary">Annuler</a>
 
 						</div>

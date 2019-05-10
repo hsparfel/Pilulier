@@ -18,7 +18,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Connexion</title>
+<title>Pilulier</title>
 
 <!-- Bootstrap core CSS -->
 <link
@@ -43,38 +43,26 @@
 						<c:forEach items="${ listeUtilisateurs }" var="utilisateur"
 							varStatus="count">
 							<button id="${ utilisateur.id }"
-								class="col-sm-3 userexistant btn btn-default btn-sm text-primary">${ utilisateur.login }</button>
+								class="col-sm-3 userexistant btn btn-default btn-sm text-primary">${ utilisateur.nom }</button>
 							<form class="form-inline d-none" action="AccueilAction"
 								method="post">
 								<div class="form-group">
 									<input type="text" name="nomUtilisateur"
-										value=${ utilisateur.login }>
+										value=${ utilisateur.nom }>
 								</div>
 								<div class="form-group">
 									<button id="ExistingUserSubmit${ utilisateur.id }"
 										type="submit" class="btn btn-sm btn-primary">Valider</button>
+										
 								</div>
 							</form>
 						</c:forEach>
 					</div>
 				</div>
-				<div id="newuser" class="d-none">
-					<form class="form-inline" action="AccueilAction" method="post">
-
-						<div class="form-group">
-							<input type="text" name="nomUtilisateur"
-								placeholder="saisir le pseudo">
-						</div>
-						<div class="form-group">
-							<button type="submit" class="btn btn-sm btn-primary">Valider</button>
-						</div>
-					</form>
-				</div>
+				
 				<div class="row justify-content-md-center">
-					<button id="boutonplus" type="button"
-						class="col-sm-3 btn btn-default btn-sm text-muted">
-						<span> Nouvel Utilisateur</span>
-					</button>
+					
+					<a  class=" btn btn-default btn-sm text-muted" href="EnregistrerUtilisateur">Nouvel Utilisateur</a>
 				</div>
 			</div>
 		</div>

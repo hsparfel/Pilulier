@@ -39,7 +39,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 			connexion = daoFactory.getConnection();
 			getListeUtilisateurs().add(unUtilisateur);
 			PreparedStatement pst = connexion.prepareStatement(ORDRE_INSERT + VALUES_INSERT, Statement.RETURN_GENERATED_KEYS);
-			pst.setString(1, unUtilisateur.getLogin());
+			pst.setString(1, unUtilisateur.getNom());
 			pst.executeUpdate();
 			rs = pst.getGeneratedKeys();
 			if (rs.next()){
@@ -142,7 +142,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 		while (resultSet.next()) {
 			Utilisateur a = new Utilisateur();
 			a.setId(resultSet.getInt("id"));
-			a.setLogin(resultSet.getString("nom"));
+			a.setNom(resultSet.getString("nom"));
 			getListeUtilisateurs().add(a);
 		}
 	}

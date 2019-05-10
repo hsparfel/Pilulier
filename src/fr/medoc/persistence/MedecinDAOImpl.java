@@ -14,6 +14,7 @@ import fr.medoc.dao.CabinetDAO;
 import fr.medoc.dao.DAOFactory;
 import fr.medoc.dao.DoseDAO;
 import fr.medoc.entities.Medecin;
+import fr.medoc.entities.Medicament;
 import fr.medoc.entities.Prescription;
 import fr.medoc.exception.DAOException;
 
@@ -22,6 +23,8 @@ public class MedecinDAOImpl implements MedecinDAO{
 	
 	private ArrayList<Medecin> listeMedecins;
 	private ArrayList<Medecin> listeMedecinsTries;
+	private ArrayList<Medecin> listeMedecinsExclus;
+	
 	private final String ORDRE_INSERT = "insert into medecin(Nom,id_specialite,id_cabinet,telephone, email) values ";
 	private final String VALUES_INSERT = "(?,?,?,?,?)";
 	private final String ORDRE_DELETE = "delete from medecin where Id = ";
@@ -29,12 +32,14 @@ public class MedecinDAOImpl implements MedecinDAO{
 	private final String ORDRE_FINDBYREF = "select * from medecin where Id = ?";
 	private final String ORDRE_FINDBYNAME = "select * from medecin where Nom = ?";
 	private final String ORDRE_FINDALLBYUSER = "select * from utilisateur_medecin AS um where um.id_utilisateur=?";
-
+	private final String ORDRE_FINDALLFILTERED = "select * from medecin AS m where m.nom NOT IN (select m.nom from medecin AS m, utilisateur AS u, utilisateur_medecin AS um where m.id=um.id_medecin AND u.id=um.id_utilisateur AND u.nom=?)";
+	
     private DAOFactory daoFactory;
 
 	public MedecinDAOImpl(DAOFactory daoFactory) {
 		listeMedecins = new ArrayList<Medecin>();
 		listeMedecinsTries = new ArrayList<Medecin>();
+		listeMedecinsExclus = new ArrayList<Medecin>();
 		this.daoFactory = daoFactory;
 	}
 	@Override
@@ -185,6 +190,25 @@ public class MedecinDAOImpl implements MedecinDAO{
 		return listeMedecinsTries;
 	}
 	
+	@Override
+	public Collection<Medecin> findAllExcludedByUser(String unUtilisateur) throws DAOException {
+		Connection connexion = null;
+		try {
+			connexion = daoFactory.getConnection();
+			PreparedStatement pst = connexion.prepareStatement(ORDRE_FINDALLFILTERED);
+			pst.setString(1, unUtilisateur);
+			ResultSet resultSet = pst.executeQuery();
+			listeMedecinsExclus.removeAll(listeMedecinsExclus);
+			resultSetToArrayListExcluded(resultSet);
+			daoFactory.closeConnexion(connexion);
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+		return listeMedecinsExclus;
+	}
+	
+	
+	
 	public void setListeMedecins(ArrayList<Medecin> listeMedecins) {
 		this.listeMedecins = listeMedecins;
 	}
@@ -193,6 +217,18 @@ public class MedecinDAOImpl implements MedecinDAO{
 		return listeMedecins;
 	}
 	
+	public ArrayList<Medecin> getListeMedecinsTries() {
+		return listeMedecinsTries;
+	}
+	public void setListeMedecinsTries(ArrayList<Medecin> listeMedecinsTries) {
+		this.listeMedecinsTries = listeMedecinsTries;
+	}
+	public ArrayList<Medecin> getListeMedecinsExclus() {
+		return listeMedecinsExclus;
+	}
+	public void setListeMedecinsExclus(ArrayList<Medecin> listeMedecinsExclus) {
+		this.listeMedecinsExclus = listeMedecinsExclus;
+	}
 	private void resultSetToArrayList(ResultSet resultSet)
 			throws SQLException, DAOException {
 
@@ -212,5 +248,30 @@ public class MedecinDAOImpl implements MedecinDAO{
 			getListeMedecins().add(a);
 		}
 	}
+	
+	private void resultSetToArrayListFiltered(ResultSet resultSet)
+			throws SQLException, DAOException {
 
+		while (resultSet.next()) {
+			SpecialiteDAO uneSpecialiteDAO = daoFactory.getSpecialiteDAO();
+			Medecin a = new Medecin();
+			a.setId(resultSet.getInt("id"));
+			a.setNom(resultSet.getString("nom"));
+			a.setSpecialite(uneSpecialiteDAO.findByRef(resultSet.getInt("id_specialite")));
+			getListeMedecinsExclus().add(a);
+		}
+	}
+
+	private void resultSetToArrayListExcluded(ResultSet resultSet)
+			throws SQLException, DAOException {
+
+		while (resultSet.next()) {
+			SpecialiteDAO uneSpecialiteDAO = daoFactory.getSpecialiteDAO();
+			Medecin a = new Medecin();
+			a.setId(resultSet.getInt("id"));
+			a.setNom(resultSet.getString("nom"));
+			a.setSpecialite(uneSpecialiteDAO.findByRef(resultSet.getInt("id_specialite")));
+			getListeMedecinsExclus().add(a);
+		}
+	}
 }

@@ -18,7 +18,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Enregistrer Prescription</title>
+<title>Pilulier</title>
 
 <!-- Bootstrap core CSS -->
 <link
@@ -43,21 +43,32 @@
 			<div class="col-xs-12 col-sm-9">
 				<div class="jumbotron">
 					<h1>Enregistrer une prescription</h1>
-					<a href="EnregistrerMedecin" class=" btn btn-default btn-sm">Ajouter
-						Medecin</a>
-					<a href="EnregistrerMedicament" class=" btn btn-default btn-sm">Ajouter
-						Medicament</a>
-						<a href="EnregistrerDose" class=" btn btn-default btn-sm">Ajouter
-						Dose</a>
-						<a href="EnregistrerFrequence" class=" btn btn-default btn-sm">Ajouter
-						Frequence</a>
+					
+					<a href="EnregistrerMedecin" class=" btn btn-default btn-sm">Associer
+						Medecin</a> <a href="EnregistrerMedicament"
+						class=" btn btn-default btn-sm">Creer Medicament</a> <a
+						href="EnregistrerDose" class=" btn btn-default btn-sm">Creer
+						Dose</a> <a href="EnregistrerFrequence"
+						class=" btn btn-default btn-sm">Creer Frequence</a>
 				</div>
 
 				<form id="newMedocInList">
 					<div class="form-group row">
-						<label for="idmedicament" class="col-2 col-form-label">Medicament</label>
+						<label for="idMedecin" class="col-2 col-form-label">Medecin</label>
 						<div class="col-6">
-							<select id="idmedicament" name="idmedicament" required="required"
+							<select id="idMedecin" name="idMedecin" required="required"
+								class="custom-select">
+								<option disabled selected value>Sélectionner</option>
+								<c:forEach items="${ listeMedecinsTries }" var="medecin">
+									<option value="${ medecin.id }">${ medecin.nom }</option>
+								</c:forEach>
+							</select>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="idMedicament" class="col-2 col-form-label">Medicament</label>
+						<div class="col-6">
+							<select id="idMedicament" name="idMdicament" required="required"
 								class="custom-select">
 								<option disabled selected value>Sélectionner</option>
 								<c:forEach items="${ listeMedicamentsTries }" var="medicament">
@@ -76,8 +87,8 @@
 									</div>
 								</div>
 								<input id="nomMedicament" name="nomMedicament"
-									placeholder="saisir une valeur" type="text"
-									required="required" class="form-control">
+									placeholder="saisir une valeur" type="text" required="required"
+									class="form-control">
 							</div>
 						</div>
 					</div>
@@ -122,7 +133,7 @@
 					<div class="form-group row">
 						<div class="offset-2 col-6">
 							<button name="submit" type="submit" class="btn btn-primary">Valider</button>
-							<a href="ModifProfilUser" id="cancel" name="cancel"
+							<a href="ModifUserProfil" id="cancel" name="cancel"
 								class="btn btn-outline-secondary">Annuler</a>
 						</div>
 					</div>

@@ -128,4 +128,8 @@ public class DAOFactory {
     public CabinetDAO getCabinetDAO() {
         return new CabinetDAOImpl(this);
     }
+    
+    public PatientMedecinDAO getPatientMedecinDAO() {
+        return new PatientMedecinDAOImpl(this);
+    }
 }
