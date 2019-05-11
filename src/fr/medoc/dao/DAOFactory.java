@@ -129,6 +129,10 @@ public class DAOFactory {
         return new CabinetDAOImpl(this);
     }
     
+    public RdvDAO getRdvDAO() {
+        return new RdvDAOImpl(this);
+    }
+    
     public PatientMedecinDAO getPatientMedecinDAO() {
         return new PatientMedecinDAOImpl(this);
     }

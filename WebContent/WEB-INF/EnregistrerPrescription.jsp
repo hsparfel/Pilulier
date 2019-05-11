@@ -43,13 +43,6 @@
 			<div class="col-xs-12 col-sm-9">
 				<div class="jumbotron">
 					<h1>Enregistrer une prescription</h1>
-					
-					<a href="EnregistrerMedecin" class=" btn btn-default btn-sm">Associer
-						Medecin</a> <a href="EnregistrerMedicament"
-						class=" btn btn-default btn-sm">Creer Medicament</a> <a
-						href="EnregistrerDose" class=" btn btn-default btn-sm">Creer
-						Dose</a> <a href="EnregistrerFrequence"
-						class=" btn btn-default btn-sm">Creer Frequence</a>
 				</div>
 
 				<form id="newMedocInList">
@@ -64,6 +57,9 @@
 								</c:forEach>
 							</select>
 						</div>
+						<a href="EnregistrerMedecin"> <span
+							class="fa fa-plus-square-o fa-2x"></span>
+						</a>
 					</div>
 					<div class="form-group row">
 						<label for="idMedicament" class="col-2 col-form-label">Medicament</label>
@@ -76,9 +72,12 @@
 								</c:forEach>
 							</select>
 						</div>
+						<a href="EnregistrerMedicament"> <span
+							class="fa fa-plus-square-o fa-2x"></span>
+						</a>
 					</div>
 					<div class="form-group row">
-						<label for="nomMedicament" class="col-2 col-form-label">Quantité</label>
+						<label for="quantiteDose" class="col-2 col-form-label">Quantité</label>
 						<div class="col-6">
 							<div class="input-group">
 								<div class="input-group-prepend">
@@ -86,7 +85,7 @@
 										<i class="fa fa-spoon"></i>
 									</div>
 								</div>
-								<input id="nomMedicament" name="nomMedicament"
+								<input id="quantiteDose" name="quantiteDose"
 									placeholder="saisir une valeur" type="text" required="required"
 									class="form-control">
 							</div>
@@ -103,9 +102,12 @@
 								</c:forEach>
 							</select>
 						</div>
+						<a href="EnregistrerDose"> <span
+							class="fa fa-plus-square-o fa-2x"></span>
+						</a>
 					</div>
 					<div class="form-group row">
-						<label for="text" class="col-2 col-form-label">Interval</label>
+						<label for="quantiteFrequence" class="col-2 col-form-label">Interval</label>
 						<div class="col-6">
 							<div class="input-group">
 								<div class="input-group-prepend">
@@ -113,7 +115,7 @@
 										<i class="fa fa-clock-o"></i>
 									</div>
 								</div>
-								<input id="text" name="text" placeholder="saisir une valeur"
+								<input id="quantiteFrequence" name="quantiteFrequence" placeholder="saisir une valeur"
 									type="text" class="form-control" required="required">
 							</div>
 						</div>
@@ -129,6 +131,9 @@
 								</c:forEach>
 							</select>
 						</div>
+						<a href="EnregistrerFrequence"> <span
+							class="fa fa-plus-square-o fa-2x"></span>
+						</a>
 					</div>
 					<div class="form-group row">
 						<div class="offset-2 col-6">
@@ -138,24 +143,25 @@
 						</div>
 					</div>
 				</form>
-
 			</div>
-
 			<div class="col-xs-6 col-sm-3 " id="sidebar">
-				<div class="list-group">
-					<div class="list-group-item active">Liste de mes
-						prescriptions</div>
-					<c:forEach items="${ listePrescriptions }" var="prescription">
-						<div class="list-group-item">${ prescription }</div>
-					</c:forEach>
-				</div>
+				<c:if test="${!empty listePrescriptions }">
+					<div class="list-group">
+						<div class="list-group-item active">Liste de mes
+							prescriptions</div>
+						<c:forEach items="${ listePrescriptions }" var="prescription">
+							<div class="list-group-item">${ prescription }</div>
+						</c:forEach>
+					</div>
+				</c:if>
 			</div>
-			<!--/.sidebar-offcanvas-->
 		</div>
-		<!--/row-->
+		<!--/.sidebar-offcanvas-->
+	</div>
+	<!--/row-->
 
-		<hr>
-		<c:import url="footer.jsp"></c:import>
+	<hr>
+	<c:import url="footer.jsp"></c:import>
 
 
 

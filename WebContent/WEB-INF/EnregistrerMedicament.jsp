@@ -74,16 +74,15 @@
 			</div>
 
 			<div class="col-xs-6 col-sm-3 " id="sidebar">
-				<div class="list-group">
-					<a href="#" class="list-group-item active">Liste des
-						medicaments</a>
-
-					<c:forEach items="${ listeMedicaments }" var="medicament">
-
-						<a href="#" class="list-group-item">${ medicament.nom }</a>
-
-					</c:forEach>
-				</div>
+				<c:if test="${!empty listeMedicaments }">
+					<div class="list-group">
+						<div class="list-group-item active">Liste des
+							medicaments</div>
+						<c:forEach items="${ listeMedicaments }" var="medicament">
+							<div class="list-group-item">${ medicament.nom }</div>
+						</c:forEach>
+					</div>
+				</c:if>
 			</div>
 			<!--/.sidebar-offcanvas-->
 		</div>

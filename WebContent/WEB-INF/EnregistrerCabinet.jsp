@@ -90,12 +90,17 @@
 				</form>
 			</div>
 			<div class="col-xs-6 col-sm-4 " id="sidebar">
-				<div class="list-group">
-					<div class="list-group-item active">Liste des cabinets</div>
-					<c:forEach items="${ listeCabinets }" var="cabinet">
-						<a href="#" class="list-group-item">${ cabinet.nom }<br>${ cabinet.adresse }, ${ cabinet.ville }</a>
-					</c:forEach>
-				</div>
+				<c:if test="${!empty listeCabinets }">
+					<div class="list-group">
+						<div class="list-group-item active">Liste des cabinets</div>
+						<c:forEach items="${ listeCabinets }" var="cabinet">
+							<div class="list-group-item">${ cabinet.nom }<br>${ cabinet.adresse },
+								${ cabinet.ville }
+							</div>
+						</c:forEach>
+					</div>
+				</c:if>
+
 			</div>
 		</div>
 		<!--/row-->
@@ -112,7 +117,8 @@
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>s
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	s
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script

@@ -42,61 +42,27 @@
 
 			<div class="col-xs-12 col-sm-9">
 				<div class="jumbotron">
-					<h1>Enregistrer un medecin</h1>
-
+					<h1>Enregistrer un rendez-vous</h1>
 				</div>
-
-				<form id="newMedecinInList" action="EnregistrerMedecinAction"
+				<form  action="EnregistrerRdvAction"
 					method="post">
 					<div class="form-group row">
-						<label for="nomMedecin" class="col-2 col-form-label">Nom</label>
+						<label for="idMedecin" class="col-2 col-form-label">Medecin</label>
 						<div class="col-6">
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<div class="input-group-text">
-										<i class="fa fa-address-book"></i>
-									</div>
-								</div>
-								<input id="nomMedecin" name="nomMedecin"
-									placeholder="saisir le nom du medecin" type="text"
-									aria-describedby="nomMedecinHelpBlock" required="required"
-									class="form-control">
-							</div>
-						</div>
-					</div>
-
-					<div class="form-group row">
-						<label for="idSpecialite" class="col-2 col-form-label">Specialite</label>
-						<div class="col-6">
-							<select id="idSpecialite" name="idSpecialite" required="required"
+							<select id="idMedecin" name="idMedecin" required="required"
 								class="custom-select">
 								<option disabled selected value>Sélectionner</option>
-								<c:forEach items="${ listeSpecialites }" var="specialite">
-									<option value="${ specialite.id }">${ specialite.nom }</option>
+								<c:forEach items="${ listeMedecins }" var="medecin">
+									<option value="${ medecin.id }">${ medecin.nom }</option>
 								</c:forEach>
 							</select>
 						</div>
-						<a href="EnregistrerSpecialite"> <span
+						<a href="EnregistrerMedecin"> <span
 							class="fa fa-plus-square-o fa-2x"></span>
 						</a>
 					</div>
 					<div class="form-group row">
-						<label for="idCabinet" class="col-2 col-form-label">Cabinet</label>
-						<div class="col-6">
-							<select id="idCabinet" name="idCabinet" required="required"
-								class="custom-select">
-								<option disabled selected value>Sélectionner</option>
-								<c:forEach items="${ listeCabinets }" var="cabinet">
-									<option value="${ cabinet.id }">${ cabinet.nom }</option>
-								</c:forEach>
-							</select>
-						</div>
-						<a href="EnregistrerCabinet"> <span
-							class="fa fa-plus-square-o fa-2x"></span>
-						</a>
-					</div>
-					<div class="form-group row">
-						<label for="nomTelephone" class="col-2 col-form-label">Telephone</label>
+						<label for="date" class="col-2 col-form-label">Date</label>
 						<div class="col-6">
 							<div class="input-group">
 								<div class="input-group-prepend">
@@ -104,7 +70,7 @@
 										<i class="fa fa-mobile-phone"></i>
 									</div>
 								</div>
-								<input id="nomTelephone" name="nomTelephone"
+								<input id="date" name="date"
 									placeholder="saisir une valeur" type="text" required="required"
 									class="form-control">
 							</div>
@@ -112,7 +78,7 @@
 					</div>
 
 					<div class="form-group row">
-						<label for="nomEmail" class="col-2 col-form-label">Email</label>
+						<label for="heure" class="col-2 col-form-label">Heure</label>
 						<div class="col-6">
 							<div class="input-group">
 								<div class="input-group-prepend">
@@ -120,7 +86,7 @@
 										<i class="fa fa-envelope"></i>
 									</div>
 								</div>
-								<input id="nomEmail" name="nomEmail"
+								<input id="heure" name="heure"
 									placeholder="saisir une valeur" type="text"
 									class="form-control" required="required">
 							</div>
@@ -130,7 +96,7 @@
 					<div class="form-group row">
 						<div class="offset-2 col-6">
 							<button name="submit" type="submit" class="btn btn-primary">Valider</button>
-							<a href="AssocierMedecin" id="cancel" name="cancel"
+							<a href="ModifUserProfil" id="cancel" name="cancel"
 								class="btn btn-outline-secondary">Annuler</a>
 						</div>
 					</div>
@@ -139,11 +105,11 @@
 			</div>
 
 			<div class="col-xs-6 col-sm-3 " id="sidebar">
-				<c:if test="${!empty listeMedecins }">
+				<c:if test="${!empty listeRdvs }">
 					<div class="list-group">
-						<div class="list-group-item active">Liste des medecins</div>
-						<c:forEach items="${ listeMedecins }" var="medecin">
-							<div class="list-group-item">${ medecin.nom }<br>${ medecin.specialite.nom }<br>${ medecin.cabinet.nom }</div>
+						<div class="list-group-item active">Liste des rendez-vous</div>
+						<c:forEach items="${ listeRdvs }" var="rdv">
+							<div class="list-group-item">${ rdv.medecin }<br>${ rdv.date }<br>${ rdv.heure }</div>
 						</c:forEach>
 					</div>
 				</c:if>

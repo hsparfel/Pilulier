@@ -72,18 +72,15 @@
 					</div>
 				</form>
 			</div>
-
 			<div class="col-xs-6 col-sm-3 " id="sidebar">
-				<div class="list-group">
-					<a href="#" class="list-group-item active">Liste des
-						specialites</a>
-
-					<c:forEach items="${ listeSpecialites }" var="specialite">
-
-						<a href="#" class="list-group-item">${ specialite.nom }</a>
-
-					</c:forEach>
-				</div>
+				<c:if test="${!empty listeSpecialites }">
+					<div class="list-group">
+						<div class="list-group-item active">Liste des specialites</div>
+						<c:forEach items="${ listeSpecialites }" var="specialite">
+							<div class="list-group-item">${ specialite.nom }</div>
+						</c:forEach>
+					</div>
+				</c:if>
 			</div>
 			<!--/.sidebar-offcanvas-->
 		</div>

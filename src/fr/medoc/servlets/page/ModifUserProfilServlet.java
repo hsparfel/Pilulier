@@ -81,10 +81,11 @@ public class ModifUserProfilServlet extends HttpServlet {
 			Utilisateur unUtilisateur = null;
 
 			try {
+				unUtilisateur = utilisateurDao.findByName((String) session.getAttribute("login"));
 				listeFrequences = (ArrayList<Frequence>) frequenceDao.findAll();
 				listeDoses = (ArrayList<Dose>) doseDao.findAll();
-				listeMedecins = (ArrayList<Medecin>) medecinDao.findAll();
-				unUtilisateur = utilisateurDao.findByName((String) session.getAttribute("login"));
+				listeMedecins = (ArrayList<Medecin>) medecinDao.findAllByUser(unUtilisateur.getId());
+				
 				System.out.println(unUtilisateur.getId());
 
 				listePrescriptions = (ArrayList<Prescription>) prescriptionDao

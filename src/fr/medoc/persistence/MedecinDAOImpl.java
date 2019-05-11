@@ -182,7 +182,7 @@ public class MedecinDAOImpl implements MedecinDAO{
 			pst.setInt(1, id);
 			ResultSet resultSet = pst.executeQuery();
 			listeMedecinsTries.removeAll(listeMedecinsTries);
-			resultSetToArrayList(resultSet);
+			resultSetToArrayListFiltered(resultSet);
 			daoFactory.closeConnexion(connexion);
 		} catch (SQLException e) {
 			throw new DAOException(e);
@@ -253,12 +253,12 @@ public class MedecinDAOImpl implements MedecinDAO{
 			throws SQLException, DAOException {
 
 		while (resultSet.next()) {
-			SpecialiteDAO uneSpecialiteDAO = daoFactory.getSpecialiteDAO();
 			Medecin a = new Medecin();
+			SpecialiteDAO uneSpecialiteDAO = daoFactory.getSpecialiteDAO();
 			a.setId(resultSet.getInt("id"));
 			a.setNom(resultSet.getString("nom"));
 			a.setSpecialite(uneSpecialiteDAO.findByRef(resultSet.getInt("id_specialite")));
-			getListeMedecinsExclus().add(a);
+			getListeMedecinsTries().add(a);
 		}
 	}
 

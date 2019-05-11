@@ -11,14 +11,18 @@
 	<ul class="navbar-nav">
 		<li class="nav-item"><img id="imgPilules"
 			src="images/pilules.png" alt="pilules" title="pilules" /></li>
-		<li class="nav-item"><a class="nav-link" href="Accueil">Bienvenue</a>
+		<li class="nav-item"><span class="nav-link">Bienvenue ${ sessionScope.login }</span>
 		</li>
-		<li class="nav-item"><c:if test="${ !empty sessionScope.login }">
-				<a class="nav-link" href="ModifUserProfil"> ${ sessionScope.login }</a>
-			</c:if></li>
-		<li class="nav-item"><c:if test="${ !empty sessionScope.login }">
-				<a class="nav-link" href="Deconnexion" id="logout">Logout</a>
-			</c:if></li>
+		<c:if test="${ !empty sessionScope.login }">
+			<li class="nav-item"><a class="nav-link" href="ModifUserProfil">Mon
+					Profil</a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="EnregistrerPrescription">Prescription</a></li>
+			<li class="nav-item"><a class="nav-link" href="#">a
+					determiner</a></li>
+			<li class="nav-item"><a class="nav-link" href="Deconnexion"
+				id="logout">Logout</a></li>
+		</c:if>
 	</ul>
 
 </nav>

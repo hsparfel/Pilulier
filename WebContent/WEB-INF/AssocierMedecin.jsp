@@ -43,12 +43,9 @@
 			<div class="col-xs-12 col-sm-9">
 				<div class="jumbotron">
 					<h1>Associer un medecin</h1>
-					
-					<a href="EnregistrerMedecin" class=" btn btn-default btn-sm">Ajouter
-						Medecin</a> 
 				</div>
 
-				<form >
+				<form>
 					<div class="form-group row">
 						<label for="idMedecin" class="col-2 col-form-label">Medecin</label>
 						<div class="col-6">
@@ -60,8 +57,11 @@
 								</c:forEach>
 							</select>
 						</div>
+						<a href="EnregistrerMedecin"> <span
+							class="fa fa-plus-square-o fa-2x"></span>
+						</a>
 					</div>
-					
+
 					<div class="form-group row">
 						<div class="offset-2 col-6">
 							<button name="submit" type="submit" class="btn btn-primary">Valider</button>
@@ -70,17 +70,16 @@
 						</div>
 					</div>
 				</form>
-
 			</div>
-
 			<div class="col-xs-6 col-sm-3 " id="sidebar">
+			<c:if test="${!empty listeMedecinsTries }">
 				<div class="list-group">
-					<div class="list-group-item active">Liste de mes
-						medecins</div>
+					<div class="list-group-item active">Liste de mes medecins</div>
 					<c:forEach items="${ listeMedecinsTries }" var="medecin">
-						<div class="list-group-item">${ medecin }- ${ medecin.specialite }</div>
+						<div class="list-group-item">${ medecin }-${ medecin.specialite }</div>
 					</c:forEach>
 				</div>
+				</c:if>
 			</div>
 			<!--/.sidebar-offcanvas-->
 		</div>

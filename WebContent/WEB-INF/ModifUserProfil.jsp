@@ -34,46 +34,69 @@
 			<div class="col-xs-12 col-sm-8">
 				<div class="jumbotron">
 					<h1>Mon Profil</h1>
-					
-						<a  class=" btn btn-default btn-sm" href="AssocierMedecin">Associer Medecin</a>
-						<a  class=" btn btn-default btn-sm" href="EnregistrerPrise">Ajouter
-						Prise</a>
-						<a class=" btn btn-default btn-sm" href="EnregistrerPrescription">Ajouter
-						Prescription</a>
-						<a class=" btn btn-default btn-sm" href="EnregistrerRdv">Ajouter
+
+					<a class=" btn btn-default btn-sm" href="AssocierMedecin">Associer
+						Medecin</a> <a class=" btn btn-default btn-sm" href="EnregistrerPrise">Ajouter
+						Prise</a> <a class=" btn btn-default btn-sm"
+						href="EnregistrerPrescription">Ajouter Prescription</a> <a
+						class=" btn btn-default btn-sm" href="EnregistrerRdv">Ajouter
 						Rendez-vous</a>
 				</div>
-				
+
 			</div>
 			<div class="col-xs-6 col-sm-4" id="sidebar">
-				<div class="list-group">
-					<div class="list-group-item active">Liste de mes
-						prescriptions</div>
-					<c:forEach items="${ listePrescriptions }" var="prescription">
-						<div class="list-group-item">${ prescription.medicament.getNom() } - ${ prescription.nbDose } ${ prescription.dose.getNom() }, ${ prescription.nbFrequence } fois par ${ prescription.frequence.getNom() }</div>
-					</c:forEach>
+				<c:if test="${!empty listePrescriptions }">
+					<div class="dropdown list-group">
+						<button class="btn btn-primary dropdown-toggle" type="button"
+							id="dropdownMenuButton" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false">Mes
+							prescriptions</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<c:forEach items="${ listePrescriptions }" var="prescription">
+								<div class="dropdown-item">${ prescription.medicament.getNom() }
+									- ${ prescription.nbDose } ${ prescription.dose.getNom() }, ${ prescription.nbFrequence }
+									fois par ${ prescription.frequence.getNom() }</div>
 
-				</div>
-				<div class="list-group">
-					<div class="list-group-item active">Liste de mes dernières
-						prises</div>
-					<c:forEach items="${ listePrises }" var="prise">
-						<div class="list-group-item">${ prise.medicament.getNom() } - ${ prise.datePrise }</div>
-					</c:forEach>
+							</c:forEach>
+						</div>
+					</div>
+				</c:if>
+				<c:if test="${!empty listePrises }">
+					<div class="dropdown list-group">
+						<button class="btn btn-primary dropdown-toggle" type="button"
+							id="dropdownMenuButton" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false">Mes dernières
+							prises</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<c:forEach items="${ listePrises }" var="prise">
+								<div class="dropdown-item">${ prise.medicament.getNom() }-
+									${ prise.datePrise }</div>
+							</c:forEach>
+						</div>
+					</div>
+				</c:if>
+				<c:if test="${!empty listeMedecins }">
+					<div class="dropdown list-group">
+						<button class="btn btn-primary dropdown-toggle" type="button"
+							id="dropdownMenuButton" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false">Mes medecins</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<c:forEach items="${ listeMedecins }" var="medecin">
+								<div class="dropdown-item">${ medecin.getNom() }-${ medecin.getSpecialite().getNom() }</div>
+							</c:forEach>
 
-				</div>
-				<div class="list-group">
-					<div class="list-group-item active">Liste de mes medecins</div>
-					<c:forEach items="${ listeMedecins }" var="medecin">
-						<div class="list-group-item">${ medecin.getNom() } - ${ medecin.getSpecialite().getNom() }</div>
-					</c:forEach>
+						</div>
+					</div>
+				</c:if>
 
-				</div>
+
+
 			</div>
 		</div>
-		<!--/row-->
-		<hr>
-		<c:import url="footer.jsp"></c:import>
+	</div>
+	<!--/row-->
+	<hr>
+	<c:import url="footer.jsp"></c:import>
 	</div>
 	<!--/.container-->
 

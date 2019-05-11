@@ -72,22 +72,18 @@
 					</div>
 				</form>
 			</div>
-
 			<div class="col-xs-6 col-sm-3 " id="sidebar">
-				<div class="list-group">
-					<a href="#" class="list-group-item active">Liste des
-						utilisateurs</a>
-
-					<c:forEach items="${ listeUtilisateurs }" var="utilisateur">
-
-						<a href="#" class="list-group-item">${ utilisateur.nom }</a>
-
-					</c:forEach>
-				</div>
+				<c:if test="${!empty listeUtilisateurs }">
+					<div class="list-group">
+						<div class="list-group-item active">Liste des utilisateurs</div>
+						<c:forEach items="${ listeUtilisateurs }" var="utilisateur">
+							<div class="list-group-item">${ utilisateur.nom }</div>
+						</c:forEach>
+					</div>
+				</c:if>
 			</div>
-			
 		</div>
-		
+
 
 		<hr>
 		<c:import url="footer.jsp"></c:import>
