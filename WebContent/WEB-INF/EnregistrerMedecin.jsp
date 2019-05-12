@@ -40,7 +40,7 @@
 
 		<div class="row">
 
-			<div class="col-xs-12 col-sm-9">
+			<div class="col-xs-12 col-sm-8">
 				<div class="jumbotron">
 					<h1>Enregistrer un medecin</h1>
 
@@ -105,7 +105,7 @@
 									</div>
 								</div>
 								<input id="nomTelephone" name="nomTelephone"
-									placeholder="saisir une valeur" type="text" required="required"
+									placeholder="ex: 0123456789" type="text" required="required"
 									class="form-control">
 							</div>
 						</div>
@@ -121,7 +121,7 @@
 									</div>
 								</div>
 								<input id="nomEmail" name="nomEmail"
-									placeholder="saisir une valeur" type="text"
+									placeholder="ex: nom@domaine.com" type="text"
 									class="form-control" required="required">
 							</div>
 						</div>
@@ -138,7 +138,7 @@
 
 			</div>
 
-			<div class="col-xs-6 col-sm-3 " id="sidebar">
+			<div class="col-xs-6 col-sm-4 " id="sidebar">
 				<c:if test="${!empty listeMedecins }">
 					<div class="list-group">
 						<div class="list-group-item active">Liste des medecins</div>

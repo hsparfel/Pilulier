@@ -31,7 +31,7 @@ public class MedecinDAOImpl implements MedecinDAO{
 	private final String ORDRE_FINDALL = "select * from medecin";
 	private final String ORDRE_FINDBYREF = "select * from medecin where Id = ?";
 	private final String ORDRE_FINDBYNAME = "select * from medecin where Nom = ?";
-	private final String ORDRE_FINDALLBYUSER = "select * from utilisateur_medecin AS um where um.id_utilisateur=?";
+	private final String ORDRE_FINDALLBYUSER = "select * from medecin AS m, utilisateur_medecin AS um where m.id=um.id_medecin AND um.id_utilisateur=?";
 	private final String ORDRE_FINDALLFILTERED = "select * from medecin AS m where m.nom NOT IN (select m.nom from medecin AS m, utilisateur AS u, utilisateur_medecin AS um where m.id=um.id_medecin AND u.id=um.id_utilisateur AND u.nom=?)";
 	
     private DAOFactory daoFactory;

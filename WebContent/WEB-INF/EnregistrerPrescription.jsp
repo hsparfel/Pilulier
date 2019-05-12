@@ -52,7 +52,7 @@
 							<select id="idMedecin" name="idMedecin" required="required"
 								class="custom-select">
 								<option disabled selected value>Sélectionner</option>
-								<c:forEach items="${ listeMedecinsTries }" var="medecin">
+								<c:forEach items="${ listeMedecins }" var="medecin">
 									<option value="${ medecin.id }">${ medecin.nom }</option>
 								</c:forEach>
 							</select>
@@ -67,7 +67,7 @@
 							<select id="idMedicament" name="idMdicament" required="required"
 								class="custom-select">
 								<option disabled selected value>Sélectionner</option>
-								<c:forEach items="${ listeMedicamentsTries }" var="medicament">
+								<c:forEach items="${ listeMedicaments }" var="medicament">
 									<option value="${ medicament.id }">${ medicament.nom }</option>
 								</c:forEach>
 							</select>
@@ -115,8 +115,9 @@
 										<i class="fa fa-clock-o"></i>
 									</div>
 								</div>
-								<input id="quantiteFrequence" name="quantiteFrequence" placeholder="saisir une valeur"
-									type="text" class="form-control" required="required">
+								<input id="quantiteFrequence" name="quantiteFrequence"
+									placeholder="saisir une valeur" type="text"
+									class="form-control" required="required">
 							</div>
 						</div>
 					</div>
@@ -134,6 +135,65 @@
 						<a href="EnregistrerFrequence"> <span
 							class="fa fa-plus-square-o fa-2x"></span>
 						</a>
+						
+					<div id="freqRadio" class="form-group row d-none">
+						<div class="col-4"></div>
+						<div class="col-8">
+							<div class="custom-controls-stacked">
+								<div class="custom-control custom-radio">
+									<input name="frequenceRadio" id="frequenceRadio_0" type="radio"
+										class="custom-control-input" value="1"> <label
+										for="frequenceRadio_0" class="custom-control-label">Matin</label>
+								</div>
+							</div>
+							<div class="custom-controls-stacked">
+								<div class="custom-control custom-radio">
+									<input name="frequenceRadio" id="frequenceRadio_1" type="radio"
+										class="custom-control-input" value="2"> <label
+										for="frequenceRadio_1" class="custom-control-label">Midi</label>
+								</div>
+							</div>
+							<div class="custom-controls-stacked">
+								<div class="custom-control custom-radio">
+									<input name="frequenceRadio" id="frequenceRadio_2" type="radio"
+										class="custom-control-input" value="3"> <label
+										for="frequenceRadio_2" class="custom-control-label">Soir</label>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="freqCheck" class="form-group row d-none">
+						<div class="col-4"></div>
+						<div class="col-8">
+							<div class="custom-controls-stacked">
+								<div class="custom-control custom-checkbox">
+									<input name="frequenceCheckbox" id="frequenceCheckbox_0"
+										type="checkbox" class="custom-control-input" value="1">
+									<label for="frequenceCheckbox_0" class="custom-control-label">Matin</label>
+								</div>
+							</div>
+							<div class="custom-controls-stacked">
+								<div class="custom-control custom-checkbox">
+									<input name="frequenceCheckbox" id="frequenceCheckbox_1"
+										type="checkbox" class="custom-control-input" value="2">
+									<label for="frequenceCheckbox_1" class="custom-control-label">Midi</label>
+								</div>
+							</div>
+							<div class="custom-controls-stacked">
+								<div class="custom-control custom-checkbox">
+									<input name="frequenceCheckbox" id="frequenceCheckbox_2"
+										type="checkbox" class="custom-control-input" value="3">
+									<label for="frequenceCheckbox_2" class="custom-control-label">Soir</label>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					
+					
+					
+					
+					
 					</div>
 					<div class="form-group row">
 						<div class="offset-2 col-6">
@@ -142,6 +202,11 @@
 								class="btn btn-outline-secondary">Annuler</a>
 						</div>
 					</div>
+
+					
+					
+					
+
 				</form>
 			</div>
 			<div class="col-xs-6 col-sm-3 " id="sidebar">
@@ -183,7 +248,9 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous"></script>
-
+<script
+		src="js/Prescription.js"
+		></script>
 
 
 

@@ -40,7 +40,7 @@
 
 		<div class="row">
 
-			<div class="col-xs-12 col-sm-9">
+			<div class="col-xs-12 col-sm-8">
 				<div class="jumbotron">
 					<h1>Enregistrer un rendez-vous</h1>
 				</div>
@@ -67,11 +67,11 @@
 							<div class="input-group">
 								<div class="input-group-prepend">
 									<div class="input-group-text">
-										<i class="fa fa-mobile-phone"></i>
+										<i class="fa fa-calendar"></i>
 									</div>
 								</div>
 								<input id="date" name="date"
-									placeholder="saisir une valeur" type="text" required="required"
+									placeholder="ex: 03/05/2019" type="text" required="required"
 									class="form-control">
 							</div>
 						</div>
@@ -83,11 +83,11 @@
 							<div class="input-group">
 								<div class="input-group-prepend">
 									<div class="input-group-text">
-										<i class="fa fa-envelope"></i>
+										<i class="fa fa-clock-o"></i>
 									</div>
 								</div>
 								<input id="heure" name="heure"
-									placeholder="saisir une valeur" type="text"
+									placeholder="ex: 09:30" type="text"
 									class="form-control" required="required">
 							</div>
 						</div>
@@ -104,10 +104,10 @@
 
 			</div>
 
-			<div class="col-xs-6 col-sm-3 " id="sidebar">
+			<div class="col-xs-6 col-sm-4 " id="sidebar">
 				<c:if test="${!empty listeRdvs }">
 					<div class="list-group">
-						<div class="list-group-item active">Liste des rendez-vous</div>
+						<div class="list-group-item active">Mes rendez-vous</div>
 						<c:forEach items="${ listeRdvs }" var="rdv">
 							<div class="list-group-item">${ rdv.medecin }<br>${ rdv.date }<br>${ rdv.heure }</div>
 						</c:forEach>

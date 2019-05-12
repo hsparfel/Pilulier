@@ -60,7 +60,7 @@
 						<label for="adresseCabinet" class="col-2 col-form-label">Adresse</label>
 						<div class="col-6">
 							<input id="adresseCabinet" name="adresseCabinet"
-								placeholder="saisir le numero et la rue" type="text"
+								placeholder="ex: 2 avenue de la republique" type="text"
 								class="form-control" required="required">
 						</div>
 					</div>
@@ -68,7 +68,7 @@
 						<label for="cpCabinet" class="col-2 col-form-label">CP</label>
 						<div class="col-6">
 							<input id="cpCabinet" name="cpCabinet"
-								placeholder="saisir le code postal" type="text"
+								placeholder="ex: 06100" type="text"
 								class="form-control" required="required">
 						</div>
 					</div>
@@ -76,7 +76,7 @@
 						<label for="villeCabinet" class="col-2 col-form-label">Ville</label>
 						<div class="col-6">
 							<input id="villeCabinet" name="villeCabinet"
-								placeholder="saisir la ville" type="text" class="form-control"
+								placeholder="ex: nice" type="text" class="form-control"
 								required="required">
 						</div>
 					</div>

@@ -40,7 +40,7 @@
 
 		<div class="row">
 
-			<div class="col-xs-12 col-sm-9">
+			<div class="col-xs-12 col-sm-8">
 				<div class="jumbotron">
 					<h1>Enregistrer une specialite</h1>
 				</div>
@@ -72,7 +72,7 @@
 					</div>
 				</form>
 			</div>
-			<div class="col-xs-6 col-sm-3 " id="sidebar">
+			<div class="col-xs-6 col-sm-4 " id="sidebar">
 				<c:if test="${!empty listeSpecialites }">
 					<div class="list-group">
 						<div class="list-group-item active">Liste des specialites</div>
