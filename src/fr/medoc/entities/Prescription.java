@@ -5,15 +5,21 @@ public class Prescription {
 	private static final long serialVersionUID = 1L;
 
 	private Utilisateur utilisateur;
+	private Medecin medecin;
 	private Medicament medicament;
 	private int nbDose;
 	private Dose dose;
 	private int nbFrequence;
 	private Frequence frequence;
+	private int matin;
+	private int midi;
+	private int soir;
 	
-	public Prescription(Utilisateur utilisateur, Medicament medicament, int nbDose, Dose dose, int nbFrequence, Frequence frequence) {
+	public Prescription(Utilisateur utilisateur, Medecin medecin, Medicament medicament, int nbDose, Dose dose,
+			int nbFrequence, Frequence frequence) {
 
 		this.utilisateur = utilisateur;
+		this.medecin = medecin;
 		this.medicament = medicament;
 		this.nbDose = nbDose;
 		this.dose = dose;
@@ -22,8 +28,8 @@ public class Prescription {
 	}
 
 	public Prescription() {
-
 		this.utilisateur = null;
+		this.medecin = null;
 		this.medicament = null;
 		this.nbDose = 0;
 		this.dose = null;
@@ -37,6 +43,14 @@ public class Prescription {
 
 	public void setUtilisateur(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
+	}
+
+	public Medecin getMedecin() {
+		return medecin;
+	}
+
+	public void setMedecin(Medecin medecin) {
+		this.medecin = medecin;
 	}
 
 	public Medicament getMedicament() {
@@ -79,11 +93,40 @@ public class Prescription {
 		this.frequence = frequence;
 	}
 
+	public int getMatin() {
+		return matin;
+	}
+
+	public void setMatin(int matin) {
+		this.matin = matin;
+	}
+
+	public int getMidi() {
+		return midi;
+	}
+
+	public void setMidi(int midi) {
+		this.midi = midi;
+	}
+
+	public int getSoir() {
+		return soir;
+	}
+
+	public void setSoir(int soir) {
+		this.soir = soir;
+	}
+
 	@Override
 	public String toString() {
-		return "Prescription [utilisateur=" + utilisateur + ", medicament=" + medicament + ", nbDose=" + nbDose
-				+ ", dose=" + dose + ", nbFrequence=" + nbFrequence + ", frequence=" + frequence + "]";
+		return "Prescription [utilisateur=" + utilisateur + ", medecin=" + medecin + ", medicament=" + medicament
+				+ ", nbDose=" + nbDose + ", dose=" + dose + ", nbFrequence=" + nbFrequence + ", frequence=" + frequence
+				+ ", matin=" + matin + ", midi=" + midi + ", soir=" + soir + "]";
 	}
+	
+	
+
+
 
 	
 

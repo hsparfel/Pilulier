@@ -25,7 +25,7 @@ public class RdvDAOImpl implements RdvDAO{
 	
 	
 	private final String ORDRE_INSERT = "insert into rdv(id_utilisateur, id_medecin, date, heure) values ";
-	private final String VALUES_INSERT = "(?,?,?,?,?)";
+	private final String VALUES_INSERT = "(?,?,?,?)";
 	private final String ORDRE_DELETE = "delete from rdv where Id = ";
 	private final String ORDRE_FINDALL = "select * from rdv";
 	private final String ORDRE_FINDBYREF = "select * from rdv where Id = ?";
@@ -135,7 +135,7 @@ public class RdvDAOImpl implements RdvDAO{
 			pst.setInt(1, id);
 			ResultSet resultSet = pst.executeQuery();
 			listeRdvsTries.removeAll(listeRdvsTries);
-			resultSetToArrayList(resultSet);
+			resultSetToArrayListFiltered(resultSet);
 			daoFactory.closeConnexion(connexion);
 		} catch (SQLException e) {
 			throw new DAOException(e);

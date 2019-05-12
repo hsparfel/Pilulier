@@ -22,7 +22,7 @@ public class PrescriptionDAOImpl implements PrescriptionDAO {
 	private ArrayList<Prescription> listePrescriptionsTries;
 
 	private final String ORDRE_INSERT = "insert into utilisateur_medicament values ";
-	private final String VALUES_INSERT = "(?,?,?,?,?,?)";
+	private final String VALUES_INSERT = "(?,?,?,?,?,?,?,?,?,?)";
 
 	private final String ORDRE_FINDALLBYUSER = "select * from utilisateur_medicament AS um where um.id_utilisateur=?";
 
@@ -45,10 +45,14 @@ public class PrescriptionDAOImpl implements PrescriptionDAO {
 			PreparedStatement pst = connexion.prepareStatement(ORDRE_INSERT + VALUES_INSERT);
 			pst.setInt(1, unePrescription.getUtilisateur().getId());
 			pst.setInt(2, unePrescription.getMedicament().getId());
-			pst.setInt(3, unePrescription.getNbDose());
-			pst.setInt(4, unePrescription.getDose().getId());
-			pst.setInt(5, unePrescription.getNbFrequence());
-			pst.setInt(6, unePrescription.getFrequence().getId());
+			pst.setInt(3, unePrescription.getMedecin().getId());
+			pst.setInt(4, unePrescription.getNbDose());
+			pst.setInt(5, unePrescription.getDose().getId());
+			pst.setInt(6, unePrescription.getNbFrequence());
+			pst.setInt(7, unePrescription.getFrequence().getId());
+			pst.setInt(8, unePrescription.getMatin());
+			pst.setInt(9, unePrescription.getMidi());
+			pst.setInt(10, unePrescription.getSoir());
 			pst.executeUpdate();
 			connexion.commit();
 			daoFactory.closeConnexion(connexion);

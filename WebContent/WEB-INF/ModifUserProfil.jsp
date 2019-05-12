@@ -34,7 +34,6 @@
 			<div class="col-xs-12 col-sm-8">
 				<div class="jumbotron">
 					<h1>Mon Profil</h1>
-
 					<a class=" btn btn-default btn-sm" href="AssocierMedecin">Associer
 						Medecin</a> <a class=" btn btn-default btn-sm" href="EnregistrerPrise">Ajouter
 						Prise</a> <a class=" btn btn-default btn-sm"
@@ -42,25 +41,37 @@
 						class=" btn btn-default btn-sm" href="EnregistrerRdv">Ajouter
 						Rendez-vous</a>
 				</div>
-
 			</div>
 			<div class="col-xs-6 col-sm-4" id="sidebar">
+				
 				<c:if test="${!empty listePrescriptions }">
-					<div class="dropdown list-group">
-						<button class="btn btn-primary dropdown-toggle" type="button"
-							id="dropdownMenuButton" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false">Mes
+					<div class="list-group">
+						<button id="listBtnPrescription" class="list-group-item active">Mes
 							prescriptions</button>
-						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						<div id="listPrescription">
 							<c:forEach items="${ listePrescriptions }" var="prescription">
-								<div class="dropdown-item">${ prescription.medicament.getNom() }
+								<div class="list-group-item">${ prescription.medicament.getNom() }
 									- ${ prescription.nbDose } ${ prescription.dose.getNom() }, ${ prescription.nbFrequence }
 									fois par ${ prescription.frequence.getNom() }</div>
-
 							</c:forEach>
 						</div>
 					</div>
 				</c:if>
+				
+				<c:if test="${!empty listePrises }">
+					<div class="list-group">
+						<button id="listBtnPrise" class="list-group-item active">Mes dernières
+							prises</button>
+						<div id="listPrise">
+							<c:forEach items="${ listePrises }" var="prise">
+								<div class="list-group-item">${ prise.medicament.getNom() }-
+									${ prise.datePrise }</div>
+							</c:forEach>
+						</div>
+					</div>
+				</c:if>
+				
+				
 				<c:if test="${!empty listePrises }">
 					<div class="dropdown list-group">
 						<button class="btn btn-primary dropdown-toggle" type="button"
@@ -75,22 +86,35 @@
 						</div>
 					</div>
 				</c:if>
+				
 				<c:if test="${!empty listeMedecins }">
-					<div class="dropdown list-group">
-						<button class="btn btn-primary dropdown-toggle" type="button"
-							id="dropdownMenuButton" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false">Mes medecins</button>
-						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+					<div class="list-group">
+						<button id="listBtnMedecin" class="list-group-item active">Mes medecins</button>
+						<div id="listMedecin">
 							<c:forEach items="${ listeMedecins }" var="medecin">
-								<div class="dropdown-item">${ medecin.getNom() }-${ medecin.getSpecialite().getNom() }</div>
+								<div class="list-group-item">${ medecin.getNom() }-${ medecin.getSpecialite().getNom() }</div>
 							</c:forEach>
-
 						</div>
 					</div>
 				</c:if>
-
-
-
+				
+				
+				
+				
+				<c:if test="${!empty listeRdvs }">
+					<div class="list-group">
+						<button id="listBtnRdv" class="list-group-item active">Mes
+							rendez-vous</button>
+						<div id="listRdv">
+							<c:forEach items="${ listeRdvs }" var="rdv">
+								<div class="list-group-item">${ rdv.getMedecin().getNom()}-
+									${ rdv.getDate()} à ${ rdv.getHeure()}</div>
+							</c:forEach>
+						</div>
+					</div>
+				</c:if>
+				
+				
 			</div>
 		</div>
 	</div>
@@ -104,21 +128,11 @@
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-		crossorigin="anonymous"></script>
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-		crossorigin="anonymous"></script>
-	<!--<script src="js/jquery.min.js"></script>-->
-	<!--<script src="js/bootstrap.min.js"></script>-->
-
-
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<script src="js/ModifUserProfil.js"></script>
 </body>
 </html>

@@ -1,23 +1,15 @@
 $(document).ready(function() {
-/*	$('#boutonplus').click(function() {
-		$('#newuser').removeClass("d-none");
-		$('.listeUserExistant').addClass("d-none");
-		$('#boutonplus').addClass("d-none");
-	});*/
-	
-	$('#posologieFrequence').on('change', function() {
-		
-		let frequence = $('#posologieFrequence option:selected').text();
-		
+	$('#idFrequence').on('change', function() {
+		let frequence = $('#idFrequence option:selected').text();
+		console.log("choix frequence: " + frequence)
 		if (frequence == "jour") {
 			$('#freqRadio').removeClass("d-none");
 			$('#freqCheck').removeClass("d-none");
+			console.log("vrai");
+		} else {
+			$('#freqRadio').addClass("d-none");
+			$('#freqCheck').addClass("d-none");
+			console.log("faux");
 		}
-		
-		
-		
-		
-		});
-		
-	
+	});
 });

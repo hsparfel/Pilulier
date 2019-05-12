@@ -45,7 +45,7 @@
 					<h1>Enregistrer une prescription</h1>
 				</div>
 
-				<form id="newMedocInList">
+				<form action="EnregistrerPrescriptionAction" method="post">
 					<div class="form-group row">
 						<label for="idMedecin" class="col-2 col-form-label">Medecin</label>
 						<div class="col-6">
@@ -64,7 +64,7 @@
 					<div class="form-group row">
 						<label for="idMedicament" class="col-2 col-form-label">Medicament</label>
 						<div class="col-6">
-							<select id="idMedicament" name="idMdicament" required="required"
+							<select id="idMedicament" name="idMedicament" required="required"
 								class="custom-select">
 								<option disabled selected value>Sélectionner</option>
 								<c:forEach items="${ listeMedicaments }" var="medicament">
@@ -92,9 +92,9 @@
 						</div>
 					</div>
 					<div class="form-group row">
-						<label for="posologieDose" class="col-2 col-form-label">Dose</label>
+						<label for="idDose" class="col-2 col-form-label">Dose</label>
 						<div class="col-6">
-							<select id="posologieDose" name="posologieDose"
+							<select id="idDose" name="idDose"
 								class="custom-select" required="required">
 								<option disabled selected value>Sélectionner</option>
 								<c:forEach items="${ listeDoses }" var="dose">
@@ -122,9 +122,9 @@
 						</div>
 					</div>
 					<div class="form-group row">
-						<label for="posologieFrequence" class="col-2 col-form-label">Fréquence</label>
+						<label for="idFrequence" class="col-2 col-form-label">Fréquence</label>
 						<div class="col-6">
-							<select id="posologieFrequence" name="posologieFrequence"
+							<select id="idFrequence" name="idFrequence"
 								required="required" class="custom-select">
 								<option disabled selected value>Sélectionnez</option>
 								<c:forEach items="${ listeFrequences }" var="frequence">
@@ -188,12 +188,7 @@
 							</div>
 						</div>
 					</div>
-					
-					
-					
-					
-					
-					
+				
 					</div>
 					<div class="form-group row">
 						<div class="offset-2 col-6">
@@ -202,10 +197,6 @@
 								class="btn btn-outline-secondary">Annuler</a>
 						</div>
 					</div>
-
-					
-					
-					
 
 				</form>
 			</div>

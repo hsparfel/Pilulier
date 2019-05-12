@@ -17,12 +17,14 @@ import fr.medoc.dao.MedecinDAO;
 import fr.medoc.dao.MedicamentDAO;
 import fr.medoc.dao.PrescriptionDAO;
 import fr.medoc.dao.PriseDAO;
+import fr.medoc.dao.RdvDAO;
 import fr.medoc.entities.Dose;
 import fr.medoc.entities.Frequence;
 import fr.medoc.entities.Medecin;
 import fr.medoc.entities.Medicament;
 import fr.medoc.entities.Prescription;
 import fr.medoc.entities.Prise;
+import fr.medoc.entities.Rdv;
 import fr.medoc.entities.Utilisateur;
 import fr.medoc.exception.DAOConfigurationException;
 import fr.medoc.exception.DAOException;
@@ -39,6 +41,7 @@ public class ModifUserProfilServlet extends HttpServlet {
 	private UtilisateurDAO utilisateurDao;
 	private PriseDAO priseDao;
 	private MedecinDAO medecinDao;
+	private RdvDAO rdvDao;
 
 	@Override
 	public void init() throws ServletException {
@@ -51,6 +54,8 @@ public class ModifUserProfilServlet extends HttpServlet {
 			utilisateurDao = daoFactory.getUtilisateurDAO();
 			priseDao = daoFactory.getPriseDAO();
 			medecinDao = daoFactory.getMedecinDAO();
+			rdvDao = daoFactory.getRdvDAO();
+			
 		} catch (DAOConfigurationException e) {
 			e.printStackTrace();
 		}
@@ -78,6 +83,7 @@ public class ModifUserProfilServlet extends HttpServlet {
 			ArrayList<Frequence> listeFrequences = null;
 			ArrayList<Prise> listePrises = null;
 			ArrayList<Medecin> listeMedecins = null;
+			ArrayList<Rdv> listeRdvs = null;
 			Utilisateur unUtilisateur = null;
 
 			try {
@@ -85,8 +91,9 @@ public class ModifUserProfilServlet extends HttpServlet {
 				listeFrequences = (ArrayList<Frequence>) frequenceDao.findAll();
 				listeDoses = (ArrayList<Dose>) doseDao.findAll();
 				listeMedecins = (ArrayList<Medecin>) medecinDao.findAllByUser(unUtilisateur.getId());
+				listeRdvs = (ArrayList<Rdv>) rdvDao.findAllByUser(unUtilisateur.getId());
 				
-				System.out.println(unUtilisateur.getId());
+				//System.out.println(unUtilisateur.getId());
 
 				listePrescriptions = (ArrayList<Prescription>) prescriptionDao
 						.findAllByUser(unUtilisateur.getId());
@@ -109,6 +116,8 @@ public class ModifUserProfilServlet extends HttpServlet {
 			request.setAttribute("listeMedicaments", listeMedicaments);
 			request.setAttribute("listePrises", listePrises);
 			request.setAttribute("listeMedecins", listeMedecins);
+			request.setAttribute("listeRdvs", listeRdvs);
+			
 			this.getServletContext().getRequestDispatcher(JSP_PAGE).forward(request, response);
 
 		} else {
