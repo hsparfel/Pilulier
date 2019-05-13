@@ -74,8 +74,9 @@ public class EnregistrerPrescriptionAction extends HttpServlet {
 
 		int frequenceRadio=0;
 		
-		int frequenceCheckbox=0;
-		
+		int frequenceCheckbox_0=0;
+		int frequenceCheckbox_1=0;
+		int frequenceCheckbox_2=0;
 
 		Dose uneDose = null;
 		Frequence uneFrequence = null;
@@ -84,8 +85,9 @@ public class EnregistrerPrescriptionAction extends HttpServlet {
 
 		// recup des radio et checkbox
 		System.out.println("radio: " + request.getParameter("frequenceRadio"));
-		System.out.println("check: " + request.getParameter("frequenceCheckbox"));
-
+		System.out.println("check0: " + request.getParameter("frequenceCheckbox_0"));
+		System.out.println("check1: " + request.getParameter("frequenceCheckbox_1"));
+		System.out.println("check2: " + request.getParameter("frequenceCheckbox_2"));
 		try {
 			unUtilisateur = utilisateurDAO.findByName((String) session.getAttribute("login"));
 			uneDose = doseDAO.findByRef(idDose);
@@ -104,18 +106,37 @@ public class EnregistrerPrescriptionAction extends HttpServlet {
 				break;
 			}
 			case 2: {
-				nouveauPrescription.setMatin(1);
+				
 				nouveauPrescription.setMidi(1);
 				break;
 			}
 			case 3: {
-				nouveauPrescription.setMatin(1);
-				nouveauPrescription.setMidi(1);
+				
 				nouveauPrescription.setSoir(1);
 				break;
 			}
 			}
-			if (request.getParameter("frequenceCheckbox")!=null) {
+			
+			if (request.getParameter("frequenceCheckbox_0")!=null) {
+				frequenceCheckbox_0 = (Integer) Integer.parseInt(request.getParameter("frequenceCheckbox_0"));
+				}
+			if (request.getParameter("frequenceCheckbox_1")!=null) {
+				frequenceCheckbox_1 = (Integer) Integer.parseInt(request.getParameter("frequenceCheckbox_1"));
+				}
+			if (request.getParameter("frequenceCheckbox_2")!=null) {
+				frequenceCheckbox_2 = (Integer) Integer.parseInt(request.getParameter("frequenceCheckbox_2"));
+				}
+			if (frequenceCheckbox_0==1) {
+				nouveauPrescription.setMatin(1);
+			}
+			if (frequenceCheckbox_1==2) {
+				nouveauPrescription.setMidi(1);
+			}
+			if (frequenceCheckbox_2==3) {
+				nouveauPrescription.setSoir(1);
+			}
+			
+			/*if (request.getParameter("frequenceCheckbox")!=null) {
 			frequenceCheckbox = (Integer) Integer.parseInt(request.getParameter("frequenceCheckbox"));
 			}
 			switch (frequenceCheckbox) {
@@ -134,7 +155,7 @@ public class EnregistrerPrescriptionAction extends HttpServlet {
 				nouveauPrescription.setSoir(1);
 				break;
 			}
-			}
+			}*/
 			prescriptionDao.ajouterPrescription(nouveauPrescription);
 		} catch (DAOException e) {
 			e.printStackTrace();

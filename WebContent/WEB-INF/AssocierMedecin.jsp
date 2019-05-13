@@ -45,7 +45,7 @@
 					<h1>Associer un medecin</h1>
 				</div>
 
-				<form>
+				<form action="AssocierMedecinAction" method="post">
 					<div class="form-group row">
 						<label for="idMedecin" class="col-2 col-form-label">Medecin</label>
 						<div class="col-6">

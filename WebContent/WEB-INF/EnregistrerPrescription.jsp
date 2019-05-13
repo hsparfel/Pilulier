@@ -167,21 +167,21 @@
 						<div class="col-8">
 							<div class="custom-controls-stacked">
 								<div class="custom-control custom-checkbox">
-									<input name="frequenceCheckbox" id="frequenceCheckbox_0"
+									<input name="frequenceCheckbox_0" id="frequenceCheckbox_0"
 										type="checkbox" class="custom-control-input" value="1">
 									<label for="frequenceCheckbox_0" class="custom-control-label">Matin</label>
 								</div>
 							</div>
 							<div class="custom-controls-stacked">
 								<div class="custom-control custom-checkbox">
-									<input name="frequenceCheckbox" id="frequenceCheckbox_1"
+									<input name="frequenceCheckbox_1" id="frequenceCheckbox_1"
 										type="checkbox" class="custom-control-input" value="2">
 									<label for="frequenceCheckbox_1" class="custom-control-label">Midi</label>
 								</div>
 							</div>
 							<div class="custom-controls-stacked">
 								<div class="custom-control custom-checkbox">
-									<input name="frequenceCheckbox" id="frequenceCheckbox_2"
+									<input name="frequenceCheckbox_2" id="frequenceCheckbox_2"
 										type="checkbox" class="custom-control-input" value="3">
 									<label for="frequenceCheckbox_2" class="custom-control-label">Soir</label>
 								</div>
