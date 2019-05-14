@@ -47,18 +47,48 @@
 
 				<form action="EnregistrerPriseAction" method="post">
 					<div class="form-group row">
-						<label for="nomPrise" class="col-2 col-form-label">Nom</label>
+						<label for="idMedicament" class="col-2 col-form-label">Medicament</label>
+						<div class="col-6">
+							<select id="idMedicament" name="idMedicament" required="required"
+								class="custom-select">
+								<option disabled selected value>Sélectionner</option>
+								<c:forEach items="${ listeMedicaments }" var="medicament">
+									<option value="${ medicament.id }">${ medicament.nom }</option>
+								</c:forEach>
+							</select>
+						</div>
+						<a href="EnregistrerMedicament"> <span
+							class="fa fa-plus-square-o fa-2x"></span>
+						</a>
+					</div>
+					<div class="form-group row">
+						<label for="date" class="col-2 col-form-label">Date</label>
 						<div class="col-6">
 							<div class="input-group">
 								<div class="input-group-prepend">
 									<div class="input-group-text">
-										<i class="fa fa-eyedropper"></i>
+										<i class="fa fa-calendar"></i>
 									</div>
 								</div>
-								<input id="nomPrise" name="nomPrise"
-									placeholder="saisir le nom de la Prise" type="text"
-									aria-describedby="nomPriseHelpBlock" required="required"
+								<input id="date" name="date"
+									placeholder="ex: 03/05/2019" type="text" required="required"
 									class="form-control">
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label for="heure" class="col-2 col-form-label">Heure</label>
+						<div class="col-6">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">
+										<i class="fa fa-clock-o"></i>
+									</div>
+								</div>
+								<input id="heure" name="heure"
+									placeholder="ex: 09:30" type="text"
+									class="form-control" required="required">
 							</div>
 						</div>
 					</div>
@@ -77,7 +107,7 @@
 					<div class="list-group">
 						<div class="list-group-item active">Liste des prises</div>
 						<c:forEach items="${ listePrises }" var="prise">
-							<div class="list-group-item">${ prise.nom }</div>
+							<div class="list-group-item">${ prise.getMedicament().getNom()} - ${prise.getDatePrise()} à ${prise.getHeurePrise() }</div>
 						</c:forEach>
 					</div>
 				</c:if>

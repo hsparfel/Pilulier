@@ -72,21 +72,6 @@
 				</c:if>
 				
 				
-				<c:if test="${!empty listePrises }">
-					<div class="dropdown list-group">
-						<button class="btn btn-primary dropdown-toggle" type="button"
-							id="dropdownMenuButton" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false">Mes dernières
-							prises</button>
-						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-							<c:forEach items="${ listePrises }" var="prise">
-								<div class="dropdown-item">${ prise.medicament.getNom() }-
-									${ prise.datePrise }</div>
-							</c:forEach>
-						</div>
-					</div>
-				</c:if>
-				
 				<c:if test="${!empty listeMedecins }">
 					<div class="list-group">
 						<button id="listBtnMedecin" class="list-group-item active">Mes medecins</button>
@@ -113,6 +98,7 @@
 						</div>
 					</div>
 				</c:if>
+				
 				
 				
 			</div>

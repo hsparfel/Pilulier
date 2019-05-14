@@ -14,7 +14,7 @@ public interface PrescriptionDAO {
 
 	public void ajouterPrescription (Prescription unePrescription)throws DAOException;
 	public Collection<Prescription> findAllByUser(int id) throws DAOException;
-	
+	public Prescription findByRefs (int idUtilisateur, int idMedicament)throws DAOException;
 	
 	
 }

@@ -1,33 +1,26 @@
 package fr.medoc.entities;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class Prise {
-
-	private static final long serialVersionUID = 1L;
 	
 	private int id;
 	private Utilisateur utilisateur;
 	private Medicament medicament;
 	private String datePrise;
+	private String heurePrise;
 	
-	public Prise(Utilisateur unUtilisateur, Medicament unMedicament, String datePrise) {
-	
-		this.utilisateur = unUtilisateur;
-		this.medicament = unMedicament;
+	public Prise(Utilisateur utilisateur, Medicament medicament, String datePrise, String heurePrise) {
+
+		this.utilisateur = utilisateur;
+		this.medicament = medicament;
 		this.datePrise = datePrise;
+		this.heurePrise = heurePrise;
 	}
 
 	public Prise() {
-		SimpleDateFormat formater = null;
-		formater = new SimpleDateFormat("yyyy-MM-dd");
-		Date aujourdhui = new Date();
-		
 		this.utilisateur = null;
 		this.medicament = null;
-		this.datePrise = formater.format(aujourdhui);
+		this.datePrise = "";
+		this.heurePrise = "";
 	}
 
 	public int getId() {
@@ -42,16 +35,16 @@ public class Prise {
 		return utilisateur;
 	}
 
-	public void setUtilisateur(Utilisateur unUtilisateur) {
-		this.utilisateur = unUtilisateur;
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 
 	public Medicament getMedicament() {
 		return medicament;
 	}
 
-	public void setMedicament(Medicament unMedicament) {
-		this.medicament = unMedicament;
+	public void setMedicament(Medicament medicament) {
+		this.medicament = medicament;
 	}
 
 	public String getDatePrise() {
@@ -62,22 +55,20 @@ public class Prise {
 		this.datePrise = datePrise;
 	}
 
-	@Override
-	public String toString() {
-		return "Prise [id=" + id + ", utilisateur=" + utilisateur + ", medicament=" + medicament
-				+ ", datePrise=" + datePrise + "]";
+	public String getHeurePrise() {
+		return heurePrise;
 	}
 
-	
-	
-	
+	public void setHeurePrise(String heurePrise) {
+		this.heurePrise = heurePrise;
+	}
 
+	@Override
+	public String toString() {
+		return "Prise [id=" + id + ", utilisateur=" + utilisateur + ", medicament=" + medicament + ", datePrise="
+				+ datePrise + ", heurePrise=" + heurePrise + "]";
+	}
 	
-
-	
-
-	
-
 	
 	
 }
