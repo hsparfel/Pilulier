@@ -12,7 +12,6 @@ import fr.medoc.dao.PriseDAO;
 import fr.medoc.dao.UtilisateurDAO;
 import fr.medoc.dao.DAOFactory;
 import fr.medoc.dao.MedicamentDAO;
-import fr.medoc.dao.PrescriptionDAO;
 import fr.medoc.entities.Prise;
 import fr.medoc.exception.DAOException;
 

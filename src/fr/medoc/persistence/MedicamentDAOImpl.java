@@ -11,7 +11,6 @@ import java.util.Collection;
 import fr.medoc.dao.MedicamentDAO;
 import fr.medoc.dao.DAOFactory;
 import fr.medoc.entities.Medicament;
-import fr.medoc.entities.Prescription;
 import fr.medoc.exception.DAOException;
 
 public class MedicamentDAOImpl implements MedicamentDAO {

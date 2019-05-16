@@ -3,8 +3,6 @@ package fr.medoc.dao;
 import java.util.Collection;
 
 import fr.medoc.entities.Medecin;
-import fr.medoc.entities.Medicament;
-import fr.medoc.entities.Prescription;
 import fr.medoc.exception.DAOException;
 
 

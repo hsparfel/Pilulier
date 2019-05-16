@@ -108,7 +108,9 @@ public class DAOFactory {
     public DoseDAO getDoseDAO() {
         return new DoseDAOImpl(this);
     }
-
+    public DureeDAO getDureeDAO() {
+        return new DureeDAOImpl(this);
+    }
     public FrequenceDAO getFrequenceDAO() {
         return new FrequenceDAOImpl(this);
     }

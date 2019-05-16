@@ -2,7 +2,6 @@ package fr.medoc.dao;
 
 import java.util.Collection;
 
-import fr.medoc.entities.Dose;
 import fr.medoc.entities.Frequence;
 import fr.medoc.exception.DAOException;
 

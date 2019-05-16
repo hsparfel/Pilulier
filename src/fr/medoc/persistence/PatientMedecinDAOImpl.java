@@ -10,10 +10,7 @@ import java.util.Collection;
 import fr.medoc.dao.PatientMedecinDAO;
 import fr.medoc.dao.UtilisateurDAO;
 import fr.medoc.dao.DAOFactory;
-import fr.medoc.dao.DoseDAO;
-import fr.medoc.dao.FrequenceDAO;
 import fr.medoc.dao.MedecinDAO;
-import fr.medoc.dao.MedicamentDAO;
 import fr.medoc.entities.PatientMedecin;
 import fr.medoc.exception.DAOException;
 
@@ -37,7 +34,7 @@ public class PatientMedecinDAOImpl implements PatientMedecinDAO {
 
 	@Override
 	public void ajouterPatientMedecin(PatientMedecin unPatientMedecin) throws DAOException {
-		ResultSet rs = null;
+		
 		Connection connexion = null;
 
 		try {

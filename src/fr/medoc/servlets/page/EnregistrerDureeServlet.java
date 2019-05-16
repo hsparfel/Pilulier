@@ -10,25 +10,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import fr.medoc.dao.UtilisateurDAO;
 import fr.medoc.dao.DAOFactory;
-import fr.medoc.entities.Utilisateur;
+import fr.medoc.dao.DureeDAO;
+import fr.medoc.entities.Duree;
 import fr.medoc.exception.DAOConfigurationException;
 import fr.medoc.exception.DAOException;
 
-@WebServlet("/Accueil")
-public class AccueilServlet extends HttpServlet {
+@WebServlet("/EnregistrerDuree")
+public class EnregistrerDureeServlet extends HttpServlet {
 
-		private static final long serialVersionUID = 1L;
-	private final String JSP_PAGE = "/WEB-INF/Accueil.jsp";
+	private final String JSP_PAGE = "/WEB-INF/EnregistrerDuree.jsp";
+
 	private DAOFactory daoFactory;
-	private UtilisateurDAO utilisateurDao;
+	private DureeDAO dureeDao;
 
-	@Override
+	@Override 
 	public void init() throws ServletException {
 		try {
 			daoFactory = DAOFactory.getInstance();
-			utilisateurDao = daoFactory.getUtilisateurDAO();
+			dureeDao = daoFactory.getDureeDAO();
 		} catch (DAOConfigurationException e) {
 			e.printStackTrace();
 		}
@@ -47,27 +47,23 @@ public class AccueilServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 
-	//	
+		if (session.getAttribute("login") != null) {
 
-			ArrayList<Utilisateur> listeUtilisateurs = null;
+			ArrayList<Duree> listeDurees = null;
 			try {
-				listeUtilisateurs = (ArrayList<Utilisateur>) utilisateurDao.findAll();	
+				listeDurees = (ArrayList<Duree>) dureeDao.findAll();	
 			} catch (DAOException e) {
 				e.printStackTrace();
 			}
 
-			if (session.getAttribute("user") != null) {
-				request.setAttribute("login", session.getAttribute("user"));
-			}
-			
-			request.setAttribute("listeUtilisateurs", listeUtilisateurs);
+			request.setAttribute("listeDurees", listeDurees);
 
 			this.getServletContext().getRequestDispatcher(JSP_PAGE).forward(request, response);
 
-		//}
-		//else {
-		//	response.sendRedirect("Accueil");
-		//}
+		}
+		else {
+			response.sendRedirect("Accueil");
+		}
 	}
 
 }

@@ -11,17 +11,11 @@ import javax.servlet.http.HttpSession;
 
 import fr.medoc.dao.PriseDAO;
 import fr.medoc.dao.UtilisateurDAO;
-import fr.medoc.dao.FrequenceDAO;
-import fr.medoc.dao.MedecinDAO;
 import fr.medoc.dao.MedicamentDAO;
-import fr.medoc.dao.DoseDAO;
 import fr.medoc.dao.DAOFactory;
-import fr.medoc.entities.Dose;
 import fr.medoc.entities.Prise;
 import fr.medoc.entities.Utilisateur;
 import fr.medoc.entities.Medicament;
-import fr.medoc.entities.Frequence;
-import fr.medoc.entities.Medecin;
 import fr.medoc.exception.DAOConfigurationException;
 import fr.medoc.exception.DAOException;
 

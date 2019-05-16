@@ -2,11 +2,7 @@ package fr.medoc.dao;
 
 import java.util.Collection;
 
-import fr.medoc.entities.Dose;
-import fr.medoc.entities.Frequence;
-import fr.medoc.entities.Medicament;
 import fr.medoc.entities.Prescription;
-import fr.medoc.entities.Utilisateur;
 import fr.medoc.exception.DAOException;
 
 

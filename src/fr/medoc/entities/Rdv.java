@@ -2,7 +2,7 @@ package fr.medoc.entities;
 
 public class Rdv {
 
-	private static final long serialVersionUID = 1L;
+	
 
 	private int id;
 	private Utilisateur utilisateur;

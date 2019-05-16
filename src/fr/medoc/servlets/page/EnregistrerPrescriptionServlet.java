@@ -15,9 +15,11 @@ import fr.medoc.dao.PrescriptionDAO;
 import fr.medoc.dao.UtilisateurDAO;
 import fr.medoc.dao.DAOFactory;
 import fr.medoc.dao.DoseDAO;
+import fr.medoc.dao.DureeDAO;
 import fr.medoc.dao.FrequenceDAO;
 import fr.medoc.dao.MedecinDAO;
 import fr.medoc.entities.Dose;
+import fr.medoc.entities.Duree;
 import fr.medoc.entities.Frequence;
 import fr.medoc.entities.Medecin;
 import fr.medoc.entities.Medicament;
@@ -36,6 +38,7 @@ public class EnregistrerPrescriptionServlet extends HttpServlet {
 	private PrescriptionDAO prescriptionDao;
 	private UtilisateurDAO utilisateurDao;
 	private DoseDAO doseDao;
+	private DureeDAO dureeDao;
 	private FrequenceDAO frequenceDao;
 	private MedecinDAO medecinDao;
 	private MedicamentDAO medicamentDao;
@@ -47,6 +50,7 @@ public class EnregistrerPrescriptionServlet extends HttpServlet {
 			prescriptionDao = daoFactory.getPrescriptionDAO();
 			utilisateurDao = daoFactory.getUtilisateurDAO();
 			doseDao = daoFactory.getDoseDAO();
+			dureeDao = daoFactory.getDureeDAO();
 			frequenceDao = daoFactory.getFrequenceDAO();
 			medecinDao = daoFactory.getMedecinDAO();
 			medicamentDao = daoFactory.getMedicamentDAO();
@@ -74,6 +78,7 @@ public class EnregistrerPrescriptionServlet extends HttpServlet {
 			ArrayList<Prescription> listePrescriptions = null;
 			Utilisateur unUtilisateur = null;
 			ArrayList<Dose> listeDoses = null;
+			ArrayList<Duree> listeDurees = null;
 			ArrayList<Frequence> listeFrequences = null;
 			ArrayList<Medecin> listeMedecins = null;
 			ArrayList<Medicament> listeMedicaments = null;
@@ -82,6 +87,7 @@ public class EnregistrerPrescriptionServlet extends HttpServlet {
 				unUtilisateur = utilisateurDao.findByName((String) session.getAttribute("login"));
 				listePrescriptions = (ArrayList<Prescription>) prescriptionDao.findAllByUser(unUtilisateur.getId());	
 				listeDoses = (ArrayList<Dose>) doseDao.findAll();	
+				listeDurees = (ArrayList<Duree>) dureeDao.findAll();	
 				listeFrequences = (ArrayList<Frequence>) frequenceDao.findAll();	
 				listeMedecins = (ArrayList<Medecin>) medecinDao.findAllByUser(unUtilisateur.getId());	
 				listeMedicaments = (ArrayList<Medicament>) medicamentDao.findAll();	
@@ -93,6 +99,7 @@ public class EnregistrerPrescriptionServlet extends HttpServlet {
 
 			request.setAttribute("listePrescriptions", listePrescriptions);
 			request.setAttribute("listeDoses", listeDoses);
+			request.setAttribute("listeDurees", listeDurees);
 			request.setAttribute("listeFrequences", listeFrequences);
 			request.setAttribute("listeMedecins", listeMedecins);
 			request.setAttribute("listeMedicaments", listeMedicaments);

@@ -2,7 +2,7 @@ package fr.medoc.entities;
 
 public class PatientMedecin {
 
-	private static final long serialVersionUID = 1L;
+	
 
 	private Utilisateur patient;
 	private Medecin medecin;

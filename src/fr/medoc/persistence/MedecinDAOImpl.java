@@ -12,10 +12,7 @@ import fr.medoc.dao.MedecinDAO;
 import fr.medoc.dao.SpecialiteDAO;
 import fr.medoc.dao.CabinetDAO;
 import fr.medoc.dao.DAOFactory;
-import fr.medoc.dao.DoseDAO;
 import fr.medoc.entities.Medecin;
-import fr.medoc.entities.Medicament;
-import fr.medoc.entities.Prescription;
 import fr.medoc.exception.DAOException;
 
 

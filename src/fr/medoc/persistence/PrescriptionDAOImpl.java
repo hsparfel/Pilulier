@@ -8,17 +8,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import fr.medoc.dao.PrescriptionDAO;
-import fr.medoc.dao.SpecialiteDAO;
 import fr.medoc.dao.UtilisateurDAO;
-import fr.medoc.dao.CabinetDAO;
 import fr.medoc.dao.DAOFactory;
 import fr.medoc.dao.DoseDAO;
+import fr.medoc.dao.DureeDAO;
 import fr.medoc.dao.FrequenceDAO;
 import fr.medoc.dao.MedecinDAO;
 import fr.medoc.dao.MedicamentDAO;
-import fr.medoc.entities.Medecin;
 import fr.medoc.entities.Prescription;
-import fr.medoc.entities.Prise;
 import fr.medoc.exception.DAOException;
 
 public class PrescriptionDAOImpl implements PrescriptionDAO {
@@ -27,7 +24,7 @@ public class PrescriptionDAOImpl implements PrescriptionDAO {
 	private ArrayList<Prescription> listePrescriptionsTries;
 
 	private final String ORDRE_INSERT = "insert into utilisateur_medicament values ";
-	private final String VALUES_INSERT = "(?,?,?,?,?,?,?,?,?,?)";
+	private final String VALUES_INSERT = "(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 	private final String ORDRE_FINDALLBYUSER = "select * from utilisateur_medicament AS um where um.id_utilisateur=?";
 	private final String ORDRE_FINDBYREFS = "select * from utilisateur_medicament AS um where um.id_utilisateur=? AND um.id_medicament=?";
@@ -43,7 +40,7 @@ public class PrescriptionDAOImpl implements PrescriptionDAO {
 
 	@Override
 	public void ajouterPrescription(Prescription unePrescription) throws DAOException {
-		ResultSet rs = null;
+		
 		Connection connexion = null;
 
 		try {
@@ -60,6 +57,9 @@ public class PrescriptionDAOImpl implements PrescriptionDAO {
 			pst.setInt(8, unePrescription.getMatin());
 			pst.setInt(9, unePrescription.getMidi());
 			pst.setInt(10, unePrescription.getSoir());
+			pst.setInt(11, unePrescription.getNbDuree());
+			pst.setInt(12, unePrescription.getDuree().getId());
+			pst.setString(13, unePrescription.getDate());
 			pst.executeUpdate();
 			connexion.commit();
 			daoFactory.closeConnexion(connexion);
@@ -108,6 +108,7 @@ public class PrescriptionDAOImpl implements PrescriptionDAO {
 			UtilisateurDAO unUtilisateurDAO = daoFactory.getUtilisateurDAO();
 			MedicamentDAO unMedicamentDAO = daoFactory.getMedicamentDAO();
 			DoseDAO uneDoseDAO = daoFactory.getDoseDAO();
+			DureeDAO uneDureeDAO = daoFactory.getDureeDAO();
 			FrequenceDAO uneFrequenceDAO = daoFactory.getFrequenceDAO();
 			
 			a.setUtilisateur(unUtilisateurDAO.findByRef(resultSet.getInt("id_utilisateur")));
@@ -116,6 +117,9 @@ public class PrescriptionDAOImpl implements PrescriptionDAO {
 			a.setDose(uneDoseDAO.findByRef(resultSet.getInt("id_dose")));
 			a.setNbFrequence(resultSet.getInt("nb_frequence"));
 			a.setFrequence(uneFrequenceDAO.findByRef(resultSet.getInt("id_frequence")));
+			a.setNbDuree(resultSet.getInt("nb_duree"));
+			a.setDuree(uneDureeDAO.findByRef(resultSet.getInt("id_duree")));
+			a.setDate(resultSet.getString("date"));
 			getListePrescriptionsTries().add(a);
 		}
 	}

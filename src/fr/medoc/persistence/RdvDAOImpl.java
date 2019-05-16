@@ -9,9 +9,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import fr.medoc.dao.RdvDAO;
-import fr.medoc.dao.SpecialiteDAO;
 import fr.medoc.dao.UtilisateurDAO;
-import fr.medoc.dao.CabinetDAO;
 import fr.medoc.dao.DAOFactory;
 import fr.medoc.dao.MedecinDAO;
 import fr.medoc.entities.Rdv;

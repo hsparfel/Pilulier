@@ -52,7 +52,7 @@
 							<c:forEach items="${ listePrescriptions }" var="prescription">
 								<div class="list-group-item">${ prescription.medicament.getNom() }
 									- ${ prescription.nbDose } ${ prescription.dose.getNom() }, ${ prescription.nbFrequence }
-									fois par ${ prescription.frequence.getNom() }</div>
+									fois par ${ prescription.frequence.getNom()} pendant ${prescription.nbDuree } ${prescription.duree.getNom() }</div>
 							</c:forEach>
 						</div>
 					</div>

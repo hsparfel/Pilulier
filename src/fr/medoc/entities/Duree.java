@@ -1,17 +1,16 @@
 package fr.medoc.entities;
 
-public class Frequence {
+public class Duree {
 
-	
 	private int id;
 	private String nom;
 
-	public Frequence() {
+	public Duree() {
 
 		this.nom="";
 	}
 	
-	public Frequence(String nom){
+	public Duree(String nom){
 		
 		this.nom= nom;
 	}
@@ -34,7 +33,7 @@ public class Frequence {
 
 	@Override
 	public String toString() {
-		return "Frequence [nom=" + nom + "]";
+		return "Duree [nom=" + nom + "]";
 	}
 
 	

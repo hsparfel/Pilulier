@@ -94,8 +94,8 @@
 					<div class="form-group row">
 						<label for="idDose" class="col-2 col-form-label">Dose</label>
 						<div class="col-6">
-							<select id="idDose" name="idDose"
-								class="custom-select" required="required">
+							<select id="idDose" name="idDose" class="custom-select"
+								required="required">
 								<option disabled selected value>Sélectionner</option>
 								<c:forEach items="${ listeDoses }" var="dose">
 									<option value="${ dose.id }">${ dose.nom }</option>
@@ -124,8 +124,8 @@
 					<div class="form-group row">
 						<label for="idFrequence" class="col-2 col-form-label">Fréquence</label>
 						<div class="col-6">
-							<select id="idFrequence" name="idFrequence"
-								required="required" class="custom-select">
+							<select id="idFrequence" name="idFrequence" required="required"
+								class="custom-select">
 								<option disabled selected value>Sélectionnez</option>
 								<c:forEach items="${ listeFrequences }" var="frequence">
 									<option value="${ frequence.id }">${ frequence.nom }</option>
@@ -135,60 +135,105 @@
 						<a href="EnregistrerFrequence"> <span
 							class="fa fa-plus-square-o fa-2x"></span>
 						</a>
-						
-					<div id="freqRadio" class="form-group row d-none">
-						<div class="col-4"></div>
-						<div class="col-8">
-							<div class="custom-controls-stacked">
-								<div class="custom-control custom-radio">
-									<input name="frequenceRadio" id="frequenceRadio_0" type="radio"
-										class="custom-control-input" value="1"> <label
-										for="frequenceRadio_0" class="custom-control-label">Matin</label>
+
+						<div id="freqRadio" class="form-group row d-none">
+							<div class="col-4"></div>
+							<div class="col-8">
+								<div class="custom-controls-stacked">
+									<div class="custom-control custom-radio">
+										<input name="frequenceRadio" id="frequenceRadio_0"
+											type="radio" class="custom-control-input" value="1">
+										<label for="frequenceRadio_0" class="custom-control-label">Matin</label>
+									</div>
 								</div>
-							</div>
-							<div class="custom-controls-stacked">
-								<div class="custom-control custom-radio">
-									<input name="frequenceRadio" id="frequenceRadio_1" type="radio"
-										class="custom-control-input" value="2"> <label
-										for="frequenceRadio_1" class="custom-control-label">Midi</label>
+								<div class="custom-controls-stacked">
+									<div class="custom-control custom-radio">
+										<input name="frequenceRadio" id="frequenceRadio_1"
+											type="radio" class="custom-control-input" value="2">
+										<label for="frequenceRadio_1" class="custom-control-label">Midi</label>
+									</div>
 								</div>
-							</div>
-							<div class="custom-controls-stacked">
-								<div class="custom-control custom-radio">
-									<input name="frequenceRadio" id="frequenceRadio_2" type="radio"
-										class="custom-control-input" value="3"> <label
-										for="frequenceRadio_2" class="custom-control-label">Soir</label>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div id="freqCheck" class="form-group row d-none">
-						<div class="col-4"></div>
-						<div class="col-8">
-							<div class="custom-controls-stacked">
-								<div class="custom-control custom-checkbox">
-									<input name="frequenceCheckbox_0" id="frequenceCheckbox_0"
-										type="checkbox" class="custom-control-input" value="1">
-									<label for="frequenceCheckbox_0" class="custom-control-label">Matin</label>
-								</div>
-							</div>
-							<div class="custom-controls-stacked">
-								<div class="custom-control custom-checkbox">
-									<input name="frequenceCheckbox_1" id="frequenceCheckbox_1"
-										type="checkbox" class="custom-control-input" value="2">
-									<label for="frequenceCheckbox_1" class="custom-control-label">Midi</label>
-								</div>
-							</div>
-							<div class="custom-controls-stacked">
-								<div class="custom-control custom-checkbox">
-									<input name="frequenceCheckbox_2" id="frequenceCheckbox_2"
-										type="checkbox" class="custom-control-input" value="3">
-									<label for="frequenceCheckbox_2" class="custom-control-label">Soir</label>
+								<div class="custom-controls-stacked">
+									<div class="custom-control custom-radio">
+										<input name="frequenceRadio" id="frequenceRadio_2"
+											type="radio" class="custom-control-input" value="3">
+										<label for="frequenceRadio_2" class="custom-control-label">Soir</label>
+									</div>
 								</div>
 							</div>
 						</div>
+						<div id="freqCheck" class="form-group row d-none">
+							<div class="col-4"></div>
+							<div class="col-8">
+								<div class="custom-controls-stacked">
+									<div class="custom-control custom-checkbox">
+										<input name="frequenceCheckbox_0" id="frequenceCheckbox_0"
+											type="checkbox" class="custom-control-input" value="1">
+										<label for="frequenceCheckbox_0" class="custom-control-label">Matin</label>
+									</div>
+								</div>
+								<div class="custom-controls-stacked">
+									<div class="custom-control custom-checkbox">
+										<input name="frequenceCheckbox_1" id="frequenceCheckbox_1"
+											type="checkbox" class="custom-control-input" value="2">
+										<label for="frequenceCheckbox_1" class="custom-control-label">Midi</label>
+									</div>
+								</div>
+								<div class="custom-controls-stacked">
+									<div class="custom-control custom-checkbox">
+										<input name="frequenceCheckbox_2" id="frequenceCheckbox_2"
+											type="checkbox" class="custom-control-input" value="3">
+										<label for="frequenceCheckbox_2" class="custom-control-label">Soir</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
 					</div>
-				
+					<div class="form-group row">
+						<label for="nbDuree" class="col-2 col-form-label">Quantité</label>
+						<div class="col-6">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">
+										<i class="fa fa-calendar-plus-o"></i>
+									</div>
+								</div>
+								<input id="nbDuree" name="nbDuree"
+									placeholder="saisir une valeur" type="text" required="required"
+									class="form-control">
+							</div>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="idDuree" class="col-2 col-form-label">Duree</label>
+						<div class="col-6">
+							<select id="idDuree" name="idDuree" class="custom-select"
+								required="required">
+								<option disabled selected value>Sélectionner</option>
+								<c:forEach items="${ listeDurees }" var="duree">
+									<option value="${ duree.id }">${ duree.nom }</option>
+								</c:forEach>
+							</select>
+						</div>
+						<a href="EnregistrerDuree"> <span
+							class="fa fa-plus-square-o fa-2x"></span>
+						</a>
+					</div>
+					<div class="form-group row">
+						<label for="date" class="col-2 col-form-label">Date</label>
+						<div class="col-6">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">
+										<i class="fa fa-calendar"></i>
+									</div>
+								</div>
+								<input id="date" name="date"
+									placeholder="ex: 03/05/2019" type="text" required="required"
+									class="form-control">
+							</div>
+						</div>
 					</div>
 					<div class="form-group row">
 						<div class="offset-2 col-6">
@@ -197,7 +242,7 @@
 								class="btn btn-outline-secondary">Annuler</a>
 						</div>
 					</div>
-
+					
 				</form>
 			</div>
 			<div class="col-xs-6 col-sm-3 " id="sidebar">
@@ -239,9 +284,7 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous"></script>
-<script
-		src="js/Prescription.js"
-		></script>
+	<script src="js/Prescription.js"></script>
 
 
 

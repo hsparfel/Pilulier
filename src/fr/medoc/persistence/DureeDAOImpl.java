@@ -8,44 +8,45 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import fr.medoc.dao.FrequenceDAO;
+import fr.medoc.dao.DureeDAO;
+import fr.medoc.dao.DureeDAO;
 import fr.medoc.dao.DAOFactory;
-import fr.medoc.entities.Frequence;
+import fr.medoc.entities.Duree;
 import fr.medoc.exception.DAOException;
 
 
-public class FrequenceDAOImpl implements FrequenceDAO{
+public class DureeDAOImpl implements DureeDAO{
 	
-	private ArrayList<Frequence> listeFrequences;
-	private final String ORDRE_INSERT = "insert into frequence(Nom) values ";
+	private ArrayList<Duree> listeDurees;
+	private final String ORDRE_INSERT = "insert into duree(Nom) values ";
 	private final String VALUES_INSERT = "(?)";
-	private final String ORDRE_DELETE = "delete from frequence where Id = ";
-	private final String ORDRE_FINDALL = "select Id,Nom from frequence";
-	private final String ORDRE_FINDBYREF = "select Id,Nom from frequence where Id = ?";
-	private final String ORDRE_FINDBYNAME = "select Id,Nom from frequence where Nom = ?";
+	private final String ORDRE_DELETE = "delete from duree where Id = ";
+	private final String ORDRE_FINDALL = "select Id,Nom from duree";
+	private final String ORDRE_FINDBYREF = "select Id,Nom from duree where Id = ?";
+	private final String ORDRE_FINDBYNAME = "select Id,Nom from duree where Nom = ?";
 	
     private DAOFactory daoFactory;
 
-	public FrequenceDAOImpl(DAOFactory daoFactory) {
-		listeFrequences = new ArrayList<Frequence>();
+	public DureeDAOImpl(DAOFactory daoFactory) {
+		listeDurees = new ArrayList<Duree>();
 		this.daoFactory = daoFactory;
 	}
 	@Override
-	public void ajouterFrequence(Frequence uneFrequence) throws DAOException{
+	public void ajouterDuree(Duree uneDuree) throws DAOException{
 		ResultSet rs = null;
 		Connection connexion = null;
 
 		try {
 			connexion = daoFactory.getConnection();
-			getListeFrequences().add(uneFrequence);
+			getListeDurees().add(uneDuree);
 			PreparedStatement pst = connexion.prepareStatement(ORDRE_INSERT + VALUES_INSERT, Statement.RETURN_GENERATED_KEYS);
-			pst.setString(1, uneFrequence.getNom());
+			pst.setString(1, uneDuree.getNom());
 			pst.executeUpdate();
 			rs = pst.getGeneratedKeys();
 			if (rs.next()){
-				uneFrequence.setId(rs.getInt(1));
+				uneDuree.setId(rs.getInt(1));
 			} else {
-				throw new DAOException("Erreur création d'un dose. " );
+				throw new DAOException("Erreur création d'un duree. " );
 			}
 			connexion.commit();
 			daoFactory.closeConnexion(connexion);
@@ -54,12 +55,12 @@ public class FrequenceDAOImpl implements FrequenceDAO{
 		}
 	}
 	@Override
-	public void supprimerFrequence(int idFrequence)throws DAOException {
+	public void supprimerDuree(int idDuree)throws DAOException {
 		Connection connexion = null;
 		try {
 			connexion = daoFactory.getConnection();
 			Statement requete = connexion.createStatement();
-			requete.executeUpdate(ORDRE_DELETE + "'"+idFrequence+"'");
+			requete.executeUpdate(ORDRE_DELETE + "'"+idDuree+"'");
 			connexion.commit();
 			daoFactory.closeConnexion(connexion);
 		} catch (SQLException e) {
@@ -67,8 +68,8 @@ public class FrequenceDAOImpl implements FrequenceDAO{
 		}
 	}
 	@Override
-	public Frequence findByRef (int id) throws DAOException{
-		Frequence uneFrequence = null;
+	public Duree findByRef (int id) throws DAOException{
+		Duree uneDuree = null;
 		Connection connexion = null;
 		try {
 			connexion = daoFactory.getConnection();
@@ -77,21 +78,21 @@ public class FrequenceDAOImpl implements FrequenceDAO{
 
 			ResultSet rs = pst.executeQuery();
 			if (rs.next()) {
-				uneFrequence = new Frequence( rs.getString("nom"));	
-				uneFrequence.setId(id);
+				uneDuree = new Duree( rs.getString("nom"));	
+				uneDuree.setId(id);
 			} else {
-				throw new DAOException("Erreur recherche d'un dose. " );
+				throw new DAOException("Erreur recherche d'un duree. " );
 			}
 			connexion.commit();
 			daoFactory.closeConnexion(connexion);
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}
-		return uneFrequence; 
+		return uneDuree; 
 	}
 	@Override
-	public Frequence findByName (String nom) throws DAOException{
-		Frequence uneFrequence = null;
+	public Duree findByName (String nom) throws DAOException{
+		Duree uneDuree = null;
 		Connection connexion = null;
 		try {
 			connexion = daoFactory.getConnection();
@@ -100,50 +101,50 @@ public class FrequenceDAOImpl implements FrequenceDAO{
 
 			ResultSet rs = pst.executeQuery();
 			if (rs.next()) {
-				uneFrequence = new Frequence( rs.getString("nom"));	
-				uneFrequence.setId(rs.getInt("id"));
+				uneDuree = new Duree( rs.getString("nom"));	
+				uneDuree.setId(rs.getInt("id"));
 			} else {
-				throw new DAOException("Erreur recherche d'un Frequence. " );
+				throw new DAOException("Erreur recherche d'un duree. " );
 			}
 			connexion.commit();
 			daoFactory.closeConnexion(connexion);
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}
-		return uneFrequence; 
+		return uneDuree; 
 	}
 	@Override
-	public Collection<Frequence> findAll() throws DAOException {	
+	public Collection<Duree> findAll() throws DAOException {	
 		Connection connexion = null;
 		try {
 			connexion = daoFactory.getConnection();
 			PreparedStatement pst = connexion.prepareStatement(ORDRE_FINDALL);
 			ResultSet resultSet = pst.executeQuery();
-			listeFrequences.removeAll(listeFrequences);
+			listeDurees.removeAll(listeDurees);
 			resultSetToArrayList(resultSet);
 			daoFactory.closeConnexion(connexion);
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}
-		return listeFrequences;
+		return listeDurees;
 	}
 	
-	public void setListeFrequences(ArrayList<Frequence> listeFrequences) {
-		this.listeFrequences = listeFrequences;
+	public void setListeDurees(ArrayList<Duree> listeDurees) {
+		this.listeDurees = listeDurees;
 	}
 
-	public Collection<Frequence> getListeFrequences() {
-		return listeFrequences;
+	public Collection<Duree> getListeDurees() {
+		return listeDurees;
 	}
 	
 	private void resultSetToArrayList(ResultSet resultSet)
 			throws SQLException {
 
 		while (resultSet.next()) {
-			Frequence a = new Frequence();
+			Duree a = new Duree();
 			a.setId(resultSet.getInt("id"));
 			a.setNom(resultSet.getString("nom"));
-			getListeFrequences().add(a);
+			getListeDurees().add(a);
 		}
 	}
 
