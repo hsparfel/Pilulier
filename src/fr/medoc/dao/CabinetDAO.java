@@ -13,4 +13,5 @@ public interface CabinetDAO {
 	public Collection<Cabinet> findAll() throws DAOException;	
 	public Cabinet findByRef (int id)throws DAOException;
 	public Cabinet findByName (String nom)throws DAOException;
+	public void modifierCabinet(Cabinet cabinet, int id) throws DAOException;
 }

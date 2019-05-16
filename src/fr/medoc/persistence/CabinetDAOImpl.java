@@ -21,8 +21,11 @@ public class CabinetDAOImpl implements CabinetDAO{
 	private final String VALUES_INSERT = "(?,?,?,?)";
 	private final String ORDRE_DELETE = "delete from cabinet where Id = ";
 	private final String ORDRE_FINDALL = "select * from cabinet";
-	private final String ORDRE_FINDBYREF = "select Id,Nom,adresse,cp,ville from cabinet where Id = ?";
-	private final String ORDRE_FINDBYNAME = "select Id,Nom,adresse,cp,ville from cabinet where Nom = ?";
+	private final String ORDRE_FINDBYREF = "select * from cabinet where Id = ?";
+	private final String ORDRE_FINDBYNAME = "select * from cabinet where Nom = ?";
+	//rajouter la requete modifier
+	private final String ORDRE_UPDATE = "update cabinet set Nom=?,adresse=?,cp=?,ville=? where id = ?";
+	
 	
     private DAOFactory daoFactory;
 
@@ -30,6 +33,37 @@ public class CabinetDAOImpl implements CabinetDAO{
 		listeCabinets = new ArrayList<Cabinet>();
 		this.daoFactory = daoFactory;
 	}
+	
+	@Override
+	public void modifierCabinet(Cabinet unCabinet, int id) throws DAOException {
+		ResultSet rs = null;
+		Connection connexion = null;
+
+		try {
+			connexion = daoFactory.getConnection();
+			getListeCabinets().add(unCabinet);
+			PreparedStatement pst = connexion.prepareStatement(ORDRE_UPDATE);
+			pst.setString(1, unCabinet.getNom());
+			pst.setString(2, unCabinet.getAdresse());
+			pst.setString(3, unCabinet.getCp());
+			pst.setString(4, unCabinet.getVille());
+			pst.setInt(5, id);
+			pst.executeUpdate();
+			System.out.println(pst);
+			//rs = pst.getGeneratedKeys();
+			//if (rs.next()){
+			//	unCabinet.setId(rs.getInt(1));
+			//} else {
+			//	throw new DAOException("Erreur création d'un cabinet. " );
+			//}
+			connexion.commit();
+			daoFactory.closeConnexion(connexion);
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+	}
+	
+	
 	@Override
 	public void ajouterCabinet(Cabinet unCabinet) throws DAOException{
 		ResultSet rs = null;
@@ -94,6 +128,7 @@ public class CabinetDAOImpl implements CabinetDAO{
 	}
 	@Override
 	public Cabinet findByName (String nom) throws DAOException{
+		System.out.println(nom);
 		Cabinet unCabinet = null;
 		Connection connexion = null;
 		try {
@@ -152,5 +187,6 @@ public class CabinetDAOImpl implements CabinetDAO{
 			getListeCabinets().add(a);
 		}
 	}
+	
 
 }

@@ -37,9 +37,26 @@
 		<div class="row">
 			<div class="col-xs-12 col-sm-8">
 				<div class="jumbotron">
-					<h1>Enregistrer un cabinet</h1>
+					<h1>Afficher un cabinet</h1>
+
 				</div>
-				<form action="EnregistrerCabinetAction" method="post">
+				<form action="AfficherCabinetAction" method="post">
+					<div class="form-group row">
+						<label for="idCabinet" class="col-2 col-form-label">Id</label>
+						<div class="col-6">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">
+										<i class="fa fa-institution"></i>
+									</div>
+								</div>
+								<input id="idCabinet" name="idCabinet"
+									value="${ monCabinet.id }" type="text"
+									aria-describedby="nomCabinetHelpBlock" required="required"
+									class="form-control" readonly>
+							</div>
+						</div>
+					</div>
 					<div class="form-group row">
 						<label for="nomCabinet" class="col-2 col-form-label">Nom</label>
 						<div class="col-6">
@@ -50,9 +67,9 @@
 									</div>
 								</div>
 								<input id="nomCabinet" name="nomCabinet"
-									placeholder="saisir le nom du cabinet" type="text"
+									value="${ monCabinet.nom }" type="text"
 									aria-describedby="nomCabinetHelpBlock" required="required"
-									class="form-control">
+									class="form-control" disabled>
 							</div>
 						</div>
 					</div>
@@ -60,30 +77,34 @@
 						<label for="adresseCabinet" class="col-2 col-form-label">Adresse</label>
 						<div class="col-6">
 							<input id="adresseCabinet" name="adresseCabinet"
-								placeholder="ex: 2 avenue de la republique" type="text"
-								class="form-control" required="required">
+								value="${ monCabinet.adresse }" type="text" class="form-control"
+								required="required" disabled>
 						</div>
 					</div>
 					<div class="form-group row">
 						<label for="cpCabinet" class="col-2 col-form-label">CP</label>
 						<div class="col-6">
-							<input id="cpCabinet" name="cpCabinet" placeholder="ex: 06100"
-								type="text" class="form-control" required="required">
+							<input id="cpCabinet" name="cpCabinet" value=${ monCabinet.cp }
+								type="text" class="form-control" required="required" disabled>
 						</div>
 					</div>
 					<div class="form-group row">
 						<label for="villeCabinet" class="col-2 col-form-label">Ville</label>
 						<div class="col-6">
 							<input id="villeCabinet" name="villeCabinet"
-								placeholder="ex: nice" type="text" class="form-control"
-								required="required">
+								value="${ monCabinet.ville }" type="text" class="form-control"
+								required="required" disabled>
 						</div>
 					</div>
 					<div class="form-group row">
 						<div class="offset-2 col-10">
-							<button name="submit" type="submit" class="btn btn-primary">Valider</button>
-							<a href="EnregistrerMedecin" id="cancel" name="cancel"
-								class="btn btn-outline-secondary">Annuler</a>
+							<button id="btnModifier" type="button"
+								class="btn btn-outline-primary">Modifier</button>
+							<button id="btnSupprimer" type="button" class="btn btn-danger">Supprimer</button>
+							<button id="valid" name="submit" type="submit"
+								class="btn btn-primary d-none">Valider</button>
+							<a href="AfficherCabinet?id=${ monCabinet.id }" id="cancel"
+								name="cancel" class="btn btn-outline-secondary d-none">Annuler</a>
 						</div>
 					</div>
 				</form>
@@ -103,7 +124,8 @@
 					<div class="list-group">
 						<div class="list-group-item active">Liste des cabinets</div>
 						<c:forEach items="${ listeCabinets }" var="cabinet">
-							<a href="AfficherCabinet?id=${ cabinet.id }" class="list-group-item">${ cabinet.nom }<br>${ cabinet.adresse },
+							<a href="AfficherCabinet?id=${ cabinet.id }"
+								class="list-group-item">${ cabinet.nom }<br>${ cabinet.adresse },
 								${ cabinet.ville }
 							</a>
 						</c:forEach>
@@ -131,7 +153,7 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
+	<script src="js/AfficherCabinet.js"></script>
 
 
 </body>
