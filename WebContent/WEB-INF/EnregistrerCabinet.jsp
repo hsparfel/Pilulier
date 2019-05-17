@@ -89,26 +89,7 @@
 				</form>
 			</div>
 			<div class="col-xs-6 col-sm-4 " id="sidebar">
-				<c:if test="${!empty listeCabinets }">
-					<div class="list-group">
-						<div class="list-group-item active">Liste des cabinets</div>
-						<c:forEach items="${ listeCabinets }" var="cabinet">
-							<div class="list-group-item">${ cabinet.nom }<br>${ cabinet.adresse },
-								${ cabinet.ville }
-							</div>
-						</c:forEach>
-					</div>
-				</c:if>
-				<c:if test="${!empty listeCabinets }">
-					<div class="list-group">
-						<div class="list-group-item active">Liste des cabinets</div>
-						<c:forEach items="${ listeCabinets }" var="cabinet">
-							<a href="AfficherCabinet?id=${ cabinet.id }" class="list-group-item">${ cabinet.nom }<br>${ cabinet.adresse },
-								${ cabinet.ville }
-							</a>
-						</c:forEach>
-					</div>
-				</c:if>
+				<c:import url="sidebarListAllCabinet.jsp"></c:import>
 			</div>
 		</div>
 		<!--/row-->

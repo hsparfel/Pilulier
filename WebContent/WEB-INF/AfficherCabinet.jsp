@@ -41,13 +41,13 @@
 
 				</div>
 				<form action="AfficherCabinetAction" method="post">
-					<div class="form-group row">
+					<div class="form-group row d-none">
 						<label for="idCabinet" class="col-2 col-form-label">Id</label>
 						<div class="col-6">
 							<div class="input-group">
 								<div class="input-group-prepend">
 									<div class="input-group-text">
-										<i class="fa fa-institution"></i>
+										<i class="fa fa-key"></i>
 									</div>
 								</div>
 								<input id="idCabinet" name="idCabinet"
@@ -96,13 +96,13 @@
 								required="required" disabled>
 						</div>
 					</div>
+			
 					<div class="form-group row">
 						<div class="offset-2 col-10">
-							<button id="btnModifier" type="button"
+							<button id="btnModifier" name="btnModifier" type="button"
 								class="btn btn-outline-primary">Modifier</button>
-							<button id="btnSupprimer" type="button" class="btn btn-danger">Supprimer</button>
-							<button id="valid" name="submit" type="submit"
-								class="btn btn-primary d-none">Valider</button>
+							<input id="btnSupprimer" name="submit" value="Supprimer" type="submit" class="btn btn-danger"/>
+							<input id="valid" name="submit" value="Valider" type="submit" class="btn btn-primary d-none"/>
 							<a href="AfficherCabinet?id=${ monCabinet.id }" id="cancel"
 								name="cancel" class="btn btn-outline-secondary d-none">Annuler</a>
 						</div>
@@ -110,27 +110,7 @@
 				</form>
 			</div>
 			<div class="col-xs-6 col-sm-4 " id="sidebar">
-				<c:if test="${!empty listeCabinets }">
-					<div class="list-group">
-						<div class="list-group-item active">Liste des cabinets</div>
-						<c:forEach items="${ listeCabinets }" var="cabinet">
-							<div class="list-group-item">${ cabinet.nom }<br>${ cabinet.adresse },
-								${ cabinet.ville }
-							</div>
-						</c:forEach>
-					</div>
-				</c:if>
-				<c:if test="${!empty listeCabinets }">
-					<div class="list-group">
-						<div class="list-group-item active">Liste des cabinets</div>
-						<c:forEach items="${ listeCabinets }" var="cabinet">
-							<a href="AfficherCabinet?id=${ cabinet.id }"
-								class="list-group-item">${ cabinet.nom }<br>${ cabinet.adresse },
-								${ cabinet.ville }
-							</a>
-						</c:forEach>
-					</div>
-				</c:if>
+				<c:import url="sidebarListAllCabinet.jsp"></c:import>
 			</div>
 		</div>
 		<!--/row-->
