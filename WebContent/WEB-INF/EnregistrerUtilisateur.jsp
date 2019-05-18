@@ -73,14 +73,7 @@
 				</form>
 			</div>
 			<div class="col-xs-6 col-sm-3 " id="sidebar">
-				<c:if test="${!empty listeUtilisateurs }">
-					<div class="list-group">
-						<div class="list-group-item active">Liste des utilisateurs</div>
-						<c:forEach items="${ listeUtilisateurs }" var="utilisateur">
-							<div class="list-group-item">${ utilisateur.nom }</div>
-						</c:forEach>
-					</div>
-				</c:if>
+				<c:import url="sidebarListAllUtilisateur.jsp"></c:import>
 			</div>
 		</div>
 

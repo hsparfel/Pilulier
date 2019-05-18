@@ -52,7 +52,7 @@
 								</div>
 								<input id="idCabinet" name="idCabinet"
 									value="${ monCabinet.id }" type="text"
-									aria-describedby="nomCabinetHelpBlock" required="required"
+									aria-describedby="idCabinetHelpBlock" required="required"
 									class="form-control" readonly>
 							</div>
 						</div>

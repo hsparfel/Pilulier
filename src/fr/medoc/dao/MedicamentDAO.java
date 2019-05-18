@@ -16,4 +16,6 @@ public interface MedicamentDAO {
 
 	public Collection<Medicament> findAllByUser(int id) throws DAOException;
 	public Collection<Medicament> findAllExcludedByUser(String unUtilisateur) throws DAOException;
+	
+	public void modifierMedicament(Medicament medicament, int id) throws DAOException;
 }

@@ -13,4 +13,5 @@ public interface UtilisateurDAO {
 	public Collection<Utilisateur> findAll() throws DAOException;	
 	public Utilisateur findByRef (int id)throws DAOException;
 	public Utilisateur findByName (String nom)throws DAOException;
+	public void modifierUtilisateur(Utilisateur utilisateur, int id) throws DAOException;
 }

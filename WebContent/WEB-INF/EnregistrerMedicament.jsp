@@ -74,15 +74,7 @@
 			</div>
 
 			<div class="col-xs-6 col-sm-3 " id="sidebar">
-				<c:if test="${!empty listeMedicaments }">
-					<div class="list-group">
-						<div class="list-group-item active">Liste des
-							medicaments</div>
-						<c:forEach items="${ listeMedicaments }" var="medicament">
-							<div class="list-group-item">${ medicament.nom }</div>
-						</c:forEach>
-					</div>
-				</c:if>
+				<c:import url="sidebarListAllMedicament.jsp"></c:import>
 			</div>
 			<!--/.sidebar-offcanvas-->
 		</div>

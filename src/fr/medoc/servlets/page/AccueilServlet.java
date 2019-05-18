@@ -19,7 +19,7 @@ import fr.medoc.exception.DAOException;
 @WebServlet("/Accueil")
 public class AccueilServlet extends HttpServlet {
 
-		private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 	private final String JSP_PAGE = "/WEB-INF/Accueil.jsp";
 	private DAOFactory daoFactory;
 	private UtilisateurDAO utilisateurDao;
@@ -43,31 +43,19 @@ public class AccueilServlet extends HttpServlet {
 		}
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-
-	//	
-
-			ArrayList<Utilisateur> listeUtilisateurs = null;
-			try {
-				listeUtilisateurs = (ArrayList<Utilisateur>) utilisateurDao.findAll();	
-			} catch (DAOException e) {
-				e.printStackTrace();
-			}
-
-			if (session.getAttribute("user") != null) {
-				request.setAttribute("login", session.getAttribute("user"));
-			}
-			
-			request.setAttribute("listeUtilisateurs", listeUtilisateurs);
-
-			this.getServletContext().getRequestDispatcher(JSP_PAGE).forward(request, response);
-
-		//}
-		//else {
-		//	response.sendRedirect("Accueil");
-		//}
+		ArrayList<Utilisateur> listeUtilisateurs = null;
+		try {
+			listeUtilisateurs = (ArrayList<Utilisateur>) utilisateurDao.findAll();
+		} catch (DAOException e) {
+			e.printStackTrace();
+		}
+		if (session.getAttribute("user") != null) {
+			request.setAttribute("login", session.getAttribute("user"));
+		}
+		request.setAttribute("listeUtilisateurs", listeUtilisateurs);
+		this.getServletContext().getRequestDispatcher(JSP_PAGE).forward(request, response);
 	}
-
 }

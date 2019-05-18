@@ -73,16 +73,9 @@
 				</form>
 			</div>
 			<div class="col-xs-6 col-sm-4 " id="sidebar">
-				<c:if test="${!empty listeSpecialites }">
-					<div class="list-group">
-						<div class="list-group-item active">Liste des specialites</div>
-						<c:forEach items="${ listeSpecialites }" var="specialite">
-							<div class="list-group-item">${ specialite.nom }</div>
-						</c:forEach>
-					</div>
-				</c:if>
+				<c:import url="sidebarListAllSpecialite.jsp"></c:import>
 			</div>
-			<!--/.sidebar-offcanvas-->
+			
 		</div>
 		<!--/row-->
 

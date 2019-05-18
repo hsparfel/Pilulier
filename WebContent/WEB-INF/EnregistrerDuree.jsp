@@ -52,7 +52,7 @@
 							<div class="input-group">
 								<div class="input-group-prepend">
 									<div class="input-group-text">
-										<i class="fa fa-spoon"></i>
+										<i class="fa fa-calendar-plus-o"></i>
 									</div>
 								</div>
 								<input id="nomDuree" name="nomDuree"
@@ -74,16 +74,9 @@
 			</div>
 
 			<div class="col-xs-6 col-sm-3 " id="sidebar">
-				<c:if test="${!empty listeDurees }">
-					<div class="list-group">
-						<div class="list-group-item active">Liste des durees</div>
-						<c:forEach items="${ listeDurees }" var="duree">
-							<div class="list-group-item">${ duree.nom }</div>
-						</c:forEach>
-					</div>
-				</c:if>
+				<c:import url="sidebarListAllDuree.jsp"></c:import>
 			</div>
-			<!--/.sidebar-offcanvas-->
+		
 		</div>
 		<!--/row-->
 

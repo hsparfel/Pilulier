@@ -19,12 +19,12 @@ import fr.medoc.exception.DAOException;
 @WebServlet("/EnregistrerDuree")
 public class EnregistrerDureeServlet extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
 	private final String JSP_PAGE = "/WEB-INF/EnregistrerDuree.jsp";
-
 	private DAOFactory daoFactory;
 	private DureeDAO dureeDao;
 
-	@Override 
+	@Override
 	public void init() throws ServletException {
 		try {
 			daoFactory = DAOFactory.getInstance();
@@ -43,27 +43,20 @@ public class EnregistrerDureeServlet extends HttpServlet {
 		}
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-
 		if (session.getAttribute("login") != null) {
-
 			ArrayList<Duree> listeDurees = null;
 			try {
-				listeDurees = (ArrayList<Duree>) dureeDao.findAll();	
+				listeDurees = (ArrayList<Duree>) dureeDao.findAll();
 			} catch (DAOException e) {
 				e.printStackTrace();
 			}
-
 			request.setAttribute("listeDurees", listeDurees);
-
 			this.getServletContext().getRequestDispatcher(JSP_PAGE).forward(request, response);
-
-		}
-		else {
+		} else {
 			response.sendRedirect("Accueil");
 		}
 	}
-
 }

@@ -73,16 +73,9 @@
 				</form>
 			</div>
 			<div class="col-xs-6 col-sm-3 " id="sidebar">
-				<c:if test="${!empty listeFrequences }">
-					<div class="list-group">
-						<div class="list-group-item active">Liste des frequences</div>
-						<c:forEach items="${ listeFrequences }" var="frequence">
-							<div class="list-group-item">${ frequence.nom }</div>
-						</c:forEach>
-					</div>
-				</c:if>
+				<c:import url="sidebarListAllFrequence.jsp"></c:import>
 			</div>
-			<!--/.sidebar-offcanvas-->
+			
 		</div>
 		<!--/row-->
 

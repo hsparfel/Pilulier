@@ -28,12 +28,11 @@ import fr.medoc.entities.Utilisateur;
 import fr.medoc.exception.DAOConfigurationException;
 import fr.medoc.exception.DAOException;
 
-
 @WebServlet("/EnregistrerPrescription")
 public class EnregistrerPrescriptionServlet extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
 	private final String JSP_PAGE = "/WEB-INF/EnregistrerPrescription.jsp";
-
 	private DAOFactory daoFactory;
 	private PrescriptionDAO prescriptionDao;
 	private UtilisateurDAO utilisateurDao;
@@ -42,8 +41,8 @@ public class EnregistrerPrescriptionServlet extends HttpServlet {
 	private FrequenceDAO frequenceDao;
 	private MedecinDAO medecinDao;
 	private MedicamentDAO medicamentDao;
-	
-	@Override 
+
+	@Override
 	public void init() throws ServletException {
 		try {
 			daoFactory = DAOFactory.getInstance();
@@ -54,7 +53,6 @@ public class EnregistrerPrescriptionServlet extends HttpServlet {
 			frequenceDao = daoFactory.getFrequenceDAO();
 			medecinDao = daoFactory.getMedecinDAO();
 			medicamentDao = daoFactory.getMedicamentDAO();
-			
 		} catch (DAOConfigurationException e) {
 			e.printStackTrace();
 		}
@@ -69,12 +67,10 @@ public class EnregistrerPrescriptionServlet extends HttpServlet {
 		}
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-
 		if (session.getAttribute("login") != null) {
-
 			ArrayList<Prescription> listePrescriptions = null;
 			Utilisateur unUtilisateur = null;
 			ArrayList<Dose> listeDoses = null;
@@ -82,34 +78,26 @@ public class EnregistrerPrescriptionServlet extends HttpServlet {
 			ArrayList<Frequence> listeFrequences = null;
 			ArrayList<Medecin> listeMedecins = null;
 			ArrayList<Medicament> listeMedicaments = null;
-			
 			try {
 				unUtilisateur = utilisateurDao.findByName((String) session.getAttribute("login"));
-				listePrescriptions = (ArrayList<Prescription>) prescriptionDao.findAllByUser(unUtilisateur.getId());	
-				listeDoses = (ArrayList<Dose>) doseDao.findAll();	
-				listeDurees = (ArrayList<Duree>) dureeDao.findAll();	
-				listeFrequences = (ArrayList<Frequence>) frequenceDao.findAll();	
-				listeMedecins = (ArrayList<Medecin>) medecinDao.findAllByUser(unUtilisateur.getId());	
-				listeMedicaments = (ArrayList<Medicament>) medicamentDao.findAll();	
-				
-			
+				listePrescriptions = (ArrayList<Prescription>) prescriptionDao.findAllByUser(unUtilisateur.getId());
+				listeDoses = (ArrayList<Dose>) doseDao.findAll();
+				listeDurees = (ArrayList<Duree>) dureeDao.findAll();
+				listeFrequences = (ArrayList<Frequence>) frequenceDao.findAll();
+				listeMedecins = (ArrayList<Medecin>) medecinDao.findAllByUser(unUtilisateur.getId());
+				listeMedicaments = (ArrayList<Medicament>) medicamentDao.findAll();
 			} catch (DAOException e) {
 				e.printStackTrace();
 			}
-
 			request.setAttribute("listePrescriptions", listePrescriptions);
 			request.setAttribute("listeDoses", listeDoses);
 			request.setAttribute("listeDurees", listeDurees);
 			request.setAttribute("listeFrequences", listeFrequences);
 			request.setAttribute("listeMedecins", listeMedecins);
 			request.setAttribute("listeMedicaments", listeMedicaments);
-			
 			this.getServletContext().getRequestDispatcher(JSP_PAGE).forward(request, response);
-
-		}
-		else {
+		} else {
 			response.sendRedirect("Accueil");
 		}
 	}
-
 }

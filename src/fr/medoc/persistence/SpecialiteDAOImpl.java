@@ -13,9 +13,8 @@ import fr.medoc.dao.DAOFactory;
 import fr.medoc.entities.Specialite;
 import fr.medoc.exception.DAOException;
 
+public class SpecialiteDAOImpl implements SpecialiteDAO {
 
-public class SpecialiteDAOImpl implements SpecialiteDAO{
-	
 	private ArrayList<Specialite> listeSpecialites;
 	private final String ORDRE_INSERT = "insert into specialite(Nom) values ";
 	private final String VALUES_INSERT = "(?)";
@@ -23,29 +22,47 @@ public class SpecialiteDAOImpl implements SpecialiteDAO{
 	private final String ORDRE_FINDALL = "select Id,Nom from specialite";
 	private final String ORDRE_FINDBYREF = "select Id,Nom from specialite where Id = ?";
 	private final String ORDRE_FINDBYNAME = "select Id,Nom from specialite where Nom = ?";
-	
-    private DAOFactory daoFactory;
+	private final String ORDRE_UPDATE = "update specialite set Nom=? where id = ?";
+	private DAOFactory daoFactory;
 
 	public SpecialiteDAOImpl(DAOFactory daoFactory) {
 		listeSpecialites = new ArrayList<Specialite>();
 		this.daoFactory = daoFactory;
 	}
-	@Override
-	public void ajouterSpecialite(Specialite uneSpecialite) throws DAOException{
-		ResultSet rs = null;
-		Connection connexion = null;
 
+	@Override
+	public void modifierSpecialite(Specialite uneSpecialite, int id) throws DAOException {
+		Connection connexion = null;
 		try {
 			connexion = daoFactory.getConnection();
 			getListeSpecialites().add(uneSpecialite);
-			PreparedStatement pst = connexion.prepareStatement(ORDRE_INSERT + VALUES_INSERT, Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement pst = connexion.prepareStatement(ORDRE_UPDATE);
+			pst.setString(1, uneSpecialite.getNom());
+			pst.setInt(2, id);
+			pst.executeUpdate();
+			connexion.commit();
+			daoFactory.closeConnexion(connexion);
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+	}
+
+	@Override
+	public void ajouterSpecialite(Specialite uneSpecialite) throws DAOException {
+		ResultSet rs = null;
+		Connection connexion = null;
+		try {
+			connexion = daoFactory.getConnection();
+			getListeSpecialites().add(uneSpecialite);
+			PreparedStatement pst = connexion.prepareStatement(ORDRE_INSERT + VALUES_INSERT,
+					Statement.RETURN_GENERATED_KEYS);
 			pst.setString(1, uneSpecialite.getNom());
 			pst.executeUpdate();
 			rs = pst.getGeneratedKeys();
-			if (rs.next()){
+			if (rs.next()) {
 				uneSpecialite.setId(rs.getInt(1));
 			} else {
-				throw new DAOException("Erreur création d'un specialite. " );
+				throw new DAOException("Erreur création d'un specialite. ");
 			}
 			connexion.commit();
 			daoFactory.closeConnexion(connexion);
@@ -53,67 +70,69 @@ public class SpecialiteDAOImpl implements SpecialiteDAO{
 			throw new DAOException(e);
 		}
 	}
+
 	@Override
-	public void supprimerSpecialite(int idSpecialite)throws DAOException {
+	public void supprimerSpecialite(int idSpecialite) throws DAOException {
 		Connection connexion = null;
 		try {
 			connexion = daoFactory.getConnection();
 			Statement requete = connexion.createStatement();
-			requete.executeUpdate(ORDRE_DELETE + "'"+idSpecialite+"'");
+			requete.executeUpdate(ORDRE_DELETE + "'" + idSpecialite + "'");
 			connexion.commit();
 			daoFactory.closeConnexion(connexion);
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}
 	}
+
 	@Override
-	public Specialite findByRef (int id) throws DAOException{
+	public Specialite findByRef(int id) throws DAOException {
 		Specialite uneSpecialite = null;
 		Connection connexion = null;
 		try {
 			connexion = daoFactory.getConnection();
 			PreparedStatement pst = connexion.prepareStatement(ORDRE_FINDBYREF);
 			pst.setInt(1, id);
-
 			ResultSet rs = pst.executeQuery();
 			if (rs.next()) {
-				uneSpecialite = new Specialite( rs.getString("nom"));	
+				uneSpecialite = new Specialite(rs.getString("nom"));
 				uneSpecialite.setId(id);
 			} else {
-				throw new DAOException("Erreur recherche d'un specialite. " );
+				throw new DAOException("Erreur recherche d'un specialite. ");
 			}
 			connexion.commit();
 			daoFactory.closeConnexion(connexion);
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}
-		return uneSpecialite; 
+		return uneSpecialite;
 	}
+
 	@Override
-	public Specialite findByName (String nom) throws DAOException{
+	public Specialite findByName(String nom) throws DAOException {
 		Specialite uneSpecialite = null;
 		Connection connexion = null;
 		try {
 			connexion = daoFactory.getConnection();
 			PreparedStatement pst = connexion.prepareStatement(ORDRE_FINDBYNAME);
 			pst.setString(1, nom);
-
 			ResultSet rs = pst.executeQuery();
 			if (rs.next()) {
-				uneSpecialite = new Specialite( rs.getString("nom"));	
+				uneSpecialite = new Specialite(rs.getString("nom"));
 				uneSpecialite.setId(rs.getInt("id"));
 			} else {
-				throw new DAOException("Erreur recherche d'un specialite. " );
+				throw new DAOException("Erreur recherche d'un specialite. ");
 			}
 			connexion.commit();
 			daoFactory.closeConnexion(connexion);
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}
-		return uneSpecialite; 
+		return uneSpecialite;
 	}
+
 	@Override
-	public Collection<Specialite> findAll() throws DAOException {	
+	public Collection<Specialite> findAll() throws DAOException {
 		Connection connexion = null;
 		try {
 			connexion = daoFactory.getConnection();
@@ -127,7 +146,7 @@ public class SpecialiteDAOImpl implements SpecialiteDAO{
 		}
 		return listeSpecialites;
 	}
-	
+
 	public void setListeSpecialites(ArrayList<Specialite> listeSpecialites) {
 		this.listeSpecialites = listeSpecialites;
 	}
@@ -135,10 +154,8 @@ public class SpecialiteDAOImpl implements SpecialiteDAO{
 	public Collection<Specialite> getListeSpecialites() {
 		return listeSpecialites;
 	}
-	
-	private void resultSetToArrayList(ResultSet resultSet)
-			throws SQLException {
 
+	private void resultSetToArrayList(ResultSet resultSet) throws SQLException {
 		while (resultSet.next()) {
 			Specialite a = new Specialite();
 			a.setId(resultSet.getInt("id"));

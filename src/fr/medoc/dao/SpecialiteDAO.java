@@ -13,4 +13,5 @@ public interface SpecialiteDAO {
 	public Collection<Specialite> findAll() throws DAOException;	
 	public Specialite findByRef (int id)throws DAOException;
 	public Specialite findByName (String nom)throws DAOException;
+	public void modifierSpecialite(Specialite specialite, int id) throws DAOException;
 }

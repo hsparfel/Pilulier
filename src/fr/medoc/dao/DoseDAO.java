@@ -13,4 +13,5 @@ public interface DoseDAO {
 	public Collection<Dose> findAll() throws DAOException;	
 	public Dose findByRef (int id)throws DAOException;
 	public Dose findByName (String nom)throws DAOException;
+	public void modifierDose(Dose dose, int id) throws DAOException;
 }

@@ -13,4 +13,5 @@ public interface FrequenceDAO {
 	public Collection<Frequence> findAll() throws DAOException;	
 	public Frequence findByRef (int id)throws DAOException;
 	public Frequence findByName (String nom)throws DAOException;
+	public void modifierFrequence(Frequence frequence, int id) throws DAOException;
 }

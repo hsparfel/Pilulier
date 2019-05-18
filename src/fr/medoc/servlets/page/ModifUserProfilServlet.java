@@ -32,6 +32,7 @@ import fr.medoc.exception.DAOException;
 @WebServlet("/ModifUserProfil")
 public class ModifUserProfilServlet extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
 	private final String JSP_PAGE = "/WEB-INF/ModifUserProfil.jsp";
 	private DAOFactory daoFactory;
 	private PrescriptionDAO prescriptionDao;
@@ -55,7 +56,6 @@ public class ModifUserProfilServlet extends HttpServlet {
 			priseDao = daoFactory.getPriseDAO();
 			medecinDao = daoFactory.getMedecinDAO();
 			rdvDao = daoFactory.getRdvDAO();
-			
 		} catch (DAOConfigurationException e) {
 			e.printStackTrace();
 		}
@@ -72,11 +72,8 @@ public class ModifUserProfilServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		HttpSession session = request.getSession();
-
 		if (session.getAttribute("login") != null) {
-
 			ArrayList<Prescription> listePrescriptions = null;
 			ArrayList<Medicament> listeMedicaments = null;
 			ArrayList<Dose> listeDoses = null;
@@ -85,31 +82,19 @@ public class ModifUserProfilServlet extends HttpServlet {
 			ArrayList<Medecin> listeMedecins = null;
 			ArrayList<Rdv> listeRdvs = null;
 			Utilisateur unUtilisateur = null;
-
 			try {
 				unUtilisateur = utilisateurDao.findByName((String) session.getAttribute("login"));
 				listeFrequences = (ArrayList<Frequence>) frequenceDao.findAll();
 				listeDoses = (ArrayList<Dose>) doseDao.findAll();
 				listeMedecins = (ArrayList<Medecin>) medecinDao.findAllByUser(unUtilisateur.getId());
 				listeRdvs = (ArrayList<Rdv>) rdvDao.findAllByUser(unUtilisateur.getId());
-				
-				//System.out.println(unUtilisateur.getId());
-
-				listePrescriptions = (ArrayList<Prescription>) prescriptionDao
-						.findAllByUser(unUtilisateur.getId());
-				
-
-				// System.out.println(listePrescriptionsTriesString);
+				listePrescriptions = (ArrayList<Prescription>) prescriptionDao.findAllByUser(unUtilisateur.getId());
 				listeMedicaments = (ArrayList<Medicament>) medicamentDao
 						.findAllExcludedByUser((String) session.getAttribute("login"));
-
 				listePrises = (ArrayList<Prise>) priseDao.findAllLastByUser(unUtilisateur.getId());
-				
-
 			} catch (DAOException e) {
 				e.printStackTrace();
 			}
-
 			request.setAttribute("listeFrequences", listeFrequences);
 			request.setAttribute("listeDoses", listeDoses);
 			request.setAttribute("listePrescriptions", listePrescriptions);
@@ -117,12 +102,9 @@ public class ModifUserProfilServlet extends HttpServlet {
 			request.setAttribute("listePrises", listePrises);
 			request.setAttribute("listeMedecins", listeMedecins);
 			request.setAttribute("listeRdvs", listeRdvs);
-			
 			this.getServletContext().getRequestDispatcher(JSP_PAGE).forward(request, response);
-
 		} else {
 			response.sendRedirect("Accueil");
 		}
 	}
-
 }

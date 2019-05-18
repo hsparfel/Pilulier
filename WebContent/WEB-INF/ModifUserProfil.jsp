@@ -40,6 +40,8 @@
 						href="EnregistrerPrescription">Ajouter Prescription</a> <a
 						class=" btn btn-default btn-sm" href="EnregistrerRdv">Ajouter
 						Rendez-vous</a>
+						<a
+						class=" btn btn-default btn-sm" href="EnregistrerUtilisateur">Modifier Login</a>
 				</div>
 			</div>
 			<div class="col-xs-6 col-sm-4" id="sidebar">

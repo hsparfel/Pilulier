@@ -23,14 +23,14 @@ import fr.medoc.exception.DAOException;
 @WebServlet("/EnregistrerPrise")
 public class EnregistrerPriseServlet extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
 	private final String JSP_PAGE = "/WEB-INF/EnregistrerPrise.jsp";
-
 	private DAOFactory daoFactory;
 	private PriseDAO priseDao;
 	private UtilisateurDAO utilisateurDao;
 	private MedicamentDAO medicamentDao;
 
-	@Override 
+	@Override
 	public void init() throws ServletException {
 		try {
 			daoFactory = DAOFactory.getInstance();
@@ -51,38 +51,25 @@ public class EnregistrerPriseServlet extends HttpServlet {
 		}
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-
 		if (session.getAttribute("login") != null) {
-
 			ArrayList<Prise> listePrises = null;
 			Utilisateur unUtilisateur = null;
 			ArrayList<Medicament> listeMedicaments = null;
-			
-			
-			
-			
-			
 			try {
 				unUtilisateur = utilisateurDao.findByName((String) session.getAttribute("login"));
-				listePrises = (ArrayList<Prise>) priseDao.findAllLastByUser(unUtilisateur.getId());	
-				listeMedicaments = (ArrayList<Medicament>) medicamentDao.findAllByUser(unUtilisateur.getId());	
-				
+				listePrises = (ArrayList<Prise>) priseDao.findAllLastByUser(unUtilisateur.getId());
+				listeMedicaments = (ArrayList<Medicament>) medicamentDao.findAllByUser(unUtilisateur.getId());
 			} catch (DAOException e) {
 				e.printStackTrace();
 			}
-
 			request.setAttribute("listePrises", listePrises);
 			request.setAttribute("listeMedicaments", listeMedicaments);
-
 			this.getServletContext().getRequestDispatcher(JSP_PAGE).forward(request, response);
-
-		}
-		else {
+		} else {
 			response.sendRedirect("Accueil");
 		}
 	}
-
 }

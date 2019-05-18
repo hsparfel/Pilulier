@@ -13,4 +13,5 @@ public interface DureeDAO {
 	public Collection<Duree> findAll() throws DAOException;	
 	public Duree findByRef (int id)throws DAOException;
 	public Duree findByName (String nom)throws DAOException;
+	public void modifierDuree(Duree duree, int id) throws DAOException;
 }

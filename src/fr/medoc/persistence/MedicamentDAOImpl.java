@@ -18,7 +18,6 @@ public class MedicamentDAOImpl implements MedicamentDAO {
 	private ArrayList<Medicament> listeMedicaments;
 	private ArrayList<Medicament> listeMedicamentsTries;
 	private ArrayList<Medicament> listeMedicamentsExclus;
-
 	private final String ORDRE_INSERT = "insert into medicament(Nom) values ";
 	private final String VALUES_INSERT = "(?)";
 	private final String ORDRE_DELETE = "delete from medicament where Id = ";
@@ -26,9 +25,8 @@ public class MedicamentDAOImpl implements MedicamentDAO {
 	private final String ORDRE_FINDBYREF = "select Id,Nom from medicament where Id = ?";
 	private final String ORDRE_FINDBYNAME = "select Id,Nom from medicament where Nom = ?";
 	private final String ORDRE_FINDALLBYUSER = "select m.id,m.nom  from medicament AS m, utilisateur_medicament AS um where m.id=um.id_medicament AND um.id_utilisateur=?";
-
+	private final String ORDRE_UPDATE = "update medicament set Nom=? where id = ?";
 	private final String ORDRE_FINDALLFILTERED = "select m.id,m.nom from medicament AS m where m.nom NOT IN (select m.nom from medicament AS m, utilisateur AS u, utilisateur_medicament AS um where m.id=um.id_medicament AND u.id=um.id_utilisateur AND u.nom=?)";
-
 	private DAOFactory daoFactory;
 
 	public MedicamentDAOImpl(DAOFactory daoFactory) {
@@ -39,10 +37,26 @@ public class MedicamentDAOImpl implements MedicamentDAO {
 	}
 
 	@Override
+	public void modifierMedicament(Medicament uneMedicament, int id) throws DAOException {
+		Connection connexion = null;
+		try {
+			connexion = daoFactory.getConnection();
+			getListeMedicaments().add(uneMedicament);
+			PreparedStatement pst = connexion.prepareStatement(ORDRE_UPDATE);
+			pst.setString(1, uneMedicament.getNom());
+			pst.setInt(2, id);
+			pst.executeUpdate();
+			connexion.commit();
+			daoFactory.closeConnexion(connexion);
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+	}
+
+	@Override
 	public void ajouterMedicament(Medicament unMedicament) throws DAOException {
 		ResultSet rs = null;
 		Connection connexion = null;
-
 		try {
 			connexion = daoFactory.getConnection();
 			getListeMedicaments().add(unMedicament);
@@ -85,7 +99,6 @@ public class MedicamentDAOImpl implements MedicamentDAO {
 			connexion = daoFactory.getConnection();
 			PreparedStatement pst = connexion.prepareStatement(ORDRE_FINDBYREF);
 			pst.setInt(1, id);
-
 			ResultSet rs = pst.executeQuery();
 			if (rs.next()) {
 				unMedicament = new Medicament(rs.getString("nom"));
@@ -109,7 +122,6 @@ public class MedicamentDAOImpl implements MedicamentDAO {
 			connexion = daoFactory.getConnection();
 			PreparedStatement pst = connexion.prepareStatement(ORDRE_FINDBYNAME);
 			pst.setString(1, nom);
-
 			ResultSet rs = pst.executeQuery();
 			if (rs.next()) {
 				unMedicament = new Medicament(rs.getString("nom"));
@@ -166,7 +178,6 @@ public class MedicamentDAOImpl implements MedicamentDAO {
 	}
 
 	private void resultSetToArrayList(ResultSet resultSet) throws SQLException {
-
 		while (resultSet.next()) {
 			Medicament a = new Medicament();
 			a.setId(resultSet.getInt("id"));
@@ -193,7 +204,6 @@ public class MedicamentDAOImpl implements MedicamentDAO {
 	}
 
 	private void resultSetToArrayListExcluded(ResultSet resultSet) throws SQLException {
-
 		while (resultSet.next()) {
 			Medicament a = new Medicament();
 			a.setId(resultSet.getInt("id"));
@@ -220,7 +230,6 @@ public class MedicamentDAOImpl implements MedicamentDAO {
 	}
 
 	private void resultSetToArrayListFiltered(ResultSet resultSet) throws SQLException {
-
 		while (resultSet.next()) {
 			Medicament a = new Medicament();
 			a.setId(resultSet.getInt("id"));

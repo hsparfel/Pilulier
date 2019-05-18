@@ -19,18 +19,16 @@ import fr.medoc.exception.DAOException;
 @WebServlet("/AfficherCabinet")
 public class AfficherCabinetServlet extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
 	private final String JSP_PAGE = "/WEB-INF/AfficherCabinet.jsp";
-
 	private DAOFactory daoFactory;
 	private CabinetDAO cabinetDao;
-	//private Cabinet monCabinet;
-	
-	@Override 
+
+	@Override
 	public void init() throws ServletException {
 		try {
 			daoFactory = DAOFactory.getInstance();
 			cabinetDao = daoFactory.getCabinetDAO();
-			
 		} catch (DAOConfigurationException e) {
 			e.printStackTrace();
 		}
@@ -45,30 +43,24 @@ public class AfficherCabinetServlet extends HttpServlet {
 		}
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println(request.getParameter("id"));
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		int idCabinet = (Integer) Integer.parseInt(request.getParameter("id"));
-		System.out.println("id:"+idCabinet);
 		HttpSession session = request.getSession();
-
 		if (session.getAttribute("login") != null) {
-Cabinet monCabinet = null;
+			Cabinet monCabinet = null;
 			ArrayList<Cabinet> listeCabinets = null;
 			try {
-				listeCabinets = (ArrayList<Cabinet>) cabinetDao.findAll();	
-				monCabinet =  cabinetDao.findByRef(idCabinet);
+				listeCabinets = (ArrayList<Cabinet>) cabinetDao.findAll();
+				monCabinet = cabinetDao.findByRef(idCabinet);
 			} catch (DAOException e) {
 				e.printStackTrace();
 			}
-
 			request.setAttribute("listeCabinets", listeCabinets);
 			request.setAttribute("monCabinet", monCabinet);
 			this.getServletContext().getRequestDispatcher(JSP_PAGE).forward(request, response);
-
-		}
-		else {
+		} else {
 			response.sendRedirect("Accueil");
 		}
 	}
-
 }

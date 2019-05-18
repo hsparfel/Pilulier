@@ -11,17 +11,14 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet("/AccueilAction")
 public class AccueilAction extends HttpServlet {
-	
+
+	private static final long serialVersionUID = 1L;
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String nomUtilisateur = request.getParameter("nomUtilisateur");
-
-		
 		HttpSession session = request.getSession(true);
 		session.setAttribute("login", nomUtilisateur);
-
-		
 		response.sendRedirect("ModifUserProfil");
 	}
-
 }
