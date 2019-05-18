@@ -104,7 +104,7 @@
 							<input id="btnSupprimer" name="submit" value="Supprimer" type="submit" class="btn btn-danger"/>
 							<input id="valid" name="submit" value="Valider" type="submit" class="btn btn-primary d-none"/>
 							<a href="AfficherCabinet?id=${ monCabinet.id }" id="cancel"
-								name="cancel" class="btn btn-outline-secondary d-none">Annuler</a>
+								 class="btn btn-outline-secondary d-none">Annuler</a>
 						</div>
 					</div>
 				</form>

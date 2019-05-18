@@ -39,13 +39,12 @@
 						Prise</a> <a class=" btn btn-default btn-sm"
 						href="EnregistrerPrescription">Ajouter Prescription</a> <a
 						class=" btn btn-default btn-sm" href="EnregistrerRdv">Ajouter
-						Rendez-vous</a>
-						<a
-						class=" btn btn-default btn-sm" href="EnregistrerUtilisateur">Modifier Login</a>
+						Rendez-vous</a> <a class=" btn btn-default btn-sm"
+						href="EnregistrerUtilisateur">Modifier Login</a>
 				</div>
 			</div>
 			<div class="col-xs-6 col-sm-4" id="sidebar">
-				
+
 				<c:if test="${!empty listePrescriptions }">
 					<div class="list-group">
 						<button id="listBtnPrescription" class="list-group-item active">Mes
@@ -54,16 +53,17 @@
 							<c:forEach items="${ listePrescriptions }" var="prescription">
 								<div class="list-group-item">${ prescription.medicament.getNom() }
 									- ${ prescription.nbDose } ${ prescription.dose.getNom() }, ${ prescription.nbFrequence }
-									fois par ${ prescription.frequence.getNom()} pendant ${prescription.nbDuree } ${prescription.duree.getNom() }</div>
+									fois par ${ prescription.frequence.getNom()} pendant
+									${prescription.nbDuree } ${prescription.duree.getNom() }</div>
 							</c:forEach>
 						</div>
 					</div>
 				</c:if>
-				
+
 				<c:if test="${!empty listePrises }">
 					<div class="list-group">
-						<button id="listBtnPrise" class="list-group-item active">Mes dernières
-							prises</button>
+						<button id="listBtnPrise" class="list-group-item active">Mes
+							dernières prises</button>
 						<div id="listPrise">
 							<c:forEach items="${ listePrises }" var="prise">
 								<div class="list-group-item">${ prise.medicament.getNom() }-
@@ -72,11 +72,12 @@
 						</div>
 					</div>
 				</c:if>
-				
-				
+
+
 				<c:if test="${!empty listeMedecins }">
 					<div class="list-group">
-						<button id="listBtnMedecin" class="list-group-item active">Mes medecins</button>
+						<button id="listBtnMedecin" class="list-group-item active">Mes
+							medecins</button>
 						<div id="listMedecin">
 							<c:forEach items="${ listeMedecins }" var="medecin">
 								<div class="list-group-item">${ medecin.getNom() }-${ medecin.getSpecialite().getNom() }</div>
@@ -84,10 +85,10 @@
 						</div>
 					</div>
 				</c:if>
-				
-				
-				
-				
+
+
+
+
 				<c:if test="${!empty listeRdvs }">
 					<div class="list-group">
 						<button id="listBtnRdv" class="list-group-item active">Mes
@@ -100,15 +101,15 @@
 						</div>
 					</div>
 				</c:if>
-				
-				
-				
+
+
+
 			</div>
 		</div>
-	</div>
-	<!--/row-->
-	<hr>
-	<c:import url="footer.jsp"></c:import>
+
+		<!--/row-->
+		<hr>
+		<c:import url="footer.jsp"></c:import>
 	</div>
 	<!--/.container-->
 

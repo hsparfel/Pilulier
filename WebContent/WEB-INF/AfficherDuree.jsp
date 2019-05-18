@@ -50,10 +50,9 @@
 										<i class="fa fa-key"></i>
 									</div>
 								</div>
-								<input id="idDuree" name="idDuree"
-									value="${ maDuree.id }" type="text"
-									aria-describedby="idDureeHelpBlock" required="required"
-									class="form-control" readonly>
+								<input id="idDuree" name="idDuree" value="${ maDuree.id }"
+									type="text" aria-describedby="idDureeHelpBlock"
+									required="required" class="form-control" readonly>
 							</div>
 						</div>
 					</div>
@@ -66,21 +65,22 @@
 										<i class="fa fa-calendar-plus-o"></i>
 									</div>
 								</div>
-								<input id="nomDuree" name="nomDuree"
-									value="${ maDuree.nom }"  type="text"
-									aria-describedby="nomDureeHelpBlock" required="required"
-									class="form-control" disabled>
+								<input id="nomDuree" name="nomDuree" value="${ maDuree.nom }"
+									type="text" aria-describedby="nomDureeHelpBlock"
+									required="required" class="form-control" disabled>
 							</div>
 						</div>
 					</div>
 					<div class="form-group row">
 						<div class="offset-2 col-10">
-								<button id="btnModifier" name="btnModifier" type="button"
+							<button id="btnModifier" name="btnModifier" type="button"
 								class="btn btn-outline-primary">Modifier</button>
-							<input id="btnSupprimer" name="submit" value="Supprimer" type="submit" class="btn btn-danger"/>
-							<input id="valid" name="submit" value="Valider" type="submit" class="btn btn-primary d-none"/>
-							<a href="AfficherDuree?id=${ maDuree.id }" id="cancel"
-								name="cancel" class="btn btn-outline-secondary d-none">Annuler</a>
+							<input id="btnSupprimer" name="submit" value="Supprimer"
+								type="submit" class="btn btn-danger" /> <input id="valid"
+								name="submit" value="Valider" type="submit"
+								class="btn btn-primary d-none" /> <a
+								href="AfficherDuree?id=${ maDuree.id }" id="cancel"
+								class="btn btn-outline-secondary d-none">Annuler</a>
 						</div>
 					</div>
 				</form>
@@ -89,7 +89,7 @@
 			<div class="col-xs-6 col-sm-3 " id="sidebar">
 				<c:import url="sidebarListAllDuree.jsp"></c:import>
 			</div>
-					</div>
+		</div>
 		<!--/row-->
 
 		<hr>
@@ -104,18 +104,12 @@
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-		crossorigin="anonymous"></script>
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-		crossorigin="anonymous"></script>
-<script src="js/AfficherDuree.js"></script>
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="js/AfficherDuree.js"></script>
 
 
 

@@ -51,7 +51,7 @@
 						<div class="col-6">
 							<select id="idMedecin" name="idMedecin" required="required"
 								class="custom-select">
-								<option disabled selected value>Sélectionner</option>
+								<option disabled selected >Sélectionner</option>
 								<c:forEach items="${ listeMedecinsExclus }" var="medecin">
 									<option value="${ medecin.id }">${ medecin.nom }</option>
 								</c:forEach>
@@ -65,23 +65,23 @@
 					<div class="form-group row">
 						<div class="offset-2 col-6">
 							<button name="submit" type="submit" class="btn btn-primary">Valider</button>
-							<a href="ModifUserProfil" id="cancel" name="cancel"
+							<a href="ModifUserProfil" id="cancel"
 								class="btn btn-outline-secondary">Annuler</a>
 						</div>
 					</div>
 				</form>
 			</div>
 			<div class="col-xs-6 col-sm-4 " id="sidebar">
-			<c:if test="${!empty listeMedecinsTries }">
-				<div class="list-group">
-					<div class="list-group-item active">Mes medecins</div>
-					<c:forEach items="${ listeMedecinsTries }" var="medecin">
-						<div class="list-group-item">${ medecin.nom }<br>${ medecin.specialite.nom }</div>
-					</c:forEach>
-				</div>
+				<c:if test="${!empty listeMedecinsTries }">
+					<div class="list-group">
+						<div class="list-group-item active">Mes medecins</div>
+						<c:forEach items="${ listeMedecinsTries }" var="medecin">
+							<div class="list-group-item">${ medecin.nom }<br>${ medecin.specialite.nom }</div>
+						</c:forEach>
+					</div>
 				</c:if>
 			</div>
-			<!--/.sidebar-offcanvas-->
+
 		</div>
 		<!--/row-->
 
@@ -97,17 +97,11 @@
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-		crossorigin="anonymous"></script>
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-		crossorigin="anonymous"></script>
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 
 
