@@ -13,6 +13,7 @@ import fr.medoc.dao.UtilisateurDAO;
 import fr.medoc.dao.DAOFactory;
 import fr.medoc.dao.MedecinDAO;
 import fr.medoc.entities.Rdv;
+import fr.medoc.entities.Rdv;
 import fr.medoc.exception.DAOException;
 
 
@@ -28,7 +29,7 @@ public class RdvDAOImpl implements RdvDAO{
 	private final String ORDRE_FINDALL = "select * from rdv";
 	private final String ORDRE_FINDBYREF = "select * from rdv where Id = ?";
 	private final String ORDRE_FINDALLBYUSER = "select * from rdv where id_utilisateur=?";
-	
+	private final String ORDRE_UPDATE = "update rdv set id_utilisateur=?,id_medecin=?,date=?,heure=? where id = ?";
     private DAOFactory daoFactory;
 
 	public RdvDAOImpl(DAOFactory daoFactory) {
@@ -37,6 +38,27 @@ public class RdvDAOImpl implements RdvDAO{
 		
 		this.daoFactory = daoFactory;
 	}
+	
+	@Override
+	public void modifierRdv(Rdv uneRdv, int id) throws DAOException {
+		Connection connexion = null;
+		try {
+			connexion = daoFactory.getConnection();
+			getListeRdvs().add(uneRdv);
+			PreparedStatement pst = connexion.prepareStatement(ORDRE_UPDATE);
+			pst.setInt(1, uneRdv.getUtilisateur().getId());
+			pst.setInt(2, uneRdv.getMedecin().getId());
+			pst.setString(3, uneRdv.getDate());
+			pst.setString(4, uneRdv.getHeure());
+			pst.setInt(5, id);
+			pst.executeUpdate();
+			connexion.commit();
+			daoFactory.closeConnexion(connexion);
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+	}
+	
 	@Override
 	public void ajouterRdv(Rdv unRdv) throws DAOException{
 		ResultSet rs = null;

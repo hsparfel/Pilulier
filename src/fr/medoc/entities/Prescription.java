@@ -2,6 +2,7 @@ package fr.medoc.entities;
 
 public class Prescription {
 
+	private int id;
 	private Utilisateur utilisateur;
 	private Medecin medecin;
 	private Medicament medicament;
@@ -44,6 +45,13 @@ public class Prescription {
 		this.nbDuree = 0;
 		this.duree = null;
 		this.date="";
+	}
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	public Utilisateur getUtilisateur() {
 		return utilisateur;
@@ -127,11 +135,12 @@ public class Prescription {
 	}
 	@Override
 	public String toString() {
-		return "Prescription [utilisateur=" + utilisateur + ", medecin=" + medecin + ", medicament=" + medicament
-				+ ", nbDose=" + nbDose + ", dose=" + dose + ", nbFrequence=" + nbFrequence + ", frequence=" + frequence
-				+ ", matin=" + matin + ", midi=" + midi + ", soir=" + soir + ", nbDuree=" + nbDuree + ", duree=" + duree
-				+ ", date=" + date + "]";
+		return "Prescription [id=" + id + ", utilisateur=" + utilisateur + ", medecin=" + medecin + ", medicament="
+				+ medicament + ", nbDose=" + nbDose + ", dose=" + dose + ", nbFrequence=" + nbFrequence + ", frequence="
+				+ frequence + ", matin=" + matin + ", midi=" + midi + ", soir=" + soir + ", nbDuree=" + nbDuree
+				+ ", duree=" + duree + ", date=" + date + "]";
 	}
+	
 	
 	
 	

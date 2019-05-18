@@ -47,9 +47,9 @@
 
 				<c:if test="${!empty listePrescriptions }">
 					<div class="list-group">
-						<button id="listBtnPrescription" class="list-group-item active">Mes
+						<button  class="list-group-item active">Mes
 							prescriptions</button>
-						<div id="listPrescription">
+						<div >
 							<c:forEach items="${ listePrescriptions }" var="prescription">
 								<div class="list-group-item">${ prescription.medicament.getNom() }
 									- ${ prescription.nbDose } ${ prescription.dose.getNom() }, ${ prescription.nbFrequence }
@@ -59,12 +59,12 @@
 						</div>
 					</div>
 				</c:if>
-
+				<c:import url="sidebarListMyPrescription.jsp"></c:import>
 				<c:if test="${!empty listePrises }">
 					<div class="list-group">
-						<button id="listBtnPrise" class="list-group-item active">Mes
+						<button  class="list-group-item active">Mes
 							dernières prises</button>
-						<div id="listPrise">
+						<div >
 							<c:forEach items="${ listePrises }" var="prise">
 								<div class="list-group-item">${ prise.medicament.getNom() }-
 									${ prise.datePrise }</div>
@@ -73,34 +73,9 @@
 					</div>
 				</c:if>
 
-
-				<c:if test="${!empty listeMedecins }">
-					<div class="list-group">
-						<button id="listBtnMedecin" class="list-group-item active">Mes
-							medecins</button>
-						<div id="listMedecin">
-							<c:forEach items="${ listeMedecins }" var="medecin">
-								<div class="list-group-item">${ medecin.getNom() }-${ medecin.getSpecialite().getNom() }</div>
-							</c:forEach>
-						</div>
-					</div>
-				</c:if>
-
-
-
-
-				<c:if test="${!empty listeRdvs }">
-					<div class="list-group">
-						<button id="listBtnRdv" class="list-group-item active">Mes
-							rendez-vous</button>
-						<div id="listRdv">
-							<c:forEach items="${ listeRdvs }" var="rdv">
-								<div class="list-group-item">${ rdv.getMedecin().getNom()}-
-									${ rdv.getDate()} à ${ rdv.getHeure()}</div>
-							</c:forEach>
-						</div>
-					</div>
-				</c:if>
+				<c:import url="sidebarListMyPrise.jsp"></c:import>
+				<c:import url="sidebarListMyMedecin.jsp"></c:import>
+				<c:import url="sidebarListMyRdv.jsp"></c:import>
 
 
 

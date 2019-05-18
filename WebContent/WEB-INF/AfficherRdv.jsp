@@ -35,24 +35,38 @@
 <body>
 	<c:import url="header.jsp"></c:import>
 
-
 	<div class="container">
-
 		<div class="row">
-
 			<div class="col-xs-12 col-sm-8">
 				<div class="jumbotron">
-					<h1>Enregistrer un rendez-vous</h1>
+					<h1>Afficher un rendez-vous</h1>
 				</div>
-				<form action="EnregistrerRdvAction" method="post">
+				<form action="AfficherRdvAction" method="post">
+					<div class="form-group row d-none">
+						<label for="idRdv" class="col-2 col-form-label">Id</label>
+						<div class="col-6">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">
+										<i class="fa fa-key"></i>
+									</div>
+								</div>
+								<input id="idRdv" name="idRdv" value="${ myRdv.id }" type="text"
+									aria-describedby="idSpecialiteHelpBlock" required="required"
+									class="form-control" readonly>
+							</div>
+						</div>
+					</div>
 					<div class="form-group row">
 						<label for="idMedecin" class="col-2 col-form-label">Medecin</label>
 						<div class="col-6">
 							<select id="idMedecin" name="idMedecin" required="required"
-								class="custom-select">
-								<option disabled selected>Sélectionner</option>
+								class="custom-select" disabled>
+								<option value="${ myRdv.medecin.id }" selected>${ myRdv.medecin.nom }</option>
 								<c:forEach items="${ listeMedecins }" var="medecin">
+									<c:if test="${ medecin.id != myRdv.medecin.id }">
 									<option value="${ medecin.id }">${ medecin.nom }</option>
+									</c:if>
 								</c:forEach>
 							</select>
 						</div>
@@ -69,8 +83,8 @@
 										<i class="fa fa-calendar"></i>
 									</div>
 								</div>
-								<input id="date" name="date" placeholder="ex: 03/05/2019"
-									type="text" required="required" class="form-control">
+								<input id="date" name="date" value="${ myRdv.date }" type="text"
+									required="required" class="form-control" disabled>
 							</div>
 						</div>
 					</div>
@@ -84,17 +98,23 @@
 										<i class="fa fa-clock-o"></i>
 									</div>
 								</div>
-								<input id="heure" name="heure" placeholder="ex: 09:30"
-									type="text" class="form-control" required="required">
+								<input id="heure" name="heure" value="${ myRdv.heure }"
+									type="text" class="form-control" required="required" disabled>
 							</div>
 						</div>
 					</div>
 
+
 					<div class="form-group row">
-						<div class="offset-2 col-6">
-							<button name="submit" type="submit" class="btn btn-primary">Valider</button>
-							<a href="ModifUserProfil" id="cancel"
-								class="btn btn-outline-secondary">Annuler</a>
+						<div class="offset-2 col-10">
+							<button id="btnModifier" name="btnModifier" type="button"
+								class="btn btn-outline-primary">Modifier</button>
+							<input id="btnSupprimer" name="submit" value="Supprimer"
+								type="submit" class="btn btn-danger" /> <input id="valid"
+								name="submit" value="Valider" type="submit"
+								class="btn btn-primary d-none" /> <a
+								href="AfficherRdv?id=${ myRdv.id }" id="cancel"
+								class="btn btn-outline-secondary d-none">Annuler</a>
 						</div>
 					</div>
 				</form>
@@ -110,9 +130,6 @@
 
 		<hr>
 		<c:import url="footer.jsp"></c:import>
-
-
-
 	</div>
 	<!--/.container-->
 
@@ -125,7 +142,7 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
+	<script src="js/AfficherRdv.js"></script>
 
 
 
