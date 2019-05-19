@@ -18,11 +18,11 @@ import fr.medoc.entities.Utilisateur;
 import fr.medoc.exception.DAOConfigurationException;
 import fr.medoc.exception.DAOException;
 
-@WebServlet("/AssocierMedecin")
-public class AssocierMedecinServlet extends HttpServlet {
+@WebServlet("/DissocierMedecin")
+public class DissocierMedecinServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private final String JSP_PAGE = "/WEB-INF/AssocierMedecin.jsp";
+	private final String JSP_PAGE = "/WEB-INF/DissocierMedecin.jsp";
 	private DAOFactory daoFactory;
 	private MedecinDAO medecinDao;
 	private UtilisateurDAO utilisateurDao;
@@ -51,19 +51,15 @@ public class AssocierMedecinServlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		if (session.getAttribute("login") != null) {
-			ArrayList<Medecin> listeMedecinsExclus = null;
 			ArrayList<Medecin> listeMedecinsTries = null;
 			Utilisateur unUtilisateur = null;
 			try {
 				unUtilisateur = utilisateurDao.findByName((String) session.getAttribute("login"));
 				listeMedecinsTries = (ArrayList<Medecin>) medecinDao.findAllByUser(unUtilisateur.getId());
-				listeMedecinsExclus = (ArrayList<Medecin>) medecinDao
-						.findAllExcludedByUser((String) session.getAttribute("login"));
 			} catch (DAOException e) {
 				e.printStackTrace();
 			}
 			request.setAttribute("listeMedecins", listeMedecinsTries);
-			request.setAttribute("listeMedecinsExclus", listeMedecinsExclus);
 			this.getServletContext().getRequestDispatcher(JSP_PAGE).forward(request, response);
 		} else {
 			response.sendRedirect("Accueil");

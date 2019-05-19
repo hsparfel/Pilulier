@@ -250,7 +250,10 @@
 						<div class="list-group-item active">Liste de mes
 							prescriptions</div>
 						<c:forEach items="${ listePrescriptions }" var="prescription">
-							<div class="list-group-item">${ prescription }</div>
+							<div class="list-group-item">${ prescription.medicament.nom }
+									- ${ prescription.nbDose } ${ prescription.dose.nom }, ${ prescription.nbFrequence }
+									fois par ${ prescription.frequence.nom} pendant
+									${prescription.nbDuree } ${prescription.duree.nom }</div>
 						</c:forEach>
 					</div>
 				</c:if>

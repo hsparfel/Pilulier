@@ -9,10 +9,10 @@
 		<button id="listBtnPrescription"  class="list-group-item active">Mes prescriptions</button>
 		<div id="listPrescription">
 		<c:forEach items="${ listePrescriptions }" var="prescription">
-			<a href="AfficherPrescription?id=${ prescription.id }" class="list-group-item">${ prescription.medicament.getNom() }
-									- ${ prescription.nbDose } ${ prescription.dose.getNom() }, ${ prescription.nbFrequence }
-									fois par ${ prescription.frequence.getNom()} pendant
-									${prescription.nbDuree } ${prescription.duree.getNom() }</a>
+			<a href="AfficherPrescription?id=${ prescription.id }" class="list-group-item">${ prescription.medicament.nom }
+									- ${ prescription.nbDose } ${ prescription.dose.nom }, ${ prescription.nbFrequence }
+									fois par ${ prescription.frequence.nom} pendant
+									${prescription.nbDuree } ${prescription.duree.nom }</a>
 		</c:forEach>
 	</div>
 	</div>

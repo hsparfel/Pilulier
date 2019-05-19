@@ -39,11 +39,11 @@
 		<div class="row">
 			<div class="col-xs-12 col-sm-8">
 				<div class="jumbotron">
-					<h1>Afficher un rendez-vous</h1>
+					<h1>Afficher un medecin</h1>
 				</div>
-				<form action="AfficherRdvAction" method="post">
+				<form action="AfficherMedecinAction" method="post">
 					<div class="form-group row d-none">
-						<label for="idRdv" class="col-2 col-form-label">Id</label>
+						<label for="idMedecin" class="col-2 col-form-label">Id</label>
 						<div class="col-6">
 							<div class="input-group">
 								<div class="input-group-prepend">
@@ -51,81 +51,112 @@
 										<i class="fa fa-key"></i>
 									</div>
 								</div>
-								<input id="idRdv" name="idRdv" value="${ myRdv.id }" type="text"
-									aria-describedby="idSpecialiteHelpBlock" required="required"
+								<input id="idMedecin" name="idMedecin"
+									value="${ monMedecin.id }" type="text"
+									aria-describedby="idMedecinHelpBlock" required="required"
 									class="form-control" readonly>
 							</div>
 						</div>
 					</div>
 					<div class="form-group row">
-						<label for="idMedecin" class="col-2 col-form-label">Medecin</label>
+						<label for="nomMedecin" class="col-2 col-form-label">Nom</label>
 						<div class="col-6">
-							<select id="idMedecin" name="idMedecin" required="required"
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">
+										<i class="fa fa-address-book"></i>
+									</div>
+								</div>
+								<input id="nomMedecin" name="nomMedecin"
+									value="${ monMedecin.nom }" type="text"
+									aria-describedby="nomMedecinHelpBlock" required="required"
+									class="form-control champDesactive" disabled>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label for="idSpecialite" class="col-2 col-form-label">Specialite</label>
+						<div class="col-6">
+							<select id="idSpecialite" name="idSpecialite" required="required"
 								class="custom-select champDesactive" disabled>
-								<option value="${ myRdv.medecin.id }" selected>${ myRdv.medecin.nom }</option>
-								<c:forEach items="${ listeMedecins }" var="medecin">
-									<c:if test="${ medecin.id != myRdv.medecin.id }">
-									<option value="${ medecin.id }">${ medecin.nom }</option>
+								<option value="${ monMedecin.specialite.id }" selected>${ monMedecin.specialite.nom }</option>
+								<c:forEach items="${ listeSpecialites }" var="specialite">
+									<c:if test="${ specialite.id!=monMedecin.specialite.id}">
+										<option value="${ specialite.id }">${ specialite.nom }</option>
 									</c:if>
 								</c:forEach>
 							</select>
 						</div>
-						<a href="EnregistrerMedecin"> <span
+						<a href="EnregistrerSpecialite"> <span
 							class="fa fa-plus-square-o fa-2x"></span>
 						</a>
 					</div>
 					<div class="form-group row">
-						<label for="date" class="col-2 col-form-label">Date</label>
+						<label for="idCabinet" class="col-2 col-form-label">Cabinet</label>
 						<div class="col-6">
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<div class="input-group-text">
-										<i class="fa fa-calendar"></i>
-									</div>
-								</div>
-								<input id="date" name="date" value="${ myRdv.date }" type="text"
-									required="required" class="form-control champDesactive" disabled>
-							</div>
+							<select id="idCabinet" name="idCabinet" required="required"
+								class="custom-select champDesactive" disabled>
+								<option value="${ monMedecin.cabinet.id }" selected>${ monMedecin.cabinet.nom }</option>
+								<c:forEach items="${ listeCabinets }" var="cabinet">
+									<c:if test="${ cabinet.id!=monMedecin.cabinet.id}">
+										<option value="${ cabinet.id }">${ cabinet.nom }</option>
+									</c:if>
+								</c:forEach>
+							</select>
 						</div>
+						<a href="EnregistrerCabinet"> <span
+							class="fa fa-plus-square-o fa-2x"></span>
+						</a>
 					</div>
-
 					<div class="form-group row">
-						<label for="heure" class="col-2 col-form-label">Heure</label>
+						<label for="telephone" class="col-2 col-form-label">Telephone</label>
 						<div class="col-6">
 							<div class="input-group">
 								<div class="input-group-prepend">
 									<div class="input-group-text">
-										<i class="fa fa-clock-o"></i>
+										<i class="fa fa-mobile-phone"></i>
 									</div>
 								</div>
-								<input id="heure" name="heure" value="${ myRdv.heure }"
-									type="text" class="form-control champDesactive" required="required" disabled>
+								<input id="telephone" name="telephone"
+									value="${ monMedecin.telephone }" type="text"
+									required="required" class="form-control champDesactive"
+									disabled>
 							</div>
 						</div>
 					</div>
-
-
+					<div class="form-group row">
+						<label for="email" class="col-2 col-form-label">Email</label>
+						<div class="col-6">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">
+										<i class="fa fa-envelope"></i>
+									</div>
+								</div>
+								<input id="email" name="email" value="${ monMedecin.email }"
+									type="text" class="form-control champDesactive" disabled
+									required="required">
+							</div>
+						</div>
+					</div>
 					<div class="form-group row">
 						<div class="offset-2 col-10">
 							<c:import url="Boutons1.jsp"></c:import>
-							<a href="EnregistrerRdv" id="ajouter"
+							<a href="EnregistrerMedecin" id="ajouter"
 								class="btn btn-outline-success btnAffiches">Ajouter</a>
-							<c:import url="Boutons2.jsp"></c:import> <a
-								href="AfficherRdv?id=${ myRdv.id }" id="cancel"
+							<c:import url="Boutons2.jsp"></c:import>
+							<a href="AfficherMedecin?id=${monMedecin.id }" id="cancel"
 								class="btn btn-outline-secondary btnMasques d-none">Annuler</a>
 						</div>
 					</div>
 				</form>
-
 			</div>
-
 			<div class="col-xs-6 col-sm-4 " id="sidebar">
-				<c:import url="sidebarListMyRdv.jsp"></c:import>
+				<c:import url="sidebarListAllMedecin.jsp"></c:import>
 			</div>
-
 		</div>
 		<!--/row-->
-
 		<hr>
 		<c:import url="footer.jsp"></c:import>
 	</div>

@@ -35,12 +35,12 @@
 				<div class="jumbotron">
 					<h1>Mon Profil</h1>
 					<a class=" btn btn-default btn-sm" href="AssocierMedecin">Associer
-						Medecin</a> <a class=" btn btn-default btn-sm" href="EnregistrerPrise">Ajouter
+						Medecin</a> <a class=" btn btn-default btn-sm" href="DissocierMedecin">Dissocier
+						Medecin</a><a class=" btn btn-default btn-sm" href="EnregistrerPrise">Ajouter
 						Prise</a> <a class=" btn btn-default btn-sm"
 						href="EnregistrerPrescription">Ajouter Prescription</a> <a
 						class=" btn btn-default btn-sm" href="EnregistrerRdv">Ajouter
-						Rendez-vous</a> <a class=" btn btn-default btn-sm"
-						href="EnregistrerUtilisateur">Modifier Login</a>
+						Rendez-vous</a> 
 				</div>
 			</div>
 			<div class="col-xs-6 col-sm-4" id="sidebar">

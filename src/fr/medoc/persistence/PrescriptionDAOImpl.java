@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -23,12 +24,14 @@ public class PrescriptionDAOImpl implements PrescriptionDAO {
 	private ArrayList<Prescription> listePrescriptions;
 	private ArrayList<Prescription> listePrescriptionsTries;
 
-	private final String ORDRE_INSERT = "insert into utilisateur_medicament values ";
+	private final String ORDRE_INSERT = "insert into prescription values ";
 	private final String VALUES_INSERT = "(?,?,?,?,?,?,?,?,?,?,?,?,?)";
-
-	private final String ORDRE_FINDALLBYUSER = "select * from utilisateur_medicament AS um where um.id_utilisateur=?";
-	private final String ORDRE_FINDBYREFS = "select * from utilisateur_medicament AS um where um.id_utilisateur=? AND um.id_medicament=?";
-
+	private final String ORDRE_FINDALL = "select * from prescription";
+	private final String ORDRE_FINDBYREF = "select * from prescription where Id = ?";
+	private final String ORDRE_FINDALLBYUSER = "select * from prescription AS um where um.id_utilisateur=?";
+	private final String ORDRE_FINDBYREFS = "select * from prescription AS um where um.id_utilisateur=? AND um.id_medicament=?";
+	private final String ORDRE_DELETE = "delete from prescription where Id = ";
+	private final String ORDRE_UPDATE = "update prescription set id_utilisateur=?, set id_medicament=?, set id_medecin=?, set nb_dose=?, set id_dose=?, set nb_frequence=?, set id_frequence=?, set matin=?, set midi=?, set soir=?, set nb_duree=?, set id_duree=?, set date=?,  where id = ?";
 	
 	private DAOFactory daoFactory;
 
@@ -38,6 +41,50 @@ public class PrescriptionDAOImpl implements PrescriptionDAO {
 		this.daoFactory = daoFactory;
 	}
 
+	@Override
+	public void modifierPrescription(Prescription unePrescription, int id) throws DAOException {
+		Connection connexion = null;
+		try {
+			connexion = daoFactory.getConnection();
+			getListePrescriptions().add(unePrescription);
+			PreparedStatement pst = connexion.prepareStatement(ORDRE_UPDATE);
+			pst.setInt(1, unePrescription.getUtilisateur().getId());
+			pst.setInt(2, unePrescription.getMedicament().getId());
+			pst.setInt(3, unePrescription.getMedecin().getId());
+			pst.setInt(4, unePrescription.getNbDose());
+			pst.setInt(5, unePrescription.getDose().getId());
+			pst.setInt(6, unePrescription.getNbFrequence());
+			pst.setInt(7, unePrescription.getFrequence().getId());
+			pst.setInt(8, unePrescription.getMatin());
+			pst.setInt(9, unePrescription.getMidi());
+			pst.setInt(10, unePrescription.getSoir());
+			pst.setInt(11, unePrescription.getNbDuree());
+			pst.setInt(12, unePrescription.getDuree().getId());
+			pst.setString(13, unePrescription.getDate());
+			
+			pst.setInt(14, id);
+			pst.executeUpdate();
+			connexion.commit();
+			daoFactory.closeConnexion(connexion);
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+	}
+	
+	@Override
+	public void supprimerPrescription(int idPrescription) throws DAOException {
+		Connection connexion = null;
+		try {
+			connexion = daoFactory.getConnection();
+			Statement requete = connexion.createStatement();
+			requete.executeUpdate(ORDRE_DELETE + "'" + idPrescription + "'");
+			connexion.commit();
+			daoFactory.closeConnexion(connexion);
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+	}
+	
 	@Override
 	public void ajouterPrescription(Prescription unePrescription) throws DAOException {
 		

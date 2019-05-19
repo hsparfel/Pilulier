@@ -139,14 +139,7 @@
 			</div>
 
 			<div class="col-xs-6 col-sm-4 " id="sidebar">
-				<c:if test="${!empty listeMedecins }">
-					<div class="list-group">
-						<div class="list-group-item active">Liste des medecins</div>
-						<c:forEach items="${ listeMedecins }" var="medecin">
-							<div class="list-group-item">${ medecin.nom }<br>${ medecin.specialite.nom }<br>${ medecin.cabinet.nom }</div>
-						</c:forEach>
-					</div>
-				</c:if>
+				<c:import url="sidebarListAllMedecin.jsp"></c:import>
 			</div>
 
 		</div>

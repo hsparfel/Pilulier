@@ -55,7 +55,7 @@ public class EnregistrerCabinetAction extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		response.sendRedirect("EnregistrerMedecin");
+		response.sendRedirect("EnregistrerCabinet");
 		
 	}
 

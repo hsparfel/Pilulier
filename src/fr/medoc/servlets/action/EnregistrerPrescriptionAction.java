@@ -162,7 +162,7 @@ public class EnregistrerPrescriptionAction extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		response.sendRedirect("ModifUserProfil");
+		response.sendRedirect("EnregistrerPrescription");
 
 	}
 

@@ -70,7 +70,7 @@ public class EnregistrerMedecinAction extends HttpServlet {
 		
 		
 		
-		response.sendRedirect("AssocierMedecin");
+		response.sendRedirect("EnregistrerMedecin");
 		
 	}
 

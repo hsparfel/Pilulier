@@ -9,32 +9,35 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import fr.medoc.dao.PriseDAO;
+import fr.medoc.dao.PatientMedecinDAO;
+import fr.medoc.dao.RdvDAO;
 import fr.medoc.dao.UtilisateurDAO;
-import fr.medoc.dao.MedicamentDAO;
+import fr.medoc.dao.MedecinDAO;
 import fr.medoc.dao.DAOFactory;
-import fr.medoc.entities.Prise;
+import fr.medoc.entities.PatientMedecin;
 import fr.medoc.entities.Utilisateur;
-import fr.medoc.entities.Medicament;
+import fr.medoc.entities.Medecin;
 import fr.medoc.exception.DAOConfigurationException;
 import fr.medoc.exception.DAOException;
 
-@WebServlet("/EnregistrerPriseAction")
-public class EnregistrerPriseAction extends HttpServlet {
+@WebServlet("/DissocierMedecinAction")
+public class DissocierMedecinAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private DAOFactory daoFactory;
-	private PriseDAO priseDao;
-	private MedicamentDAO medicamentDAO;
+	private PatientMedecinDAO patientMedecinDao;
+	private MedecinDAO medecinDAO;
 	private UtilisateurDAO utilisateurDAO;
+	private RdvDAO rdvDAO;
 
 	@Override
 	public void init() throws ServletException {
 		try {
 			daoFactory = DAOFactory.getInstance();
-			priseDao = daoFactory.getPriseDAO();
-			medicamentDAO = daoFactory.getMedicamentDAO();
+			patientMedecinDao = daoFactory.getPatientMedecinDAO();
+			medecinDAO = daoFactory.getMedecinDAO();
 			utilisateurDAO = daoFactory.getUtilisateurDAO();
+			rdvDAO = daoFactory.getRdvDAO();
 		} catch (DAOConfigurationException e) {
 			e.printStackTrace();
 		}
@@ -53,31 +56,23 @@ public class EnregistrerPriseAction extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Utilisateur unUtilisateur = null;
-		
-		int idMedicament = (Integer) Integer.parseInt(request.getParameter("idMedicament"));
-		
+		int idMedecin = (Integer) Integer.parseInt(request.getParameter("idMedecin"));
 
-		String date = request.getParameter("date");
-		String heure = request.getParameter("heure");
-		
-		
-		
-		Medicament unMedicament = null;
+		Medecin unMedecin = null;
 
-		
 		try {
 			unUtilisateur = utilisateurDAO.findByName((String) session.getAttribute("login"));
-			
-			unMedicament = medicamentDAO.findByRef(idMedicament);
-			Prise nouveauPrise = new Prise(unUtilisateur,  unMedicament, date, heure);
-			
-			
-			priseDao.ajouterPrise(nouveauPrise);
+			unMedecin = medecinDAO.findByRef(idMedecin);
+			PatientMedecin nouveauPatientMedecin = new PatientMedecin(unUtilisateur, unMedecin);
+			patientMedecinDao.supprimerPatientMedecin(nouveauPatientMedecin);
+			//ajouter ici la suppresson des rdv comportant ce PatientMEdecin
+			rdvDAO.supprimerRdvByUserAndMedecin(nouveauPatientMedecin);
+						//
 		} catch (DAOException e) {
 			e.printStackTrace();
 		}
 
-		response.sendRedirect("EnregistrerPrise");
+		response.sendRedirect("ModifUserProfil");
 
 	}
 

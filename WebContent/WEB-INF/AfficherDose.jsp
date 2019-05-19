@@ -35,7 +35,7 @@
 
 	<div class="container">
 		<div class="row">
-			<div class="col-xs-12 col-sm-9">
+			<div class="col-xs-12 col-sm-8">
 				<div class="jumbotron">
 					<h1>Afficher une dose</h1>
 				</div>
@@ -67,26 +67,24 @@
 								</div>
 								<input id="nomDose" name="nomDose" value="${ maDose.nom }"
 									type="text" aria-describedby="nomDoseHelpBlock"
-									required="required" class="form-control" disabled>
+									required="required" class="form-control champDesactive" disabled>
 							</div>
 						</div>
 					</div>
 					<div class="form-group row">
 						<div class="offset-2 col-10">
-							<button id="btnModifier" name="btnModifier" type="button"
-								class="btn btn-outline-primary">Modifier</button>
-							<input id="btnSupprimer" name="submit" value="Supprimer"
-								type="submit" class="btn btn-danger" /> <input id="valid"
-								name="submit" value="Valider" type="submit"
-								class="btn btn-primary d-none" /> <a
+							<c:import url="Boutons1.jsp"></c:import>
+							<a href="EnregistrerDose" id="ajouter"
+								class="btn btn-outline-success btnAffiches">Ajouter</a>
+							<c:import url="Boutons2.jsp"></c:import> <a
 								href="AfficherDose?id=${ maDose.id }" id="cancel"
-								class="btn btn-outline-secondary d-none">Annuler</a>
+								class="btn btn-outline-secondary btnMasques d-none">Annuler</a>
 						</div>
 					</div>
 				</form>
 			</div>
 
-			<div class="col-xs-6 col-sm-3 " id="sidebar">
+			<div class="col-xs-6 col-sm-4 " id="sidebar">
 				<c:import url="sidebarListAllDose.jsp"></c:import>
 			</div>
 		</div>
@@ -109,7 +107,7 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-	<script src="js/AfficherDose.js"></script>
+	<script src="js/AfficherX.js"></script>
 
 
 

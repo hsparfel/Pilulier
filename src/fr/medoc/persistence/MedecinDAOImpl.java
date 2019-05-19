@@ -30,7 +30,8 @@ public class MedecinDAOImpl implements MedecinDAO{
 	private final String ORDRE_FINDBYNAME = "select * from medecin where Nom = ?";
 	private final String ORDRE_FINDALLBYUSER = "select * from medecin AS m, utilisateur_medecin AS um where m.id=um.id_medecin AND um.id_utilisateur=?";
 	private final String ORDRE_FINDALLFILTERED = "select * from medecin AS m where m.nom NOT IN (select m.nom from medecin AS m, utilisateur AS u, utilisateur_medecin AS um where m.id=um.id_medecin AND u.id=um.id_utilisateur AND u.nom=?)";
-	
+	private final String ORDRE_UPDATE = "update medecin set Nom=?,id_specialite=?,id_cabinet=?,telephone=?,email=? where id = ?";
+
     private DAOFactory daoFactory;
 
 	public MedecinDAOImpl(DAOFactory daoFactory) {
@@ -38,7 +39,30 @@ public class MedecinDAOImpl implements MedecinDAO{
 		listeMedecinsTries = new ArrayList<Medecin>();
 		listeMedecinsExclus = new ArrayList<Medecin>();
 		this.daoFactory = daoFactory;
+		}
+	
+	@Override
+	public void modifierMedecin(Medecin unMedecin, int id) throws DAOException {
+
+		Connection connexion = null;
+		try {
+			connexion = daoFactory.getConnection();
+			getListeMedecins().add(unMedecin);
+			PreparedStatement pst = connexion.prepareStatement(ORDRE_UPDATE);
+			pst.setString(1, unMedecin.getNom());
+			pst.setInt(2, unMedecin.getSpecialite().getId());
+			pst.setInt(3, unMedecin.getCabinet().getId());
+			pst.setString(4, unMedecin.getTelephone());
+			pst.setString(5, unMedecin.getEmail());
+			pst.setInt(6, id);
+			pst.executeUpdate();
+			connexion.commit();
+			daoFactory.closeConnexion(connexion);
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
 	}
+	
 	@Override
 	public void ajouterMedecin(Medecin unMedecin) throws DAOException{
 		ResultSet rs = null;
@@ -252,9 +276,11 @@ public class MedecinDAOImpl implements MedecinDAO{
 		while (resultSet.next()) {
 			Medecin a = new Medecin();
 			SpecialiteDAO uneSpecialiteDAO = daoFactory.getSpecialiteDAO();
+			CabinetDAO unCabinetDAO = daoFactory.getCabinetDAO();
 			a.setId(resultSet.getInt("id"));
 			a.setNom(resultSet.getString("nom"));
 			a.setSpecialite(uneSpecialiteDAO.findByRef(resultSet.getInt("id_specialite")));
+			a.setCabinet(unCabinetDAO.findByRef(resultSet.getInt("id_cabinet")));
 			getListeMedecinsTries().add(a);
 		}
 	}

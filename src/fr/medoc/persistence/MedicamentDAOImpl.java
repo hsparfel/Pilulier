@@ -24,9 +24,9 @@ public class MedicamentDAOImpl implements MedicamentDAO {
 	private final String ORDRE_FINDALL = "select Id,Nom from medicament";
 	private final String ORDRE_FINDBYREF = "select Id,Nom from medicament where Id = ?";
 	private final String ORDRE_FINDBYNAME = "select Id,Nom from medicament where Nom = ?";
-	private final String ORDRE_FINDALLBYUSER = "select m.id,m.nom  from medicament AS m, utilisateur_medicament AS um where m.id=um.id_medicament AND um.id_utilisateur=?";
+	private final String ORDRE_FINDALLBYUSER = "select m.id,m.nom  from medicament AS m, prescription AS um where m.id=um.id_medicament AND um.id_utilisateur=?";
 	private final String ORDRE_UPDATE = "update medicament set Nom=? where id = ?";
-	private final String ORDRE_FINDALLFILTERED = "select m.id,m.nom from medicament AS m where m.nom NOT IN (select m.nom from medicament AS m, utilisateur AS u, utilisateur_medicament AS um where m.id=um.id_medicament AND u.id=um.id_utilisateur AND u.nom=?)";
+	private final String ORDRE_FINDALLFILTERED = "select m.id,m.nom from medicament AS m where m.nom NOT IN (select m.nom from medicament AS m, utilisateur AS u, prescription AS um where m.id=um.id_medicament AND u.id=um.id_utilisateur AND u.nom=?)";
 	private DAOFactory daoFactory;
 
 	public MedicamentDAOImpl(DAOFactory daoFactory) {

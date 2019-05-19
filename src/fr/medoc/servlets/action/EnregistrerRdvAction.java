@@ -70,7 +70,7 @@ public class EnregistrerRdvAction extends HttpServlet {
 		
 		
 		
-		response.sendRedirect("ModifUserProfil");
+		response.sendRedirect("EnregistrerRdv");
 		
 	}
 

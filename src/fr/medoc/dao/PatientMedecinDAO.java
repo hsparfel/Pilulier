@@ -10,7 +10,7 @@ public interface PatientMedecinDAO {
 
 	public void ajouterPatientMedecin (PatientMedecin unPatientMedecin)throws DAOException;
 	public Collection<PatientMedecin> findAllByUser(int id) throws DAOException;
-	
+	public void supprimerPatientMedecin (PatientMedecin unPatientMedecin)throws DAOException;
 	
 	
 }

@@ -52,7 +52,7 @@ public class EnregistrerUtilisateurAction extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		response.sendRedirect("Accueil");
+		response.sendRedirect("EnregistrerUtilisateur");
 		
 	}
 

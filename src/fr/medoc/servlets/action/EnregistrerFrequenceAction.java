@@ -51,7 +51,7 @@ public class EnregistrerFrequenceAction extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		response.sendRedirect("EnregistrerPrescription");
+		response.sendRedirect("EnregistrerFrequence");
 		
 	}
 

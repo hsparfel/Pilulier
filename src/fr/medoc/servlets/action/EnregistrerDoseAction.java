@@ -52,7 +52,7 @@ public class EnregistrerDoseAction extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		response.sendRedirect("EnregistrerPrescription");
+		response.sendRedirect("EnregistrerDose");
 		
 	}
 

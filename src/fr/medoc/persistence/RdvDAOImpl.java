@@ -12,7 +12,7 @@ import fr.medoc.dao.RdvDAO;
 import fr.medoc.dao.UtilisateurDAO;
 import fr.medoc.dao.DAOFactory;
 import fr.medoc.dao.MedecinDAO;
-import fr.medoc.entities.Rdv;
+import fr.medoc.entities.PatientMedecin;
 import fr.medoc.entities.Rdv;
 import fr.medoc.exception.DAOException;
 
@@ -26,6 +26,7 @@ public class RdvDAOImpl implements RdvDAO{
 	private final String ORDRE_INSERT = "insert into rdv(id_utilisateur, id_medecin, date, heure) values ";
 	private final String VALUES_INSERT = "(?,?,?,?)";
 	private final String ORDRE_DELETE = "delete from rdv where Id = ";
+	private final String ORDRE_DELETEBYUSERANDMEDECIN = "delete from rdv where id_utilisateur = ? AND id_medecin=?";
 	private final String ORDRE_FINDALL = "select * from rdv";
 	private final String ORDRE_FINDBYREF = "select * from rdv where Id = ?";
 	private final String ORDRE_FINDALLBYUSER = "select * from rdv where id_utilisateur=?";
@@ -51,6 +52,22 @@ public class RdvDAOImpl implements RdvDAO{
 			pst.setString(3, uneRdv.getDate());
 			pst.setString(4, uneRdv.getHeure());
 			pst.setInt(5, id);
+			pst.executeUpdate();
+			connexion.commit();
+			daoFactory.closeConnexion(connexion);
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+	}
+	
+	@Override
+	public void supprimerRdvByUserAndMedecin(PatientMedecin patientMedecin)throws DAOException {
+		Connection connexion = null;
+		try {
+			connexion = daoFactory.getConnection();
+			PreparedStatement pst = connexion.prepareStatement(ORDRE_DELETEBYUSERANDMEDECIN);
+			pst.setInt(1, patientMedecin.getPatient().getId());
+			pst.setInt(2, patientMedecin.getMedecin().getId());
 			pst.executeUpdate();
 			connexion.commit();
 			daoFactory.closeConnexion(connexion);

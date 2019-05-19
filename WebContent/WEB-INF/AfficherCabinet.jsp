@@ -38,7 +38,6 @@
 			<div class="col-xs-12 col-sm-8">
 				<div class="jumbotron">
 					<h1>Afficher un cabinet</h1>
-
 				</div>
 				<form action="AfficherCabinetAction" method="post">
 					<div class="form-group row d-none">
@@ -69,7 +68,7 @@
 								<input id="nomCabinet" name="nomCabinet"
 									value="${ monCabinet.nom }" type="text"
 									aria-describedby="nomCabinetHelpBlock" required="required"
-									class="form-control" disabled>
+									class="form-control champDesactive" disabled>
 							</div>
 						</div>
 					</div>
@@ -77,7 +76,7 @@
 						<label for="adresseCabinet" class="col-2 col-form-label">Adresse</label>
 						<div class="col-6">
 							<input id="adresseCabinet" name="adresseCabinet"
-								value="${ monCabinet.adresse }" type="text" class="form-control"
+								value="${ monCabinet.adresse }" type="text" class="form-control champDesactive"
 								required="required" disabled>
 						</div>
 					</div>
@@ -85,26 +84,26 @@
 						<label for="cpCabinet" class="col-2 col-form-label">CP</label>
 						<div class="col-6">
 							<input id="cpCabinet" name="cpCabinet" value=${ monCabinet.cp }
-								type="text" class="form-control" required="required" disabled>
+								type="text" class="form-control champDesactive" required="required" disabled>
 						</div>
 					</div>
 					<div class="form-group row">
 						<label for="villeCabinet" class="col-2 col-form-label">Ville</label>
 						<div class="col-6">
 							<input id="villeCabinet" name="villeCabinet"
-								value="${ monCabinet.ville }" type="text" class="form-control"
+								value="${ monCabinet.ville }" type="text" class="form-control champDesactive"
 								required="required" disabled>
 						</div>
 					</div>
 			
 					<div class="form-group row">
 						<div class="offset-2 col-10">
-							<button id="btnModifier" name="btnModifier" type="button"
-								class="btn btn-outline-primary">Modifier</button>
-							<input id="btnSupprimer" name="submit" value="Supprimer" type="submit" class="btn btn-danger"/>
-							<input id="valid" name="submit" value="Valider" type="submit" class="btn btn-primary d-none"/>
+							<c:import url="Boutons1.jsp"></c:import>
+							<a href="EnregistrerCabinet" id="ajouter"
+								class="btn btn-outline-success btnAffiches">Ajouter</a>
+							<c:import url="Boutons2.jsp"></c:import>
 							<a href="AfficherCabinet?id=${ monCabinet.id }" id="cancel"
-								 class="btn btn-outline-secondary d-none">Annuler</a>
+								 class="btn btn-outline-secondary btnMasques d-none">Annuler</a>
 						</div>
 					</div>
 				</form>
@@ -133,7 +132,7 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-	<script src="js/AfficherCabinet.js"></script>
+	<script src="js/AfficherX.js"></script>
 
 
 </body>

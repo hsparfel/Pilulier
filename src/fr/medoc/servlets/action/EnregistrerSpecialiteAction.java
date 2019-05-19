@@ -52,7 +52,7 @@ public class EnregistrerSpecialiteAction extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		response.sendRedirect("EnregistrerMedecin");
+		response.sendRedirect("EnregistrerSpecialite");
 		
 	}
 

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -21,7 +22,7 @@ public class PatientMedecinDAOImpl implements PatientMedecinDAO {
 
 	private final String ORDRE_INSERT = "insert into utilisateur_medecin values ";
 	private final String VALUES_INSERT = "(?,?)";
-
+	private final String ORDRE_DELETE = "delete from utilisateur_medecin where id_utilisateur = ? AND id_medecin=?";
 	private final String ORDRE_FINDALLBYUSER = "select * from utilisateur_medecin AS um where um.id_utilisateur=?";
 
 	private DAOFactory daoFactory;
@@ -33,8 +34,25 @@ public class PatientMedecinDAOImpl implements PatientMedecinDAO {
 	}
 
 	@Override
+	public void supprimerPatientMedecin(PatientMedecin unPatientMedecin) throws DAOException {
+		Connection connexion = null;
+		try {
+			connexion = daoFactory.getConnection();
+
+			PreparedStatement pst = connexion.prepareStatement(ORDRE_DELETE);
+			pst.setInt(1, unPatientMedecin.getPatient().getId());
+			pst.setInt(2, unPatientMedecin.getMedecin().getId());
+			pst.executeUpdate();
+			connexion.commit();
+			daoFactory.closeConnexion(connexion);
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+	}
+
+	@Override
 	public void ajouterPatientMedecin(PatientMedecin unPatientMedecin) throws DAOException {
-		
+
 		Connection connexion = null;
 
 		try {
@@ -43,7 +61,7 @@ public class PatientMedecinDAOImpl implements PatientMedecinDAO {
 			PreparedStatement pst = connexion.prepareStatement(ORDRE_INSERT + VALUES_INSERT);
 			pst.setInt(1, unPatientMedecin.getPatient().getId());
 			pst.setInt(2, unPatientMedecin.getMedecin().getId());
-			
+
 			pst.executeUpdate();
 			connexion.commit();
 			daoFactory.closeConnexion(connexion);
@@ -91,7 +109,7 @@ public class PatientMedecinDAOImpl implements PatientMedecinDAO {
 			PatientMedecin a = new PatientMedecin();
 			UtilisateurDAO unUtilisateurDAO = daoFactory.getUtilisateurDAO();
 			MedecinDAO unMedecinDAO = daoFactory.getMedecinDAO();
-			
+
 			a.setPatient(unUtilisateurDAO.findByRef(resultSet.getInt("id_utilisateur")));
 			a.setMedecin(unMedecinDAO.findByRef(resultSet.getInt("id_medicament")));
 			getListePatientMedecinsTries().add(a);

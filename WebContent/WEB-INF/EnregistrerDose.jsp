@@ -40,7 +40,7 @@
 
 		<div class="row">
 
-			<div class="col-xs-12 col-sm-9">
+			<div class="col-xs-12 col-sm-8">
 				<div class="jumbotron">
 					<h1>Enregistrer une dose</h1>
 				</div>
@@ -65,7 +65,7 @@
 					<div class="form-group row">
 						<div class="offset-2 col-10">
 							<button name="submit" type="submit" class="btn btn-primary">Valider</button>
-							<a href="EnregistrerPrescription" id="cancel"
+							<a href="EnregistrerDose" id="cancel"
 								class="btn btn-outline-secondary">Annuler</a>
 
 						</div>
@@ -73,7 +73,7 @@
 				</form>
 			</div>
 
-			<div class="col-xs-6 col-sm-3 " id="sidebar">
+			<div class="col-xs-6 col-sm-4 " id="sidebar">
 				<c:import url="sidebarListAllDose.jsp"></c:import>
 			</div>
 

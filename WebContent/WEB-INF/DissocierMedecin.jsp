@@ -42,37 +42,39 @@
 
 			<div class="col-xs-12 col-sm-8">
 				<div class="jumbotron">
-					<h1>Associer un medecin</h1>
+					<h1>Dissocier un medecin</h1>
 				</div>
 
-				<form action="AssocierMedecinAction" method="post">
+				<form action="DissocierMedecinAction" method="post">
 					<div class="form-group row">
 						<label for="idMedecin" class="col-2 col-form-label">Medecin</label>
 						<div class="col-6">
 							<select id="idMedecin" name="idMedecin" required="required"
 								class="custom-select">
 								<option disabled selected >Sélectionner</option>
-								<c:forEach items="${ listeMedecinsExclus }" var="medecin">
+								<c:forEach items="${ listeMedecins }" var="medecin">
 									<option value="${ medecin.id }">${ medecin.nom }</option>
 								</c:forEach>
 							</select>
 						</div>
-						<a href="EnregistrerMedecin"> <span
-							class="fa fa-plus-square-o fa-2x"></span>
-						</a>
-					</div>
+											</div>
 
 					<div class="form-group row">
 						<div class="offset-2 col-6">
-							<button name="submit" type="submit" class="btn btn-primary">Associer</button>
+							<button name="submit" type="submit" class="btn btn-danger">Dissocier</button>
 							<a href="ModifUserProfil" id="cancel"
 								class="btn btn-outline-secondary">Annuler</a>
 						</div>
+						
+						
 					</div>
+					
+					
+					
+					
 				</form>
 			</div>
-			<div class="col-xs-6 col-sm-3" id="sidebar">
-			
+			<div class="col-xs-6 col-sm-4 " id="sidebar">
 				<c:import url="sidebarListMyMedecin.jsp"></c:import>
 			</div>
 

@@ -9,8 +9,8 @@
 		<button id="listBtnPrise"  class="list-group-item active">Mes prises</button>
 		<div id="listPrise">
 		<c:forEach items="${ listePrises }" var="prise">
-			<a href="AfficherPrise?id=${ prise.id }" class="list-group-item">${ prise.getMedicament().getNom()}-
-				${ prise.getDatePrise()} à ${ prise.getHeurePrise()}</a>
+			<a href="AfficherPrise?id=${ prise.id }" class="list-group-item">${ prise.medicamentm.nom}-
+				${ prise.datePrise} à ${ prise.heurePrise}</a>
 		</c:forEach>
 	</div>
 	</div>
