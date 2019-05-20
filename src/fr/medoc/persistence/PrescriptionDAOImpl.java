@@ -24,14 +24,14 @@ public class PrescriptionDAOImpl implements PrescriptionDAO {
 	private ArrayList<Prescription> listePrescriptions;
 	private ArrayList<Prescription> listePrescriptionsTries;
 
-	private final String ORDRE_INSERT = "insert into prescription values ";
-	private final String VALUES_INSERT = "(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	private final String ORDRE_INSERT = "insert into prescription(id_utilisateur,id_medicament,id_medecin,nb_dose,id_dose,nb_frequence,id_frequence,matin,midi,soir,nb_duree,id_duree,date_debut,date_fin) values ";
+	private final String VALUES_INSERT = "(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	private final String ORDRE_FINDALL = "select * from prescription";
 	private final String ORDRE_FINDBYREF = "select * from prescription where Id = ?";
 	private final String ORDRE_FINDALLBYUSER = "select * from prescription AS um where um.id_utilisateur=?";
 	private final String ORDRE_FINDBYREFS = "select * from prescription AS um where um.id_utilisateur=? AND um.id_medicament=?";
 	private final String ORDRE_DELETE = "delete from prescription where Id = ";
-	private final String ORDRE_UPDATE = "update prescription set id_utilisateur=?, set id_medicament=?, set id_medecin=?, set nb_dose=?, set id_dose=?, set nb_frequence=?, set id_frequence=?, set matin=?, set midi=?, set soir=?, set nb_duree=?, set id_duree=?, set date=?,  where id = ?";
+	private final String ORDRE_UPDATE = "update prescription set id_utilisateur=?, set id_medicament=?, set id_medecin=?, set nb_dose=?, set id_dose=?, set nb_frequence=?, set id_frequence=?, set matin=?, set midi=?, set soir=?, set nb_duree=?, set id_duree=?, set date_debut=?, set date_fin=?  where id = ?";
 	
 	private DAOFactory daoFactory;
 
@@ -60,9 +60,10 @@ public class PrescriptionDAOImpl implements PrescriptionDAO {
 			pst.setInt(10, unePrescription.getSoir());
 			pst.setInt(11, unePrescription.getNbDuree());
 			pst.setInt(12, unePrescription.getDuree().getId());
-			pst.setString(13, unePrescription.getDate());
-			
-			pst.setInt(14, id);
+			pst.setString(13, unePrescription.getDateDebut());
+			pst.setString(14, unePrescription.getDateFin());
+			//ajouter la modif de la date_fin
+			pst.setInt(15, id);
 			pst.executeUpdate();
 			connexion.commit();
 			daoFactory.closeConnexion(connexion);
@@ -106,7 +107,8 @@ public class PrescriptionDAOImpl implements PrescriptionDAO {
 			pst.setInt(10, unePrescription.getSoir());
 			pst.setInt(11, unePrescription.getNbDuree());
 			pst.setInt(12, unePrescription.getDuree().getId());
-			pst.setString(13, unePrescription.getDate());
+			pst.setString(13, unePrescription.getDateDebut());
+			pst.setString(14, unePrescription.getDateFin());
 			pst.executeUpdate();
 			connexion.commit();
 			daoFactory.closeConnexion(connexion);
@@ -166,7 +168,8 @@ public class PrescriptionDAOImpl implements PrescriptionDAO {
 			a.setFrequence(uneFrequenceDAO.findByRef(resultSet.getInt("id_frequence")));
 			a.setNbDuree(resultSet.getInt("nb_duree"));
 			a.setDuree(uneDureeDAO.findByRef(resultSet.getInt("id_duree")));
-			a.setDate(resultSet.getString("date"));
+			a.setDateDebut(resultSet.getString("date_debut"));
+			a.setDateFin(a.calculerDateFin(resultSet.getString("date_debut"), a.getNbDuree(), a.getDuree()));
 			getListePrescriptionsTries().add(a);
 		}
 	}

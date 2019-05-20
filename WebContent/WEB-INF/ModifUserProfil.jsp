@@ -38,9 +38,7 @@
 						Medecin</a> <a class=" btn btn-default btn-sm" href="DissocierMedecin">Dissocier
 						Medecin</a><a class=" btn btn-default btn-sm" href="EnregistrerPrise">Ajouter
 						Prise</a> <a class=" btn btn-default btn-sm"
-						href="EnregistrerPrescription">Ajouter Prescription</a> <a
-						class=" btn btn-default btn-sm" href="EnregistrerRdv">Ajouter
-						Rendez-vous</a> 
+						href="EnregistrerPrescription">Ajouter Prescription</a> 
 				</div>
 			</div>
 			<div class="col-xs-6 col-sm-4" id="sidebar">

@@ -93,10 +93,7 @@ public class EnregistrerPrescriptionAction extends HttpServlet {
 		Medicament unMedicament = null;
 
 		// recup des radio et checkbox
-		System.out.println("radio: " + request.getParameter("frequenceRadio"));
-		System.out.println("check0: " + request.getParameter("frequenceCheckbox_0"));
-		System.out.println("check1: " + request.getParameter("frequenceCheckbox_1"));
-		System.out.println("check2: " + request.getParameter("frequenceCheckbox_2"));
+		
 		try {
 			unUtilisateur = utilisateurDAO.findByName((String) session.getAttribute("login"));
 			uneDose = doseDAO.findByRef(idDose);
@@ -107,6 +104,13 @@ public class EnregistrerPrescriptionAction extends HttpServlet {
 			Prescription nouveauPrescription = new Prescription(unUtilisateur, unMedecin, unMedicament, qteDose,
 					uneDose, qteFrequence, uneFrequence, qteDuree,
 					uneDuree, date);
+			//ajout de la date de fin
+			nouveauPrescription.setDateFin(nouveauPrescription.calculerDateFin(nouveauPrescription.getDateDebut(),nouveauPrescription.getNbDuree(),nouveauPrescription.getDuree()));
+			
+			
+			
+			
+			
 			// rajouter ici les setters matin midi soir
 			if (request.getParameter("frequenceRadio")!=null) {
 			frequenceRadio = (Integer) Integer.parseInt(request.getParameter("frequenceRadio"));
