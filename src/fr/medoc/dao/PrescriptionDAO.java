@@ -13,4 +13,5 @@ public interface PrescriptionDAO {
 	public Prescription findByRefs (int idUtilisateur, int idMedicament)throws DAOException;
 	public void supprimerPrescription(int idPrescription)throws DAOException;
 	public void modifierPrescription(Prescription prescription, int id) throws DAOException;
+	public Prescription findByRef (int id)throws DAOException;
 }

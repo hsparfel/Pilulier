@@ -38,31 +38,19 @@
 						Medecin</a> <a class=" btn btn-default btn-sm" href="DissocierMedecin">Dissocier
 						Medecin</a><a class=" btn btn-default btn-sm" href="EnregistrerPrise">Ajouter
 						Prise</a> <a class=" btn btn-default btn-sm"
-						href="EnregistrerPrescription">Ajouter Prescription</a> 
+						href="EnregistrerPrescription">Ajouter Prescription</a>
 				</div>
 			</div>
 			<div class="col-xs-6 col-sm-4" id="sidebar">
 
-				<c:if test="${!empty listePrescriptions }">
-					<div class="list-group">
-						<button  class="list-group-item active">Mes
-							prescriptions</button>
-						<div >
-							<c:forEach items="${ listePrescriptions }" var="prescription">
-								<div class="list-group-item">${ prescription.medicament.getNom() }
-									- ${ prescription.nbDose } ${ prescription.dose.getNom() }, ${ prescription.nbFrequence }
-									fois par ${ prescription.frequence.getNom()} pendant
-									${prescription.nbDuree } ${prescription.duree.getNom() }</div>
-							</c:forEach>
-						</div>
-					</div>
-				</c:if>
-				<c:import url="sidebarListMyPrescription.jsp"></c:import>
+
+
+
 				<c:if test="${!empty listePrises }">
 					<div class="list-group">
-						<button  class="list-group-item active">Mes
-							dernières prises</button>
-						<div >
+						<button class="list-group-item active">Mes dernières
+							prises</button>
+						<div>
 							<c:forEach items="${ listePrises }" var="prise">
 								<div class="list-group-item">${ prise.medicament.getNom() }-
 									${ prise.datePrise }</div>
@@ -70,10 +58,11 @@
 						</div>
 					</div>
 				</c:if>
+				<c:import url="sidebarMenuListMyPrise.jsp"></c:import>
 
-				<c:import url="sidebarListMyPrise.jsp"></c:import>
-				<c:import url="sidebarListMyMedecin.jsp"></c:import>
-				<c:import url="sidebarListMyRdv.jsp"></c:import>
+				<c:import url="sidebarMenuListMyPrescription.jsp"></c:import>
+				<c:import url="sidebarMenuListMyMedecin.jsp"></c:import>
+				<c:import url="sidebarMenuListMyRdv.jsp"></c:import>
 
 
 

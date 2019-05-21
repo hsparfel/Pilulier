@@ -84,7 +84,8 @@ public class EnregistrerPrescriptionAction extends HttpServlet {
 
 		int qteDuree = (Integer) Integer.parseInt(request.getParameter("nbDuree"));
 		int idDuree = (Integer) Integer.parseInt(request.getParameter("idDuree"));
-		String date = request.getParameter("date");
+		String dateDebut = request.getParameter("date");
+		
 		
 		Dose uneDose = null;
 		Duree uneDuree = null;
@@ -103,7 +104,7 @@ public class EnregistrerPrescriptionAction extends HttpServlet {
 			unMedicament = medicamentDAO.findByRef(idMedicament);
 			Prescription nouveauPrescription = new Prescription(unUtilisateur, unMedecin, unMedicament, qteDose,
 					uneDose, qteFrequence, uneFrequence, qteDuree,
-					uneDuree, date);
+					uneDuree, dateDebut);
 			//ajout de la date de fin
 			nouveauPrescription.setDateFin(nouveauPrescription.calculerDateFin(nouveauPrescription.getDateDebut(),nouveauPrescription.getNbDuree(),nouveauPrescription.getDuree()));
 			
@@ -155,6 +156,22 @@ public class EnregistrerPrescriptionAction extends HttpServlet {
 			prescriptionDao.ajouterPrescription(nouveauPrescription);
 			
 			//ajouter ici l'enregistrement de toutes les prises necessaires à la prescription
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			

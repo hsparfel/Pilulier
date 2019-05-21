@@ -30,6 +30,8 @@
 					<a class="dropdown-item" href="EnregistrerRdv">Rdv</a> <a
 						class="dropdown-item" href="EnregistrerCabinet">Cabinet</a> <a
 						class="dropdown-item" href="EnregistrerUtilisateur">Utilisateur</a>
+						<a
+						class="dropdown-item" href="EnregistrerPrescription">Prescription</a>
 					<div class="dropdown-divider"></div>
 					<a class="dropdown-item" href="EnregistrerDose">Dose</a> <a
 						class="dropdown-item" href="EnregistrerDuree">Duree</a> <a

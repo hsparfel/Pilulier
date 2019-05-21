@@ -16,4 +16,5 @@ public interface RdvDAO {
 	public Rdv findByRef (int id)throws DAOException;
 	public Collection<Rdv> findAllByUser(int id) throws DAOException;
 	public void modifierRdv(Rdv rdv, int id) throws DAOException;
+	
 }

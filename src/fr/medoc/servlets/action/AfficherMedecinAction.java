@@ -7,17 +7,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import fr.medoc.dao.MedecinDAO;
 import fr.medoc.dao.SpecialiteDAO;
-import fr.medoc.dao.UtilisateurDAO;
 import fr.medoc.dao.CabinetDAO;
 import fr.medoc.dao.DAOFactory;
 import fr.medoc.entities.Cabinet;
 import fr.medoc.entities.Medecin;
 import fr.medoc.entities.Specialite;
-import fr.medoc.entities.Utilisateur;
 import fr.medoc.exception.DAOConfigurationException;
 import fr.medoc.exception.DAOException;
 

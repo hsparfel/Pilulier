@@ -31,14 +31,59 @@ public class PrescriptionDAOImpl implements PrescriptionDAO {
 	private final String ORDRE_FINDALLBYUSER = "select * from prescription AS um where um.id_utilisateur=?";
 	private final String ORDRE_FINDBYREFS = "select * from prescription AS um where um.id_utilisateur=? AND um.id_medicament=?";
 	private final String ORDRE_DELETE = "delete from prescription where Id = ";
-	private final String ORDRE_UPDATE = "update prescription set id_utilisateur=?, set id_medicament=?, set id_medecin=?, set nb_dose=?, set id_dose=?, set nb_frequence=?, set id_frequence=?, set matin=?, set midi=?, set soir=?, set nb_duree=?, set id_duree=?, set date_debut=?, set date_fin=?  where id = ?";
-	
+	private final String ORDRE_UPDATE = "update prescription set id_utilisateur=?,id_medicament=?,id_medecin=?,nb_dose=?,id_dose=?,nb_frequence=?,id_frequence=?,matin=?,midi=?,soir=?,nb_duree=?,id_duree=?,date_debut=?,date_fin=?  where id = ?";
+
 	private DAOFactory daoFactory;
 
 	public PrescriptionDAOImpl(DAOFactory daoFactory) {
 		listePrescriptions = new ArrayList<Prescription>();
 		listePrescriptionsTries = new ArrayList<Prescription>();
 		this.daoFactory = daoFactory;
+	}
+
+	@Override
+	public Prescription findByRef(int id) throws DAOException {
+		Prescription unPrescription = null;
+		Connection connexion = null;
+		UtilisateurDAO unUtilisateurDAO = daoFactory.getUtilisateurDAO();
+		MedecinDAO unMedecinDAO = daoFactory.getMedecinDAO();
+		MedicamentDAO unMedicamentDAO = daoFactory.getMedicamentDAO();
+		DoseDAO unDoseDAO = daoFactory.getDoseDAO();
+		DureeDAO unDureeDAO = daoFactory.getDureeDAO();
+		FrequenceDAO unFrequenceDAO = daoFactory.getFrequenceDAO();
+		try {
+			connexion = daoFactory.getConnection();
+			PreparedStatement pst = connexion.prepareStatement(ORDRE_FINDBYREF);
+			pst.setInt(1, id);
+
+			ResultSet rs = pst.executeQuery();
+			if (rs.next()) {
+				unPrescription = new Prescription();
+
+				unPrescription.setId(rs.getInt("id"));
+				unPrescription.setUtilisateur(unUtilisateurDAO.findByRef(rs.getInt("id_utilisateur")));
+				unPrescription.setMedecin(unMedecinDAO.findByRef(rs.getInt("id_medecin")));
+				unPrescription.setMedicament(unMedicamentDAO.findByRef(rs.getInt("id_medicament")));
+				unPrescription.setDose(unDoseDAO.findByRef(rs.getInt("id_dose")));
+				unPrescription.setDuree(unDureeDAO.findByRef(rs.getInt("id_duree")));
+				unPrescription.setFrequence(unFrequenceDAO.findByRef(rs.getInt("id_frequence")));
+				unPrescription.setNbDose(rs.getInt("nb_dose"));
+				unPrescription.setNbDuree(rs.getInt("nb_duree"));
+				unPrescription.setNbFrequence(rs.getInt("nb_frequence"));
+				unPrescription.setMatin(rs.getInt("matin"));
+				unPrescription.setMidi(rs.getInt("midi"));
+				unPrescription.setSoir(rs.getInt("soir"));
+				unPrescription.setDateDebut(rs.getString("date_debut"));
+				unPrescription.setDateFin(rs.getString("date_fin"));
+			} else {
+				throw new DAOException("Erreur recherche d'un prescription");
+			}
+			connexion.commit();
+			daoFactory.closeConnexion(connexion);
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+		return unPrescription;
 	}
 
 	@Override
@@ -62,7 +107,6 @@ public class PrescriptionDAOImpl implements PrescriptionDAO {
 			pst.setInt(12, unePrescription.getDuree().getId());
 			pst.setString(13, unePrescription.getDateDebut());
 			pst.setString(14, unePrescription.getDateFin());
-			//ajouter la modif de la date_fin
 			pst.setInt(15, id);
 			pst.executeUpdate();
 			connexion.commit();
@@ -71,7 +115,7 @@ public class PrescriptionDAOImpl implements PrescriptionDAO {
 			throw new DAOException(e);
 		}
 	}
-	
+
 	@Override
 	public void supprimerPrescription(int idPrescription) throws DAOException {
 		Connection connexion = null;
@@ -85,16 +129,17 @@ public class PrescriptionDAOImpl implements PrescriptionDAO {
 			throw new DAOException(e);
 		}
 	}
-	
+
 	@Override
 	public void ajouterPrescription(Prescription unePrescription) throws DAOException {
-		
+		ResultSet rs = null;
 		Connection connexion = null;
 
 		try {
 			connexion = daoFactory.getConnection();
 			getListePrescriptions().add(unePrescription);
-			PreparedStatement pst = connexion.prepareStatement(ORDRE_INSERT + VALUES_INSERT);
+			PreparedStatement pst = connexion.prepareStatement(ORDRE_INSERT + VALUES_INSERT,
+					Statement.RETURN_GENERATED_KEYS);
 			pst.setInt(1, unePrescription.getUtilisateur().getId());
 			pst.setInt(2, unePrescription.getMedicament().getId());
 			pst.setInt(3, unePrescription.getMedecin().getId());
@@ -110,6 +155,12 @@ public class PrescriptionDAOImpl implements PrescriptionDAO {
 			pst.setString(13, unePrescription.getDateDebut());
 			pst.setString(14, unePrescription.getDateFin());
 			pst.executeUpdate();
+			rs = pst.getGeneratedKeys();
+			if (rs.next()) {
+				unePrescription.setId(rs.getInt(1));
+			} else {
+				throw new DAOException("Erreur création d'une prescription. ");
+			}
 			connexion.commit();
 			daoFactory.closeConnexion(connexion);
 		} catch (SQLException e) {
@@ -159,7 +210,7 @@ public class PrescriptionDAOImpl implements PrescriptionDAO {
 			DoseDAO uneDoseDAO = daoFactory.getDoseDAO();
 			DureeDAO uneDureeDAO = daoFactory.getDureeDAO();
 			FrequenceDAO uneFrequenceDAO = daoFactory.getFrequenceDAO();
-			
+			a.setId(resultSet.getInt("id"));
 			a.setUtilisateur(unUtilisateurDAO.findByRef(resultSet.getInt("id_utilisateur")));
 			a.setMedicament(unMedicamentDAO.findByRef(resultSet.getInt("id_medicament")));
 			a.setNbDose(resultSet.getInt("nb_dose"));
@@ -168,6 +219,9 @@ public class PrescriptionDAOImpl implements PrescriptionDAO {
 			a.setFrequence(uneFrequenceDAO.findByRef(resultSet.getInt("id_frequence")));
 			a.setNbDuree(resultSet.getInt("nb_duree"));
 			a.setDuree(uneDureeDAO.findByRef(resultSet.getInt("id_duree")));
+			a.setMatin(resultSet.getInt("matin"));
+			a.setMidi(resultSet.getInt("midi"));
+			a.setSoir(resultSet.getInt("soir"));
 			a.setDateDebut(resultSet.getString("date_debut"));
 			a.setDateFin(a.calculerDateFin(resultSet.getString("date_debut"), a.getNbDuree(), a.getDuree()));
 			getListePrescriptionsTries().add(a);
@@ -186,32 +240,31 @@ public class PrescriptionDAOImpl implements PrescriptionDAO {
 
 			ResultSet rs = pst.executeQuery();
 			if (rs.next()) {
-				unePrescription = new Prescription();	
+				unePrescription = new Prescription();
 				UtilisateurDAO unUtilisateurDAO = daoFactory.getUtilisateurDAO();
 				MedecinDAO unMedecinDAO = daoFactory.getMedecinDAO();
 				MedicamentDAO unMedicamentDAO = daoFactory.getMedicamentDAO();
 				DoseDAO uneDoseDAO = daoFactory.getDoseDAO();
-				
+
 				FrequenceDAO uneFrequenceDAO = daoFactory.getFrequenceDAO();
-				
+
 				unePrescription.setUtilisateur(unUtilisateurDAO.findByRef(rs.getInt("id_utilisateur")));
 				unePrescription.setMedecin(unMedecinDAO.findByRef(rs.getInt("id_medecin")));
-				
+
 				unePrescription.setMedicament(unMedicamentDAO.findByRef(rs.getInt("id_medicament")));
 				unePrescription.setNbDose(rs.getInt("nb_dose"));
 				unePrescription.setDose(uneDoseDAO.findByRef(rs.getInt("id_dose")));
 				unePrescription.setNbFrequence(rs.getInt("nb_frequence"));
 				unePrescription.setFrequence(uneFrequenceDAO.findByRef(rs.getInt("id_frequence")));
-				
-				
+
 			} else {
-				throw new DAOException("Erreur recherche d'une prescription. " );
+				throw new DAOException("Erreur recherche d'une prescription. ");
 			}
 			connexion.commit();
 			daoFactory.closeConnexion(connexion);
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}
-		return unePrescription; 
+		return unePrescription;
 	}
 }
