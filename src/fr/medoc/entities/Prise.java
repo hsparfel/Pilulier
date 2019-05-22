@@ -3,24 +3,22 @@ package fr.medoc.entities;
 public class Prise {
 	
 	private int id;
-	private Utilisateur utilisateur;
-	private Medicament medicament;
-	private String datePrise;
-	private String heurePrise;
+	private Prescription prescription;
+	private String date;
+	private String heure;
+	private boolean effectue;
 	
-	public Prise(Utilisateur utilisateur, Medicament medicament, String datePrise, String heurePrise) {
+	public Prise(Prescription prescription, String date, String heure) {
 
-		this.utilisateur = utilisateur;
-		this.medicament = medicament;
-		this.datePrise = datePrise;
-		this.heurePrise = heurePrise;
+		this.prescription = prescription;
+		this.date = date;
+		this.heure = heure;
 	}
 
 	public Prise() {
-		this.utilisateur = null;
-		this.medicament = null;
-		this.datePrise = "";
-		this.heurePrise = "";
+		this.prescription = null;
+		this.date = "";
+		this.heure = "";
 	}
 
 	public int getId() {
@@ -31,43 +29,45 @@ public class Prise {
 		this.id = id;
 	}
 
-	public Utilisateur getUtilisateur() {
-		return utilisateur;
+	public Prescription getPrescription() {
+		return prescription;
 	}
 
-	public void setUtilisateur(Utilisateur utilisateur) {
-		this.utilisateur = utilisateur;
+	public void setPrescription(Prescription prescription) {
+		this.prescription = prescription;
 	}
 
-	public Medicament getMedicament() {
-		return medicament;
+	public String getDate() {
+		return date;
 	}
 
-	public void setMedicament(Medicament medicament) {
-		this.medicament = medicament;
+	public void setDate(String date) {
+		this.date = date;
 	}
 
-	public String getDatePrise() {
-		return datePrise;
+	public String getHeure() {
+		return heure;
 	}
 
-	public void setDatePrise(String datePrise) {
-		this.datePrise = datePrise;
+	public void setHeure(String heure) {
+		this.heure = heure;
 	}
 
-	public String getHeurePrise() {
-		return heurePrise;
+	public boolean isEffectue() {
+		return effectue;
 	}
 
-	public void setHeurePrise(String heurePrise) {
-		this.heurePrise = heurePrise;
+	public void setEffectue(boolean effectue) {
+		this.effectue = effectue;
 	}
 
 	@Override
 	public String toString() {
-		return "Prise [id=" + id + ", utilisateur=" + utilisateur + ", medicament=" + medicament + ", datePrise="
-				+ datePrise + ", heurePrise=" + heurePrise + "]";
+		return "Prise [id=" + id + ", prescription=" + prescription + ", date=" + date + ", heure=" + heure
+				+ ", effectue=" + effectue + "]";
 	}
+
+	
 	
 	
 	

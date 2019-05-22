@@ -12,10 +12,12 @@ import javax.servlet.http.HttpSession;
 import fr.medoc.dao.PriseDAO;
 import fr.medoc.dao.UtilisateurDAO;
 import fr.medoc.dao.MedicamentDAO;
+import fr.medoc.dao.PrescriptionDAO;
 import fr.medoc.dao.DAOFactory;
 import fr.medoc.entities.Prise;
 import fr.medoc.entities.Utilisateur;
 import fr.medoc.entities.Medicament;
+import fr.medoc.entities.Prescription;
 import fr.medoc.exception.DAOConfigurationException;
 import fr.medoc.exception.DAOException;
 
@@ -25,16 +27,15 @@ public class EnregistrerPriseAction extends HttpServlet {
 
 	private DAOFactory daoFactory;
 	private PriseDAO priseDao;
-	private MedicamentDAO medicamentDAO;
-	private UtilisateurDAO utilisateurDAO;
-
+	private PrescriptionDAO prescriptionDAO;
+	
 	@Override
 	public void init() throws ServletException {
 		try {
 			daoFactory = DAOFactory.getInstance();
 			priseDao = daoFactory.getPriseDAO();
-			medicamentDAO = daoFactory.getMedicamentDAO();
-			utilisateurDAO = daoFactory.getUtilisateurDAO();
+			prescriptionDAO = daoFactory.getPrescriptionDAO();
+			
 		} catch (DAOConfigurationException e) {
 			e.printStackTrace();
 		}
@@ -54,7 +55,7 @@ public class EnregistrerPriseAction extends HttpServlet {
 		HttpSession session = request.getSession();
 		Utilisateur unUtilisateur = null;
 		
-		int idMedicament = (Integer) Integer.parseInt(request.getParameter("idMedicament"));
+		int idPrise = (Integer) Integer.parseInt(request.getParameter("idPrise"));
 		
 
 		String date = request.getParameter("date");
@@ -62,14 +63,14 @@ public class EnregistrerPriseAction extends HttpServlet {
 		
 		
 		
-		Medicament unMedicament = null;
+		Prescription unePrescription = null;
 
 		
 		try {
-			unUtilisateur = utilisateurDAO.findByName((String) session.getAttribute("login"));
+			unePrescription = prescriptionDAO.findByRef(idPrise);
 			
-			unMedicament = medicamentDAO.findByRef(idMedicament);
-			Prise nouveauPrise = new Prise(unUtilisateur,  unMedicament, date, heure);
+			
+			Prise nouveauPrise = new Prise(unePrescription, date, heure);
 			
 			
 			priseDao.ajouterPrise(nouveauPrise);

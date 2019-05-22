@@ -53,9 +53,9 @@ public class Prescription {
 
 	public String calculerDateFin(String dateDebut, int nbDuree, Duree duree) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		System.out.println(dateDebut);
+		//System.out.println(dateDebut);
 		LocalDate dateDebutParsedDate = LocalDate.parse(dateDebut, formatter);
-		System.out.println(dateDebutParsedDate);
+		//System.out.println(dateDebutParsedDate);
 		LocalDate dateFinParsedDate = null;
 		switch (duree.getNom()) {
 		case "jour":

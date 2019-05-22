@@ -42,30 +42,10 @@
 				</div>
 			</div>
 			<div class="col-xs-6 col-sm-4" id="sidebar">
-
-
-
-
-				<c:if test="${!empty listePrises }">
-					<div class="list-group">
-						<button class="list-group-item active">Mes dernières
-							prises</button>
-						<div>
-							<c:forEach items="${ listePrises }" var="prise">
-								<div class="list-group-item">${ prise.medicament.getNom() }-
-									${ prise.datePrise }</div>
-							</c:forEach>
-						</div>
-					</div>
-				</c:if>
 				<c:import url="sidebarMenuListMyPrise.jsp"></c:import>
-
 				<c:import url="sidebarMenuListMyPrescription.jsp"></c:import>
 				<c:import url="sidebarMenuListMyMedecin.jsp"></c:import>
 				<c:import url="sidebarMenuListMyRdv.jsp"></c:import>
-
-
-
 			</div>
 		</div>
 

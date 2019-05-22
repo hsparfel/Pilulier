@@ -6,13 +6,15 @@
 
 <c:if test="${!empty listePrises }">
 	<div class="list-group">
-		<button id="listBtnPrise"  class="list-group-item active">Mes prises</button>
+		<button id="listBtnPrise"  class="list-group-item active">Mes prises du Jour</button>
 		<div id="listPrise">
 		<c:forEach items="${ listePrises }" var="prise">
-			<a href="AfficherPrise?id=${ prise.id }" class="list-group-item">${ prise.medicamentm.nom}-
-				${ prise.datePrise} à ${ prise.heurePrise}</a>
+		 
+		<c:if test="${ prise.date==dateDuJour && prise.prescription.utilisateur.getNom()==login }">
+			<a href="AfficherPrise?id=${ prise.id }" class="list-group-item">${ prise.prescription.medicament.nom}-
+				${ prise.date} à ${ prise.heure}</a>
+				</c:if>
 		</c:forEach>
 	</div>
 	</div>
 </c:if>
-

@@ -1,6 +1,8 @@
 package fr.medoc.servlets.page;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -43,10 +45,12 @@ public class ModifUserProfilServlet extends HttpServlet {
 	private PriseDAO priseDao;
 	private MedecinDAO medecinDao;
 	private RdvDAO rdvDao;
+	private LocalDate dateDuJour = null;
 
 	@Override
 	public void init() throws ServletException {
 		try {
+			dateDuJour = dateDuJour.now();
 			daoFactory = DAOFactory.getInstance();
 			prescriptionDao = daoFactory.getPrescriptionDAO();
 			doseDao = daoFactory.getDoseDAO();
@@ -91,7 +95,7 @@ public class ModifUserProfilServlet extends HttpServlet {
 				listePrescriptions = (ArrayList<Prescription>) prescriptionDao.findAllByUser(unUtilisateur.getId());
 				listeMedicaments = (ArrayList<Medicament>) medicamentDao
 						.findAllExcludedByUser((String) session.getAttribute("login"));
-				listePrises = (ArrayList<Prise>) priseDao.findAllLastByUser(unUtilisateur.getId());
+				listePrises = (ArrayList<Prise>) priseDao.findAll();
 			} catch (DAOException e) {
 				e.printStackTrace();
 			}
@@ -102,6 +106,13 @@ public class ModifUserProfilServlet extends HttpServlet {
 			request.setAttribute("listePrises", listePrises);
 			request.setAttribute("listeMedecins", listeMedecins);
 			request.setAttribute("listeRdvs", listeRdvs);
+request.setAttribute("login", (String) session.getAttribute("login"));
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			//LocalDate dateDuJourParsedDate = LocalDate.parse(dateDuJour, formatter);
+			LocalDate dateFinParsedDate = null;
+			String dateDuJourString = dateDuJour.format(formatter);
+//System.out.println("test= " + dateDuJourString);
+			request.setAttribute("dateDuJour", dateDuJourString);
 			this.getServletContext().getRequestDispatcher(JSP_PAGE).forward(request, response);
 		} else {
 			response.sendRedirect("Accueil");

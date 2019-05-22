@@ -60,7 +60,7 @@ public class EnregistrerPriseServlet extends HttpServlet {
 			ArrayList<Medicament> listeMedicaments = null;
 			try {
 				unUtilisateur = utilisateurDao.findByName((String) session.getAttribute("login"));
-				listePrises = (ArrayList<Prise>) priseDao.findAllLastByUser(unUtilisateur.getId());
+				listePrises = (ArrayList<Prise>) priseDao.findAll();
 				listeMedicaments = (ArrayList<Medicament>) medicamentDao.findAllByUser(unUtilisateur.getId());
 			} catch (DAOException e) {
 				e.printStackTrace();
