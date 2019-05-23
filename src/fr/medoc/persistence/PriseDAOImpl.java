@@ -24,7 +24,8 @@ public class PriseDAOImpl implements PriseDAO {
 	private final String ORDRE_DELETE = "delete from prise where Id = ";
 	private final String ORDRE_FINDALL = "select * from prise";
 	private final String ORDRE_FINDBYREF = "select * from prise where Id = ?";
-
+	private final String ORDRE_DELETEBYPRESCRIPTION = "delete from prise where id_prescription = ";
+	
 	private DAOFactory daoFactory;
 
 	public PriseDAOImpl(DAOFactory daoFactory) {
@@ -67,6 +68,20 @@ public class PriseDAOImpl implements PriseDAO {
 			connexion = daoFactory.getConnection();
 			Statement requete = connexion.createStatement();
 			requete.executeUpdate(ORDRE_DELETE + "'" + idPrise + "'");
+			connexion.commit();
+			daoFactory.closeConnexion(connexion);
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+	}
+	
+	@Override
+	public void supprimerPrisesByPrescription(int idPrescription) throws DAOException {
+		Connection connexion = null;
+		try {
+			connexion = daoFactory.getConnection();
+			Statement requete = connexion.createStatement();
+			requete.executeUpdate(ORDRE_DELETEBYPRESCRIPTION + "'" + idPrescription + "'");
 			connexion.commit();
 			daoFactory.closeConnexion(connexion);
 		} catch (SQLException e) {

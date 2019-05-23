@@ -71,26 +71,18 @@ public class AfficherPrescriptionAction extends HttpServlet {
 		HttpSession session = request.getSession();
 		Utilisateur unUtilisateur = null;
 		String submitForm = request.getParameter("submit");
-		
-		
-
 
 		try {
-			
-			
-			
-			
-			
+
 			if (submitForm != null) {
 				if ("Valider".equals(submitForm)) {
 					String dateDebut = request.getParameter("date");
-					
-					int frequenceRadio=0;
-					int frequenceCheckbox_0=0;
-					int frequenceCheckbox_1=0;
-					int frequenceCheckbox_2=0;
 
-				
+					int frequenceRadio = 0;
+					int frequenceCheckbox_0 = 0;
+					int frequenceCheckbox_1 = 0;
+					int frequenceCheckbox_2 = 0;
+
 					Dose uneDose = null;
 					Duree uneDuree = null;
 					Frequence uneFrequence = null;
@@ -111,18 +103,15 @@ public class AfficherPrescriptionAction extends HttpServlet {
 					unMedecin = medecinDAO.findByRef(idMedecin);
 					unMedicament = medicamentDAO.findByRef(idMedicament);
 					Prescription nouveauPrescription = new Prescription(unUtilisateur, unMedecin, unMedicament, qteDose,
-							uneDose, qteFrequence, uneFrequence, qteDuree,
-							uneDuree, dateDebut);
-					//ajout de la date de fin
-					nouveauPrescription.setDateFin(nouveauPrescription.calculerDateFin(nouveauPrescription.getDateDebut(),nouveauPrescription.getNbDuree(),nouveauPrescription.getDuree()));
-					
-					
-					
-					
-					
+							uneDose, qteFrequence, uneFrequence, qteDuree, uneDuree, dateDebut);
+					// ajout de la date de fin
+					nouveauPrescription
+							.setDateFin(nouveauPrescription.calculerDateFin(nouveauPrescription.getDateDebut(),
+									nouveauPrescription.getNbDuree(), nouveauPrescription.getDuree()));
+
 					// rajouter ici les setters matin midi soir
-					if (request.getParameter("frequenceRadio")!=null) {
-					frequenceRadio = (Integer) Integer.parseInt(request.getParameter("frequenceRadio"));
+					if (request.getParameter("frequenceRadio") != null) {
+						frequenceRadio = (Integer) Integer.parseInt(request.getParameter("frequenceRadio"));
 					}
 					switch (frequenceRadio) {
 					case 1: {
@@ -130,51 +119,45 @@ public class AfficherPrescriptionAction extends HttpServlet {
 						break;
 					}
 					case 2: {
-						
 						nouveauPrescription.setMidi(1);
 						break;
 					}
 					case 3: {
-						
 						nouveauPrescription.setSoir(1);
 						break;
 					}
 					}
-					
-					if (request.getParameter("frequenceCheckbox_0")!=null) {
+
+					if (request.getParameter("frequenceCheckbox_0") != null) {
 						frequenceCheckbox_0 = (Integer) Integer.parseInt(request.getParameter("frequenceCheckbox_0"));
-						}
-					if (request.getParameter("frequenceCheckbox_1")!=null) {
+					}
+					if (request.getParameter("frequenceCheckbox_1") != null) {
 						frequenceCheckbox_1 = (Integer) Integer.parseInt(request.getParameter("frequenceCheckbox_1"));
-						}
-					if (request.getParameter("frequenceCheckbox_2")!=null) {
+					}
+					if (request.getParameter("frequenceCheckbox_2") != null) {
 						frequenceCheckbox_2 = (Integer) Integer.parseInt(request.getParameter("frequenceCheckbox_2"));
-						}
-					if (frequenceCheckbox_0==1) {
+					}
+					if (frequenceCheckbox_0 == 1) {
 						nouveauPrescription.setMatin(1);
 					}
-					if (frequenceCheckbox_1==2) {
+					if (frequenceCheckbox_1 == 2) {
 						nouveauPrescription.setMidi(1);
 					}
-					if (frequenceCheckbox_2==3) {
+					if (frequenceCheckbox_2 == 3) {
 						nouveauPrescription.setSoir(1);
 					}
-					
-				//	Prescription nouveauPrescription = new Prescription(unUtilisateur,unMedecin,unMedicament,qteDose,idDose,qteFrequence, idFrequence,qteDuree,idDuree,dateDebut);
+					// Prescription nouveauPrescription = new
+					// Prescription(unUtilisateur,unMedecin,unMedicament,qteDose,idDose,qteFrequence,
+					// idFrequence,qteDuree,idDuree,dateDebut);
 					prescriptionDao.modifierPrescription(nouveauPrescription, idPrescription);
 				}
 				if ("Supprimer".equals(submitForm)) {
 					prescriptionDao.supprimerPrescription(idPrescription);
 				}
 			}
-
-			
 		} catch (DAOException e) {
 			e.printStackTrace();
 		}
-
 		response.sendRedirect("EnregistrerPrescription");
-
 	}
-
 }

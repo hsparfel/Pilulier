@@ -4,15 +4,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
-<c:if test="${!empty listeMedecins }">
-	<div class="list-group">
-		<button id="listBtnMedecin"  class="list-group-item active">Mes medecins</button>
+
+<div class="list-group">
+	<button id="listBtnMedecin" class="list-group-item active">Mes
+		medecins</button>
+	<c:if test="${!empty listeMedecins }">
 		<div id="listMedecin">
-		<c:forEach items="${ listeMedecins }" var="medecin">
-			<a href="AfficherMedecin?id=${ medecin.id }" class="list-group-item">${ medecin.nom}-
-				${ medecin.specialite.nom}<br>${ medecin.cabinet.nom} </a>
-		</c:forEach>
-	</div>
-	</div>
-</c:if>
+			<c:forEach items="${ listeMedecins }" var="medecin">
+				<a href="AfficherMedecin?id=${ medecin.id }" class="list-group-item">${ medecin.nom}-
+					${ medecin.specialite.nom}<br>${ medecin.cabinet.nom}
+				</a>
+			</c:forEach>
+		</div>
+	</c:if>
+</div>
+
 

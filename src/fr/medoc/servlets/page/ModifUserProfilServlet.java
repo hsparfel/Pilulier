@@ -106,9 +106,9 @@ public class ModifUserProfilServlet extends HttpServlet {
 			request.setAttribute("listePrises", listePrises);
 			request.setAttribute("listeMedecins", listeMedecins);
 			request.setAttribute("listeRdvs", listeRdvs);
-request.setAttribute("login", (String) session.getAttribute("login"));
+			request.setAttribute("login", (String) session.getAttribute("login"));
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-			//LocalDate dateDuJourParsedDate = LocalDate.parse(dateDuJour, formatter);
+			// LocalDate dateDuJourParsedDate = LocalDate.parse(dateDuJour, formatter);
 			LocalDate dateFinParsedDate = null;
 			String dateDuJourString = dateDuJour.format(formatter);
 //System.out.println("test= " + dateDuJourString);

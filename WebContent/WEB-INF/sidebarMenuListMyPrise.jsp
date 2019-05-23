@@ -4,17 +4,20 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
-<c:if test="${!empty listePrises }">
-	<div class="list-group">
-		<button id="listBtnPrise"  class="list-group-item active">Mes prises du Jour</button>
+
+<div class="list-group">
+	<button id="listBtnPrise" class="list-group-item active">Mes
+		prises du Jour</button>
+	<c:if test="${!empty listePrises }">
 		<div id="listPrise">
-		<c:forEach items="${ listePrises }" var="prise">
-		 
-		<c:if test="${ prise.date==dateDuJour && prise.prescription.utilisateur.getNom()==login }">
-			<a href="AfficherPrise?id=${ prise.id }" class="list-group-item">${ prise.prescription.medicament.nom}-
-				${ prise.date} à ${ prise.heure}</a>
+			<c:forEach items="${ listePrises }" var="prise">
+				<c:if
+					test="${ prise.date==dateDuJour && prise.prescription.utilisateur.getNom()==login }">
+					<a href="AfficherPrise?id=${ prise.id }" class="list-group-item">${ prise.prescription.medicament.nom}-
+						${ prise.date} à ${ prise.heure}</a>
 				</c:if>
-		</c:forEach>
-	</div>
-	</div>
-</c:if>
+			</c:forEach>
+		</div>
+	</c:if>
+</div>
+

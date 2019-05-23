@@ -81,25 +81,18 @@ public class EnregistrerPrescriptionAction extends HttpServlet {
 		int idDose = (Integer) Integer.parseInt(request.getParameter("idDose"));
 		int qteFrequence = (Integer) Integer.parseInt(request.getParameter("quantiteFrequence"));
 		int idFrequence = (Integer) Integer.parseInt(request.getParameter("idFrequence"));
-
 		int frequenceRadio = 0;
-
 		int frequenceCheckbox_0 = 0;
 		int frequenceCheckbox_1 = 0;
 		int frequenceCheckbox_2 = 0;
-
 		int qteDuree = (Integer) Integer.parseInt(request.getParameter("nbDuree"));
 		int idDuree = (Integer) Integer.parseInt(request.getParameter("idDuree"));
 		String dateDebut = request.getParameter("date");
-
 		Dose uneDose = null;
 		Duree uneDuree = null;
 		Frequence uneFrequence = null;
 		Medecin unMedecin = null;
 		Medicament unMedicament = null;
-		//Prise unePrise = null;
-
-		// recup des radio et checkbox
 
 		try {
 			unUtilisateur = utilisateurDAO.findByName((String) session.getAttribute("login"));
@@ -108,14 +101,11 @@ public class EnregistrerPrescriptionAction extends HttpServlet {
 			uneFrequence = frequenceDAO.findByRef(idFrequence);
 			unMedecin = medecinDAO.findByRef(idMedecin);
 			unMedicament = medicamentDAO.findByRef(idMedicament);
-			
+
 			Prescription nouveauPrescription = new Prescription(unUtilisateur, unMedecin, unMedicament, qteDose,
 					uneDose, qteFrequence, uneFrequence, qteDuree, uneDuree, dateDebut);
-			// ajout de la date de fin
 			nouveauPrescription.setDateFin(nouveauPrescription.calculerDateFin(nouveauPrescription.getDateDebut(),
 					nouveauPrescription.getNbDuree(), nouveauPrescription.getDuree()));
-
-			// rajouter ici les setters matin midi soir
 			if (request.getParameter("frequenceRadio") != null) {
 				frequenceRadio = (Integer) Integer.parseInt(request.getParameter("frequenceRadio"));
 			}
@@ -125,17 +115,14 @@ public class EnregistrerPrescriptionAction extends HttpServlet {
 				break;
 			}
 			case 2: {
-
 				nouveauPrescription.setMidi(1);
 				break;
 			}
 			case 3: {
-
 				nouveauPrescription.setSoir(1);
 				break;
 			}
 			}
-
 			if (request.getParameter("frequenceCheckbox_0") != null) {
 				frequenceCheckbox_0 = (Integer) Integer.parseInt(request.getParameter("frequenceCheckbox_0"));
 			}
@@ -154,59 +141,47 @@ public class EnregistrerPrescriptionAction extends HttpServlet {
 			if (frequenceCheckbox_2 == 3) {
 				nouveauPrescription.setSoir(1);
 			}
-
 			prescriptionDao.ajouterPrescription(nouveauPrescription);
-
-			// ajouter ici l'enregistrement de toutes les prises necessaires à la
-			// prescription
-// convertir date string en Date puis incrementer une boucle jusque à date fin
-			
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-			//System.out.println(dateDebut);
 			LocalDate dateDebutParsedDate = LocalDate.parse(nouveauPrescription.getDateDebut(), formatter);
-			//System.out.println(dateDebutParsedDate);
-			LocalDate dateFinParsedDate = LocalDate.parse(nouveauPrescription.getDateFin(), formatter);;
-			
+			LocalDate dateFinParsedDate = LocalDate.parse(nouveauPrescription.getDateFin(), formatter);
 			Prise newPrise = new Prise();
-			for (LocalDate date=dateDebutParsedDate;date.isBefore(dateFinParsedDate);date=date.plusDays(1)) {
-				
+		//sauvegarde au cas où
+			//for (LocalDate date = dateDebutParsedDate; date.isBefore(dateFinParsedDate); date = date.plusDays(1)) {
+			/*System.out.println(nouveauPrescription.getFrequence().getNom());
+			if (nouveauPrescription.getFrequence().getNom().equals("jour")) {
+				System.out.println("=>jour");
+			} else if (nouveauPrescription.getFrequence().getNom().equals("semaine")) {
+				System.out.println("=>semaine");
+			} else  {
+				System.out.println("=>mois");
+			}*/
+			for (LocalDate date = dateDebutParsedDate; date.isBefore(dateFinParsedDate); date =  (nouveauPrescription.getFrequence().getNom().equals("jour") ? date.plusDays(1) : (nouveauPrescription.getFrequence().getNom().equals("semaine") ? date.plusWeeks(1) : date.plusMonths(1)))) {
 				newPrise.setPrescription(nouveauPrescription);
 				newPrise.setDate(date.format(formatter));
-				newPrise.setHeure("09:00");
-				 priseDAO.ajouterPrise(newPrise);
+				if (nouveauPrescription.getMatin() == 1 || nouveauPrescription.getMatin() == 1
+						|| nouveauPrescription.getMatin() == 1) {
+					if (nouveauPrescription.getMatin() == 1) {
+						newPrise.setHeure("matin");
+						priseDAO.ajouterPrise(newPrise);
+					}
+					if (nouveauPrescription.getMidi() == 1) {
+						newPrise.setHeure("midi");
+						priseDAO.ajouterPrise(newPrise);
+					}
+					if (nouveauPrescription.getSoir() == 1) {
+						newPrise.setHeure("soir");
+						priseDAO.ajouterPrise(newPrise);
+					}
+				} else {
+					newPrise.setHeure("matin");
+					priseDAO.ajouterPrise(newPrise);
+				}
 			}
-			
-			
-			
-			//int nbJourPrescrit = 0;
-			/*switch (nouveauPrescription.getDuree().getNom()) {
-			case "jour":
-				nbJourPrescrit=nouveauPrescription.getNbDuree();
-				//dateFinParsedDate = dateDebutParsedDate.plusDays(nbDuree);
-				break;
-			case "semaine":
-				nbJourPrescrit=nouveauPrescription.getNbDuree()*7;
-				//dateFinParsedDate = dateDebutParsedDate.plusWeeks(nbDuree);
-				break;
-			case "mois":
-			//	dateFinParsedDate = dateDebutParsedDate.plusMonths(nbDuree);
-				break;
-			default:
-			//	dateFinParsedDate = dateDebutParsedDate;
-			}*/
 			String dateFin = dateFinParsedDate.format(formatter);
-			
-					//	Prise newPrise = new Prise();
-//newPrise.setPrescription(nouveauPrescription);
-//newPrise.setDate(nouveauPrescription.getDateDebut());
-			//
-
 		} catch (DAOException e) {
 			e.printStackTrace();
 		}
-
 		response.sendRedirect("EnregistrerPrescription");
-
 	}
-
 }
