@@ -35,7 +35,8 @@
 		<div class="row">
 			<div class="col-xs-12 col-sm-8">
 				<div class="jumbotron">
-					<h1>Mon Profil</h1>
+					<div class ="row"><h1 id="div_horloge"></h1>
+					</div>
 					<a class=" btn btn-default btn-sm" href="AssocierMedecin">Associer
 						Medecin</a> <a class=" btn btn-default btn-sm" href="DissocierMedecin">Dissocier
 						Medecin</a><a class=" btn btn-default btn-sm" href="EnregistrerPrise">Ajouter

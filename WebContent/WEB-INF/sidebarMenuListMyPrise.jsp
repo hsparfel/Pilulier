@@ -13,22 +13,32 @@
 			<c:forEach items="${ listePrises }" var="prise">
 				<c:if
 					test="${ prise.date==dateDuJour && prise.prescription.utilisateur.getNom()==login }">
-
-					<button id="Prise${ prise.id }"
-						class="list-group-item btn-block btn-prise text-left">
-						<c:if test="${prise.effectue }">
+					<c:if test="${prise.effectue }">
+						<button id="Prise${ prise.id }"
+							class="list-group-item btn-block btn-prise text-left disabled">
 							<div class="fa fa-check fa-2x"></div>
-						</c:if>
-						<c:if test="${!prise.effectue }">
+							${ prise.prescription.medicament.nom}- ${ prise.date} - ${ prise.heure}
+						</button>
+						<form action="ModifUserProfilAction" method="post" class="d-none">
+							<input name="idSubmit" type="text" value="${ prise.id }" /> <input
+								id="btnSubmitPrise${ prise.id }" name="submit"
+								value=${ prise.id } type="submit"
+								class="btn btn-outline-danger " />
+						</form>
+					</c:if>
+					<c:if test="${!prise.effectue }">
+						<button id="Prise${ prise.id }"
+							class="list-group-item btn-block btn-prise text-left">
 							<div class="fa fa-bell-o fa-2x"></div>
-						</c:if>
-						${ prise.prescription.medicament.nom}- ${ prise.date} à ${ prise.heure}
-					</button>
-					<form action="ModifUserProfilAction" method="post" class="d-none">
-						<input name="idSubmit" type="text" value="${ prise.id }" /> <input
-							id="btnSubmitPrise${ prise.id }" name="submit"
-							value=${ prise.id } type="submit" class="btn btn-outline-danger " />
-					</form>
+							${ prise.prescription.medicament.nom}- ${ prise.date} - ${ prise.heure}
+						</button>
+						<form action="ModifUserProfilAction" method="post" class="d-none">
+							<input name="idSubmit" type="text" value="${ prise.id }" /> <input
+								id="btnSubmitPrise${ prise.id }" name="submit"
+								value=${ prise.id } type="submit"
+								class="btn btn-outline-danger " />
+						</form>
+					</c:if>
 				</c:if>
 			</c:forEach>
 		</div>
