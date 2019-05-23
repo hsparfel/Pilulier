@@ -25,6 +25,7 @@ public class PriseDAOImpl implements PriseDAO {
 	private final String ORDRE_FINDALL = "select * from prise";
 	private final String ORDRE_FINDBYREF = "select * from prise where Id = ?";
 	private final String ORDRE_DELETEBYPRESCRIPTION = "delete from prise where id_prescription = ";
+	private final String ORDRE_VALIDATE = "update prise set effectue=true where id = ";
 	
 	private DAOFactory daoFactory;
 
@@ -68,6 +69,20 @@ public class PriseDAOImpl implements PriseDAO {
 			connexion = daoFactory.getConnection();
 			Statement requete = connexion.createStatement();
 			requete.executeUpdate(ORDRE_DELETE + "'" + idPrise + "'");
+			connexion.commit();
+			daoFactory.closeConnexion(connexion);
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+	}
+	
+	@Override
+	public void validerPrise(int idPrise) throws DAOException {
+		Connection connexion = null;
+		try {
+			connexion = daoFactory.getConnection();
+			Statement requete = connexion.createStatement();
+			requete.executeUpdate(ORDRE_VALIDATE + "'" + idPrise + "'");
 			connexion.commit();
 			daoFactory.closeConnexion(connexion);
 		} catch (SQLException e) {
@@ -154,7 +169,7 @@ public class PriseDAOImpl implements PriseDAO {
 			Prise a = new Prise();
 
 			PrescriptionDAO unPrescriptionDAO = daoFactory.getPrescriptionDAO();
-			
+			a.setId(resultSet.getInt("id"));
 			a.setPrescription(unPrescriptionDAO.findByRef(resultSet.getInt("id_prescription")));
 			a.setDate(resultSet.getString("date"));
 			a.setHeure(resultSet.getString("heure"));

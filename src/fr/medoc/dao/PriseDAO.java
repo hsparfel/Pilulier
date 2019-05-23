@@ -13,4 +13,5 @@ public interface PriseDAO {
 	public Collection<Prise> findAll() throws DAOException;	
 	public Prise findByRef (int id)throws DAOException;
 	public void supprimerPrisesByPrescription(int idPrescription)throws DAOException;
+	public void validerPrise (int idPrise)throws DAOException;
 	}

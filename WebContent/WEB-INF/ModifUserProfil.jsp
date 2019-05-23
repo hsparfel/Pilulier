@@ -24,6 +24,8 @@
 <link
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -40,12 +42,19 @@
 						Prise</a> <a class=" btn btn-default btn-sm"
 						href="EnregistrerPrescription">Ajouter Prescription</a>
 				</div>
+				<div class="col-xs-12 col-sm-6">
+					
+						<c:import url="sidebarMenuListMyPrise.jsp"></c:import>
+						
+					
+				</div>
 			</div>
 			<div class="col-xs-6 col-sm-4" id="sidebar">
-				<c:import url="sidebarMenuListMyPrise.jsp"></c:import>
-				<c:import url="sidebarMenuListMyPrescription.jsp"></c:import>
-				<c:import url="sidebarMenuListMyMedecin.jsp"></c:import>
 				<c:import url="sidebarMenuListMyRdv.jsp"></c:import>
+				<c:import url="sidebarMenuListMyMedecin.jsp"></c:import>
+				<c:import url="sidebarMenuListMyPrescription.jsp"></c:import>
+
+
 			</div>
 		</div>
 
