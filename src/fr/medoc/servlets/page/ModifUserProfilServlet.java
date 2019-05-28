@@ -50,7 +50,7 @@ public class ModifUserProfilServlet extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		try {
-			dateDuJour = dateDuJour.now();
+			dateDuJour = LocalDate.now();
 			daoFactory = DAOFactory.getInstance();
 			prescriptionDao = daoFactory.getPrescriptionDAO();
 			doseDao = daoFactory.getDoseDAO();
@@ -108,8 +108,6 @@ public class ModifUserProfilServlet extends HttpServlet {
 			request.setAttribute("listeRdvs", listeRdvs);
 			request.setAttribute("login", (String) session.getAttribute("login"));
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-			// LocalDate dateDuJourParsedDate = LocalDate.parse(dateDuJour, formatter);
-			LocalDate dateFinParsedDate = null;
 			String dateDuJourString = dateDuJour.format(formatter);
 //System.out.println("test= " + dateDuJourString);
 			request.setAttribute("dateDuJour", dateDuJourString);

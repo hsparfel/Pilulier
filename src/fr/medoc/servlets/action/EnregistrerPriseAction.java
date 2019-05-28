@@ -7,16 +7,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import fr.medoc.dao.PriseDAO;
-import fr.medoc.dao.UtilisateurDAO;
-import fr.medoc.dao.MedicamentDAO;
 import fr.medoc.dao.PrescriptionDAO;
 import fr.medoc.dao.DAOFactory;
 import fr.medoc.entities.Prise;
-import fr.medoc.entities.Utilisateur;
-import fr.medoc.entities.Medicament;
 import fr.medoc.entities.Prescription;
 import fr.medoc.exception.DAOConfigurationException;
 import fr.medoc.exception.DAOException;
@@ -52,8 +46,8 @@ public class EnregistrerPriseAction extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		Utilisateur unUtilisateur = null;
+		//HttpSession session = request.getSession();
+		//Utilisateur unUtilisateur = null;
 		
 		int idPrise = (Integer) Integer.parseInt(request.getParameter("idPrise"));
 		

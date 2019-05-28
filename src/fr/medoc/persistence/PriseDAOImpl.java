@@ -183,7 +183,7 @@ public class PriseDAOImpl implements PriseDAO {
 		}
 	}
 
-	private void resultSetToArrayListTries(ResultSet resultSet) throws SQLException, DAOException {
+	/*private void resultSetToArrayListTries(ResultSet resultSet) throws SQLException, DAOException {
 
 		while (resultSet.next()) {
 			Prise a = new Prise();
@@ -196,7 +196,7 @@ public class PriseDAOImpl implements PriseDAO {
 
 			getListePrisesTries().add(a);
 		}
-	}
+	}*/
 
 	
 

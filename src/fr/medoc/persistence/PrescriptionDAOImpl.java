@@ -26,7 +26,7 @@ public class PrescriptionDAOImpl implements PrescriptionDAO {
 
 	private final String ORDRE_INSERT = "insert into prescription(id_utilisateur,id_medicament,id_medecin,nb_dose,id_dose,nb_frequence,id_frequence,matin,midi,soir,nb_duree,id_duree,date_debut,date_fin) values ";
 	private final String VALUES_INSERT = "(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-	private final String ORDRE_FINDALL = "select * from prescription";
+	//private final String ORDRE_FINDALL = "select * from prescription";
 	private final String ORDRE_FINDBYREF = "select * from prescription where Id = ?";
 	private final String ORDRE_FINDALLBYUSER = "select * from prescription AS um where um.id_utilisateur=?";
 	private final String ORDRE_FINDBYREFS = "select * from prescription AS um where um.id_utilisateur=? AND um.id_medicament=?";
@@ -96,7 +96,7 @@ public class PrescriptionDAOImpl implements PrescriptionDAO {
 			pst.setInt(1, unePrescription.getUtilisateur().getId());
 			pst.setInt(2, unePrescription.getMedicament().getId());
 			pst.setInt(3, unePrescription.getMedecin().getId());
-			pst.setInt(4, unePrescription.getNbDose());
+			pst.setFloat(4, unePrescription.getNbDose());
 			pst.setInt(5, unePrescription.getDose().getId());
 			pst.setInt(6, unePrescription.getNbFrequence());
 			pst.setInt(7, unePrescription.getFrequence().getId());
@@ -143,7 +143,7 @@ public class PrescriptionDAOImpl implements PrescriptionDAO {
 			pst.setInt(1, unePrescription.getUtilisateur().getId());
 			pst.setInt(2, unePrescription.getMedicament().getId());
 			pst.setInt(3, unePrescription.getMedecin().getId());
-			pst.setInt(4, unePrescription.getNbDose());
+			pst.setFloat(4, unePrescription.getNbDose());
 			pst.setInt(5, unePrescription.getDose().getId());
 			pst.setInt(6, unePrescription.getNbFrequence());
 			pst.setInt(7, unePrescription.getFrequence().getId());
@@ -213,7 +213,7 @@ public class PrescriptionDAOImpl implements PrescriptionDAO {
 			a.setId(resultSet.getInt("id"));
 			a.setUtilisateur(unUtilisateurDAO.findByRef(resultSet.getInt("id_utilisateur")));
 			a.setMedicament(unMedicamentDAO.findByRef(resultSet.getInt("id_medicament")));
-			a.setNbDose(resultSet.getInt("nb_dose"));
+			a.setNbDose(resultSet.getFloat("nb_dose"));
 			a.setDose(uneDoseDAO.findByRef(resultSet.getInt("id_dose")));
 			a.setNbFrequence(resultSet.getInt("nb_frequence"));
 			a.setFrequence(uneFrequenceDAO.findByRef(resultSet.getInt("id_frequence")));
@@ -252,7 +252,7 @@ public class PrescriptionDAOImpl implements PrescriptionDAO {
 				unePrescription.setMedecin(unMedecinDAO.findByRef(rs.getInt("id_medecin")));
 
 				unePrescription.setMedicament(unMedicamentDAO.findByRef(rs.getInt("id_medicament")));
-				unePrescription.setNbDose(rs.getInt("nb_dose"));
+				unePrescription.setNbDose(rs.getFloat("nb_dose"));
 				unePrescription.setDose(uneDoseDAO.findByRef(rs.getInt("id_dose")));
 				unePrescription.setNbFrequence(rs.getInt("nb_frequence"));
 				unePrescription.setFrequence(uneFrequenceDAO.findByRef(rs.getInt("id_frequence")));

@@ -91,7 +91,7 @@ public class AfficherPrescriptionAction extends HttpServlet {
 					unUtilisateur = utilisateurDAO.findByName((String) session.getAttribute("login"));
 					int idMedecin = (Integer) Integer.parseInt(request.getParameter("idMedecin"));
 					int idMedicament = (Integer) Integer.parseInt(request.getParameter("idMedicament"));
-					int qteDose = (Integer) Integer.parseInt(request.getParameter("quantiteDose"));
+					float qteDose = (Float) Float.parseFloat(request.getParameter("quantiteDose"));
 					int idDose = (Integer) Integer.parseInt(request.getParameter("idDose"));
 					int qteFrequence = (Integer) Integer.parseInt(request.getParameter("quantiteFrequence"));
 					int idFrequence = (Integer) Integer.parseInt(request.getParameter("idFrequence"));

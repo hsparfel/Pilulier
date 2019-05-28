@@ -9,7 +9,7 @@ public class Prescription {
 	private Utilisateur utilisateur;
 	private Medecin medecin;
 	private Medicament medicament;
-	private int nbDose;
+	private float nbDose;
 	private Dose dose;
 	private int nbFrequence;
 	private Frequence frequence;
@@ -21,7 +21,7 @@ public class Prescription {
 	private String dateDebut;
 	private String dateFin;
 
-	public Prescription(Utilisateur utilisateur, Medecin medecin, Medicament medicament, int nbDose, Dose dose,
+	public Prescription(Utilisateur utilisateur, Medecin medecin, Medicament medicament, float nbDose, Dose dose,
 			int nbFrequence, Frequence frequence, int nbDuree, Duree duree, String dateDebut) {
 		this.utilisateur = utilisateur;
 		this.medecin = medecin;
@@ -39,7 +39,7 @@ public class Prescription {
 		this.utilisateur = null;
 		this.medecin = null;
 		this.medicament = null;
-		this.nbDose = 0;
+		this.nbDose = 0.0f;
 		this.dose = null;
 		this.nbFrequence = 0;
 		this.frequence = null;
@@ -114,11 +114,11 @@ public class Prescription {
 		this.medicament = medicament;
 	}
 
-	public int getNbDose() {
+	public float getNbDose() {
 		return nbDose;
 	}
 
-	public void setNbDose(int nbDose) {
+	public void setNbDose(float nbDose) {
 		this.nbDose = nbDose;
 	}
 

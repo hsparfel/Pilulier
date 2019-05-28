@@ -77,7 +77,7 @@ public class EnregistrerPrescriptionAction extends HttpServlet {
 		Utilisateur unUtilisateur = null;
 		int idMedecin = (Integer) Integer.parseInt(request.getParameter("idMedecin"));
 		int idMedicament = (Integer) Integer.parseInt(request.getParameter("idMedicament"));
-		int qteDose = (Integer) Integer.parseInt(request.getParameter("quantiteDose"));
+		float qteDose = (Float) Float.parseFloat(request.getParameter("quantiteDose"));
 		int idDose = (Integer) Integer.parseInt(request.getParameter("idDose"));
 		int qteFrequence = (Integer) Integer.parseInt(request.getParameter("quantiteFrequence"));
 		int idFrequence = (Integer) Integer.parseInt(request.getParameter("idFrequence"));
@@ -178,7 +178,8 @@ public class EnregistrerPrescriptionAction extends HttpServlet {
 					priseDAO.ajouterPrise(newPrise);
 				}
 			}
-			String dateFin = dateFinParsedDate.format(formatter);
+			//String dateFin = dateFinParsedDate.format(formatter);
+			
 		} catch (DAOException e) {
 			e.printStackTrace();
 		}
