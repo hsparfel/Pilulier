@@ -57,7 +57,7 @@
 							</select>
 						</div>
 						<a href="EnregistrerMedecin"> <span
-							class="fa fa-plus-square-o fa-2x"></span>
+							class="fa fa-plus-square-o fa-2x btnPlus"></span>
 						</a>
 					</div>
 					<div class="form-group row">
@@ -92,9 +92,9 @@
 
 					<div class="form-group row">
 						<div class="offset-2 col-6">
-							<button name="submit" type="submit" class="btn btn-primary">Valider</button>
+							<button name="submit" type="submit" class="btn btn-primary btnSubmit">Valider</button>
 							<a href="ModifUserProfil" id="cancel"
-								class="btn btn-outline-secondary">Annuler</a>
+								class="btn btn-outline-secondary btnCancel">Annuler</a>
 						</div>
 					</div>
 				</form>
@@ -125,7 +125,7 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
+<script src="js/EnrRdv.js"></script>
 
 
 
