@@ -10,33 +10,49 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import fr.medoc.dao.MedecinDAO;
-import fr.medoc.dao.RdvDAO;
+import fr.medoc.dao.MedicamentDAO;
+import fr.medoc.dao.PrescriptionDAO;
 import fr.medoc.dao.UtilisateurDAO;
 import fr.medoc.dao.DAOFactory;
+import fr.medoc.dao.DoseDAO;
+import fr.medoc.dao.DureeDAO;
+import fr.medoc.dao.FrequenceDAO;
+import fr.medoc.dao.MedecinDAO;
+import fr.medoc.entities.Dose;
+import fr.medoc.entities.Duree;
+import fr.medoc.entities.Frequence;
 import fr.medoc.entities.Medecin;
-import fr.medoc.entities.Rdv;
+import fr.medoc.entities.Medicament;
+import fr.medoc.entities.Prescription;
 import fr.medoc.entities.Utilisateur;
 import fr.medoc.exception.DAOConfigurationException;
 import fr.medoc.exception.DAOException;
 
-@WebServlet("/EnregistrerRdv")
-public class EnregistrerRdvServlet extends HttpServlet {
+@WebServlet("/EnregistrerOrdonnance")
+public class EnregistrerOrdonnanceServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private final String JSP_PAGE = "/WEB-INF/EnregistrerRdv2.jsp";
+	private final String JSP_PAGE = "/WEB-INF/EnregistrerOrdonnance.jsp";
 	private DAOFactory daoFactory;
-	private RdvDAO rdvDao;
+	private PrescriptionDAO prescriptionDao;
 	private UtilisateurDAO utilisateurDao;
+	private DoseDAO doseDao;
+	private DureeDAO dureeDao;
+	private FrequenceDAO frequenceDao;
 	private MedecinDAO medecinDao;
+	private MedicamentDAO medicamentDao;
 
 	@Override
 	public void init() throws ServletException {
 		try {
 			daoFactory = DAOFactory.getInstance();
-			rdvDao = daoFactory.getRdvDAO();
+			prescriptionDao = daoFactory.getPrescriptionDAO();
 			utilisateurDao = daoFactory.getUtilisateurDAO();
+			doseDao = daoFactory.getDoseDAO();
+			dureeDao = daoFactory.getDureeDAO();
+			frequenceDao = daoFactory.getFrequenceDAO();
 			medecinDao = daoFactory.getMedecinDAO();
+			medicamentDao = daoFactory.getMedicamentDAO();
 		} catch (DAOConfigurationException e) {
 			e.printStackTrace();
 		}
@@ -55,18 +71,30 @@ public class EnregistrerRdvServlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		if (session.getAttribute("login") != null) {
-			ArrayList<Rdv> listeRdvs = null;
-			ArrayList<Medecin> listeMedecins = null;
+			ArrayList<Prescription> listePrescriptions = null;
 			Utilisateur unUtilisateur = null;
+			ArrayList<Dose> listeDoses = null;
+			ArrayList<Duree> listeDurees = null;
+			ArrayList<Frequence> listeFrequences = null;
+			ArrayList<Medecin> listeMedecins = null;
+			ArrayList<Medicament> listeMedicaments = null;
 			try {
 				unUtilisateur = utilisateurDao.findByName((String) session.getAttribute("login"));
-				listeRdvs = (ArrayList<Rdv>) rdvDao.findAll();
+				listePrescriptions = (ArrayList<Prescription>) prescriptionDao.findAllByUser(unUtilisateur.getId());
+				listeDoses = (ArrayList<Dose>) doseDao.findAll();
+				listeDurees = (ArrayList<Duree>) dureeDao.findAll();
+				listeFrequences = (ArrayList<Frequence>) frequenceDao.findAll();
 				listeMedecins = (ArrayList<Medecin>) medecinDao.findAllByUser(unUtilisateur.getId());
+				listeMedicaments = (ArrayList<Medicament>) medicamentDao.findAll();
 			} catch (DAOException e) {
 				e.printStackTrace();
 			}
-			request.setAttribute("listeRdvs", listeRdvs);
+			request.setAttribute("listePrescriptions", listePrescriptions);
+			request.setAttribute("listeDoses", listeDoses);
+			request.setAttribute("listeDurees", listeDurees);
+			request.setAttribute("listeFrequences", listeFrequences);
 			request.setAttribute("listeMedecins", listeMedecins);
+			request.setAttribute("listeMedicaments", listeMedicaments);
 			this.getServletContext().getRequestDispatcher(JSP_PAGE).forward(request, response);
 		} else {
 			response.sendRedirect("Accueil");

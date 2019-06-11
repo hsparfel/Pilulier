@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$('.btnSubmit').click(function() {
+	$('.btnPlus').click(function() {
 		sessionStorage.setItem("rdvDate",$('#date').val());
 		sessionStorage.setItem("rdvHeure",$('#heure').val());
 	});

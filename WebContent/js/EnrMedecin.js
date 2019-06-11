@@ -1,12 +1,14 @@
 $(document).ready(function() {
 	
 	$('.btnSubmit').click(function() {
-		sessionStorage.setItem("medecinNom",$('#nomMedecin').val());
+		
 		sessionStorage.setItem("associerMedecinNom",$('#nomMedecin').val());
-		sessionStorage.setItem("medecinSpecialite",$('#idSpecialite option:selected').text());
-		sessionStorage.setItem("medecinCabinet",$('#idCabinet option:selected').text());
-		sessionStorage.setItem("medecinTelephone",$('#nomTelephone').val());
-		sessionStorage.setItem("medecinMail",$('#nomEmail').val());
+		
+		sessionStorage.removeItem("medecinNom");
+		sessionStorage.removeItem("medecinSpecialite");
+		sessionStorage.removeItem("medecinCabinet");
+		sessionStorage.removeItem("medecinTelephone");
+		sessionStorage.removeItem("medecinMail");
 	});
 	
 	$('.btnPlus').click(function() {

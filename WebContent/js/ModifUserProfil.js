@@ -30,7 +30,7 @@ $(document).ready(
 						str += "Lundi";
 						break;
 					case 2:
-						str += "MaArdi";
+						str += "Mardi";
 						break;
 					case 3:
 						str += "Mercredi";
