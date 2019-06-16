@@ -46,12 +46,20 @@
 				</div>
 
 				<form action="AssocierMedecinAction" method="post">
+					<!--  mettre en d-none -->
+					<div class="form-group row">
+						<label for="pagePrecedente" class="col-2 col-form-label">Url</label>
+						<div class="col-6">
+							<input id="pagePrecedente" name="pagePrecedente" type="text"
+								class="form-control" >
+						</div>
+					</div>
 					<div class="form-group row">
 						<label for="idMedecin" class="col-2 col-form-label">Medecin</label>
 						<div class="col-6">
 							<select id="idMedecin" name="idMedecin" required="required"
 								class="custom-select">
-								<option disabled selected >Sélectionner</option>
+								<option disabled selected>Sélectionner</option>
 								<c:forEach items="${ listeMedecinsExclus }" var="medecin">
 									<option value="${ medecin.id }">${ medecin.nom }</option>
 								</c:forEach>
@@ -64,7 +72,8 @@
 
 					<div class="form-group row">
 						<div class="offset-2 col-6">
-							<button name="submit" type="submit" class="btn btn-primary btnSubmit">Associer</button>
+							<button name="submit" type="submit"
+								class="btn btn-primary btnSubmit">Associer</button>
 							<a href="ModifUserProfil" id="cancel"
 								class="btn btn-outline-secondary btnCancel">Annuler</a>
 						</div>
@@ -72,7 +81,7 @@
 				</form>
 			</div>
 			<div class="col-xs-6 col-sm-3" id="sidebar">
-			
+
 				<c:import url="sidebarListMyMedecin.jsp"></c:import>
 			</div>
 
@@ -96,7 +105,7 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="js/AssocMedecin.js"></script>
+	<script src="js/AssocMedecin.js"></script>
 
 
 

@@ -27,6 +27,10 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
+<link rel="stylesheet" type="text/css" href="css/clockpicker.css">
+<link rel="stylesheet" type="text/css" href="css/standalone.css">
+
+<link href="css/ion.calendar.css" rel="stylesheet" type="text/css">
 <!-- Custom styles for this template -->
 
 
@@ -60,58 +64,76 @@
 					<div class="form-group row">
 						<label for="idMedecin" class="col-2 col-form-label">Medecin</label>
 						<div class="col-6">
-							<select id="idMedecin" name="idMedecin" required="required"
-								class="custom-select champDesactive" disabled>
-								<option value="${ myRdv.medecin.id }" selected>${ myRdv.medecin.nom }</option>
-								<c:forEach items="${ listeMedecins }" var="medecin">
-									<c:if test="${ medecin.id != myRdv.medecin.id }">
-									<option value="${ medecin.id }">${ medecin.nom }</option>
-									</c:if>
-								</c:forEach>
-							</select>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">
+										<i class="fa fa-address-book"></i>
+									</div>
+								</div>
+								<select id="idMedecin" name="idMedecin" required="required"
+									class="custom-select champDesactive" disabled>
+									<option value="${ myRdv.medecin.id }" selected>${ myRdv.medecin.nom }</option>
+									<c:forEach items="${ listeMedecins }" var="medecin">
+										<c:if test="${ medecin.id != myRdv.medecin.id }">
+											<option value="${ medecin.id }">${ medecin.nom }</option>
+										</c:if>
+									</c:forEach>
+								</select>
+							</div>
 						</div>
 						<a href="EnregistrerMedecin"> <span
 							class="fa fa-plus-square-o fa-2x"></span>
 						</a>
 					</div>
 					<div class="form-group row">
-						<label for="date" class="col-2 col-form-label">Date</label>
-						<div class="col-6">
+						<label for="date" class="col-2 col-form-label">Date/Heure</label>
+						<div class="col-4">
 							<div class="input-group">
 								<div class="input-group-prepend">
 									<div class="input-group-text">
 										<i class="fa fa-calendar"></i>
 									</div>
 								</div>
-								<input id="date" name="date" value="${ myRdv.date }" type="text"
-									required="required" class="form-control champDesactive" disabled>
+
+								<input type="text"  id="date" class="form-control champDesactive"
+									data-lang="fr" data-years="2019-2030" data-format="DD/MM/YYYY"
+									required="required" name="date" value="${ myRdv.date }" disabled />
 							</div>
 						</div>
-					</div>
-
-					<div class="form-group row">
-						<label for="heure" class="col-2 col-form-label">Heure</label>
-						<div class="col-6">
-							<div class="input-group">
+						<div class="col-4">
+							<div class="input-group clockpicker" data-autoclose="true">
 								<div class="input-group-prepend">
 									<div class="input-group-text">
 										<i class="fa fa-clock-o"></i>
 									</div>
 								</div>
-								<input id="heure" name="heure" value="${ myRdv.heure }"
-									type="text" class="form-control champDesactive" required="required" disabled>
+								<input id="heure" type="text" class="form-control champDesactive" 
+									required="required" name="heure" value="${ myRdv.heure }" disabled>
 							</div>
 						</div>
 					</div>
+					<div class="form-group row">
+						<label for="commentaire" class="col-2 col-form-label">Commentaire</label>
+						<div class="col-9">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">
+										<i class="fa fa-pencil"></i>
+									</div>
+								</div>
+								<textarea id="commentaire" name="commentaire"
+									class="form-control champDesactive" disabled>${ myRdv.commentaire }</textarea>
 
-
+							</div>
+						</div>
+					</div>
 					<div class="form-group row">
 						<div class="offset-2 col-10">
 							<c:import url="Boutons1.jsp"></c:import>
 							<a href="EnregistrerRdv" id="ajouter"
 								class="btn btn-outline-success btnAffiches">Ajouter</a>
-							<c:import url="Boutons2.jsp"></c:import> <a
-								href="AfficherRdv?id=${ myRdv.id }" id="cancel"
+							<c:import url="Boutons2.jsp"></c:import>
+							<a href="AfficherRdv?id=${ myRdv.id }" id="cancel"
 								class="btn btn-outline-secondary btnMasques d-none">Annuler</a>
 						</div>
 					</div>
@@ -141,7 +163,21 @@
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<script src="js/AfficherX.js"></script>
-
+	<script src="js/AfficherRdv.js"></script>
+<script src="js/clockpicker.js"></script>
+	<script type="text/javascript">
+		$('.clockpicker').clockpicker();
+	</script>
+	<script src="js/moment-with-locales.min.js"></script>
+	<script src="js/ion.calendar.min.js"></script>
+	<script>
+		$(function() {
+			$("#date").ionDatePicker({
+				hideArrows : true,
+				sundayFirst : false
+			});
+		});
+	</script>
 
 
 </body>

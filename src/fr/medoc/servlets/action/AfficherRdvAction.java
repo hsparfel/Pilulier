@@ -58,31 +58,31 @@ public class AfficherRdvAction extends HttpServlet {
 		
 		String date = request.getParameter("date");
 		String heure = request.getParameter("heure");
+		String commentaire = request.getParameter("commentaire");
 		String submitForm = request.getParameter("submit");
 
 		try {
 			unUtilisateur = utilisateurDAO.findByName((String) session.getAttribute("login"));
-
 			
 			if (submitForm != null) {
 				if ("Valider".equals(submitForm)) {
 					int idMedecin = (Integer) Integer.parseInt(request.getParameter("idMedecin"));
 					unMedecin = medecinDAO.findByRef(idMedecin);
-					Rdv nouveauRdv = new Rdv(unUtilisateur, unMedecin, date, heure);
+					Rdv nouveauRdv = new Rdv();
+					nouveauRdv.setUtilisateur(unUtilisateur);
+					nouveauRdv.setMedecin(unMedecin);
+					nouveauRdv.setDate(date);
+					nouveauRdv.setHeure(heure);
+					nouveauRdv.setCommentaire(commentaire);
 					rdvDao.modifierRdv(nouveauRdv, idRdv);
 				}
 				if ("Supprimer".equals(submitForm)) {
 					rdvDao.supprimerRdv(idRdv);
 				}
 			}
-
-			
 		} catch (DAOException e) {
 			e.printStackTrace();
 		}
-
 		response.sendRedirect("EnregistrerRdv");
-
 	}
-
 }

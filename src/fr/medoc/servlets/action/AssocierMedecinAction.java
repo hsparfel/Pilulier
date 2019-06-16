@@ -54,7 +54,7 @@ public class AssocierMedecinAction extends HttpServlet {
 		HttpSession session = request.getSession();
 		Utilisateur unUtilisateur = null;
 		int idMedecin = (Integer) Integer.parseInt(request.getParameter("idMedecin"));
-				
+		String pagePrecedente = request.getParameter("pagePrecedente");
 		Medecin unMedecin = null;
 		
 
@@ -71,7 +71,7 @@ public class AssocierMedecinAction extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		response.sendRedirect("ModifUserProfil");
+		response.sendRedirect(""+pagePrecedente);
 
 	}
 

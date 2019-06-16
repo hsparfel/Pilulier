@@ -23,14 +23,14 @@ public class RdvDAOImpl implements RdvDAO{
 	private ArrayList<Rdv> listeRdvsTries;
 	
 	
-	private final String ORDRE_INSERT = "insert into rdv(id_utilisateur, id_medecin, date, heure) values ";
-	private final String VALUES_INSERT = "(?,?,?,?)";
+	private final String ORDRE_INSERT = "insert into rdv(id_utilisateur, id_medecin, date, heure, commentaire) values ";
+	private final String VALUES_INSERT = "(?,?,?,?,?)";
 	private final String ORDRE_DELETE = "delete from rdv where Id = ";
 	private final String ORDRE_DELETEBYUSERANDMEDECIN = "delete from rdv where id_utilisateur = ? AND id_medecin=?";
 	private final String ORDRE_FINDALL = "select * from rdv";
 	private final String ORDRE_FINDBYREF = "select * from rdv where Id = ?";
 	private final String ORDRE_FINDALLBYUSER = "select * from rdv where id_utilisateur=?";
-	private final String ORDRE_UPDATE = "update rdv set id_utilisateur=?,id_medecin=?,date=?,heure=? where id = ?";
+	private final String ORDRE_UPDATE = "update rdv set id_utilisateur=?,id_medecin=?,date=?,heure=?,commentaire=? where id = ?";
     private DAOFactory daoFactory;
 
 	public RdvDAOImpl(DAOFactory daoFactory) {
@@ -51,7 +51,8 @@ public class RdvDAOImpl implements RdvDAO{
 			pst.setInt(2, uneRdv.getMedecin().getId());
 			pst.setString(3, uneRdv.getDate());
 			pst.setString(4, uneRdv.getHeure());
-			pst.setInt(5, id);
+			pst.setString(5, uneRdv.getCommentaire());
+			pst.setInt(6, id);
 			pst.executeUpdate();
 			connexion.commit();
 			daoFactory.closeConnexion(connexion);
@@ -89,7 +90,7 @@ public class RdvDAOImpl implements RdvDAO{
 			pst.setInt(2, unRdv.getMedecin().getId());
 			pst.setString(3, unRdv.getDate());
 			pst.setString(4, unRdv.getHeure());
-			
+			pst.setString(5, unRdv.getCommentaire());
 			
 			pst.executeUpdate();
 			rs = pst.getGeneratedKeys();
@@ -136,6 +137,7 @@ public class RdvDAOImpl implements RdvDAO{
 				unRdv.setMedecin(unMedecinDAO.findByRef(rs.getInt("id_medecin")));
 				unRdv.setDate(rs.getString("date"));
 				unRdv.setHeure(rs.getString("heure"));
+				unRdv.setCommentaire(rs.getString("commentaire"));
 			} else {
 				throw new DAOException("Erreur recherche d'un rdv. " );
 			}
@@ -212,7 +214,7 @@ public class RdvDAOImpl implements RdvDAO{
 			a.setMedecin(unMedecinDAO.findByRef(resultSet.getInt("id_medecin")));
 			a.setDate(resultSet.getString("date"));
 			a.setHeure(resultSet.getString("heure"));
-						
+			a.setCommentaire(resultSet.getString("commentaire"));		
 			getListeRdvs().add(a);
 		}
 	}
@@ -229,6 +231,7 @@ public class RdvDAOImpl implements RdvDAO{
 			a.setMedecin(unMedecinDAO.findByRef(resultSet.getInt("id_medecin")));
 			a.setDate(resultSet.getString("date"));
 			a.setHeure(resultSet.getString("heure"));
+			a.setCommentaire(resultSet.getString("commentaire"));	
 			getListeRdvsTries().add(a);
 		}
 	}

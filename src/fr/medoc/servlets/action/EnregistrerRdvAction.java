@@ -19,23 +19,22 @@ import fr.medoc.entities.Medecin;
 import fr.medoc.exception.DAOConfigurationException;
 import fr.medoc.exception.DAOException;
 
-
 @WebServlet("/EnregistrerRdvAction")
 public class EnregistrerRdvAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	private DAOFactory daoFactory;
 	private RdvDAO rdvDao;
 	private MedecinDAO medecinDAO;
 	private UtilisateurDAO utilisateurDAO;
-	
-	@Override 
+
+	@Override
 	public void init() throws ServletException {
 		try {
 			daoFactory = DAOFactory.getInstance();
 			rdvDao = daoFactory.getRdvDAO();
-			medecinDAO= daoFactory.getMedecinDAO();
-			utilisateurDAO=daoFactory.getUtilisateurDAO();
+			medecinDAO = daoFactory.getMedecinDAO();
+			utilisateurDAO = daoFactory.getUtilisateurDAO();
 		} catch (DAOConfigurationException e) {
 			e.printStackTrace();
 		}
@@ -49,29 +48,31 @@ public class EnregistrerRdvAction extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Utilisateur unUtilisateur = null;
 		Medecin unMedecin = null;
 		int idMedecin = (Integer) Integer.parseInt(request.getParameter("idMedecin"));
 		String date = request.getParameter("date");
 		String heure = request.getParameter("heure");
-				
+		String commentaire = request.getParameter("commentaire");
+
 		try {
 			unUtilisateur = utilisateurDAO.findByName((String) session.getAttribute("login"));
-			
 			unMedecin = medecinDAO.findByRef(idMedecin);
-			Rdv nouveauRdv = new Rdv(unUtilisateur,unMedecin,date, heure);
+			Rdv nouveauRdv = new Rdv();
+			nouveauRdv.setUtilisateur(unUtilisateur);
+			nouveauRdv.setMedecin(unMedecin);
+			nouveauRdv.setDate(date);
+			nouveauRdv.setHeure(heure);
+			nouveauRdv.setCommentaire(commentaire);
+
 			rdvDao.ajouterRdv(nouveauRdv);
 		} catch (DAOException e) {
 			e.printStackTrace();
 		}
-		
-		
-		
 		response.sendRedirect("EnregistrerRdv");
-		
 	}
-
 }

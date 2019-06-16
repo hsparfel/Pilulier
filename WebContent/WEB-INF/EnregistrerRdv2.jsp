@@ -26,8 +26,12 @@
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css"
-	rel="stylesheet" type="text/css" />
+
+<link rel="stylesheet" type="text/css" href="css/clockpicker.css">
+<link rel="stylesheet" type="text/css" href="css/standalone.css">
+
+<link href="css/ion.calendar.css" rel="stylesheet" type="text/css">
+
 <!-- Custom styles for this template -->
 
 
@@ -45,7 +49,7 @@
 				<div class="jumbotron">
 					<h1>Enregistrer un rendez-vous</h1>
 				</div>
-				<form action="EnregistrerRdvAction" method="post">
+				<form action="EnregistrerRdvAction" method="post" autocomplete="off">
 					<div class="form-group row">
 						<label for="idMedecin" class="col-2 col-form-label">Medecin</label>
 						<div class="col-6">
@@ -57,7 +61,7 @@
 								</div>
 								<select id="idMedecin" name="idMedecin" required="required"
 									class="custom-select">
-									<option disabled selected>Sélectionner</option>
+									<option value="" disabled selected>Sélectionner</option>
 									<c:forEach items="${ listeMedecins }" var="medecin">
 										<option value="${ medecin.id }">${ medecin.nom }</option>
 									</c:forEach>
@@ -72,33 +76,52 @@
 
 					<div class="form-group row">
 						<label for="date" class="col-2 col-form-label">Date/Heure</label>
-						<div class="col-6">
-
-							
-								
-								
-						<input id="input" type="text"  required="required" name="date" class="form-control "/>
-
+						<div class="col-4">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">
+										<i class="fa fa-calendar"></i>
+									</div>
+								</div>
+								<input type="text" value="" id="date" class="form-control"
+									data-lang="fr" data-years="2019-2030" data-format="DD/MM/YYYY"
+									required="required" name="date" placeholder="ex: 04/07/2019" />
+							</div>
+							<span id="textHelpBlockDate" class="form-text text-muted d-none">ex:
+								04/07/2019</span>
 						</div>
-
+						<div class="col-4">
+							<div class="input-group clockpicker" data-autoclose="true">
+								<div class="input-group-prepend">
+									<div class="input-group-text">
+										<i class="fa fa-clock-o"></i>
+									</div>
+								</div>
+								<input id="heure" type="text" class="form-control" value=""
+									required="required" name="heure" placeholder="ex: 09:45">
+							</div>
+							<span id="textHelpBlockHeure" class="form-text text-muted d-none">ex: 09:45</span>
+						</div>
 					</div>
+
+
+
+
 					<div class="form-group row">
 						<label for="commentaire" class="col-2 col-form-label">Commentaire</label>
-						<div class="col-8">
+						<div class="col-9">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">
+										<i class="fa fa-pencil"></i>
+									</div>
+								</div>
+								<textarea id="commentaire" name="commentaire"
+									class="form-control" placeholder="optionnel"></textarea>
 
-							
-								
-								
-						<textarea id="commentaire"   name="commentaire" class="form-control "></textarea>
-
+							</div>
 						</div>
-
 					</div>
-
-
-
-
-
 					<div class="form-group row">
 						<div class="offset-2 col-6">
 							<button name="submit" type="submit"
@@ -108,7 +131,6 @@
 						</div>
 					</div>
 				</form>
-
 			</div>
 
 			<div class="col-xs-6 col-sm-4 " id="sidebar">
@@ -121,25 +143,32 @@
 		<hr>
 		<c:import url="footer.jsp"></c:import>
 
-
-
 	</div>
 	<!--/.container-->
-
 
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<script src="js/EnrRdv.js"></script>
+	<script src="js/clockpicker.js"></script>
+	<script type="text/javascript">
+		$('.clockpicker').clockpicker();
+	</script>
+	<script src="js/moment-with-locales.min.js"></script>
+	<script src="js/ion.calendar.min.js"></script>
+	<script>
+		$(function() {
+			$("#date").ionDatePicker({
+				hideArrows : true,
+				sundayFirst : false
+			});
+		});
+	</script>
 
-	<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js"
-		type="text/javascript"></script>
-	<script src="js/datepicker.js"></script>
 </body>
 </html>

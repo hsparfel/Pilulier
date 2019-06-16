@@ -26,7 +26,8 @@
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
+<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css"
+	rel="stylesheet" type="text/css" />
 <!-- Custom styles for this template -->
 
 
@@ -61,9 +62,34 @@
 							class="fa fa-plus-square-o fa-2x"></span>
 						</a>
 					</div>
-					
-					
-					
+					<div class="form-group row">
+						<label for="date" class="col-2 col-form-label">Date
+							Ordonnance</label>
+						<div class="col-6">
+							<input id="datepicker" width="276">
+						</div>
+					</div>
+					<div class="form-group row listPresciption">
+						<div class="infoAMasquer">
+							<label>nb precription:</label>
+							<div class="nbPrescription">0</div>
+						</div>
+						<div class="detailPrescription"></div>
+					</div>
+					<div class="form-group row listAnalyse">
+						<div class="infoAMasquer">
+							<label>nb analyse:</label>
+							<div class="nbAnalyse">0</div>
+						</div>
+						<div class="detailAnalyse"></div>
+					</div>
+					<div class="form-group row listExamen">
+						<div class="infoAMasquer">
+							<label>nb examen:</label>
+							<div class="nbExamen">0</div>
+						</div>
+						<div class="detailExamen"></div>
+					</div>
 					<div class="form-group row">
 						<label for="idMedicament" class="col-2 col-form-label">Medicament</label>
 						<div class="col-6">
@@ -223,20 +249,7 @@
 							class="fa fa-plus-square-o fa-2x"></span>
 						</a>
 					</div>
-					<div class="form-group row">
-						<label for="date" class="col-2 col-form-label">Date</label>
-						<div class="col-6">
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<div class="input-group-text">
-										<i class="fa fa-calendar"></i>
-									</div>
-								</div>
-								<input id="date" name="date" placeholder="ex: 03/05/2019"
-									type="text" required="required" class="form-control">
-							</div>
-						</div>
-					</div>
+
 					<div class="form-group row">
 						<div class="offset-2 col-6">
 							<button name="submit" type="submit" class="btn btn-primary">Valider</button>
@@ -246,19 +259,22 @@
 					</div>
 
 				</form>
-				
+
 				<div class="row">
-								<button id="ajouterPrescription"
-								class="col-sm-3  btn btn-default btn-sm text-primary text-left" >+ Prescription</button>
-					</div>
-					<div class=" row">
-								<button id="ajouterAnalyse"
-								class="col-sm-3  btn btn-default btn-sm text-primary text-left">+ Analyse</button>
-					</div>
-					<div class=" row">
-								<button id="ajouterExamen"
-								class="col-sm-3  btn btn-default btn-sm text-primary text-left">+ Examen</button>
-					</div>
+					<button id="ajouterPrescription"
+						class="col-sm-3  btn btn-default btn-sm text-primary text-left">+
+						Prescription</button>
+				</div>
+				<div class=" row">
+					<button id="ajouterAnalyse"
+						class="col-sm-3  btn btn-default btn-sm text-primary text-left">+
+						Analyse</button>
+				</div>
+				<div class=" row">
+					<button id="ajouterExamen"
+						class="col-sm-3  btn btn-default btn-sm text-primary text-left">+
+						Examen</button>
+				</div>
 			</div>
 			<div class="col-xs-6 col-sm-4 " id="sidebar">
 				<c:import url="sidebarListMyPrescription.jsp"></c:import>
@@ -281,12 +297,15 @@
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js"
+		type="text/javascript"></script>
+	<script src="js/datePicker.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-	<script src="js/Prescription.js"></script>
-
+	<script src="js/Ordonnance.js"></script>
+	
 
 
 </body>

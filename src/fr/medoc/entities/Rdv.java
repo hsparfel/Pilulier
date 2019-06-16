@@ -2,26 +2,19 @@ package fr.medoc.entities;
 
 public class Rdv {
 
-	
-
 	private int id;
 	private Utilisateur utilisateur;
 	private Medecin medecin;
 	private String date;
 	private String heure;
-
-	public Rdv(Utilisateur utilisateur, Medecin medecin, String date, String heure) {
-		this.utilisateur = utilisateur;
-		this.medecin = medecin;
-		this.date = date;
-		this.heure = heure;
-			}
+	private String commentaire;
 
 	public Rdv() {
 		this.utilisateur = null;
 		this.medecin = null;
 		this.date = "";
 		this.heure = "";
+		this.commentaire ="";
 	}
 
 	public int getId() {
@@ -64,11 +57,21 @@ public class Rdv {
 		this.heure = heure;
 	}
 
+	public String getCommentaire() {
+		return commentaire;
+	}
+
+	public void setCommentaire(String commentaire) {
+		this.commentaire = commentaire;
+	}
+
 	@Override
 	public String toString() {
 		return "Rdv [id=" + id + ", utilisateur=" + utilisateur + ", medecin=" + medecin + ", date=" + date + ", heure="
-				+ heure + "]";
+				+ heure + ", commentaire=" + commentaire + "]";
 	}
+
+	
 
 	
 
