@@ -85,7 +85,7 @@
 								</div>
 								<input type="text" value="" id="date" class="form-control"
 									data-lang="fr" data-years="2019-2030" data-format="DD/MM/YYYY"
-									required="required" name="date" placeholder="ex: 04/07/2019" />
+									required="required" name="date" placeholder="ex: 04/07/2019" maxlength="10" />
 							</div>
 							<span id="textHelpBlockDate" class="form-text text-muted d-none">ex:
 								04/07/2019</span>

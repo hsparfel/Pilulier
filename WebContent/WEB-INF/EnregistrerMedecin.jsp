@@ -69,8 +69,8 @@
 						<label for="idSpecialite" class="col-2 col-form-label">Specialite</label>
 						<div class="col-6">
 							<select id="idSpecialite" name="idSpecialite" required="required"
-								class="custom-select">
-								<option disabled selected>Sélectionner</option>
+								class="custom-select" >
+								<option value="" disabled selected>Sélectionner</option>
 								<c:forEach items="${ listeSpecialites }" var="specialite">
 									<option value="${ specialite.id }">${ specialite.nom }</option>
 								</c:forEach>
@@ -84,8 +84,8 @@
 						<label for="idCabinet" class="col-2 col-form-label">Cabinet</label>
 						<div class="col-6">
 							<select id="idCabinet" name="idCabinet" required="required"
-								class="custom-select">
-								<option disabled selected>Sélectionner</option>
+								class="custom-select" >
+								<option value="" disabled selected>Sélectionner</option>
 								<c:forEach items="${ listeCabinets }" var="cabinet">
 									<option value="${ cabinet.id }">${ cabinet.nom }</option>
 								</c:forEach>
@@ -106,8 +106,10 @@
 								</div>
 								<input id="nomTelephone" name="nomTelephone"
 									placeholder="ex: 0123456789" type="text" required="required"
-									class="form-control">
+									class="form-control" minlength ="10" maxlength="10">
 							</div>
+							<span id="textHelpBlockNomTelephone" class="form-text text-muted d-none">ex: 0123456789</span>
+						
 						</div>
 					</div>
 
@@ -124,6 +126,8 @@
 									placeholder="ex: nom@domaine.com" type="text"
 									class="form-control" required="required">
 							</div>
+							<span id="textHelpBlockNomEmail" class="form-text text-muted d-none">ex: nom@domaine.com</span>
+						
 						</div>
 					</div>
 

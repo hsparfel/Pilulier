@@ -59,29 +59,52 @@
 					<div class="form-group row">
 						<label for="adresseCabinet" class="col-2 col-form-label">Adresse</label>
 						<div class="col-6">
+						
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">
+										<i class="fa fa-home"></i>
+									</div>
+								</div>
 							<input id="adresseCabinet" name="adresseCabinet"
 								placeholder="ex: 2 avenue de la republique" type="text"
 								class="form-control" required="required">
-						</div>
+						</div></div>
 					</div>
 					<div class="form-group row">
 						<label for="cpCabinet" class="col-2 col-form-label">CP</label>
 						<div class="col-6">
-							<input id="cpCabinet" name="cpCabinet" placeholder="ex: 06100"
-								type="text" class="form-control" required="required">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">
+										<i class="fa fa-map-marker"></i>
+									</div>
+								</div>
+								<input id="cpCabinet" name="cpCabinet" placeholder="ex: 06100"
+									type="text" class="form-control" required="required"
+									minlength ="5" maxlength="5">
+							</div>
+							<span id="textHelpBlockCpCabinet" class="form-text text-muted d-none">ex: 06100</span>
 						</div>
 					</div>
 					<div class="form-group row">
 						<label for="villeCabinet" class="col-2 col-form-label">Ville</label>
 						<div class="col-6">
+						<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">
+										<i class="fa fa-hospital-o"></i>
+									</div>
+								</div>
 							<input id="villeCabinet" name="villeCabinet"
 								placeholder="ex: nice" type="text" class="form-control"
 								required="required">
-						</div>
+						</div></div>
 					</div>
 					<div class="form-group row">
 						<div class="offset-2 col-10">
-							<button name="submit" type="submit" class="btn btn-primary btnSubmit">Valider</button>
+							<button name="submit" type="submit"
+								class="btn btn-primary btnSubmit">Valider</button>
 							<a href="EnregistrerMedecin" id="cancel"
 								class="btn btn-outline-secondary btnCancel">Annuler</a>
 						</div>
@@ -112,7 +135,7 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="js/EnrCabinet.js"></script>
+	<script src="js/EnrCabinet.js"></script>
 
 
 </body>
