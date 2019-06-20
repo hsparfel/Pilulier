@@ -10,9 +10,11 @@ $(document).ready(
 			// console.log("ici");
 			// }
 			// main();
-
+		    sessionStorage.clear();
+		    
 			window.onload = function() {
 				horloge('div_horloge');
+				
 			};
 
 			function horloge(el) {

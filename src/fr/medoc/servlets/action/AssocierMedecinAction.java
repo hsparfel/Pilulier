@@ -1,5 +1,6 @@
 package fr.medoc.servlets.action;
 
+import java.awt.Window;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -56,22 +57,25 @@ public class AssocierMedecinAction extends HttpServlet {
 		int idMedecin = (Integer) Integer.parseInt(request.getParameter("idMedecin"));
 		String pagePrecedente = request.getParameter("pagePrecedente");
 		Medecin unMedecin = null;
-		
 
-		
+		if (pagePrecedente.equals("")) {
+			pagePrecedente = "ModifUserProfil";
+			
+		}
+
 		try {
 			unUtilisateur = utilisateurDAO.findByName((String) session.getAttribute("login"));
-			
+
 			unMedecin = medecinDAO.findByRef(idMedecin);
-			
+
 			PatientMedecin nouveauPatientMedecin = new PatientMedecin(unUtilisateur, unMedecin);
-			
+
 			patientMedecinDao.ajouterPatientMedecin(nouveauPatientMedecin);
 		} catch (DAOException e) {
 			e.printStackTrace();
 		}
 
-		response.sendRedirect(""+pagePrecedente);
+		response.sendRedirect("" + pagePrecedente);
 
 	}
 

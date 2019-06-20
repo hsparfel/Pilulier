@@ -16,23 +16,23 @@
 		<c:if test="${ !empty sessionScope.login }">
 			<li class="nav-item"><a class="nav-link" href="ModifUserProfil">Mon
 					Profil</a></li>
-			<li class="nav-item"><a class="nav-link"
+			<li class="nav-item"><a class="nav-link ordonnance"
 				href="EnregistrerOrdonnance">Ordonnance</a></li>
-			<li class="nav-item"><a class="nav-link" href="EnregistrerRdv">RDV</a></li>
+			<li class="nav-item"><a class="nav-link rdv" href="EnregistrerRdv">RDV</a></li>
 			<li class="nav-item dropdown"><a
 				class="nav-link dropdown-toggle" href="#"
 				id="navbarDropdownMenuLink" data-toggle="dropdown"
 				aria-haspopup="true" aria-expanded="false"> Enregistrer </a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-					<a class="dropdown-item" href="EnregistrerMedecin">Medecin</a> <a
-						class="dropdown-item" href="EnregistrerMedicament">Medicament</a>
-					<a class="dropdown-item" href="EnregistrerSpecialite">Specialite</a>
-					<a class="dropdown-item" href="EnregistrerRdv">Rdv</a> <a
-						class="dropdown-item" href="EnregistrerCabinet">Cabinet</a> <a
+					<a class="dropdown-item medecin" href="EnregistrerMedecin">Medecin</a> <a
+						class="dropdown-item medicament" href="EnregistrerMedicament">Medicament</a>
+					<a class="dropdown-item specialite" href="EnregistrerSpecialite">Specialite</a>
+					<a class="dropdown-item rdv" href="EnregistrerRdv">Rdv</a> <a
+						class="dropdown-item cabinet" href="EnregistrerCabinet">Cabinet</a> <a
 						class="dropdown-item" href="EnregistrerUtilisateur">Utilisateur</a>
-					<a class="dropdown-item" href="EnregistrerOrdonnance">Ordonnance</a>
+					<a class="dropdown-item ordonnance" href="EnregistrerOrdonnance">Ordonnance</a>
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="EnregistrerDose">Dose</a> <a
+					<a class="dropdown-item dose" href="EnregistrerDose">Dose</a> <a
 						class="dropdown-item" href="EnregistrerDuree">Duree</a> <a
 						class="dropdown-item" href="EnregistrerFrequence">Frequence</a>
 				</div></li>

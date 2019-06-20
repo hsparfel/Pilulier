@@ -77,8 +77,8 @@
 							<a href="EnregistrerDose" id="ajouter"
 								class="btn btn-outline-success btnAffiches">Ajouter</a>
 							<c:import url="Boutons2.jsp"></c:import> <a
-								href="AfficherDose?id=${ maDose.id }" id="cancel"
-								class="btn btn-outline-secondary btnMasques d-none">Annuler</a>
+								href="EnregistrerOrdonnance" id="cancel"
+								class="btn btn-outline-secondary btnMasques ">Annuler</a>
 						</div>
 					</div>
 				</form>
