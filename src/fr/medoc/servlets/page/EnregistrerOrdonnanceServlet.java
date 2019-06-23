@@ -25,6 +25,9 @@ import fr.medoc.entities.Medecin;
 import fr.medoc.entities.Medicament;
 import fr.medoc.entities.Prescription;
 import fr.medoc.entities.Utilisateur;
+import fr.medoc.enumeration.EnumAnalyse;
+import fr.medoc.enumeration.EnumDuree;
+import fr.medoc.enumeration.EnumExamen;
 import fr.medoc.exception.DAOConfigurationException;
 import fr.medoc.exception.DAOException;
 
@@ -74,25 +77,32 @@ public class EnregistrerOrdonnanceServlet extends HttpServlet {
 			ArrayList<Prescription> listePrescriptions = null;
 			Utilisateur unUtilisateur = null;
 			ArrayList<Dose> listeDoses = null;
-			ArrayList<Duree> listeDurees = null;
-			ArrayList<Frequence> listeFrequences = null;
+			//ArrayList<Duree> listeDurees = null;
+			//ArrayList<Frequence> listeFrequences = null;
 			ArrayList<Medecin> listeMedecins = null;
 			ArrayList<Medicament> listeMedicaments = null;
 			try {
 				unUtilisateur = utilisateurDao.findByName((String) session.getAttribute("login"));
 				listePrescriptions = (ArrayList<Prescription>) prescriptionDao.findAllByUser(unUtilisateur.getId());
 				listeDoses = (ArrayList<Dose>) doseDao.findAll();
-				listeDurees = (ArrayList<Duree>) dureeDao.findAll();
-				listeFrequences = (ArrayList<Frequence>) frequenceDao.findAll();
+				//listeDurees = (ArrayList<Duree>) dureeDao.findAll();
+				//listeFrequences = (ArrayList<Frequence>) frequenceDao.findAll();
 				listeMedecins = (ArrayList<Medecin>) medecinDao.findAllByUser(unUtilisateur.getId());
 				listeMedicaments = (ArrayList<Medicament>) medicamentDao.findAll();
 			} catch (DAOException e) {
 				e.printStackTrace();
 			}
+			
+			EnumAnalyse[] listeAnalyses =  EnumAnalyse.values();
+			EnumDuree[] listeDurees =  EnumDuree.values();
+			EnumExamen[] listeExamens =  EnumExamen.values();
+			
+			request.setAttribute("listeExamens", listeExamens);
+			request.setAttribute("listeAnalyses", listeAnalyses);
 			request.setAttribute("listePrescriptions", listePrescriptions);
 			request.setAttribute("listeDoses", listeDoses);
 			request.setAttribute("listeDurees", listeDurees);
-			request.setAttribute("listeFrequences", listeFrequences);
+			//request.setAttribute("listeFrequences", listeFrequences);
 			request.setAttribute("listeMedecins", listeMedecins);
 			request.setAttribute("listeMedicaments", listeMedicaments);
 			this.getServletContext().getRequestDispatcher(JSP_PAGE).forward(request, response);

@@ -68,6 +68,12 @@
 					<div class="form-group row">
 						<label for="idSpecialite" class="col-2 col-form-label">Specialite</label>
 						<div class="col-6">
+						<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">
+										<i class="fa fa-graduation-cap"></i>
+									</div>
+								</div>
 							<select id="idSpecialite" name="idSpecialite" required="required"
 								class="custom-select" >
 								<option value="" disabled selected>Sélectionner</option>
@@ -75,7 +81,7 @@
 									<option value="${ specialite.id }">${ specialite.nom }</option>
 								</c:forEach>
 							</select>
-						</div>
+						</div>		</div>
 						<a href="EnregistrerSpecialite"> <span
 							class="fa fa-plus-square-o fa-2x btnPlus"></span>
 						</a>
@@ -83,6 +89,12 @@
 					<div class="form-group row">
 						<label for="idCabinet" class="col-2 col-form-label">Cabinet</label>
 						<div class="col-6">
+						<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">
+										<i class="fa fa-institution"></i>
+									</div>
+								</div>
 							<select id="idCabinet" name="idCabinet" required="required"
 								class="custom-select" >
 								<option value="" disabled selected>Sélectionner</option>
@@ -90,7 +102,7 @@
 									<option value="${ cabinet.id }">${ cabinet.nom }</option>
 								</c:forEach>
 							</select>
-						</div>
+						</div></div>
 						<a href="EnregistrerCabinet"> <span
 							class="fa fa-plus-square-o fa-2x btnPlus"></span>
 						</a>

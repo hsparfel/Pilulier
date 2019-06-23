@@ -1,10 +1,43 @@
 $(document)
         .ready(
                 function () {
+                    
+                    let frequence = $('#idFrequence option:selected').text();
+                    let qteFrequence = $('#quantiteFrequence').val();
+                    console.log("choix frequence: " + frequence);
+                    console.log("nb frequence: " + qteFrequence);
+                    console.log(typeof 'qteFrequence');
+
+                    if (frequence == "jour" && qteFrequence < 4) {
+                        if (qteFrequence == "1") {
+                            console.log("unique");
+                            $('#freqRadio').removeClass("d-none");
+                            $(":checkbox").prop('checked', false).parent().removeClass('active');
+                            $('#freqCheck').addClass("d-none");
+                        } else  {
+                            console.log("multiple");
+                            $('#freqCheck').removeClass("d-none");
+                            $(":radio").prop('checked', false).parent().removeClass('active');
+                            $('#freqRadio').addClass("d-none");
+                        }
+                        console.log("vrai");
+                    } else {
+                        $(":radio").prop('checked', false).parent().removeClass('active');
+                        $(":checkbox").prop('checked', false).parent().removeClass('active');
+                        $('#freqRadio').addClass("d-none");
+                        $('#freqCheck').addClass("d-none");
+                        console.log("faux");
+                    }
+                    
+                    
+                    
+                    
+                    
+                    
                     $('#ajouterPrescription')
                             .click(
                                     function () {
-                                        $('.detailPrescription').append(
+                                     /*   $('.detailPrescription').append(
                                                 '<div class="prescr" id="prescription' + (parseInt($('.nbPrescription').text()) + 1) + '"></div>');
                                         // ajout ligne medicament
                                         $('.prescr')
@@ -27,7 +60,7 @@ $(document)
                                                 .append(
                                                         '<div class="form-group row"><label for="nbDuree' + (parseInt($('.nbPrescription').text()) + 1) + '" class="col-1 col-form-label font-weight-lighter   text-right">Duree</label><label class="col-1 col-form-label ">pendant</label><div class="col-2"><div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><i class="fa fa-calendar-plus-o"></i></div></div><input id="nbDuree' + (parseInt($('.nbPrescription').text()) + 1) + '" name="nbDuree' + (parseInt($('.nbPrescription').text()) + 1) + '" type="number" class="form-control" required="required" value="0" min="0"></div></div><div class="col-2"><select id="idDuree' + (parseInt($('.nbPrescription').text()) + 1) + '" name="idDuree' + (parseInt($('.nbPrescription').text()) + 1) + '" class="custom-select" required="required"><option disabled selected>Sélectionner</option><c:forEach items="${ listeDurees }" var="duree"><option value="${ duree.id }">${ duree.nom }</option></c:forEach></select></div><a href="EnregistrerDuree"> <span class="fa fa-plus-square-o fa-2x"></span></a></div>');
 
-                                        $('.nbPrescription').text(parseInt($('.nbPrescription').text()) + 1);
+                                        $('.nbPrescription').text(parseInt($('.nbPrescription').text()) + 1);*/
 
                                     });
                     $('#ajouterAnalyse').click(function () {

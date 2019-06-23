@@ -2,7 +2,7 @@ package fr.medoc.enumeration;
 
 public enum EnumDuree {
 
-	JOU("jour"), MOI("mois"), SEM("semaine");
+	JOU("jour"), SEM("semaine"), MOI("mois");
 
 	private String name = "";
 
