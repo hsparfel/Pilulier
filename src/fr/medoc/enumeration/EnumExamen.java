@@ -2,7 +2,7 @@ package fr.medoc.enumeration;
 
 public enum EnumExamen {
 
-	RAD("radio"), ECH("echographie"), PER("perfusion");
+	RAD("radiographie"), ECH("echographie"), PER("perfusion"), IRM("irm");
 
 	private String name = "";
 

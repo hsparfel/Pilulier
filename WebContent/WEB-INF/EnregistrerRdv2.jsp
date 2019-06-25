@@ -117,7 +117,7 @@
 									</div>
 								</div>
 								<textarea id="commentaire" name="commentaire"
-									class="form-control" placeholder="optionnel"></textarea>
+									class="form-control" maxlength="300" placeholder="optionnel"></textarea>
 
 							</div>
 						</div>

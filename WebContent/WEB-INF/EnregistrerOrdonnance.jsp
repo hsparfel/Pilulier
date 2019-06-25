@@ -41,7 +41,6 @@
 	<div class="container">
 
 		<div class="row">
-
 			<div class="col-xs-12 col-sm-8">
 				<div class="jumbotron">
 					<h1>Enregistrer une ordonnance</h1>
@@ -60,7 +59,7 @@
 									</div>
 								</div>
 								<select id="idMedecin" name="idMedecin" required="required"
-									class="custom-select">
+									class="custom-select" value="">
 									<option disabled selected>Sélectionner</option>
 									<c:forEach items="${ listeMedecins }" var="medecin">
 										<option value="${ medecin.id }">${ medecin.nom }</option>
@@ -89,192 +88,234 @@
 								04/07/2019</span>
 						</div>
 
+
 					</div>
+					<div class="form-group row">
+						<button type="button" id="ajouterCommentaire"
+							class="col-sm-2  btn btn-default btn-sm text-warning text-left">+
+							Commentaire</button>
+						<div id="comment" class="col-5 d-none">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">
+										<i class="fa fa-pencil"></i>
+									</div>
+								</div>
+								<textarea id="commentaire" name="commentaire"
+									class="form-control " maxlength="300"></textarea>
+								<button type="button" name="btnMoins" id="enleverCommentaire"
+									class="btn btn-outline-danger fa fa-minus-square-o fa-2x"></button>
+
+							</div>
+
+						</div>
 
 
 
-
-
-
-
-
+					</div>
 					<div class="listPresciption">
 						<div class="d-none">
 							<label>nb precription:</label>
 							<div class="nbPrescription">0</div>
 						</div>
-						<div class="detailPrescription">
+						<div class="detailPrescription ">
 
 
 
-							<div class="form-group row">
-								<label for="idMedicament"
-									class="col-1 col-form-label font-weight-lighter text-right">Medicament</label>
-								<div class="col-3">
-									<div class="input-group">
-										<div class="input-group-prepend">
-											<div class="input-group-text">
-												<i class="fa fa-eyedropper"></i>
+							<div id="prescription1" class=" d-none">
+								<div id="prescriptionLigne1" class="form-group row">
+									<label for="idMedicament1"
+										class="col-1 col-form-label font-weight-lighter text-right">Medicament</label>
+									<div class="col-3">
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<div class="input-group-text">
+													<i class="fa fa-eyedropper"></i>
+												</div>
+											</div>
+											<select id="idMedicament1" name="idMedicament1"
+												required="required" class="custom-select">
+												<option disabled selected>Sélectionner</option>
+												<c:forEach items="${ listeMedicaments }" var="medicament">
+													<option value="${ medicament.id }">${ medicament.nom }</option>
+												</c:forEach>
+											</select>
+										</div>
+									</div>
+									<a href="EnregistrerMedicament"> <span
+										class="fa fa-plus-square-o fa-2x"></span>
+									</a> <label for="quantiteDose1"
+										class="col-1 col-form-label font-weight-lighter text-right">Dose</label>
+									<div class="col-1">
+
+										<input id="quantiteDose1" name="quantiteDose1" type="number"
+											required="required" class="form-control" step="0.5" value="0"
+											min="0">
+									</div>
+									<div class="col-3">
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<div class="input-group-text">
+													<i class="fa fa-spoon"></i>
+												</div>
+											</div>
+											<select id="idDose1" name="idDose1" class="custom-select"
+												required="required">
+												<option disabled selected>Sélectionner dose</option>
+												<c:forEach items="${ listeDoses }" var="dose">
+													<option value="${ dose.id }">${ dose.nom }</option>
+												</c:forEach>
+											</select>
+										</div>
+									</div>
+									<a href="EnregistrerDose"> <span
+										class="fa fa-plus-square-o fa-2x"></span>
+									</a>
+								</div>
+								<div id="prescriptionLigne2" class="form-group row">
+									<label for="quantiteFrequence1"
+										class="col-1 col-form-label font-weight-lighter text-right ">Fréquence</label>
+									<div class="col-1">
+										<input id="quantiteFrequence1" name="quantiteFrequence1"
+											type="number" class="form-control" required="required"
+											value="0" min="0">
+									</div>
+									<label for="idFrequence1" class=" col-form-label ">fois
+										par</label>
+									<div class="col-3">
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<div class="input-group-text">
+													<i class="fa fa-clock-o"></i>
+												</div>
+											</div>
+											<select id="idFrequence1" name="idFrequence1"
+												required="required" class="custom-select">
+												<option disabled selected>Sélectionner</option>
+												<c:forEach items="${ listeDurees }" var="duree">
+													<option value="${ duree }">${ duree.toString() }</option>
+												</c:forEach>
+											</select>
+										</div>
+									</div>
+
+									<div id="freqRadio1" class="col-2 form-group row d-none ">
+										<div class="col-1">
+											<div class="custom-controls-stacked">
+												<div class="custom-control custom-radio">
+													<input name="frequenceRadio1" id="frequenceRadio1_0"
+														type="radio" class="custom-control-input" value="1">
+													<label for="frequenceRadio1_0" class="custom-control-label">Matin</label>
+												</div>
+											</div>
+											<div class="custom-controls-stacked">
+												<div class="custom-control custom-radio">
+													<input name="frequenceRadio1" id="frequenceRadio1_1"
+														type="radio" class="custom-control-input" value="2">
+													<label for="frequenceRadio1_1" class="custom-control-label">Midi</label>
+												</div>
+											</div>
+											<div class="custom-controls-stacked">
+												<div class="custom-control custom-radio">
+													<input name="frequenceRadio1" id="frequenceRadio1_2"
+														type="radio" class="custom-control-input" value="3">
+													<label for="frequenceRadio1_2" class="custom-control-label">Soir</label>
+												</div>
 											</div>
 										</div>
-										<select id="idMedicament" name="idMedicament"
-											required="required" class="custom-select">
-											<option disabled selected>Sélectionner</option>
-											<c:forEach items="${ listeMedicaments }" var="medicament">
-												<option value="${ medicament.id }">${ medicament.nom }</option>
-											</c:forEach>
-										</select>
 									</div>
-								</div>
-								<a href="EnregistrerMedicament"> <span
-									class="fa fa-plus-square-o fa-2x"></span>
-								</a>
-							
-								<label for="quantiteDose"
-									class="col-1 col-form-label font-weight-lighter text-right">Dose</label>
-								<div class="col-1">
-
-									<input id="quantiteDose" name="quantiteDose" type="number"
-										required="required" class="form-control" step="0.5" value="0"
-										min="0">
-
-								</div>
-								<div class="col-3">
-									<div class="input-group">
-										<div class="input-group-prepend">
-											<div class="input-group-text">
-												<i class="fa fa-spoon"></i>
+									<div id="freqCheck1" class="col-2 form-group row d-none">
+										<div class="col-1">
+											<div class="custom-controls-stacked">
+												<div class="custom-control custom-checkbox">
+													<input name="frequenceCheckbox1_0"
+														id="frequenceCheckbox1_0" type="checkbox1"
+														class="custom-control-input" value="1"> <label
+														for="frequenceCheckbox1_0" class="custom-control-label">Matin</label>
+												</div>
+											</div>
+											<div class="custom-controls-stacked">
+												<div class="custom-control custom-checkbox">
+													<input name="frequenceCheckbox1_1"
+														id="frequenceCheckbox1_1" type="checkbox1"
+														class="custom-control-input" value="2"> <label
+														for="frequenceCheckbox1_1" class="custom-control-label">Midi</label>
+												</div>
+											</div>
+											<div class="custom-controls-stacked">
+												<div class="custom-control custom-checkbox">
+													<input name="frequenceCheckbox1_2"
+														id="frequenceCheckbox1_2" type="checkbox1"
+														class="custom-control-input" value="3"> <label
+														for="frequenceCheckbox1_2" class="custom-control-label">Soir</label>
+												</div>
 											</div>
 										</div>
-										<select id="idDose" name="idDose" class="custom-select"
-											required="required">
-											<option disabled selected>Sélectionner dose</option>
-											<c:forEach items="${ listeDoses }" var="dose">
-												<option value="${ dose.id }">${ dose.nom }</option>
-											</c:forEach>
-										</select>
+									</div>
+									<label class="col-1 col-form-label text-right ">pendant</label>
+									<div class="col-1">
+										<input id="nbDuree1" name="nbDuree1" type="number"
+											class="form-control" required="required" value="0" min="0">
+									</div>
+									<div class="col-2">
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<div class="input-group-text">
+													<i class="fa fa-calendar-plus-o"></i>
+												</div>
+											</div>
+											<select id="idDuree1" name="idDuree1" class="custom-select"
+												required="required">
+												<option disabled selected>Sélectionner</option>
+												<c:forEach items="${ listeDurees }" var="duree">
+													<option value="${ duree }">${ duree.toString() }</option>
+												</c:forEach>
+											</select>
+										</div>
+
+									</div>
+
+								</div>
+								<div class="form-group row">
+
+									<button type="button" id="ajouterCommentairePrescription1"
+										class="col-sm-2  btn btn-default btn-sm text-warning text-left">+
+										Commentaire</button>
+									<div id="commentPrescription1" class="col-5 d-none">
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<div class="input-group-text">
+													<i class="fa fa-pencil"></i>
+												</div>
+											</div>
+											<textarea id="commentairePrescription1"
+												name="commentairePrescription1" class="form-control "
+												maxlength="300"></textarea>
+											<button type="button" name="btnMoins"
+												id="enleverCommentairePrescription1"
+												class="btn btn-outline-danger fa fa-minus-square-o fa-2x"></button>
+										</div>
+									</div>
+									<div id="recapPrescription1" class="col-7 d-none"></div>
+
+									<div class="col-3 ">
+										<button type="button" id="btnValiderPrescription1"
+											class="btn  btn-sm btn-outline-success">Enregistrer</button>
+										<button type="button" id="btnModifierPrescription1"
+											class="btn  btn-sm btn-outline-success d-none">Modifier</button>
+										<button type="button" id="btnAnnulerPrescription1"
+											class="btn  btn-sm btn-outline-danger">Annuler</button>
 									</div>
 								</div>
-								<a href="EnregistrerDose"> <span
-									class="fa fa-plus-square-o fa-2x"></span>
-								</a>
 							</div>
-							<div class="form-group row">
-								<label for="quantiteFrequence"
-									class="col-1 col-form-label font-weight-lighter text-right ">Fréquence</label>
-								<div class="col-1">
 
-									<input id="quantiteFrequence" name="quantiteFrequence"
-										type="number" class="form-control" required="required"
-										value="0" min="0">
 
-								</div>
-								<label for="idFrequence" class="col-1 col-form-label ">fois
-									par</label>
-								<div class="col-2">
-									<div class="input-group">
-										<div class="input-group-prepend">
-											<div class="input-group-text">
-												<i class="fa fa-clock-o"></i>
-											</div>
-										</div>
-										<select id="idFrequence" name="idFrequence"
-											required="required" class="custom-select">
-											<option disabled selected>Sélectionner</option>
-											<c:forEach items="${ listeDurees }" var="duree">
-												<option value="${ duree }">${ duree.toString() }</option>
-											</c:forEach>
-										</select>
-									</div>
-								</div>
-								<a href="EnregistrerFrequence"> <span
-									class="fa fa-plus-square-o fa-2x"></span>
-								</a>
-								<div id="freqRadio" class="form-group row d-none">
-									<div class="col-4"></div>
-									<div class="col-8">
-										<div class="custom-controls-stacked">
-											<div class="custom-control custom-radio">
-												<input name="frequenceRadio" id="frequenceRadio_0"
-													type="radio" class="custom-control-input" value="1">
-												<label for="frequenceRadio_0" class="custom-control-label">Matin</label>
-											</div>
-										</div>
-										<div class="custom-controls-stacked">
-											<div class="custom-control custom-radio">
-												<input name="frequenceRadio" id="frequenceRadio_1"
-													type="radio" class="custom-control-input" value="2">
-												<label for="frequenceRadio_1" class="custom-control-label">Midi</label>
-											</div>
-										</div>
-										<div class="custom-controls-stacked">
-											<div class="custom-control custom-radio">
-												<input name="frequenceRadio" id="frequenceRadio_2"
-													type="radio" class="custom-control-input" value="3">
-												<label for="frequenceRadio_2" class="custom-control-label">Soir</label>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div id="freqCheck" class="form-group row d-none">
-									<div class="col-4"></div>
-									<div class="col-8">
-										<div class="custom-controls-stacked">
-											<div class="custom-control custom-checkbox">
-												<input name="frequenceCheckbox_0" id="frequenceCheckbox_0"
-													type="checkbox" class="custom-control-input" value="1">
-												<label for="frequenceCheckbox_0"
-													class="custom-control-label">Matin</label>
-											</div>
-										</div>
-										<div class="custom-controls-stacked">
-											<div class="custom-control custom-checkbox">
-												<input name="frequenceCheckbox_1" id="frequenceCheckbox_1"
-													type="checkbox" class="custom-control-input" value="2">
-												<label for="frequenceCheckbox_1"
-													class="custom-control-label">Midi</label>
-											</div>
-										</div>
-										<div class="custom-controls-stacked">
-											<div class="custom-control custom-checkbox">
-												<input name="frequenceCheckbox_2" id="frequenceCheckbox_2"
-													type="checkbox" class="custom-control-input" value="3">
-												<label for="frequenceCheckbox_2"
-													class="custom-control-label">Soir</label>
-											</div>
-										</div>
-									</div>
-								</div>
-	
-								<label for="nbDuree"
-									class="col-1 col-form-label font-weight-lighter   text-right">Duree</label>
-								<label class="col-1 col-form-label ">pendant</label>
-								<div class="col-1">
 
-									<input id="nbDuree" name="nbDuree" type="number"
-										class="form-control" required="required" value="0" min="0">
 
-								</div>
-								<div class="col-2">
-									<div class="input-group">
-										<div class="input-group-prepend">
-											<div class="input-group-text">
-												<i class="fa fa-calendar-plus-o"></i>
-											</div>
-										</div>
-										<select id="idDuree" name="idDuree" class="custom-select"
-											required="required">
-											<option disabled selected>Sélectionner</option>
-											<c:forEach items="${ listeDurees }" var="duree">
-												<option value="${ duree }">${ duree.toString() }</option>
-											</c:forEach>
-										</select>
-									</div>
-								</div>
-								<a href="EnregistrerDuree"> <span
-									class="fa fa-plus-square-o fa-2x"></span>
-								</a>
-							</div>
+
+
+
+
 
 
 
@@ -290,172 +331,189 @@
 							<div class="nbAnalyse">0</div>
 						</div>
 						<div class="detailAnalyse">
-
-
-
-							<div class="form-group row">
-								<label for="analyse"
-									class="col-1 col-form-label font-weight-lighter text-right">Analyse</label>
-								<div class="col-3">
-									<div class="input-group">
-										<div class="input-group-prepend">
-											<div class="input-group-text">
-												<i class="fa fa-flask"></i>
+							<div id="analyse1" class="rounded border d-none border-success">
+								<div class="form-group row ">
+									<label for="idAnalyse1"
+										class="col-1 col-form-label font-weight-lighter text-right">Analyse</label>
+									<div class="col-3">
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<div class="input-group-text">
+													<i class="fa fa-flask"></i>
+												</div>
 											</div>
+											<select id="idAnalyse1" name="idAnalyse1" required="required"
+												class="custom-select">
+												<option disabled selected>Sélectionner</option>
+												<c:forEach items="${ listeAnalyses }" var="analyse">
+													<option value="${ analyse }">${ analyse.toString() }</option>
+												</c:forEach>
+											</select>
 										</div>
-										<select id="analyse" name="analyse" required="required"
-											class="custom-select">
-											<option disabled selected>Sélectionner</option>
-											<c:forEach items="${ listeAnalyses }" var="analyse">
-												<option value="${ analyse }">${ analyse.toString() }</option>
-											</c:forEach>
-										</select>
 									</div>
-								</div>
-								<label for="idCabinet"
-									class="col-1 col-form-label font-weight-lighter text-right">Lieu</label>
-								<div class="col-3">
-									<div class="input-group">
-										<div class="input-group-prepend">
-											<div class="input-group-text">
-												<i class="fa fa-institution"></i>
+									<label for="idCabinetAnalyse1"
+										class="col-1 col-form-label font-weight-lighter text-right">Lieu</label>
+									<div class="col-3">
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<div class="input-group-text">
+													<i class="fa fa-institution"></i>
+												</div>
 											</div>
+											<select id="idCabinetAnalyse1" name="idCabinetAnalyse1"
+												required="required" class="custom-select">
+												<option value="" disabled selected>Sélectionner</option>
+												<c:forEach items="${ listeCabinets }" var="cabinet">
+													<option value="${ cabinet.id }">${ cabinet.nom }</option>
+												</c:forEach>
+											</select>
 										</div>
-										<select id="idCabinet" name="idCabinet" required="required"
-											class="custom-select">
-											<option value="" disabled selected>Sélectionner</option>
-											<c:forEach items="${ listeCabinets }" var="cabinet">
-												<option value="${ cabinet.id }">${ cabinet.nom }</option>
-											</c:forEach>
-										</select>
 									</div>
-								</div>
-								<a href="EnregistrerCabinet"> <span
-									class="fa fa-plus-square-o fa-2x btnPlus"></span>
-								</a>
-								<label for="dateAnalyse"
-							class="col-1 col-form-label font-weight-lighter text-right">Date
-						</label>
-						<div class="col-2">
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<div class="input-group-text">
-										<i class="fa fa-calendar"></i>
-									</div>
-								</div>
-								<input type="text" value="" id="dateAnalyse" class="form-control"
-									data-lang="fr" data-years="2019-2030" data-format="DD/MM/YYYY"
-									required="required" name="dateAnalyse" placeholder="Sélectionner"
-									maxlength="10" />
-							</div>
-							<span id="textHelpBlockDate" class="form-text text-muted d-none">ex:
-								04/07/2019</span>
-						</div>
-							</div>
-						</div>
-					</div>
-					<div class="listExamen">
-						<div class="d-none">
-							<label>nb examen:</label>
-							<div class="nbExamen">0</div>
-						</div>
-						<div class="detailExamen">
-
-
-							<div class="form-group row">
-								<label for="idExamen"
-									class="col-1 col-form-label font-weight-lighter text-right">Examen</label>
-								<div class="col-3">
-									<div class="input-group">
-										<div class="input-group-prepend">
-											<div class="input-group-text">
-												<i class="fa fa-stethoscope"></i>
+									<a href="EnregistrerCabinet"> <span
+										class="fa fa-plus-square-o fa-2x btnPlus"></span>
+									</a> <label for="dateAnalyse1"
+										class="col-1 col-form-label font-weight-lighter text-right">Date
+									</label>
+									<div class="col-2">
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<div class="input-group-text">
+													<i class="fa fa-calendar"></i>
+												</div>
 											</div>
+											<input type="text" value="" id="dateAnalyse1"
+												class="form-control" data-lang="fr" data-years="2019-2030"
+												data-format="DD/MM/YYYY" required="required"
+												name="dateAnalyse1" placeholder="Sélectionner"
+												maxlength="10" />
 										</div>
-										<select id="idExamen" name="idExamen" required="required"
-											class="custom-select">
-											<option disabled selected>Sélectionner</option>
-											<c:forEach items="${ listeExamens }" var="examen">
-												<option value="${ examen }">${ examen.toString() }</option>
-											</c:forEach>
-										</select>
+										<span id="textHelpBlockDate"
+											class="form-text text-muted d-none">ex: 04/07/2019</span>
 									</div>
 								</div>
-								<label for="idCabinet"
-									class="col-1 col-form-label font-weight-lighter text-right">Lieu</label>
-								<div class="col-3">
-									<div class="input-group">
-										<div class="input-group-prepend">
-											<div class="input-group-text">
-												<i class="fa fa-institution"></i>
-											</div>
-										</div>
-										<select id="idCabinet" name="idCabinet" required="required"
-											class="custom-select">
-											<option value="" disabled selected>Sélectionner</option>
-											<c:forEach items="${ listeCabinets }" var="cabinet">
-												<option value="${ cabinet.id }">${ cabinet.nom }</option>
-											</c:forEach>
-										</select>
+								<div class="form-group row">
+									<div class="col-9"></div>
+									<div class="col-3">
+										<button type="button" name="btnValiderAnalyse1"
+											class="btn  btn-sm btn-outline-success">Enregistrer</button>
+										<button type="button" name="btnModifierAnalyse1"
+											class="btn  btn-sm btn-outline-success">Modifier</button>
+										<button type="button" name="btnAnnulerAnalyse1"
+											class="btn  btn-sm btn-outline-danger">Annuler</button>
 									</div>
 								</div>
-								<a href="EnregistrerCabinet"> <span
-									class="fa fa-plus-square-o fa-2x btnPlus"></span>
-								</a>
-								<label for="date"
-							class="col-1 col-form-label font-weight-lighter text-right">Date
-						</label>
-						<div class="col-2">
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<div class="input-group-text">
-										<i class="fa fa-calendar"></i>
-									</div>
-								</div>
-								<input type="text" value="" id="dateExamen" class="form-control"
-									data-lang="fr" data-years="2019-2030" data-format="DD/MM/YYYY"
-									required="required" name="dateExamen" placeholder="Sélectionner"
-									maxlength="10" />
-							</div>
-							<span id="textHelpBlockDate" class="form-text text-muted d-none">ex:
-								04/07/2019</span>
-						</div>
 							</div>
 
 
 
 
 						</div>
-					</div>
+						<div class="listExamen">
+							<div class="d-none">
+								<label>nb examen:</label>
+								<div class="nbExamen">0</div>
+							</div>
+							<div class="detailExamen">
+								<div id="examen1" class="rounded border d-none border-warning">
+									<div class="form-group row">
+										<label for="idExamen1"
+											class="col-1 col-form-label font-weight-lighter text-right">Examen</label>
+										<div class="col-3">
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<div class="input-group-text">
+														<i class="fa fa-stethoscope"></i>
+													</div>
+												</div>
+												<select id="idExamen1" name="idExamen1" required="required"
+													class="custom-select">
+													<option disabled selected>Sélectionner</option>
+													<c:forEach items="${ listeExamens }" var="examen">
+														<option value="${ examen }">${ examen.toString() }</option>
+													</c:forEach>
+												</select>
+											</div>
+										</div>
+										<label for="idCabinetExamen1"
+											class="col-1 col-form-label font-weight-lighter text-right">Lieu</label>
+										<div class="col-3">
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<div class="input-group-text">
+														<i class="fa fa-institution"></i>
+													</div>
+												</div>
+												<select id="idCabinetExamen1" name="idCabinetExamen1"
+													required="required" class="custom-select">
+													<option value="" disabled selected>Sélectionner</option>
+													<c:forEach items="${ listeCabinets }" var="cabinet">
+														<option value="${ cabinet.id }">${ cabinet.nom }</option>
+													</c:forEach>
+												</select>
+											</div>
+										</div>
+										<a href="EnregistrerCabinet"> <span
+											class="fa fa-plus-square-o fa-2x btnPlus"></span>
+										</a> <label for="date1"
+											class="col-1 col-form-label font-weight-lighter text-right">Date
+										</label>
+										<div class="col-2">
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<div class="input-group-text">
+														<i class="fa fa-calendar"></i>
+													</div>
+												</div>
+												<input type="text" value="" id="dateExamen1"
+													class="form-control" data-lang="fr" data-years="2019-2030"
+													data-format="DD/MM/YYYY" required="required"
+													name="dateExamen1" placeholder="Sélectionner"
+													maxlength="10" />
+											</div>
+											<span id="textHelpBlockDate"
+												class="form-text text-muted d-none">ex: 04/07/2019</span>
+										</div>
+									</div>
+									<div class="form-group row">
+										<div class="col-9"></div>
+										<div class="col-3 ">
+											<button type="button" name="btnValiderExamen1"
+												class="btn  btn-sm btn-outline-success">Enregistrer</button>
+											<button type="button" name="btnModifierExamen1"
+												class="btn  btn-sm btn-outline-success">Modifier</button>
+											<button type="button" name="btnAnnulerExamen1"
+												class="btn  btn-sm btn-outline-danger">Annuler</button>
+										</div>
+									</div>
+								</div>
 
 
 
-
-
-
-					<div class="form-group row">
-						<div class="offset-2 col-6">
-							<button name="submit" type="submit" class="btn btn-primary">Valider</button>
-							<a href="ModifUserProfil" id="cancel"
-								class="btn btn-outline-secondary">Annuler</a>
+							</div>
 						</div>
-					</div>
-
+						<div class="form-group row"></div>
+						<div class="form-group row"></div>
+						<div class="form-group row d-none">
+							<div class="offset-2 col-6">
+								<button name="submit" type="submit" class="btn btn-primary">Valider</button>
+								<a href="ModifUserProfil" id="cancel"
+									class="btn btn-outline-secondary">Annuler</a>
+							</div>
+						</div>
 				</form>
-
 				<div class="row">
-					<button id="ajouterPrescription"
-						class="col-sm-3  btn btn-default btn-sm text-primary text-left">+
+					<button type="button" id="ajouterPrescription"
+						class="col-sm-3  btn btn-outline-primary btn-sm  text-left">+
 						Prescription</button>
 				</div>
 				<div class=" row">
-					<button id="ajouterAnalyse"
-						class="col-sm-3  btn btn-default btn-sm text-primary text-left">+
+					<button type="button" id="ajouterAnalyse"
+						class="col-sm-3  btn btn-outline-success btn-sm  text-left">+
 						Analyse</button>
 				</div>
 				<div class=" row">
-					<button id="ajouterExamen"
-						class="col-sm-3  btn btn-default btn-sm text-primary text-left">+
+					<button type="button" id="ajouterExamen"
+						class="col-sm-3  btn btn-outline-info btn-sm  text-left">+
 						Examen</button>
 				</div>
 			</div>
@@ -469,8 +527,6 @@
 
 		<hr>
 		<c:import url="footer.jsp"></c:import>
-
-
 
 	</div>
 	<!--/.container-->
