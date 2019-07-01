@@ -9,6 +9,7 @@ import fr.medoc.enumeration.EnumDuree;
 public class Prescription2 {
 
 	private int id;
+	private Ordonnance ordonnance;
 	private Medicament medicament;
 	private float nbDose;
 	private Dose dose;
@@ -18,45 +19,91 @@ public class Prescription2 {
 	private EnumDuree duree;
 	private String dateDebut;
 	private String dateFin;
-private List<String> listDetails;
-private String commentaire;
-	
+	private int matin;
+	private int midi;
+	private int soir;
+	private String commentaire;
+
 
 	public Prescription2() {
+	}
 
-	this.medicament = null;
-	this.nbDose = 0.0f;
-	this.dose = null;
-	this.nbFrequence = 0;
-	this.frequence = null;
-	this.nbDuree = 0;
-	this.duree = null;
-	this.dateDebut = null;
-	this.dateFin = null;
-	this.listDetails = null;
-	this.commentaire = null;
-}
 
-	
+
+	public int getMatin() {
+		return matin;
+	}
+
+
+
+	public void setMatin(int matin) {
+		this.matin = matin;
+	}
+
+
+
+	public int getMidi() {
+		return midi;
+	}
+
+
+
+	public void setMidi(int midi) {
+		this.midi = midi;
+	}
+
+
+
+	public int getSoir() {
+		return soir;
+	}
+
+
+
+	public void setSoir(int soir) {
+		this.soir = soir;
+	}
+
+
+
+	public Ordonnance getOrdonnance() {
+		return ordonnance;
+	}
+
+
+
+	public void setOrdonnance(Ordonnance ordonnance) {
+		this.ordonnance = ordonnance;
+	}
+
+
 
 	public String calculerDateFin(String dateDebut, int nbDuree, EnumDuree duree) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-	
+
 		LocalDate dateDebutParsedDate = LocalDate.parse(dateDebut, formatter);
-		
+		System.out.println(duree.name());
 		LocalDate dateFinParsedDate = null;
 		switch (duree.name()) {
-		case "jour":
+		case "JOU":
 			dateFinParsedDate = dateDebutParsedDate.plusDays(nbDuree);
+			System.out.println("la1");
+			System.out.println(dateFinParsedDate);
 			break;
-		case "semaine":
+		case "SEM":
 			dateFinParsedDate = dateDebutParsedDate.plusWeeks(nbDuree);
+			System.out.println("la2");
+			System.out.println(dateFinParsedDate);
 			break;
-		case "mois":
+		case "MOI":
 			dateFinParsedDate = dateDebutParsedDate.plusMonths(nbDuree);
+			System.out.println("la3");
+			System.out.println(dateFinParsedDate);
 			break;
 		default:
 			dateFinParsedDate = dateDebutParsedDate;
+			System.out.println("la4");
+			System.out.println(dateFinParsedDate);
 		}
 		String dateFin = dateFinParsedDate.format(formatter);
 		return dateFin;
@@ -196,15 +243,7 @@ private String commentaire;
 
 
 
-	public List<String> getListDetails() {
-		return listDetails;
-	}
 
 
 
-	public void setListDetails(List<String> listDetails) {
-		this.listDetails = listDetails;
-	}
-
-	
 }

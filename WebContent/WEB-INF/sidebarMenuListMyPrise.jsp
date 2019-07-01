@@ -11,13 +11,12 @@
 	<c:if test="${!empty listePrises }">
 		<div id="listPrise">
 			<c:forEach items="${ listePrises }" var="prise">
-				<c:if
-					test="${ prise.date==dateDuJour && prise.prescription.utilisateur.getNom()==login }">
+				
 					<c:if test="${prise.effectue }">
 						<button id="Prise${ prise.id }"
 							class="list-group-item btn-block btn-prise text-left disabled">
 							<div class="fa fa-check fa-2x"></div>
-							${ prise.prescription.medicament.nom}- ${ prise.date} - ${ prise.heure}
+							${ prise.prescription.nbDose} ${ prise.prescription.dose.nom} ${ prise.prescription.medicament.nom} - ${ prise.heure}
 						</button>
 						<form action="ModifUserProfilAction" method="post" class="d-none">
 							<input name="idSubmit" type="text" value="${ prise.id }" /> <input
@@ -30,7 +29,7 @@
 						<button id="Prise${ prise.id }"
 							class="list-group-item btn-block btn-prise text-left">
 							<div class="fa fa-bell-o fa-2x"></div>
-							${ prise.prescription.medicament.nom}- ${ prise.date} - ${ prise.heure}
+							${ prise.prescription.nbDose} ${ prise.prescription.dose.nom} ${ prise.prescription.medicament.nom} - ${ prise.heure}
 						</button>
 						<form action="ModifUserProfilAction" method="post" class="d-none">
 							<input name="idSubmit" type="text" value="${ prise.id }" /> <input
@@ -39,7 +38,7 @@
 								class="btn btn-outline-danger " />
 						</form>
 					</c:if>
-				</c:if>
+				
 			</c:forEach>
 		</div>
 	</c:if>

@@ -46,6 +46,14 @@
 				</div>
 
 				<form action="EnregistrerSpecialiteAction" method="post">
+				<!--  mettre en d-none -->
+					<div class="form-group row">
+						<label for="pagePrecedente" class="col-2 col-form-label">Url</label>
+						<div class="col-6">
+							<input id="pagePrecedente" name="pagePrecedente" type="text"
+								class="form-control" >
+						</div>
+					</div>
 					<div class="form-group row">
 						<label for="nomSpecialite" class="col-2 col-form-label">Nom</label>
 						<div class="col-6">

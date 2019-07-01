@@ -2,12 +2,12 @@
 $(document).ready(
 		function() {
 			// function main(){
-			// $('#listBtnPrise').click();
+			// $('#listBtnRdv').click();
 			// console.log("ici");
 			// $('#listPrescription').slideToggle("slow");
 			// $('#listPrise').slideToggle("slow");
-			// $('#listRdv').slideToggle("slow");
-			// console.log("ici");
+		    //$('#listBtnRdv').click();
+			 //console.log("ici");
 			// }
 			// main();
 		    sessionStorage.clear();

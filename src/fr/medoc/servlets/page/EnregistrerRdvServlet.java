@@ -60,7 +60,7 @@ public class EnregistrerRdvServlet extends HttpServlet {
 			Utilisateur unUtilisateur = null;
 			try {
 				unUtilisateur = utilisateurDao.findByName((String) session.getAttribute("login"));
-				listeRdvs = (ArrayList<Rdv>) rdvDao.findAll();
+				listeRdvs = (ArrayList<Rdv>) rdvDao.findAllByUser(unUtilisateur.getId());
 				listeMedecins = (ArrayList<Medecin>) medecinDao.findAllByUser(unUtilisateur.getId());
 			} catch (DAOException e) {
 				e.printStackTrace();

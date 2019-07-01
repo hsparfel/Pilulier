@@ -43,8 +43,12 @@ public class EnregistrerSpecialiteAction extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String nomSpecialite = request.getParameter("nomSpecialite");
-	
+		String pagePrecedente = request.getParameter("pagePrecedente");
 		Specialite nouveauSpecialite = new Specialite(nomSpecialite);
+		
+		if (pagePrecedente.equals("")) {
+			pagePrecedente = "ModifUserProfil";
+		}
 		
 		try {
 			specialiteDao.ajouterSpecialite(nouveauSpecialite);
@@ -52,7 +56,7 @@ public class EnregistrerSpecialiteAction extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		response.sendRedirect("EnregistrerMedecin");
+		response.sendRedirect("" + pagePrecedente);
 		
 	}
 

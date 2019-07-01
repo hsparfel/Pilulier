@@ -3,12 +3,12 @@ package fr.medoc.entities;
 public class Prise {
 	
 	private int id;
-	private Prescription prescription;
+	private Prescription2 prescription;
 	private String date;
 	private String heure;
 	private boolean effectue;
 	
-	public Prise(Prescription prescription, String date, String heure) {
+	public Prise(Prescription2 prescription, String date, String heure) {
 
 		this.prescription = prescription;
 		this.date = date;
@@ -16,10 +16,7 @@ public class Prise {
 	}
 
 	public Prise() {
-		this.prescription = null;
-		this.date = "";
-		this.heure = "";
-	}
+		}
 
 	public int getId() {
 		return id;
@@ -29,11 +26,11 @@ public class Prise {
 		this.id = id;
 	}
 
-	public Prescription getPrescription() {
+	public Prescription2 getPrescription() {
 		return prescription;
 	}
 
-	public void setPrescription(Prescription prescription) {
+	public void setPrescription(Prescription2 prescription) {
 		this.prescription = prescription;
 	}
 

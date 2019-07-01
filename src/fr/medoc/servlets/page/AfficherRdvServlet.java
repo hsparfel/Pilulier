@@ -62,6 +62,7 @@ public class AfficherRdvServlet extends HttpServlet {
 			Utilisateur unUtilisateur = null;
 			try {
 				unUtilisateur = utilisateurDao.findByName((String) session.getAttribute("login"));
+				System.out.println((String) session.getAttribute("login"));
 				listeRdvs = (ArrayList<Rdv>) rdvDao.findAllByUser(unUtilisateur.getId());
 				listeMedecins = (ArrayList<Medecin>) medecinDao.findAllByUser(unUtilisateur.getId());
 				myRdv = rdvDao.findByRef(idRdv);

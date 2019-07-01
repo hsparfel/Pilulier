@@ -5,15 +5,40 @@ import fr.medoc.enumeration.EnumExamen;
 public class Examen {
 
 	private int id;
+	private Ordonnance ordonnance;
+	private Cabinet cabinet;
 	private EnumExamen nom;
 	private String commentaire;
 	private String date;
 	
 	public Examen() {
-		this.nom = null;
-		this.commentaire = null;
-		this.date = null;
+			}
+
+	
+
+	public Ordonnance getOrdonnance() {
+		return ordonnance;
 	}
+
+
+
+	public void setOrdonnance(Ordonnance ordonnance) {
+		this.ordonnance = ordonnance;
+	}
+
+
+
+	public Cabinet getCabinet() {
+		return cabinet;
+	}
+
+
+
+	public void setCabinet(Cabinet cabinet) {
+		this.cabinet = cabinet;
+	}
+
+
 
 	public int getId() {
 		return id;

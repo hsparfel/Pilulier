@@ -32,9 +32,7 @@
 						class="dropdown-item" href="EnregistrerUtilisateur">Utilisateur</a>
 					<a class="dropdown-item ordonnance" href="EnregistrerOrdonnance">Ordonnance</a>
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item dose" href="EnregistrerDose">Dose</a> <a
-						class="dropdown-item" href="EnregistrerDuree">Duree</a> <a
-						class="dropdown-item" href="EnregistrerFrequence">Frequence</a>
+					<a class="dropdown-item dose" href="EnregistrerDose">Dose</a> 
 				</div></li>
 			<li class="nav-item"><a class="nav-link" href="Deconnexion"
 				id="logout">Logout</a></li>

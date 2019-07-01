@@ -10,7 +10,7 @@ import java.util.Collection;
 
 import fr.medoc.dao.PriseDAO;
 import fr.medoc.dao.DAOFactory;
-import fr.medoc.dao.PrescriptionDAO;
+import fr.medoc.dao.Prescription2DAO;
 import fr.medoc.entities.Prise;
 import fr.medoc.exception.DAOException;
 
@@ -23,10 +23,13 @@ public class PriseDAOImpl implements PriseDAO {
 	private final String VALUES_INSERT = "(?,?,?)";
 	private final String ORDRE_DELETE = "delete from prise where Id = ";
 	private final String ORDRE_FINDALL = "select * from prise";
+	//private final String ORDRE_FINDALLBYUSER = "select m.nom, pr.nb_dose, d.nom, p.date, p.heure from prise AS p, prescription AS pr, ordonnance AS o, medicament as m, dose AS d where p.id_prescription = pr.id and pr.id_ordonnance=o.id and pr.id_medicament=m.id and pr.id_dose = d.id and o.id_utilisateur=";
+	private final String ORDRE_FINDALLBYUSER = "select p.id, p.id_prescription, p.date, p.heure, p.effectue from prise AS p, prescription AS pr, ordonnance AS o, medicament as m, dose AS d where p.id_prescription = pr.id and pr.id_ordonnance=o.id and pr.id_medicament=m.id and pr.id_dose = d.id and o.id_utilisateur=";
+	
 	private final String ORDRE_FINDBYREF = "select * from prise where Id = ?";
 	private final String ORDRE_DELETEBYPRESCRIPTION = "delete from prise where id_prescription = ";
 	private final String ORDRE_VALIDATE = "update prise set effectue=true where id = ";
-	
+
 	private DAOFactory daoFactory;
 
 	public PriseDAOImpl(DAOFactory daoFactory) {
@@ -75,7 +78,7 @@ public class PriseDAOImpl implements PriseDAO {
 			throw new DAOException(e);
 		}
 	}
-	
+
 	@Override
 	public void validerPrise(int idPrise) throws DAOException {
 		Connection connexion = null;
@@ -89,7 +92,7 @@ public class PriseDAOImpl implements PriseDAO {
 			throw new DAOException(e);
 		}
 	}
-	
+
 	@Override
 	public void supprimerPrisesByPrescription(int idPrescription) throws DAOException {
 		Connection connexion = null;
@@ -108,8 +111,8 @@ public class PriseDAOImpl implements PriseDAO {
 	public Prise findByRef(int id) throws DAOException {
 		Prise unePrise = null;
 		Connection connexion = null;
-		PrescriptionDAO unPrescriptionDAO = daoFactory.getPrescriptionDAO();
-		
+		Prescription2DAO unPrescriptionDAO = daoFactory.getPrescription2DAO();
+
 		try {
 			connexion = daoFactory.getConnection();
 			PreparedStatement pst = connexion.prepareStatement(ORDRE_FINDBYREF);
@@ -168,19 +171,31 @@ public class PriseDAOImpl implements PriseDAO {
 		while (resultSet.next()) {
 			Prise a = new Prise();
 
-			PrescriptionDAO unPrescriptionDAO = daoFactory.getPrescriptionDAO();
+			Prescription2DAO unPrescriptionDAO = daoFactory.getPrescription2DAO();
 			a.setId(resultSet.getInt("id"));
 			a.setPrescription(unPrescriptionDAO.findByRef(resultSet.getInt("id_prescription")));
 			a.setDate(resultSet.getString("date"));
 			a.setHeure(resultSet.getString("heure"));
 			a.setEffectue(resultSet.getBoolean("effectue")); 
-			
-			System.out.println(resultSet.getString("date"));
-			System.out.println(resultSet.getString("heure"));
-			System.out.println(resultSet.getBoolean("effectue"));
-			
+
 			getListePrises().add(a);
 		}
+	}
+
+	@Override
+	public Collection<Prise> findAllByUser(int id) throws DAOException {
+		Connection connexion = null;
+		try {
+			connexion = daoFactory.getConnection();
+			PreparedStatement pst = connexion.prepareStatement(ORDRE_FINDALLBYUSER+ "'" + id + "'");
+			ResultSet resultSet = pst.executeQuery();
+			listePrises.removeAll(listePrises);
+			resultSetToArrayList(resultSet);
+			daoFactory.closeConnexion(connexion);
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+		return listePrises;
 	}
 
 	/*private void resultSetToArrayListTries(ResultSet resultSet) throws SQLException, DAOException {
@@ -188,7 +203,7 @@ public class PriseDAOImpl implements PriseDAO {
 		while (resultSet.next()) {
 			Prise a = new Prise();
 
-			PrescriptionDAO unPrescriptionDAO = daoFactory.getPrescriptionDAO();
+			Prescription2DAO unPrescriptionDAO = daoFactory.getPrescription2DAO();
 
 			a.setPrescription(unPrescriptionDAO.findByRef(resultSet.getInt("id_prescription")));
 					a.setDate(resultSet.getString("date"));
@@ -198,6 +213,6 @@ public class PriseDAOImpl implements PriseDAO {
 		}
 	}*/
 
-	
+
 
 }

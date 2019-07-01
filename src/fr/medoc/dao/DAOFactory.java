@@ -101,19 +101,19 @@ public class DAOFactory {
         return new MedicamentDAOImpl(this);
     }
 
-    public PrescriptionDAO getPrescriptionDAO() {
-        return new PrescriptionDAOImpl(this);
+        
+    public Prescription2DAO getPrescription2DAO() {
+        return new Prescription2DAOImpl(this);
+    }
+    
+    public OrdonnanceDAO getOrdonnanceDAO() {
+        return new OrdonnanceDAOImpl(this);
     }
     
     public DoseDAO getDoseDAO() {
         return new DoseDAOImpl(this);
     }
-    public DureeDAO getDureeDAO() {
-        return new DureeDAOImpl(this);
-    }
-    public FrequenceDAO getFrequenceDAO() {
-        return new FrequenceDAOImpl(this);
-    }
+    
     
     public PriseDAO getPriseDAO() {
         return new PriseDAOImpl(this);
@@ -133,6 +133,14 @@ public class DAOFactory {
     
     public RdvDAO getRdvDAO() {
         return new RdvDAOImpl(this);
+    }
+    
+    public ExamenDAO getExamenDAO() {
+        return new ExamenDAOImpl(this);
+    }
+    
+    public AnalyseDAO getAnalyseDAO() {
+        return new AnalyseDAOImpl(this);
     }
     
     public PatientMedecinDAO getPatientMedecinDAO() {

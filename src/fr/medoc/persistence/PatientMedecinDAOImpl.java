@@ -19,8 +19,8 @@ public class PatientMedecinDAOImpl implements PatientMedecinDAO {
 	private ArrayList<PatientMedecin> listePatientMedecins;
 	private ArrayList<PatientMedecin> listePatientMedecinsTries;
 
-	private final String ORDRE_INSERT = "insert into utilisateur_medecin values ";
-	private final String VALUES_INSERT = "(?,?)";
+	private final String ORDRE_INSERT = "insert into utilisateur_medecin (id_utilisateur,id_medecin) values (?,?)";
+	//private final String VALUES_INSERT = "(?,?)";
 	private final String ORDRE_DELETE = "delete from utilisateur_medecin where id_utilisateur = ? AND id_medecin=?";
 	private final String ORDRE_FINDALLBYUSER = "select * from utilisateur_medecin AS um where um.id_utilisateur=?";
 
@@ -56,8 +56,8 @@ public class PatientMedecinDAOImpl implements PatientMedecinDAO {
 
 		try {
 			connexion = daoFactory.getConnection();
-			getListePatientMedecins().add(unPatientMedecin);
-			PreparedStatement pst = connexion.prepareStatement(ORDRE_INSERT + VALUES_INSERT);
+			//getListePatientMedecins().add(unPatientMedecin);
+			PreparedStatement pst = connexion.prepareStatement(ORDRE_INSERT);
 			pst.setInt(1, unPatientMedecin.getPatient().getId());
 			pst.setInt(2, unPatientMedecin.getMedecin().getId());
 
