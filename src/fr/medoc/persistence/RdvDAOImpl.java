@@ -29,7 +29,7 @@ public class RdvDAOImpl implements RdvDAO{
 	private final String ORDRE_DELETEBYUSERANDMEDECIN = "delete from rdv where id_utilisateur = ? AND id_medecin=?";
 	private final String ORDRE_FINDALL = "select * from rdv";
 	private final String ORDRE_FINDBYREF = "select * from rdv where Id = ?";
-	private final String ORDRE_FINDALLBYUSER = "select * from rdv where id_utilisateur=?";
+	private final String ORDRE_FINDALLBYUSER = "select * from rdv where id_utilisateur=? order by (SUBSTRING(date,7,4)), (SUBSTRING(date,4,2)), (SUBSTRING(date,1,2))";
 	private final String ORDRE_UPDATE = "update rdv set id_utilisateur=?,id_medecin=?,date=?,heure=?,commentaire=? where id = ?";
     private DAOFactory daoFactory;
 

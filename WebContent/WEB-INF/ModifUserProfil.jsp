@@ -39,11 +39,7 @@
 					<div class="row">
 						<h1 id="div_horloge"></h1>
 					</div>
-					<a class=" btn btn-default btn-sm" href="AssocierMedecin">Associer
-						Medecin</a> <a class=" btn btn-default btn-sm" href="DissocierMedecin">Dissocier
-						Medecin</a><a class=" btn btn-default btn-sm" href="EnregistrerPrise">Ajouter
-						Prise</a> <a class=" btn btn-default btn-sm"
-						href="EnregistrerOrdonnance">Ajouter Ordonnance</a>
+					
 				</div>
 				<div class="col-7 ">
 
@@ -63,7 +59,7 @@
 		</div>
 
 		<!--/row-->
-		<hr>
+		
 		<c:import url="footer.jsp"></c:import>
 	</div>
 	<!--/.container-->

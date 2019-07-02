@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <footer>
+<hr>
 	<p>&copy; 2019 Hugo</p>
 </footer>
 

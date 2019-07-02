@@ -26,7 +26,7 @@ public class PriseDAOImpl implements PriseDAO {
 	private final String ORDRE_DELETE = "delete from prise where Id = ";
 	private final String ORDRE_FINDALL = "select * from prise";
 	//private final String ORDRE_FINDALLBYUSER = "select m.nom, pr.nb_dose, d.nom, p.date, p.heure from prise AS p, prescription AS pr, ordonnance AS o, medicament as m, dose AS d where p.id_prescription = pr.id and pr.id_ordonnance=o.id and pr.id_medicament=m.id and pr.id_dose = d.id and o.id_utilisateur=";
-	private final String ORDRE_FINDALLBYUSER = "select p.id, p.id_prescription, p.date, p.heure, p.effectue from prise AS p, prescription AS pr, ordonnance AS o, medicament as m, dose AS d where p.id_prescription = pr.id and pr.id_ordonnance=o.id and pr.id_medicament=m.id and pr.id_dose = d.id and o.id_utilisateur=? and p.date=?";
+	private final String ORDRE_FINDALLBYUSER = "select p.id, p.id_prescription, p.date, p.heure, p.effectue from prise AS p, prescription AS pr, ordonnance AS o, medicament as m, dose AS d where p.id_prescription = pr.id and pr.id_ordonnance=o.id and pr.id_medicament=m.id and pr.id_dose = d.id and o.id_utilisateur=? and p.date=? order by p.heure";
 	
 	private final String ORDRE_FINDBYREF = "select * from prise where Id = ?";
 	private final String ORDRE_DELETEBYPRESCRIPTION = "delete from prise where id_prescription = ";

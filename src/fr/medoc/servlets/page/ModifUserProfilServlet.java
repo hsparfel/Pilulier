@@ -45,15 +45,15 @@ public class ModifUserProfilServlet extends HttpServlet {
 	private PriseDAO priseDao;
 	private MedecinDAO medecinDao;
 	private RdvDAO rdvDao;
-//	private LocalDate dateDuJour = null;
+	private LocalDate dateDuJour = null;
 
 	@Override
 	public void init() throws ServletException {
 		try {
-			//dateDuJour = LocalDate.now();
+			dateDuJour = LocalDate.now();
 			daoFactory = DAOFactory.getInstance();
 			prescriptionDao = daoFactory.getPrescription2DAO();
-		analyseDao = daoFactory.getAnalyseDAO();
+			analyseDao = daoFactory.getAnalyseDAO();
 			examenDao = daoFactory.getExamenDAO();
 			utilisateurDao = daoFactory.getUtilisateurDAO();
 			priseDao = daoFactory.getPriseDAO();
@@ -95,16 +95,125 @@ public class ModifUserProfilServlet extends HttpServlet {
 			} catch (DAOException e) {
 				e.printStackTrace();
 			}
+			//faire pareil pour examen et rdv puis modifier pour prescription
+			//trier analyse
+			ArrayList<Analyse> listeAnalysesTries = new ArrayList<Analyse>();
+			DateTimeFormatter formatterDay = DateTimeFormatter.ofPattern("dd");
+			int formattedDay = Integer.parseInt(dateDuJour.format(formatterDay));
+			DateTimeFormatter formatterMonth = DateTimeFormatter.ofPattern("MM");
+			int formattedMonth = Integer.parseInt(dateDuJour.format(formatterMonth));
+			DateTimeFormatter formatterYear = DateTimeFormatter.ofPattern("yyyy");
+			int formattedYear = Integer.parseInt(dateDuJour.format(formatterYear));
 			
-			request.setAttribute("listeAnalyses", listeAnalyses);
-			request.setAttribute("listePrescriptions", listePrescriptions);
-			request.setAttribute("listeExamens", listeExamens);
-		
+			for (Analyse analyse : listeAnalyses) { 
+				int analyseJour = Integer.parseInt(analyse.getDate().substring(0, 2));
+				int analyseMois = Integer.parseInt(analyse.getDate().substring(3, 5));
+				int analyseAnnee = Integer.parseInt(analyse.getDate().substring(6, 10));
+				
+				if (analyseAnnee>formattedYear) {
+				
+					listeAnalysesTries.add(analyse);
+				} else if (analyseAnnee==formattedYear) {
+					if (analyseMois>formattedMonth) {
+					
+						listeAnalysesTries.add(analyse);
+					} else if (analyseMois==formattedMonth) {
+						if (analyseJour>=formattedDay) {
+							
+							listeAnalysesTries.add(analyse);
+						}
+					}
+				}
+				System.out.println(listeAnalysesTries);
+			} 
+			//
+			//trier examen
+			ArrayList<Examen> listeExamensTries = new ArrayList<Examen>();
+			for (Examen examen : listeExamens) { 
+				int examenJour = Integer.parseInt(examen.getDate().substring(0, 2));
+				int examenMois = Integer.parseInt(examen.getDate().substring(3, 5));
+				int examenAnnee = Integer.parseInt(examen.getDate().substring(6, 10));
+				if (examenAnnee>formattedYear) {
+					listeExamensTries.add(examen);
+				} else if (examenAnnee==formattedYear) {
+					if (examenMois>formattedMonth) {
+						listeExamensTries.add(examen);
+					} else if (examenMois==formattedMonth) {
+						if (examenJour>=formattedDay) {
+							listeExamensTries.add(examen);
+						}
+					}
+				}
+			} 
+			//
+			//trier rdv
+			ArrayList<Rdv> listeRdvsTries = new ArrayList<Rdv>();
+			for (Rdv rdv : listeRdvs) { 
+				int rdvJour = Integer.parseInt(rdv.getDate().substring(0, 2));
+				int rdvMois = Integer.parseInt(rdv.getDate().substring(3, 5));
+				int rdvAnnee = Integer.parseInt(rdv.getDate().substring(6, 10));
+				if (rdvAnnee>formattedYear) {
+					listeRdvsTries.add(rdv);
+				} else if (rdvAnnee==formattedYear) {
+					if (rdvMois>formattedMonth) {
+						listeRdvsTries.add(rdv);
+					} else if (rdvMois==formattedMonth) {
+						if (rdvJour>=formattedDay) {
+							listeRdvsTries.add(rdv);
+						}
+					}
+				}
+			} 
+			//
+			//trier prescription
+			ArrayList<Prescription2> listePrescriptionsTries = new ArrayList<Prescription2>();
+			System.out.println("jour: "+formattedDay);
+			System.out.println("mois: "+formattedMonth);
+			System.out.println("annee: "+formattedYear);
+			
+			
+			
+			
+			
+			for (Prescription2 prescription : listePrescriptions) { 
+				int prescriptionJour = Integer.parseInt(prescription.getDateFin().substring(0, 2));
+				int prescriptionMois = Integer.parseInt(prescription.getDateFin().substring(3, 5));
+				int prescriptionAnnee = Integer.parseInt(prescription.getDateFin().substring(6, 10));
+				
+				
+				System.out.println("jour2: "+prescription.getDateFin().substring(0, 2));
+				System.out.println("mois2: "+prescription.getDateFin().substring(3, 5));
+				System.out.println("annee2: "+prescription.getDateFin().substring(6, 10));
+				System.out.println("jour3: "+prescriptionJour);
+				System.out.println("mois3: "+prescriptionMois);
+				System.out.println("annee3: "+prescriptionAnnee);
+				
+				if (prescriptionAnnee>formattedYear) {
+					System.out.println("ici1");
+					listePrescriptionsTries.add(prescription);
+				} else if (prescriptionAnnee==formattedYear) {
+					if (prescriptionMois>formattedMonth) {
+						System.out.println("ici2");
+						listePrescriptionsTries.add(prescription);
+					} else if (prescriptionMois==formattedMonth) {
+						if (prescriptionJour>=formattedDay) {
+							System.out.println("ici3");
+							listePrescriptionsTries.add(prescription);
+						}
+					}
+				}
+			} 
+			//
+
+			request.setAttribute("listeAnalyses", listeAnalysesTries);
+			request.setAttribute("listePrescriptions", listePrescriptionsTries);
+			request.setAttribute("listeExamens", listeExamensTries);
+
 			request.setAttribute("listeMedecins", listeMedecins);
-			request.setAttribute("listeRdvs", listeRdvs);
+			request.setAttribute("listeRdvs", listeRdvsTries);
 			request.setAttribute("login", (String) session.getAttribute("login"));
-			
-			
+
+
 			request.setAttribute("listePrises", listePrises);
 			this.getServletContext().getRequestDispatcher(JSP_PAGE).forward(request, response);
 		} else {

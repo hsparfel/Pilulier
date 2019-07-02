@@ -26,7 +26,7 @@ public class ExamenDAOImpl implements ExamenDAO {
 	private final String ORDRE_FINDBYREF = "select * from examen where Id = ?";
 	private final String ORDRE_UPDATE = "update examen set id_ordonnance=?, set nom=?,set id_cabinet=?,set commentaire=?, set date=? where id = ?";
 	//a faire
-	private final String ORDRE_FINDALLBYUSER = "select e.id,e.id_ordonnance,e.nom,e.id_cabinet,e.commentaire,e.date from examen AS e, ordonnance as o where e.id_ordonnance=o.id and o.id_utilisateur=?";
+	private final String ORDRE_FINDALLBYUSER = "select e.id,e.id_ordonnance,e.nom,e.id_cabinet,e.commentaire,e.date from examen AS e, ordonnance as o where e.id_ordonnance=o.id and o.id_utilisateur=? order by (SUBSTRING(e.date,7,4)), (SUBSTRING(e.date,4,2)), (SUBSTRING(e.date,1,2))";
 	
 	private DAOFactory daoFactory;
 

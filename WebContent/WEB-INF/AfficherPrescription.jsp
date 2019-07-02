@@ -336,7 +336,7 @@
 		</div>
 		<!--/row-->
 
-		<hr>
+	
 		<c:import url="footer.jsp"></c:import>
 
 	</div>

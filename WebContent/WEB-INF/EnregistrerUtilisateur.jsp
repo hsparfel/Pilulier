@@ -77,7 +77,7 @@
 		</div>
 
 
-		<hr>
+
 		<c:import url="footer.jsp"></c:import>
 
 

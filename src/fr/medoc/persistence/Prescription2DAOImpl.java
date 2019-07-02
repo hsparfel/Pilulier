@@ -25,7 +25,7 @@ public class Prescription2DAOImpl implements Prescription2DAO {
 	private final String ORDRE_INSERT = "insert into prescription(id_ordonnance,id_medicament,nb_dose,id_dose,nb_frequence,frequence,nb_duree,duree,date_debut,date_fin,matin,midi,soir,commentaire) values ";
 	private final String VALUES_INSERT = "(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	private final String ORDRE_FINDBYREF = "select * from prescription where Id = ?";
-	private final String ORDRE_FINDALLBYUSER = "select p.id,p.id_ordonnance,p.id_medicament,p.nb_dose,p.id_dose,p.nb_frequence,p.frequence,p.nb_duree,p.duree,p.date_debut,p.date_fin,p.matin,p.midi,p.soir,p.commentaire from prescription AS p, ordonnance as o where p.id_ordonnance=o.id and o.id_utilisateur=?";
+	private final String ORDRE_FINDALLBYUSER = "select p.id,p.id_ordonnance,p.id_medicament,p.nb_dose,p.id_dose,p.nb_frequence,p.frequence,p.nb_duree,p.duree,p.date_debut,p.date_fin,p.matin,p.midi,p.soir,p.commentaire from prescription AS p, ordonnance as o where p.id_ordonnance=o.id and o.id_utilisateur=? order by (SUBSTRING(p.date_fin,7,4)), (SUBSTRING(p.date_fin,4,2)), (SUBSTRING(p.date_fin,1,2))";
 	//private final String ORDRE_FINDBYREFS = "select * from prescription AS um where um.id_utilisateur=? AND um.id_medicament=?";
 	private final String ORDRE_DELETE = "delete from prescription where Id = ";
 	private final String ORDRE_UPDATE = "update prescription set id_ordonnance=?,id_medicament=?,nb_dose=?,id_dose=?,nb_frequence=?,frequence=?,nb_duree=?,duree=?,date_debut=?,date_fin=?,matin=?,midi=?,soir=?,commentaire=?  where id = ?";
@@ -213,12 +213,12 @@ public class Prescription2DAOImpl implements Prescription2DAO {
 			a.setNbDuree(resultSet.getInt("nb_duree"));
 			a.setDuree(EnumDuree.valueOf(resultSet.getString("duree")));
 			a.setDateDebut(resultSet.getString("date_debut"));
-			//	a.setDateFin(resultSet.getString("date_fin"));
+				a.setDateFin(resultSet.getString("date_fin"));
 			a.setMatin(resultSet.getInt("matin"));
 			a.setMidi(resultSet.getInt("midi"));
 			a.setSoir(resultSet.getInt("soir"));
 			a.setCommentaire(resultSet.getString("commentaire"));
-			a.setDateFin(a.calculerDateFin(resultSet.getString("date_debut"), a.getNbDuree(), a.getDuree()));
+			//a.setDateFin(a.calculerDateFin(resultSet.getString("date_debut"), a.getNbDuree(), a.getDuree()));
 			getListePrescriptions().add(a);
 		}
 	}
