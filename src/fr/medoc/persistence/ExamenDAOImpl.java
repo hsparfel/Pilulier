@@ -11,6 +11,7 @@ import fr.medoc.dao.ExamenDAO;
 import fr.medoc.dao.OrdonnanceDAO;
 import fr.medoc.dao.CabinetDAO;
 import fr.medoc.dao.DAOFactory;
+import fr.medoc.entities.Analyse;
 import fr.medoc.entities.Examen;
 import fr.medoc.enumeration.EnumExamen;
 import fr.medoc.exception.DAOException;
@@ -24,6 +25,9 @@ public class ExamenDAOImpl implements ExamenDAO {
 	private final String ORDRE_FINDALL = "select * from examen";
 	private final String ORDRE_FINDBYREF = "select * from examen where Id = ?";
 	private final String ORDRE_UPDATE = "update examen set id_ordonnance=?, set nom=?,set id_cabinet=?,set commentaire=?, set date=? where id = ?";
+	//a faire
+	private final String ORDRE_FINDALLBYUSER = "select e.id,e.id_ordonnance,e.nom,e.id_cabinet,e.commentaire,e.date from examen AS e, ordonnance as o where e.id_ordonnance=o.id and o.id_utilisateur=?";
+	
 	private DAOFactory daoFactory;
 
 	public ExamenDAOImpl(DAOFactory daoFactory) {
@@ -100,7 +104,7 @@ public class ExamenDAOImpl implements ExamenDAO {
 		Connection connexion = null;
 		OrdonnanceDAO uneOrdonnanceDAO = daoFactory.getOrdonnanceDAO();
 		CabinetDAO unCabinetDAO = daoFactory.getCabinetDAO();
-		
+
 		try {
 			connexion = daoFactory.getConnection();
 			PreparedStatement pst = connexion.prepareStatement(ORDRE_FINDBYREF);
@@ -154,7 +158,7 @@ public class ExamenDAOImpl implements ExamenDAO {
 			Examen a = new Examen();
 			OrdonnanceDAO uneOrdonnanceDAO = daoFactory.getOrdonnanceDAO();
 			CabinetDAO unCabinetDAO = daoFactory.getCabinetDAO();
-			
+
 			a.setId(resultSet.getInt("id"));
 			a.setOrdonnance(uneOrdonnanceDAO.findByRef(resultSet.getInt("id_ordonnance")));
 			a.setNom(EnumExamen.valueOf(resultSet.getString("nom")));
@@ -163,5 +167,23 @@ public class ExamenDAOImpl implements ExamenDAO {
 			a.setDate(resultSet.getString("date"));
 			getListeExamens().add(a);
 		}
+	}
+	
+	@Override
+	public Collection<Examen> findAllByUser(int id) throws DAOException {
+		Connection connexion = null;
+		try {
+			connexion = daoFactory.getConnection();
+			PreparedStatement pst = connexion.prepareStatement(ORDRE_FINDALLBYUSER);
+			pst.setInt(1, id);
+			ResultSet resultSet = pst.executeQuery();
+			listeExamens.removeAll(listeExamens);
+			resultSetToArrayList(resultSet);
+			daoFactory.closeConnexion(connexion);
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+		return listeExamens;
+		
 	}
 }

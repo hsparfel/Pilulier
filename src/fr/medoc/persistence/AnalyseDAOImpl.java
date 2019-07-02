@@ -24,6 +24,9 @@ public class AnalyseDAOImpl implements AnalyseDAO {
 	private final String ORDRE_FINDALL = "select * from analyse";
 	private final String ORDRE_FINDBYREF = "select * from analyse where Id = ?";
 	private final String ORDRE_UPDATE = "update analyse set id_ordonnance=?, set nom=?,set id_cabinet=?,set commentaire=?, set date=? where id = ?";
+	//a faire
+	private final String ORDRE_FINDALLBYUSER = "select a.id,a.id_ordonnance,a.nom,a.id_cabinet,a.commentaire,a.date from analyse AS a, ordonnance as o where a.id_ordonnance=o.id and o.id_utilisateur=?";
+	
 	private DAOFactory daoFactory;
 
 	public AnalyseDAOImpl(DAOFactory daoFactory) {
@@ -163,5 +166,23 @@ public class AnalyseDAOImpl implements AnalyseDAO {
 			a.setDate(resultSet.getString("date"));
 			getListeAnalyses().add(a);
 		}
+	}
+
+	@Override
+	public Collection<Analyse> findAllByUser(int id) throws DAOException {
+		Connection connexion = null;
+		try {
+			connexion = daoFactory.getConnection();
+			PreparedStatement pst = connexion.prepareStatement(ORDRE_FINDALLBYUSER);
+			pst.setInt(1, id);
+			ResultSet resultSet = pst.executeQuery();
+			listeAnalyses.removeAll(listeAnalyses);
+			resultSetToArrayList(resultSet);
+			daoFactory.closeConnexion(connexion);
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+		return listeAnalyses;
+		
 	}
 }

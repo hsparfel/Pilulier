@@ -42,7 +42,7 @@
 
 		<div class="row">
 			<div class="col-xs-12 col-sm-8">
-				<div class="jumbotron">
+				<div class="h1">
 					<h1>Enregistrer une ordonnance</h1>
 				</div>
 			</div>
@@ -907,7 +907,7 @@
 													<i class="fa fa-spoon"></i>
 												</div>
 											</div>
-											<select id="idDose5" name="idDose4" class="custom-select"
+											<select id="idDose5" name="idDose5" class="custom-select"
 												required="required">
 												<option disabled selected>Sélectionner dose</option>
 												<c:forEach items="${ listeDoses }" var="dose">

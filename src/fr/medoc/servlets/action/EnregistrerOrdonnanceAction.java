@@ -111,9 +111,10 @@ public class EnregistrerOrdonnanceAction extends HttpServlet {
 		if (nbPrescription>0) {
 
 			for (int i=1;i<=nbPrescription;i++) {
-
+System.out.println("boucle: "+i);
 				int idMedicament = (Integer) Integer.parseInt(request.getParameter("idMedicament"+i));
 				Float nbDose = (Float) Float.parseFloat(request.getParameter("quantiteDose"+i));
+				
 				int idDose = (Integer) Integer.parseInt(request.getParameter("idDose"+i));
 				int nbFrequence = (Integer) Integer.parseInt(request.getParameter("quantiteFrequence"+i));
 				String idFrequence = request.getParameter("idFrequence"+i);

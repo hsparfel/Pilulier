@@ -38,7 +38,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-sm-8">
-				<div class="jumbotron">
+				<div class="h1">
 					<h1>Afficher un medecin</h1>
 				</div>
 				<form action="AfficherMedecinAction" method="post">

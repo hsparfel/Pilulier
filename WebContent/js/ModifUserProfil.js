@@ -116,6 +116,15 @@ str+=" "+date.getFullYear()+"  -  "
 				$('#listRdv').slideToggle("slow");
 			});
 
+			$('#listBtnAnalyse').click(function() {
+                $('#listAnalyse').slideToggle("slow");
+            });
+			$('#listBtnExamen').click(function() {
+                $('#listExamen').slideToggle("slow");
+            });
+			
+			
+			
 			$('.btn-prise').click(function() {
 
 				$('#btnSubmit' + this.id).click();

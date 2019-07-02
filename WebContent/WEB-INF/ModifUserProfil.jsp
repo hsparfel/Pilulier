@@ -34,8 +34,10 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-sm-8">
-				<div class="jumbotron">
-					<div class ="row"><h1 id="div_horloge"></h1>
+				<!--  		<div class="jumbotron"> -->
+				<div class="h1">
+					<div class="row">
+						<h1 id="div_horloge"></h1>
 					</div>
 					<a class=" btn btn-default btn-sm" href="AssocierMedecin">Associer
 						Medecin</a> <a class=" btn btn-default btn-sm" href="DissocierMedecin">Dissocier
@@ -43,18 +45,19 @@
 						Prise</a> <a class=" btn btn-default btn-sm"
 						href="EnregistrerOrdonnance">Ajouter Ordonnance</a>
 				</div>
-				<div class="col-xs-12 col-sm-6">
-					
-						<c:import url="sidebarMenuListMyPrise.jsp"></c:import>
-						
-					
+				<div class="col-7 ">
+
+					<c:import url="sidebarMenuListMyPrise.jsp"></c:import>
+
+
 				</div>
 			</div>
 			<div class="col-xs-6 col-sm-4" id="sidebar">
 				<c:import url="sidebarMenuListMyRdv.jsp"></c:import>
-				<c:import url="sidebarMenuListMyMedecin.jsp"></c:import>
+				<c:import url="sidebarMenuListMyAnalyse.jsp"></c:import>
+				<c:import url="sidebarMenuListMyExamen.jsp"></c:import>
 				<c:import url="sidebarMenuListMyPrescription.jsp"></c:import>
-
+				<c:import url="sidebarMenuListMyMedecin.jsp"></c:import>
 
 			</div>
 		</div>

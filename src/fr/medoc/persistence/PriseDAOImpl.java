@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -17,14 +19,14 @@ import fr.medoc.exception.DAOException;
 public class PriseDAOImpl implements PriseDAO {
 
 	private ArrayList<Prise> listePrises;
-	private ArrayList<Prise> listePrisesTries;
+	
 
 	private final String ORDRE_INSERT = "insert into prise(id_prescription, date, heure) values ";
 	private final String VALUES_INSERT = "(?,?,?)";
 	private final String ORDRE_DELETE = "delete from prise where Id = ";
 	private final String ORDRE_FINDALL = "select * from prise";
 	//private final String ORDRE_FINDALLBYUSER = "select m.nom, pr.nb_dose, d.nom, p.date, p.heure from prise AS p, prescription AS pr, ordonnance AS o, medicament as m, dose AS d where p.id_prescription = pr.id and pr.id_ordonnance=o.id and pr.id_medicament=m.id and pr.id_dose = d.id and o.id_utilisateur=";
-	private final String ORDRE_FINDALLBYUSER = "select p.id, p.id_prescription, p.date, p.heure, p.effectue from prise AS p, prescription AS pr, ordonnance AS o, medicament as m, dose AS d where p.id_prescription = pr.id and pr.id_ordonnance=o.id and pr.id_medicament=m.id and pr.id_dose = d.id and o.id_utilisateur=";
+	private final String ORDRE_FINDALLBYUSER = "select p.id, p.id_prescription, p.date, p.heure, p.effectue from prise AS p, prescription AS pr, ordonnance AS o, medicament as m, dose AS d where p.id_prescription = pr.id and pr.id_ordonnance=o.id and pr.id_medicament=m.id and pr.id_dose = d.id and o.id_utilisateur=? and p.date=?";
 	
 	private final String ORDRE_FINDBYREF = "select * from prise where Id = ?";
 	private final String ORDRE_DELETEBYPRESCRIPTION = "delete from prise where id_prescription = ";
@@ -34,7 +36,7 @@ public class PriseDAOImpl implements PriseDAO {
 
 	public PriseDAOImpl(DAOFactory daoFactory) {
 		listePrises = new ArrayList<Prise>();
-		listePrisesTries = new ArrayList<Prise>();
+		
 		this.daoFactory = daoFactory;
 	}
 
@@ -158,13 +160,7 @@ public class PriseDAOImpl implements PriseDAO {
 		return listePrises;
 	}
 
-	public void setListePrisesTries(ArrayList<Prise> listePrisesTries) {
-		this.listePrisesTries = listePrisesTries;
-	}
-
-	public Collection<Prise> getListePrisesTries() {
-		return listePrisesTries;
-	}
+	
 
 	private void resultSetToArrayList(ResultSet resultSet) throws SQLException, DAOException {
 
@@ -187,7 +183,18 @@ public class PriseDAOImpl implements PriseDAO {
 		Connection connexion = null;
 		try {
 			connexion = daoFactory.getConnection();
-			PreparedStatement pst = connexion.prepareStatement(ORDRE_FINDALLBYUSER+ "'" + id + "'");
+			PreparedStatement pst = connexion.prepareStatement(ORDRE_FINDALLBYUSER);
+			pst.setInt(1, id);
+			
+			//String dateDuJour = "";
+			LocalDate dateNow = LocalDate.now();
+			
+			DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd/MM/yyyy"); 
+		    String dateDuJour = dateNow.format(myFormatObj); 
+		    System.out.println("date du jour: "+dateDuJour);
+		     
+			
+			pst.setString(2, dateDuJour);
 			ResultSet resultSet = pst.executeQuery();
 			listePrises.removeAll(listePrises);
 			resultSetToArrayList(resultSet);
@@ -195,6 +202,7 @@ public class PriseDAOImpl implements PriseDAO {
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}
+		System.out.println(listePrises);
 		return listePrises;
 	}
 

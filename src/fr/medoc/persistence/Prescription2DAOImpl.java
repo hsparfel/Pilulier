@@ -25,7 +25,7 @@ public class Prescription2DAOImpl implements Prescription2DAO {
 	private final String ORDRE_INSERT = "insert into prescription(id_ordonnance,id_medicament,nb_dose,id_dose,nb_frequence,frequence,nb_duree,duree,date_debut,date_fin,matin,midi,soir,commentaire) values ";
 	private final String VALUES_INSERT = "(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	private final String ORDRE_FINDBYREF = "select * from prescription where Id = ?";
-	//private final String ORDRE_FINDALLBYUSER = "select * from prescription AS um where um.id_utilisateur=?";
+	private final String ORDRE_FINDALLBYUSER = "select p.id,p.id_ordonnance,p.id_medicament,p.nb_dose,p.id_dose,p.nb_frequence,p.frequence,p.nb_duree,p.duree,p.date_debut,p.date_fin,p.matin,p.midi,p.soir,p.commentaire from prescription AS p, ordonnance as o where p.id_ordonnance=o.id and o.id_utilisateur=?";
 	//private final String ORDRE_FINDBYREFS = "select * from prescription AS um where um.id_utilisateur=? AND um.id_medicament=?";
 	private final String ORDRE_DELETE = "delete from prescription where Id = ";
 	private final String ORDRE_UPDATE = "update prescription set id_ordonnance=?,id_medicament=?,nb_dose=?,id_dose=?,nb_frequence=?,frequence=?,nb_duree=?,duree=?,date_debut=?,date_fin=?,matin=?,midi=?,soir=?,commentaire=?  where id = ?";
@@ -58,14 +58,14 @@ public class Prescription2DAOImpl implements Prescription2DAO {
 				unePrescription.setId(rs.getInt("id"));
 				unePrescription.setOrdonnance(uneOrdonnanceDAO.findByRef(rs.getInt("id_ordonnance")));
 				unePrescription.setMedicament(unMedicamentDAO.findByRef(rs.getInt("id_medicament")));
-				unePrescription.setNbDose(rs.getInt("nb_dose"));
+				unePrescription.setNbDose(rs.getFloat("nb_dose"));
 				unePrescription.setDose(unDoseDAO.findByRef(rs.getInt("id_dose")));
 				unePrescription.setNbFrequence(rs.getInt("nb_frequence"));
 				unePrescription.setFrequence(EnumDuree.valueOf(rs.getString("frequence")));
 				unePrescription.setNbDuree(rs.getInt("nb_duree"));
 				unePrescription.setDuree(EnumDuree.valueOf(rs.getString("duree")));
 				unePrescription.setDateDebut(rs.getString("date_debut"));
-				unePrescription.setDateFin(unePrescription.calculerDateFin(rs.getString("date_debut"), unePrescription.getNbDuree(), unePrescription.getDuree()));
+				unePrescription.setDateFin(rs.getString("date_fin"));
 
 				unePrescription.setMatin(rs.getInt("matin"));
 				unePrescription.setMidi(rs.getInt("midi"));
@@ -166,7 +166,7 @@ public class Prescription2DAOImpl implements Prescription2DAO {
 		}
 	}
 
-	/*@Override
+	@Override
 	public Collection<Prescription2> findAllByUser(int id) throws DAOException {
 		Connection connexion = null;
 		try {
@@ -181,7 +181,7 @@ public class Prescription2DAOImpl implements Prescription2DAO {
 			throw new DAOException(e);
 		}
 		return listePrescriptions;
-	}*/
+	}
 
 	public void setListePrescriptions(ArrayList<Prescription2> listePrescriptions) {
 		this.listePrescriptions = listePrescriptions;
@@ -206,7 +206,7 @@ public class Prescription2DAOImpl implements Prescription2DAO {
 			a.setId(resultSet.getInt("id"));
 			a.setOrdonnance(uneOrdonnanceDAO.findByRef(resultSet.getInt("id_ordonnance")));
 			a.setMedicament(unMedicamentDAO.findByRef(resultSet.getInt("id_medicament")));
-			a.setNbDose(resultSet.getInt("nb_dose"));
+			a.setNbDose(resultSet.getFloat("nb_dose"));
 			a.setDose(unDoseDAO.findByRef(resultSet.getInt("id_dose")));
 			a.setNbFrequence(resultSet.getInt("nb_frequence"));
 			a.setFrequence(EnumDuree.valueOf(resultSet.getString("frequence")));

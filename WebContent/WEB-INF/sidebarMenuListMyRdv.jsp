@@ -11,7 +11,7 @@
 	<c:if test="${!empty listeRdvs }">
 		<div id="listRdv">
 			<c:forEach items="${ listeRdvs }" var="rdv">
-				<a href="AfficherRdv?id=${ rdv.id }" class="list-group-item">${ rdv.medecin.nom}-
+				<a href="AfficherRdv?id=${ rdv.id }" class="list-group-item">${ rdv.medecin.nom} -
 					${ rdv.date} à ${ rdv.heure}<br>${ rdv.medecin.cabinet.nom}</a>
 			</c:forEach>
 		</div>
