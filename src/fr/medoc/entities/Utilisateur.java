@@ -6,9 +6,27 @@ public class Utilisateur {
 
 	private int id;
 	private String nom;
+	private String dateDeNaissance;
+	private String sexe;
 
 	public Utilisateur() {
 		this.nom = "";
+	}
+
+	public String getDateDeNaissance() {
+		return dateDeNaissance;
+	}
+
+	public void setDateDeNaissance(String dateDeNaissance) {
+		this.dateDeNaissance = dateDeNaissance;
+	}
+
+	public String getSexe() {
+		return sexe;
+	}
+
+	public void setSexe(String sexe) {
+		this.sexe = sexe;
 	}
 
 	public Utilisateur(String nom) {

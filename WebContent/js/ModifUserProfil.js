@@ -1,7 +1,37 @@
 
 $(document).ready(
 		function() {
-			// function main(){
+			
+		    //remplir l'age
+		    
+		    let dateNaissance = $('#dateNaissance').html();
+		    let dateDuJour=new Date(Date.now());
+		    let jourNaissance = dateNaissance.substr(0,2);
+		    console.log("jour naiss: "+jourNaissance);
+		    let moisNaissance = dateNaissance.substr(3,2);
+            console.log("mois naiss: "+moisNaissance);
+             let anneeNaissance = dateNaissance.substr(6,4);
+            console.log("annee naiss: "+anneeNaissance);
+            dateNaissance=anneeNaissance+"-"+moisNaissance+"-"+jourNaissance;
+            dateNaissanceFormatee=new Date(dateNaissance);
+            
+            var ageDifMs = dateDuJour - dateNaissanceFormatee.getTime();
+            var ageDate = new Date(ageDifMs); // miliseconds from epoch
+            let age= Math.abs(ageDate.getUTCFullYear() - 1970);
+            
+            console.log("age: "+age);
+            
+            $('#myAge').html(age+" ans");
+            
+            
+            
+            
+		    //fin remplir l'age
+		    
+		    
+		    
+		    
+		    // function main(){
 			// $('#listBtnRdv').click();
 			// console.log("ici");
 			// $('#listPrescription').slideToggle("slow");
@@ -130,4 +160,14 @@ str+=" "+date.getFullYear()+"  -  "
 				$('#btnSubmit' + this.id).click();
 			});
 
+			$('#btnModifier').click(function() {
+			    console.log("url");
+			 // sauvegarde de l'url pour retour
+                let chemin = $(location).attr('pathname');
+                let chemin2 = chemin.substr(1, chemin.length - 1);
+                let indiceSlash = chemin2.indexOf("/");
+                let page = chemin2.substr(indiceSlash + 1, chemin.length - indiceSlash);
+                sessionStorage.setItem("pagePrecedente", page);
+                
+            });
 		});

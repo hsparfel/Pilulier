@@ -39,13 +39,70 @@
 					<div class="row">
 						<h1 id="div_horloge"></h1>
 					</div>
-					
+
 				</div>
-				<div class="col-7 ">
+				<div class="row">
+					<div class="col-7 ">
 
-					<c:import url="sidebarMenuListMyPrise.jsp"></c:import>
+						<c:import url="sidebarMenuListMyPrise.jsp"></c:import>
 
 
+					</div>
+					<div class="col-5">
+						<div class="form-group row">
+							<label for="myPoids"
+								class="col-5 col-form-label text-right ">Poids :</label>
+							<div class="col-4 col-form-label text-left ">${ profil.poids }
+								kgs</div>
+
+						</div>
+						<div class="form-group row">
+							<label for="myTaille"
+								class="col-5 col-form-label text-right ">Taille :</label>
+							<div class="col-4 col-form-label text-left ">${ profil.taille }
+								cms</div>
+
+						</div>
+						<div class="form-group row">
+							<label for="myAge" class="col-5 col-form-label text-right ">Age :</label>
+							<div id="myAge" class="col-4 col-form-label text-left "></div>
+
+						</div>
+						<div class="form-group row">
+							<label for="myNaissance"
+								class="col-5 col-form-label text-right ">Naissance :</label>
+							<div id="dateNaissance" class="col-4 col-form-label text-left ">${ utilisateur.dateDeNaissance}</div>
+
+						</div>
+						<div class="form-group row">
+							<label for="myImc" class="col-5 col-form-label text-right ">IMC :</label>
+							<div class="col-4 col-form-label text-left ">${ profil.imc }</div>
+
+						</div>
+							<div class="form-group row">
+							<label for="myImcComm" class="col-5 col-form-label text-right ">Mon
+								Commentaire IMC :</label>
+							<div class="col-4 col-form-label text-left ">${ profil.commentaire }</div>
+
+						</div>
+						<div class="form-group row">
+							<div class="offset-2 col-10">
+								<a href="ModifierProfil" id="btnModifier" name="btnModifier"
+									type="button" class="btn btn-outline-primary btnAffiches">Modifier</a>
+							</div>
+
+						</div>
+						<div class="form-group row">
+							<div class="offset-2 col-10">
+								<a href="GraphiqueProfil" id="btnGraphique" name="btnGraphique"
+									type="button"
+									class=" btn btn-outline-primary btnAffiches"> <img
+									src="images/chart.png">
+								</a> 
+
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="col-xs-6 col-sm-4" id="sidebar">
@@ -59,7 +116,7 @@
 		</div>
 
 		<!--/row-->
-		
+
 		<c:import url="footer.jsp"></c:import>
 	</div>
 	<!--/.container-->

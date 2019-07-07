@@ -8,7 +8,7 @@
 	<div class="list-group">
 		<div class="list-group-item active">Liste des utilisateurs</div>
 		<c:forEach items="${ listeUtilisateurs }" var="utilisateur">
-			<a href="AfficherUtilisateur?id=${ utilisateur.id }" class="list-group-item">${ utilisateur.nom }</a>
+			<a href="Accueil" class="list-group-item">${ utilisateur.nom }</a>
 		</c:forEach>
 	</div>
 </c:if>

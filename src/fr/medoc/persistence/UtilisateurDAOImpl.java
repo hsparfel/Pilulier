@@ -19,10 +19,10 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 	private final String ORDRE_INSERT = "insert into utilisateur(Nom) values ";
 	private final String VALUES_INSERT = "(?)";
 	private final String ORDRE_DELETE = "delete from utilisateur where Id = ";
-	private final String ORDRE_FINDALL = "select Id,Nom from utilisateur";
-	private final String ORDRE_FINDBYREF = "select Id,Nom from utilisateur where Id = ?";
-	private final String ORDRE_FINDBYNAME = "select Id,Nom from utilisateur where Nom = ?";
-	private final String ORDRE_UPDATE = "update utilisateur set Nom=? where id = ?";
+	private final String ORDRE_FINDALL = "select Id,Nom,date_naissance,sexe from utilisateur";
+	private final String ORDRE_FINDBYREF = "select Id,Nom,date_naissance,sexe from utilisateur where Id = ?";
+	private final String ORDRE_FINDBYNAME = "select Id,Nom,date_naissance,sexe from utilisateur where Nom = ?";
+	private final String ORDRE_UPDATE = "update utilisateur set Nom=?,date_naissance=?,sexe=? where id = ?";
 	private DAOFactory daoFactory;
 
 	public UtilisateurDAOImpl(DAOFactory daoFactory) {
@@ -31,14 +31,17 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 	}
 
 	@Override
-	public void modifierUtilisateur(Utilisateur uneUtilisateur, int id) throws DAOException {
+	public void modifierUtilisateur(Utilisateur unUtilisateur, int id) throws DAOException {
 		Connection connexion = null;
 		try {
 			connexion = daoFactory.getConnection();
-			getListeUtilisateurs().add(uneUtilisateur);
+			getListeUtilisateurs().add(unUtilisateur);
 			PreparedStatement pst = connexion.prepareStatement(ORDRE_UPDATE);
-			pst.setString(1, uneUtilisateur.getNom());
-			pst.setInt(2, id);
+			pst.setString(1, unUtilisateur.getNom());
+			pst.setString(2, unUtilisateur.getDateDeNaissance());
+			pst.setString(3, unUtilisateur.getSexe());
+			
+			pst.setInt(4, id);
 			pst.executeUpdate();
 			connexion.commit();
 			daoFactory.closeConnexion(connexion);
@@ -97,6 +100,10 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 			if (rs.next()) {
 				unUtilisateur = new Utilisateur(rs.getString("nom"));
 				unUtilisateur.setId(id);
+				unUtilisateur.setDateDeNaissance(rs.getString("date_naissance"));
+				unUtilisateur.setSexe(rs.getString("sexe"));
+				
+				
 			} else {
 				throw new DAOException("Erreur recherche d'un utilisateur. ");
 			}
@@ -120,6 +127,9 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 			if (rs.next()) {
 				unUtilisateur = new Utilisateur(rs.getString("nom"));
 				unUtilisateur.setId(rs.getInt("id"));
+				unUtilisateur.setDateDeNaissance(rs.getString("date_naissance"));
+				unUtilisateur.setSexe(rs.getString("sexe"));
+				
 			} else {
 				throw new DAOException("Erreur recherche d'un utilisateur. ");
 			}

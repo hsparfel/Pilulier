@@ -146,4 +146,8 @@ public class DAOFactory {
     public PatientMedecinDAO getPatientMedecinDAO() {
         return new PatientMedecinDAOImpl(this);
     }
+    
+    public ProfilDAO getProfilDAO() {
+        return new ProfilDAOImpl(this);
+    }
 }
