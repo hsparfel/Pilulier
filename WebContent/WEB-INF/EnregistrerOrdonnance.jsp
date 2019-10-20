@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
 <meta http-equiv="Content-Type"
 	content="text/html; charset=windows-1252">
@@ -29,6 +29,7 @@
 <link rel="stylesheet" type="text/css" href="css/standalone.css">
 
 <link href="css/ion.calendar.css" rel="stylesheet" type="text/css">
+<link href="css/Ordonnance.css" rel="stylesheet" type="text/css">
 <!-- Custom styles for this template -->
 
 
@@ -47,7 +48,8 @@
 				</div>
 			</div>
 			<div class="col-12">
-				<form action="EnregistrerOrdonnanceAction" method="post" autocomplete="off">
+				<form action="EnregistrerOrdonnanceAction" method="post"
+					autocomplete="off" enctype="multipart/form-data">
 					<div class="form-group row">
 						<label for="idMedecin"
 							class="col-1 col-form-label font-weight-lighter text-right">Medecin</label>
@@ -59,8 +61,8 @@
 									</div>
 								</div>
 								<select id="idMedecin" name="idMedecin" required="required"
-									class="custom-select" value="">
-									<option disabled selected>Sélectionner</option>
+									class="custom-select">
+									<option value="" disabled selected>Sélectionner</option>
 									<c:forEach items="${ listeMedecins }" var="medecin">
 										<option value="${ medecin.id }">${ medecin.nom }</option>
 									</c:forEach>
@@ -68,7 +70,7 @@
 							</div>
 						</div>
 						<a href="EnregistrerMedecin"> <span
-							class="fa fa-plus-square-o fa-2x"></span>
+							class="fa fa-plus-square-o fa-2x btnPlus"></span>
 						</a> <label for="date"
 							class="col-1 col-form-label font-weight-lighter text-right">Date
 						</label>
@@ -87,6 +89,30 @@
 							<span id="textHelpBlockDate" class="form-text text-muted d-none">ex:
 								04/07/2019</span>
 						</div>
+
+						<div class="col-4">
+							<!--  <div class="form-group row"> -->
+								<div class="input-group">
+									<div class="input-group-prepend">
+										<div class="input-group-text">
+											<i class="fa fa-file-text-o"></i>
+										</div>
+									</div>
+									<div class="custom-file">
+										<input type="file" class="custom-file-input " id="customFile" name="fichier"
+											lang="fr" accept=".jpg,.jpeg,.gif,.png,.pdf"> <label
+											class="custom-file-label" for="customFile">Enregistrer
+											un Fichier</label>
+									</div>
+								</div>
+						<!-- 	</div>-->
+						</div>
+
+
+
+
+
+
 
 
 					</div>
@@ -118,9 +144,10 @@
 
 
 					<div class="listPrescription">
-							<div class="d-none"> 
-							<label>nb precription:</label>
-							<input type="text" id="nbPrescription" name="nbPrescription" class="nbPrescription form-control"value="0"></input>
+						<div class="d-none">
+							<label>nb precription:</label> <input type="text"
+								id="nbPrescription" name="nbPrescription"
+								class="nbPrescription form-control" value="0"></input>
 						</div>
 						<div class="detailPrescription ">
 
@@ -152,8 +179,7 @@
 										class="col-1 col-form-label font-weight-lighter text-right">Dose</label>
 									<div class="col-1">
 										<input id="quantiteDose1" name="quantiteDose1" type="number"
-											required="required" class="form-control" step="0.5" value="0"
-											min="0">
+											class="form-control" step="0.5" value="0" min="0">
 									</div>
 									<div class="col-3">
 										<div class="input-group">
@@ -180,8 +206,7 @@
 										class="col-1 col-form-label font-weight-lighter text-right ">Fréquence</label>
 									<div class="col-1">
 										<input id="quantiteFrequence1" name="quantiteFrequence1"
-											type="number" class="form-control" required="required"
-											value="0" min="0">
+											type="number" class="form-control" value="0" min="0">
 									</div>
 									<label for="idFrequence1" class=" col-form-label ">fois
 										par</label>
@@ -338,8 +363,7 @@
 										class="col-1 col-form-label font-weight-lighter text-right">Dose</label>
 									<div class="col-1">
 										<input id="quantiteDose2" name="quantiteDose2" type="number"
-											required="required" class="form-control" step="0.5" value="0"
-											min="0">
+											class="form-control" step="0.5" value="0" min="0">
 									</div>
 									<div class="col-3">
 										<div class="input-group">
@@ -366,8 +390,7 @@
 										class="col-1 col-form-label font-weight-lighter text-right ">Fréquence</label>
 									<div class="col-1">
 										<input id="quantiteFrequence2" name="quantiteFrequence2"
-											type="number" class="form-control" required="required"
-											value="0" min="0">
+											type="number" class="form-control" value="0" min="0">
 									</div>
 									<label for="idFrequence2" class=" col-form-label ">fois
 										par</label>
@@ -524,8 +547,7 @@
 										class="col-1 col-form-label font-weight-lighter text-right">Dose</label>
 									<div class="col-1">
 										<input id="quantiteDose3" name="quantiteDose3" type="number"
-											required="required" class="form-control" step="0.5" value="0"
-											min="0">
+											class="form-control" step="0.5" value="0" min="0">
 									</div>
 									<div class="col-3">
 										<div class="input-group">
@@ -552,8 +574,7 @@
 										class="col-1 col-form-label font-weight-lighter text-right ">Fréquence</label>
 									<div class="col-1">
 										<input id="quantiteFrequence3" name="quantiteFrequence3"
-											type="number" class="form-control" required="required"
-											value="0" min="0">
+											type="number" class="form-control" value="0" min="0">
 									</div>
 									<label for="idFrequence3" class=" col-form-label ">fois
 										par</label>
@@ -711,8 +732,7 @@
 										class="col-1 col-form-label font-weight-lighter text-right">Dose</label>
 									<div class="col-1">
 										<input id="quantiteDose4" name="quantiteDose4" type="number"
-											required="required" class="form-control" step="0.5" value="0"
-											min="0">
+											class="form-control" step="0.5" value="0" min="0">
 									</div>
 									<div class="col-3">
 										<div class="input-group">
@@ -739,8 +759,7 @@
 										class="col-1 col-form-label font-weight-lighter text-right ">Fréquence</label>
 									<div class="col-1">
 										<input id="quantiteFrequence4" name="quantiteFrequence4"
-											type="number" class="form-control" required="required"
-											value="0" min="0">
+											type="number" class="form-control" value="0" min="0">
 									</div>
 									<label for="idFrequence4" class=" col-form-label ">fois
 										par</label>
@@ -897,8 +916,7 @@
 										class="col-1 col-form-label font-weight-lighter text-right">Dose</label>
 									<div class="col-1">
 										<input id="quantiteDose5" name="quantiteDose5" type="number"
-											required="required" class="form-control" step="0.5" value="0"
-											min="0">
+											class="form-control" step="0.5" value="0" min="0">
 									</div>
 									<div class="col-3">
 										<div class="input-group">
@@ -925,8 +943,7 @@
 										class="col-1 col-form-label font-weight-lighter text-right ">Fréquence</label>
 									<div class="col-1">
 										<input id="quantiteFrequence5" name="quantiteFrequence5"
-											type="number" class="form-control" required="required"
-											value="0" min="0">
+											type="number" class="form-control" value="0" min="0">
 									</div>
 									<label for="idFrequence5" class=" col-form-label ">fois
 										par</label>
@@ -1060,9 +1077,9 @@
 						</div>
 					</div>
 					<div class="listAnalyse">
-					  	<div class="d-none"> 
-							<label>nb analyse:</label>
-							<input type="text" id="nbAnalyse" name="nbAnalyse" class="nbAnalyse form-control" value="0"></input>
+						<div class="d-none">
+							<label>nb analyse:</label> <input type="text" id="nbAnalyse"
+								name="nbAnalyse" class="nbAnalyse form-control" value="0"></input>
 						</div>
 						<div class="detailAnalyse">
 							<!-- analyse1 -->
@@ -1097,7 +1114,7 @@
 											</div>
 											<select id="idCabinetAnalyse1" name="idCabinetAnalyse1"
 												required="required" class="custom-select">
-												<option  disabled selected>Sélectionner</option>
+												<option disabled selected>Sélectionner</option>
 												<c:forEach items="${ listeCabinets }" var="cabinet">
 													<option value="${ cabinet.id }">${ cabinet.nom }</option>
 												</c:forEach>
@@ -1116,13 +1133,12 @@
 													<i class="fa fa-calendar"></i>
 												</div>
 											</div>
-											<input type="text"  id="dateAnalyse1"
-												class="form-control" data-lang="fr" data-years="2019-2030"
-												data-format="DD/MM/YYYY" 
-												name="dateAnalyse1" placeholder="Sélectionner"
-												maxlength="10" />
+											<input type="text" id="dateAnalyse1" class="form-control"
+												data-lang="fr" data-years="2019-2030"
+												data-format="DD/MM/YYYY" name="dateAnalyse1"
+												placeholder="Sélectionner" maxlength="10" />
 										</div>
-										<span id="textHelpBlockDate"
+										<span id="textHelpBlockDateAnalyse1"
 											class="form-text text-muted d-none">ex: 04/07/2019</span>
 									</div>
 								</div>
@@ -1190,7 +1206,7 @@
 											</div>
 											<select id="idCabinetAnalyse2" name="idCabinetAnalyse2"
 												required="required" class="custom-select">
-												<option  disabled selected>Sélectionner</option>
+												<option disabled selected>Sélectionner</option>
 												<c:forEach items="${ listeCabinets }" var="cabinet">
 													<option value="${ cabinet.id }">${ cabinet.nom }</option>
 												</c:forEach>
@@ -1209,13 +1225,12 @@
 													<i class="fa fa-calendar"></i>
 												</div>
 											</div>
-											<input type="text"  id="dateAnalyse2"
-												class="form-control" data-lang="fr" data-years="2019-2030"
-												data-format="DD/MM/YYYY" 
-												name="dateAnalyse2" placeholder="Sélectionner"
-												maxlength="10" />
+											<input type="text" id="dateAnalyse2" class="form-control"
+												data-lang="fr" data-years="2019-2030"
+												data-format="DD/MM/YYYY" name="dateAnalyse2"
+												placeholder="Sélectionner" maxlength="10" />
 										</div>
-										<span id="textHelpBlockDate"
+										<span id="textHelpBlockDateAnalyse2"
 											class="form-text text-muted d-none">ex: 04/07/2019</span>
 									</div>
 								</div>
@@ -1252,7 +1267,7 @@
 							<!-- fin analyse2 -->
 
 
-<!-- analyse3 -->
+							<!-- analyse3 -->
 							<div id="analyse3" class="d-none">
 								<div id="analyse3Ligne1" class="form-group row ">
 									<label for="idAnalyse3"
@@ -1284,7 +1299,7 @@
 											</div>
 											<select id="idCabinetAnalyse3" name="idCabinetAnalyse3"
 												required="required" class="custom-select">
-												<option  disabled selected>Sélectionner</option>
+												<option disabled selected>Sélectionner</option>
 												<c:forEach items="${ listeCabinets }" var="cabinet">
 													<option value="${ cabinet.id }">${ cabinet.nom }</option>
 												</c:forEach>
@@ -1303,13 +1318,12 @@
 													<i class="fa fa-calendar"></i>
 												</div>
 											</div>
-											<input type="text"  id="dateAnalyse3"
-												class="form-control" data-lang="fr" data-years="2019-2030"
-												data-format="DD/MM/YYYY" 
-												name="dateAnalyse3" placeholder="Sélectionner"
-												maxlength="10" />
+											<input type="text" id="dateAnalyse3" class="form-control"
+												data-lang="fr" data-years="2019-2030"
+												data-format="DD/MM/YYYY" name="dateAnalyse3"
+												placeholder="Sélectionner" maxlength="10" />
 										</div>
-										<span id="textHelpBlockDate"
+										<span id="textHelpBlockDateAnalyse3"
 											class="form-text text-muted d-none">ex: 04/07/2019</span>
 									</div>
 								</div>
@@ -1344,18 +1358,18 @@
 								<hr>
 							</div>
 							<!-- fin analyse3 -->
-							
-							
+
+
 						</div>
 						<div class="listExamen">
-								<div class="d-none"> 
-								<label>nb examen:</label>
-								<input type="text" id="nbExamen" name="nbExamen" class="nbExamen form-control"value="0"></input>
+							<div class="d-none">
+								<label>nb examen:</label> <input type="text" id="nbExamen"
+									name="nbExamen" class="nbExamen form-control" value="0"></input>
 							</div>
 							<div class="detailExamen">
-							
-							
-							<!-- examen1 -->
+
+
+								<!-- examen1 -->
 								<div id="examen1" class="d-none">
 									<div id="examen1Ligne1" class="form-group row">
 										<label for="idExamen1"
@@ -1387,7 +1401,7 @@
 												</div>
 												<select id="idCabinetExamen1" name="idCabinetExamen1"
 													required="required" class="custom-select">
-													<option  disabled selected>Sélectionner</option>
+													<option disabled selected>Sélectionner</option>
 													<c:forEach items="${ listeCabinets }" var="cabinet">
 														<option value="${ cabinet.id }">${ cabinet.nom }</option>
 													</c:forEach>
@@ -1406,35 +1420,34 @@
 														<i class="fa fa-calendar"></i>
 													</div>
 												</div>
-												<input type="text"  id="dateExamen1"
-													class="form-control" data-lang="fr" data-years="2019-2030"
-													data-format="DD/MM/YYYY"
-													name="dateExamen1" placeholder="Sélectionner"
-													maxlength="10" />
+												<input type="text" id="dateExamen1" class="form-control"
+													data-lang="fr" data-years="2019-2030"
+													data-format="DD/MM/YYYY" name="dateExamen1"
+													placeholder="Sélectionner" maxlength="10" />
 											</div>
-											<span id="textHelpBlockDate"
+											<span id="textHelpBlockDateExamen1"
 												class="form-text text-muted d-none">ex: 04/07/2019</span>
 										</div>
 									</div>
 									<div class="form-group row">
 										<button type="button" id="ajouterCommentaireExamen1"
-										class="col-sm-2  btn btn-default btn-sm text-warning text-left">+
-										Commentaire</button>
-									<div id="commentExamen1" class="col-5 d-none">
-										<div class="input-group">
-											<div class="input-group-prepend">
-												<div class="input-group-text">
-													<i class="fa fa-pencil"></i>
+											class="col-sm-2  btn btn-default btn-sm text-warning text-left">+
+											Commentaire</button>
+										<div id="commentExamen1" class="col-5 d-none">
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<div class="input-group-text">
+														<i class="fa fa-pencil"></i>
+													</div>
 												</div>
+												<textarea id="commentaireExamen1" name="commentaireExamen1"
+													class="form-control " maxlength="300"></textarea>
+												<button type="button" name="btnMoins"
+													id="enleverCommentaireExamen1"
+													class="btn btn-outline-danger fa fa-minus-square-o fa-2x"></button>
 											</div>
-											<textarea id="commentaireExamen1" name="commentaireExamen1"
-												class="form-control " maxlength="300"></textarea>
-											<button type="button" name="btnMoins"
-												id="enleverCommentaireExamen1"
-												class="btn btn-outline-danger fa fa-minus-square-o fa-2x"></button>
 										</div>
-									</div>
-									<div id="recapExamen1" class="col-7 d-none"></div>
+										<div id="recapExamen1" class="col-7 d-none"></div>
 										<div class="col-3 ">
 											<button type="button" id="btnValiderExamen1"
 												class="btn  btn-sm btn-outline-success">Enregistrer</button>
@@ -1444,10 +1457,11 @@
 												class="btn  btn-sm btn-outline-danger">Annuler</button>
 										</div>
 									</div>
+									<hr>
 								</div>
-<!-- fin examen1 -->
+								<!-- fin examen1 -->
 
-							<!-- examen2 -->
+								<!-- examen2 -->
 								<div id="examen2" class="d-none">
 									<div id="examen2Ligne1" class="form-group row">
 										<label for="idExamen2"
@@ -1479,7 +1493,7 @@
 												</div>
 												<select id="idCabinetExamen2" name="idCabinetExamen2"
 													required="required" class="custom-select">
-													<option  disabled selected>Sélectionner</option>
+													<option disabled selected>Sélectionner</option>
 													<c:forEach items="${ listeCabinets }" var="cabinet">
 														<option value="${ cabinet.id }">${ cabinet.nom }</option>
 													</c:forEach>
@@ -1498,35 +1512,34 @@
 														<i class="fa fa-calendar"></i>
 													</div>
 												</div>
-												<input type="text"  id="dateExamen2"
-													class="form-control" data-lang="fr" data-years="2019-2030"
-													data-format="DD/MM/YYYY" 
-													name="dateExamen2" placeholder="Sélectionner"
-													maxlength="10" />
+												<input type="text" id="dateExamen2" class="form-control"
+													data-lang="fr" data-years="2019-2030"
+													data-format="DD/MM/YYYY" name="dateExamen2"
+													placeholder="Sélectionner" maxlength="10" />
 											</div>
-											<span id="textHelpBlockDate"
+											<span id="textHelpBlockDateExamen2"
 												class="form-text text-muted d-none">ex: 04/07/2019</span>
 										</div>
 									</div>
 									<div class="form-group row">
 										<button type="button" id="ajouterCommentaireExamen2"
-										class="col-sm-2  btn btn-default btn-sm text-warning text-left">+
-										Commentaire</button>
-									<div id="commentExamen2" class="col-5 d-none">
-										<div class="input-group">
-											<div class="input-group-prepend">
-												<div class="input-group-text">
-													<i class="fa fa-pencil"></i>
+											class="col-sm-2  btn btn-default btn-sm text-warning text-left">+
+											Commentaire</button>
+										<div id="commentExamen2" class="col-5 d-none">
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<div class="input-group-text">
+														<i class="fa fa-pencil"></i>
+													</div>
 												</div>
+												<textarea id="commentaireExamen2" name="commentaireExamen2"
+													class="form-control " maxlength="300"></textarea>
+												<button type="button" name="btnMoins"
+													id="enleverCommentaireExamen2"
+													class="btn btn-outline-danger fa fa-minus-square-o fa-2x"></button>
 											</div>
-											<textarea id="commentaireExamen2" name="commentaireExamen2"
-												class="form-control " maxlength="300"></textarea>
-											<button type="button" name="btnMoins"
-												id="enleverCommentaireExamen2"
-												class="btn btn-outline-danger fa fa-minus-square-o fa-2x"></button>
 										</div>
-									</div>
-									<div id="recapExamen2" class="col-7 d-none"></div>
+										<div id="recapExamen2" class="col-7 d-none"></div>
 										<div class="col-3 ">
 											<button type="button" id="btnValiderExamen2"
 												class="btn  btn-sm btn-outline-success">Enregistrer</button>
@@ -1536,10 +1549,11 @@
 												class="btn  btn-sm btn-outline-danger">Annuler</button>
 										</div>
 									</div>
+									<hr>
 								</div>
-<!-- fin examen2 -->
+								<!-- fin examen2 -->
 
-							<!-- examen3 -->
+								<!-- examen3 -->
 								<div id="examen3" class="d-none">
 									<div id="examen3Ligne1" class="form-group row">
 										<label for="idExamen3"
@@ -1571,7 +1585,7 @@
 												</div>
 												<select id="idCabinetExamen3" name="idCabinetExamen3"
 													required="required" class="custom-select">
-													<option  disabled selected>Sélectionner</option>
+													<option disabled selected>Sélectionner</option>
 													<c:forEach items="${ listeCabinets }" var="cabinet">
 														<option value="${ cabinet.id }">${ cabinet.nom }</option>
 													</c:forEach>
@@ -1590,35 +1604,34 @@
 														<i class="fa fa-calendar"></i>
 													</div>
 												</div>
-												<input type="text"  id="dateExamen3"
-													class="form-control" data-lang="fr" data-years="2019-2030"
-													data-format="DD/MM/YYYY" 
-													name="dateExamen3" placeholder="Sélectionner"
-													maxlength="10" />
+												<input type="text" id="dateExamen3" class="form-control"
+													data-lang="fr" data-years="2019-2030"
+													data-format="DD/MM/YYYY" name="dateExamen3"
+													placeholder="Sélectionner" maxlength="10" />
 											</div>
-											<span id="textHelpBlockDate"
+											<span id="textHelpBlockDateExamen3"
 												class="form-text text-muted d-none">ex: 04/07/2019</span>
 										</div>
 									</div>
 									<div class="form-group row">
 										<button type="button" id="ajouterCommentaireExamen3"
-										class="col-sm-2  btn btn-default btn-sm text-warning text-left">+
-										Commentaire</button>
-									<div id="commentExamen3" class="col-5 d-none">
-										<div class="input-group">
-											<div class="input-group-prepend">
-												<div class="input-group-text">
-													<i class="fa fa-pencil"></i>
+											class="col-sm-2  btn btn-default btn-sm text-warning text-left">+
+											Commentaire</button>
+										<div id="commentExamen3" class="col-5 d-none">
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<div class="input-group-text">
+														<i class="fa fa-pencil"></i>
+													</div>
 												</div>
+												<textarea id="commentaireExamen3" name="commentaireExamen3"
+													class="form-control " maxlength="300"></textarea>
+												<button type="button" name="btnMoins"
+													id="enleverCommentaireExamen3"
+													class="btn btn-outline-danger fa fa-minus-square-o fa-2x"></button>
 											</div>
-											<textarea id="commentaireExamen3" name="commentaireExamen3"
-												class="form-control " maxlength="300"></textarea>
-											<button type="button" name="btnMoins"
-												id="enleverCommentaireExamen3"
-												class="btn btn-outline-danger fa fa-minus-square-o fa-2x"></button>
 										</div>
-									</div>
-									<div id="recapExamen3" class="col-7 d-none"></div>
+										<div id="recapExamen3" class="col-7 d-none"></div>
 										<div class="col-3 ">
 											<button type="button" id="btnValiderExamen3"
 												class="btn  btn-sm btn-outline-success">Enregistrer</button>
@@ -1628,8 +1641,9 @@
 												class="btn  btn-sm btn-outline-danger">Annuler</button>
 										</div>
 									</div>
+									<hr>
 								</div>
-<!-- fin examen3 -->
+								<!-- fin examen3 -->
 							</div>
 						</div>
 						<div class="form-group row"></div>
@@ -1666,7 +1680,7 @@
 
 		<!--/row-->
 
-		
+
 		<c:import url="footer.jsp"></c:import>
 
 	</div>
@@ -1688,7 +1702,12 @@
 	<script src="js/moment-with-locales.min.js"></script>
 	<script src="js/ion.calendar.min.js"></script>
 	<script>
+	
         $(function () {
+            $("input[type=file]").change(function (e){$(this).next('.custom-file-label').text(e.target.files[0].name);})
+
+            
+            
             $("#date").ionDatePicker({
                 hideArrows : true,
                 sundayFirst : false
@@ -1717,7 +1736,10 @@
                 hideArrows : true,
                 sundayFirst : false
             });
+            
         });
+        
+        
     </script>
 
 

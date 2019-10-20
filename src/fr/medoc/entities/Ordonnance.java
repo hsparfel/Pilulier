@@ -1,5 +1,9 @@
 package fr.medoc.entities;
 
+
+
+import java.io.InputStream;
+
 public class Ordonnance {
 
 	private int id;
@@ -7,7 +11,8 @@ public class Ordonnance {
 	private Medecin medecin;
 	private String date;
 	private String commentaire;
-	
+	private InputStream fichier;
+
 	public Ordonnance() {
 	}
 
@@ -52,4 +57,11 @@ public class Ordonnance {
 	}
 
 
+	public void setFichier(InputStream inputStream) {
+		this.fichier = inputStream;
+	}
+
+	public InputStream getFichier() {
+		return fichier;
+	}
 }

@@ -1,4 +1,70 @@
 $(document).ready(function () {
+    // def du regex
+    let regexDate = /^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/;
+    // verif des données saisies dans dates
+    $('#date').change(function (event) {
+
+        if (!regexDate.test($('#date').val())) {
+            $('#textHelpBlockDate').removeClass("d-none");
+            $('#date').focus();
+        } else {
+            $('#textHelpBlockDate').addClass("d-none");
+        }
+    });
+
+    $('#dateAnalyse1').change(function (event) {
+        if (!regexDate.test($('#dateAnalyse1').val())) {
+            $('#textHelpBlockDateAnalyse1').removeClass("d-none");
+            $('#dateAnalyse1').focus();
+        } else {
+            $('#textHelpBlockDateAnalyse1').addClass("d-none");
+        }
+    });
+
+    $('#dateAnalyse2').change(function (event) {
+        if (!regexDate.test($('#dateAnalyse2').val())) {
+            $('#textHelpBlockDateAnalyse2').removeClass("d-none");
+            $('#dateAnalyse2').focus();
+        } else {
+            $('#textHelpBlockDateAnalyse2').addClass("d-none");
+        }
+    });
+
+    $('#dateAnalyse3').change(function (event) {
+        if (!regexDate.test($('#dateAnalyse3').val())) {
+            $('#textHelpBlockDateAnalyse3').removeClass("d-none");
+            $('#dateAnalyse3').focus();
+        } else {
+            $('#textHelpBlockDateAnalyse3').addClass("d-none");
+        }
+    });
+
+    $('#dateExamen1').change(function (event) {
+        if (!regexDate.test($('#dateExamen1').val())) {
+            $('#textHelpBlockDateExamen1').removeClass("d-none");
+            $('#dateExamen1').focus();
+        } else {
+            $('#textHelpBlockDateExamen1').addClass("d-none");
+        }
+    });
+    $('#dateExamen2').change(function (event) {
+        if (!regexDate.test($('#dateExamen2').val())) {
+            $('#textHelpBlockDateExamen2').removeClass("d-none");
+            $('#dateExamen2').focus();
+        } else {
+            $('#textHelpBlockDateExamen2').addClass("d-none");
+        }
+    });
+    $('#dateExamen3').change(function (event) {
+        if (!regexDate.test($('#dateExamen3').val())) {
+            $('#textHelpBlockDateExamen3').removeClass("d-none");
+            $('#dateExamen3').focus();
+        } else {
+            $('#textHelpBlockDateExamen3').addClass("d-none");
+        }
+    });
+
+
 
     //ordonnance
     $('#ajouterCommentaire').click(function () {
@@ -12,7 +78,10 @@ $(document).ready(function () {
     });
     //  boutons ajouterx3
     $('#ajouterPrescription').click(function () {
+        console.log("prescription");
+        console.log($('.nbPrescription').val());
         if (parseInt($('.nbPrescription').val())+1<=5) {
+            console.log("dedans");
             if ($('#prescription1').hasClass('d-none')) {
                 $('#prescription1').removeClass('d-none');
             } else {
@@ -154,7 +223,7 @@ $(document).ready(function () {
         //fin afficher ou masquer commentaire
         //action boutons  x3
         $('#btnValiderPrescription'+i).click(function () {
-
+console.log("prq?");
             //verif si les 7 champs de base sont remplis
             if ($('#idMedicament'+i).val()==null){
                 $('#idMedicament'+i).focus();
@@ -266,9 +335,9 @@ $(document).ready(function () {
             $('#commentPrescription'+i).addClass('d-none');
             $('#prescription'+i+' label').hide();
             $('.btnSubmitAndCancelPrescription'+i).removeClass('d-none');
-            
+
             $('.btnSubmitAndCancel').removeClass('d-none');
-            
+
         });
         $('#btnModifierPrescription'+i).click(function () {
             $('#btnValiderPrescription'+i).removeClass('d-none');
@@ -282,12 +351,12 @@ $(document).ready(function () {
                 $('#commentPrescription'+i).removeClass('d-none');
             }
             $('#prescription'+i+' label').show();
-            
-            
-            
-            
-           
-            
+
+
+
+
+
+
             if( $('.nbPrescription').val()==="0" && $('.nbAnalyse').val()==="0" && $('.nbExamen').val()==="0"){
                 console.log("ici");
                 $('.btnSubmitAndCancel').addClass('d-none');
@@ -407,11 +476,11 @@ $(document).ready(function () {
             if (parseInt($('.nbAnalyse').val())<3){
                 $('#ajouterAnalyse').removeClass('d-none');
             }
-            
+
             console.log($('.nbPrescription').val());
             console.log($('.nbAnalyse').val());
             console.log($('.nbPrescription').val());
-            
+
             if( $('.nbPrescription').val()==="0" && $('.nbAnalyse').val()==="0" && $('.nbExamen').val()==="0"){
                 console.log("ici");
                 $('.btnSubmitAndCancel').addClass('d-none');
@@ -507,7 +576,7 @@ $(document).ready(function () {
             if (parseInt($('.nbExamen').val())<3){
                 $('#ajouterExamen').removeClass('d-none');
             }
-            
+
             if( $('.nbPrescription').val()==="0" && $('.nbAnalyse').val()==="0" && $('.nbExamen').val()==="0"){
                 console.log("ici");
                 $('.btnSubmitAndCancel').addClass('d-none');
@@ -517,4 +586,147 @@ $(document).ready(function () {
     }//fin boucle for
     // fin boucle analysex3
 
-});
+//  date du jour
+
+    let dateDuJourRaw=new Date(Date.now());
+    let dd=dateDuJourRaw.getDate();
+    let mm=dateDuJourRaw.getMonth()+1;
+    //console.log(dateDuJourRaw);
+    //console.log(dateDuJourRaw.getMonth());
+    let yyyy=dateDuJourRaw.getFullYear();
+    if(dd<10) 
+    {
+        dd='0'+dd;
+    } 
+
+    if(mm<10) 
+    {
+        mm='0'+mm;
+    } 
+
+    let dateDuJour=dd+"/"+mm+"/"+yyyy;
+    console.log(dateDuJour);
+
+    $('#date').val(dateDuJour);
+    //fin date du jour
+
+    //
+    $('.btnPlus').click(function () {
+        console.log("plus");
+        // sauvegarde des donnees temporaires formulaires
+        sessionStorage.setItem("idMedecin", $("#idMedecin option:selected").text());
+        sessionStorage.setItem("date", $('#date').val());
+        sessionStorage.setItem("commentaire", $('#commentaire').val());
+        sessionStorage.setItem("nbPrescription", $('#nbPrescription').val());
+        sessionStorage.setItem("nbAnalyse", $('#nbAnalyse').val());
+        sessionStorage.setItem("nbExamen", $('#nbExamen').val());
+
+        for (i=1;i<6;i++) {
+            sessionStorage.setItem("idMedicament"+i, $("#idMedicament"+i+" option:selected").text());
+            sessionStorage.setItem("quantiteDose"+i, $("#quantiteDose"+i).val());
+            sessionStorage.setItem("idDose"+i, $("#idDose"+i+" option:selected").text());
+            sessionStorage.setItem("quantiteFrequence"+i, $("#quantiteFrequence"+i).val());
+            sessionStorage.setItem("idFrequence"+i, $("#idFrequence"+i+" option:selected").text());
+            sessionStorage.setItem("frequenceRadio"+i+"_0", $("#frequenceRadio"+i+"_0").val());
+            sessionStorage.setItem("frequenceRadio"+i+"_1", $("#frequenceRadio"+i+"_1").val());
+            sessionStorage.setItem("frequenceRadio"+i+"_2", $("#frequenceRadio"+i+"_2").val());
+            sessionStorage.setItem("frequenceCheckbox"+i+"_0", $("#frequenceCheckbox"+i+"_0").val());
+            sessionStorage.setItem("frequenceCheckbox"+i+"_1", $("#frequenceCheckbox"+i+"_1").val());
+            sessionStorage.setItem("frequenceCheckbox"+i+"_2", $("#frequenceCheckbox"+i+"_2").val());
+            sessionStorage.setItem("nbDuree"+i, $("#nbDuree"+i).val());
+            sessionStorage.setItem("idDuree"+i, $("#idDuree"+i+" option:selected").text());
+            sessionStorage.setItem("commentairePrescription"+i, $("#commentairePrescription"+i).val());
+
+            if (i<4){
+                sessionStorage.setItem("idAnalyse"+i, $("#idAnalyse"+i+" option:selected").text());
+                sessionStorage.setItem("idCabinetAnalyse"+i, $("#idCabinetAnalyse"+i+" option:selected").text());
+                sessionStorage.setItem("dateAnalyse"+i, $("#dateAnalyse"+i).val());
+                sessionStorage.setItem("commentaireAnalyse"+i, $("#commentaireAnalyse"+i).val());
+
+                sessionStorage.setItem("idExamen"+i, $("#idExamen"+i+" option:selected").text());
+                sessionStorage.setItem("idCabinetExamen"+i, $("#idCabinetExamen"+i+" option:selected").text());
+                sessionStorage.setItem("dateExamen"+i, $("#dateExamen"+i).val());
+                sessionStorage.setItem("commentaireExamen"+i, $("#commentaireExamen"+i).val());
+            }
+
+        }
+
+
+
+        // sauvegarde de l'url pour retour
+        let chemin = $(location).attr('pathname');
+        let chemin2 = chemin.substr(1, chemin.length - 1);
+        let indiceSlash = chemin2.indexOf("/");
+        let page = chemin2.substr(indiceSlash + 1, chemin.length - indiceSlash);
+        sessionStorage.setItem("pagePrecedente", page);
+    });
+
+    // affichage des données temporaires
+    console.log("donnees temp");
+    $('[name=idMedecin] option').filter(function () {
+        return ($(this).text() == sessionStorage.getItem("idMedecin"));
+    }).prop('selected', true);
+    $('#date').val(sessionStorage.getItem("date"));
+    $('#commentaire').val(sessionStorage.getItem("commentaire"));
+    if (sessionStorage.getItem("nbPrescription")!=null){
+        if (!sessionStorage.getItem("nbPrescription").isEmpty()){
+            $('#nbPrescription').val(sessionStorage.getItem("nbPrescription"));}
+    }
+    if (sessionStorage.getItem("nbAnalyse")!=null){
+        if (!sessionStorage.getItem("nbAnalyse").isEmpty()){
+            $('#nbAnalyse').val(sessionStorage.getItem("nbAnalyse"));}
+    }
+    if (sessionStorage.getItem("nbExamen")!=null){
+        if (!sessionStorage.getItem("nbExamen").isEmpty()){
+            $('#nbExamen').val(sessionStorage.getItem("nbExamen"));}
+    }
+
+    for (i=1;i<6;i++) {
+
+        $("[name=idMedicament"+i+"] option").filter(function () {
+            return ($(this).text() == sessionStorage.getItem("idMedicament"+i));
+        }).prop('selected', true);
+        $("#quantiteDose"+i).val(parseFloat(sessionStorage.getItem("quantiteDose"+i)));
+        $("[name=idDose"+i+"] option").filter(function () {
+            return ($(this).text() == sessionStorage.getItem("idDose"+i));
+        }).prop('selected', true);
+        $("#quantiteFrequence"+i).val(sessionStorage.getItem("quantiteFrequence"+i));
+        $("[name=idFrequence"+i+"] option").filter(function () {
+            return ($(this).text() == sessionStorage.getItem("idFrequence"+i));
+        }).prop('selected', true);
+        $("frequenceRadio"+i+"_0").val(sessionStorage.getItem("frequenceRadio"+i+"_0"));
+        $("frequenceRadio"+i+"_1").val(sessionStorage.getItem("frequenceRadio"+i+"_1"));
+        $("frequenceRadio"+i+"_2").val(sessionStorage.getItem("frequenceRadio"+i+"_2"));
+        $("frequenceCheckbox"+i+"_0").val(sessionStorage.getItem("frequenceCheckbox"+i+"_0"));
+        $("frequenceCheckbox"+i+"_1").val(sessionStorage.getItem("frequenceCheckbox"+i+"_1"));
+        $("frequenceCheckbox"+i+"_2").val(sessionStorage.getItem("frequenceCheckbox"+i+"_2"));
+        $("nbDuree"+i).val(sessionStorage.getItem("nbDuree"+i));
+        $("[name=idDuree"+i+"] option").filter(function () {
+            return ($(this).text() == sessionStorage.getItem("idDuree"+i));
+        }).prop('selected', true);
+        $("commentairePrescription"+i).val(sessionStorage.getItem("commentairePrescription"+i));
+
+        if (i<4){
+
+            $("[name=idAnalyse"+i+"] option").filter(function () {
+                return ($(this).text() == sessionStorage.getItem("idAnalyse"+i));
+            }).prop('selected', true);
+            $("[name=idCabinetAnalyse"+i+"] option").filter(function () {
+                return ($(this).text() == sessionStorage.getItem("idCabinetAnalyse"+i));
+            }).prop('selected', true);
+            $("dateAnalyse"+i).val(sessionStorage.getItem("dateAnalyse"+i));
+            $("commentaireAnalyse"+i).val(sessionStorage.getItem("commentaireAnalyse"+i));
+
+            $("[name=idExamen"+i+"] option").filter(function () {
+                return ($(this).text() == sessionStorage.getItem("idExamen"+i));
+            }).prop('selected', true);
+            $("[name=idCabinetExamen"+i+"] option").filter(function () {
+                return ($(this).text() == sessionStorage.getItem("idCabinetExamen"+i));
+            }).prop('selected', true);
+            $("dateExamen"+i).val(sessionStorage.getItem("dateExamen"+i));
+            $("commentaireExamen"+i).val(sessionStorage.getItem("commentaireExamen"+i));
+
+        }
+
+    }
+    });

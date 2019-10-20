@@ -1,12 +1,12 @@
 package fr.medoc.enumeration;
 
-public enum EnumAnalyse {
+public enum EnumExamen_old {
 
-	SAN("sanguine"), SEL("selle"), URI("urine");
-
+	//RAD("radiographie"), ECH("echographie"), PER("perfusion"), IRM("irm");
+NON("a nettoyer");
 	private String name = "";
 
-	EnumAnalyse(String name) {
+	EnumExamen_old(String name) {
 		this.name = name;
 	}
 

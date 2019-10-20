@@ -8,26 +8,20 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
 import fr.medoc.dao.ExamenDAO;
-import fr.medoc.dao.OrdonnanceDAO;
-import fr.medoc.dao.CabinetDAO;
 import fr.medoc.dao.DAOFactory;
-import fr.medoc.entities.Analyse;
 import fr.medoc.entities.Examen;
-import fr.medoc.enumeration.EnumExamen;
 import fr.medoc.exception.DAOException;
 
 public class ExamenDAOImpl implements ExamenDAO {
 
 	private ArrayList<Examen> listeExamens;
-	private final String ORDRE_INSERT = "insert into examen(id_ordonnance, nom, id_cabinet, commentaire, date) values ";
-	private final String VALUES_INSERT = "(?,?,?,?,?)";
+	private final String ORDRE_INSERT = "insert into examen(Nom) values ";
+	private final String VALUES_INSERT = "(?)";
 	private final String ORDRE_DELETE = "delete from examen where Id = ";
-	private final String ORDRE_FINDALL = "select * from examen";
-	private final String ORDRE_FINDBYREF = "select * from examen where Id = ?";
-	private final String ORDRE_UPDATE = "update examen set id_ordonnance=?, set nom=?,set id_cabinet=?,set commentaire=?, set date=? where id = ?";
-	//a faire
-	private final String ORDRE_FINDALLBYUSER = "select e.id,e.id_ordonnance,e.nom,e.id_cabinet,e.commentaire,e.date from examen AS e, ordonnance as o where e.id_ordonnance=o.id and o.id_utilisateur=? order by (SUBSTRING(e.date,7,4)), (SUBSTRING(e.date,4,2)), (SUBSTRING(e.date,1,2))";
-	
+	private final String ORDRE_FINDALL = "select Id,Nom from examen";
+	private final String ORDRE_FINDBYREF = "select Id,Nom from examen where Id = ?";
+	private final String ORDRE_FINDBYNAME = "select Id,Nom from examen where Nom = ?";
+	private final String ORDRE_UPDATE = "update examen set Nom=? where id = ?";
 	private DAOFactory daoFactory;
 
 	public ExamenDAOImpl(DAOFactory daoFactory) {
@@ -36,18 +30,14 @@ public class ExamenDAOImpl implements ExamenDAO {
 	}
 
 	@Override
-	public void modifierExamen(Examen unExamen, int id) throws DAOException {
+	public void modifierExamen(Examen uneExamen, int id) throws DAOException {
 		Connection connexion = null;
 		try {
 			connexion = daoFactory.getConnection();
-			getListeExamens().add(unExamen);
+			getListeExamens().add(uneExamen);
 			PreparedStatement pst = connexion.prepareStatement(ORDRE_UPDATE);
-			pst.setInt(1, unExamen.getOrdonnance().getId());
-			pst.setString(2, unExamen.getNom().name());
-			pst.setInt(3, unExamen.getCabinet().getId());
-			pst.setString(4, unExamen.getCommentaire());
-			pst.setString(5, unExamen.getDate());
-			pst.setInt(6, unExamen.getId());
+			pst.setString(1, uneExamen.getNom());
+			pst.setInt(2, id);
 			pst.executeUpdate();
 			connexion.commit();
 			daoFactory.closeConnexion(connexion);
@@ -57,23 +47,19 @@ public class ExamenDAOImpl implements ExamenDAO {
 	}
 
 	@Override
-	public void ajouterExamen(Examen unExamen) throws DAOException {
+	public void ajouterExamen(Examen uneExamen) throws DAOException {
 		ResultSet rs = null;
 		Connection connexion = null;
 		try {
 			connexion = daoFactory.getConnection();
-			getListeExamens().add(unExamen);
+			getListeExamens().add(uneExamen);
 			PreparedStatement pst = connexion.prepareStatement(ORDRE_INSERT + VALUES_INSERT,
 					Statement.RETURN_GENERATED_KEYS);
-			pst.setInt(1, unExamen.getOrdonnance().getId());
-			pst.setString(2, unExamen.getNom().name());
-			pst.setInt(3, unExamen.getCabinet().getId());
-			pst.setString(4, unExamen.getCommentaire());
-			pst.setString(5, unExamen.getDate());
+			pst.setString(1, uneExamen.getNom());
 			pst.executeUpdate();
 			rs = pst.getGeneratedKeys();
 			if (rs.next()) {
-				unExamen.setId(rs.getInt(1));
+				uneExamen.setId(rs.getInt(1));
 			} else {
 				throw new DAOException("Erreur création d'un examen. ");
 			}
@@ -100,24 +86,16 @@ public class ExamenDAOImpl implements ExamenDAO {
 
 	@Override
 	public Examen findByRef(int id) throws DAOException {
-		Examen unExamen = null;
+		Examen uneExamen = null;
 		Connection connexion = null;
-		OrdonnanceDAO uneOrdonnanceDAO = daoFactory.getOrdonnanceDAO();
-		CabinetDAO unCabinetDAO = daoFactory.getCabinetDAO();
-
 		try {
 			connexion = daoFactory.getConnection();
 			PreparedStatement pst = connexion.prepareStatement(ORDRE_FINDBYREF);
 			pst.setInt(1, id);
 			ResultSet rs = pst.executeQuery();
 			if (rs.next()) {
-				unExamen = new Examen();
-				unExamen.setId(id);
-				unExamen.setOrdonnance(uneOrdonnanceDAO.findByRef(rs.getInt("id_ordonnance")));
-				unExamen.setNom(EnumExamen.valueOf(rs.getString("nom")));
-				unExamen.setCabinet(unCabinetDAO.findByRef(rs.getInt("id_cabinet")));
-				unExamen.setCommentaire(rs.getString("commentaire"));
-				unExamen.setDate(rs.getString("date"));
+				uneExamen = new Examen(rs.getString("nom"));
+				uneExamen.setId(id);
 			} else {
 				throw new DAOException("Erreur recherche d'un examen. ");
 			}
@@ -126,7 +104,30 @@ public class ExamenDAOImpl implements ExamenDAO {
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}
-		return unExamen;
+		return uneExamen;
+	}
+
+	@Override
+	public Examen findByName(String nom) throws DAOException {
+		Examen uneExamen = null;
+		Connection connexion = null;
+		try {
+			connexion = daoFactory.getConnection();
+			PreparedStatement pst = connexion.prepareStatement(ORDRE_FINDBYNAME);
+			pst.setString(1, nom);
+			ResultSet rs = pst.executeQuery();
+			if (rs.next()) {
+				uneExamen = new Examen(rs.getString("nom"));
+				uneExamen.setId(rs.getInt("id"));
+			} else {
+				throw new DAOException("Erreur recherche d'un examen. ");
+			}
+			connexion.commit();
+			daoFactory.closeConnexion(connexion);
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+		return uneExamen;
 	}
 
 	@Override
@@ -153,37 +154,12 @@ public class ExamenDAOImpl implements ExamenDAO {
 		return listeExamens;
 	}
 
-	private void resultSetToArrayList(ResultSet resultSet) throws SQLException, DAOException {
+	private void resultSetToArrayList(ResultSet resultSet) throws SQLException {
 		while (resultSet.next()) {
 			Examen a = new Examen();
-			OrdonnanceDAO uneOrdonnanceDAO = daoFactory.getOrdonnanceDAO();
-			CabinetDAO unCabinetDAO = daoFactory.getCabinetDAO();
-
 			a.setId(resultSet.getInt("id"));
-			a.setOrdonnance(uneOrdonnanceDAO.findByRef(resultSet.getInt("id_ordonnance")));
-			a.setNom(EnumExamen.valueOf(resultSet.getString("nom")));
-			a.setCabinet(unCabinetDAO.findByRef(resultSet.getInt("id_cabinet")));
-			a.setCommentaire(resultSet.getString("commentaire"));
-			a.setDate(resultSet.getString("date"));
+			a.setNom(resultSet.getString("nom"));
 			getListeExamens().add(a);
 		}
-	}
-	
-	@Override
-	public Collection<Examen> findAllByUser(int id) throws DAOException {
-		Connection connexion = null;
-		try {
-			connexion = daoFactory.getConnection();
-			PreparedStatement pst = connexion.prepareStatement(ORDRE_FINDALLBYUSER);
-			pst.setInt(1, id);
-			ResultSet resultSet = pst.executeQuery();
-			listeExamens.removeAll(listeExamens);
-			resultSetToArrayList(resultSet);
-			daoFactory.closeConnexion(connexion);
-		} catch (SQLException e) {
-			throw new DAOException(e);
-		}
-		return listeExamens;
-		
 	}
 }

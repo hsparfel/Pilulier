@@ -2,7 +2,6 @@ package fr.medoc.dao;
 
 import java.util.Collection;
 
-import fr.medoc.entities.Analyse;
 import fr.medoc.entities.Examen;
 import fr.medoc.exception.DAOException;
 
@@ -13,6 +12,6 @@ public interface ExamenDAO {
 	public void supprimerExamen(int idExamen)throws DAOException;
 	public Collection<Examen> findAll() throws DAOException;	
 	public Examen findByRef (int id)throws DAOException;
+	public Examen findByName (String nom)throws DAOException;
 	public void modifierExamen(Examen examen, int id) throws DAOException;
-	public Collection<Examen> findAllByUser(int id) throws DAOException;
 }

@@ -68,7 +68,7 @@
 							<div id="myAge" class="col-4 col-form-label text-left "></div>
 
 						</div>
-						<div class="form-group row">
+						<div class="form-group row d-none">
 							<label for="myNaissance"
 								class="col-5 col-form-label text-right ">Naissance :</label>
 							<div id="dateNaissance" class="col-4 col-form-label text-left ">${ utilisateur.dateDeNaissance}</div>
@@ -76,13 +76,13 @@
 						</div>
 						<div class="form-group row">
 							<label for="myImc" class="col-5 col-form-label text-right ">IMC :</label>
-							<div class="col-4 col-form-label text-left ">${ profil.imc }</div>
+							<div id="myImc"class="col-4 col-form-label text-center rounded-circle">${ profil.imc }</div>
 
 						</div>
-							<div class="form-group row">
+							<div class="form-group row d-none">
 							<label for="myImcComm" class="col-5 col-form-label text-right ">Mon
 								Commentaire IMC :</label>
-							<div class="col-4 col-form-label text-left ">${ profil.commentaire }</div>
+							<div id="myImcComm" class="col-4 col-form-label text-left ">${ profil.commentaire }</div>
 
 						</div>
 						<div class="form-group row">
@@ -111,7 +111,7 @@
 				<c:import url="sidebarMenuListMyExamen.jsp"></c:import>
 				<c:import url="sidebarMenuListMyPrescription.jsp"></c:import>
 				<c:import url="sidebarMenuListMyMedecin.jsp"></c:import>
-
+<c:import url="sidebarMenuListMyOrdonnance.jsp"></c:import>
 			</div>
 		</div>
 

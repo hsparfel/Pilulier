@@ -1,44 +1,17 @@
 package fr.medoc.entities;
 
-import fr.medoc.enumeration.EnumExamen;
-
 public class Examen {
 
 	private int id;
-	private Ordonnance ordonnance;
-	private Cabinet cabinet;
-	private EnumExamen nom;
-	private String commentaire;
-	private String date;
-	
+	private String nom;
+
 	public Examen() {
-			}
-
-	
-
-	public Ordonnance getOrdonnance() {
-		return ordonnance;
+		this.nom="";
 	}
 
-
-
-	public void setOrdonnance(Ordonnance ordonnance) {
-		this.ordonnance = ordonnance;
+	public Examen(String nom){
+		this.nom= nom;
 	}
-
-
-
-	public Cabinet getCabinet() {
-		return cabinet;
-	}
-
-
-
-	public void setCabinet(Cabinet cabinet) {
-		this.cabinet = cabinet;
-	}
-
-
 
 	public int getId() {
 		return id;
@@ -48,31 +21,16 @@ public class Examen {
 		this.id = id;
 	}
 
-	public EnumExamen getNom() {
+	public String getNom() {
 		return nom;
 	}
 
-	public void setNom(EnumExamen nom) {
+	public void setNom(String nom) {
 		this.nom = nom;
 	}
 
-	public String getCommentaire() {
-		return commentaire;
+	@Override
+	public String toString() {
+		return "Examen [id=" + id + ", nom=" + nom + "]";
 	}
-
-	public void setCommentaire(String commentaire) {
-		this.commentaire = commentaire;
-	}
-
-	public String getDate() {
-		return date;
-	}
-
-	public void setDate(String date) {
-		this.date = date;
-	}
-
-	
-
-	
 }

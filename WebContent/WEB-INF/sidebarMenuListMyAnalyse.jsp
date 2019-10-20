@@ -6,13 +6,13 @@
 
 
 <div class="list-group">
-	<button id="listBtnAnalyse" class="list-group-item active">Mes
-		Analyses</button>
 	<c:if test="${!empty listeAnalyses }">
+		<button id="listBtnAnalyse" class="list-group-item active">Mes
+			Analyses</button>
 		<div id="listAnalyse">
 			<c:forEach items="${ listeAnalyses }" var="analyse">
-				<a href="AfficherAnalyse?id=${ analyse.id }" class="list-group-item">${ analyse.nom.name} -
-					${ analyse.date} <br>${ analyse.cabinet.nom}</a>
+				<a href="AfficherAnalyse?id=${ analyse.id }" class="list-group-item">${ analyse.nom.name}
+					- ${ analyse.date} <br>${ analyse.cabinet.nom}</a>
 			</c:forEach>
 		</div>
 	</c:if>

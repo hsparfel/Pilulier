@@ -12,21 +12,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.medoc.dao.UtilisateurDAO;
-import fr.medoc.dao.AnalyseDAO;
+import fr.medoc.dao.OrdoAnalyseDAO;
 import fr.medoc.dao.DAOFactory;
-import fr.medoc.dao.DoseDAO;
 import fr.medoc.dao.MedecinDAO;
-import fr.medoc.dao.ExamenDAO;
+import fr.medoc.dao.OrdonnanceDAO;
+import fr.medoc.dao.OrdoExamenDAO;
 
-import fr.medoc.dao.Prescription2DAO;
+import fr.medoc.dao.OrdoPrescriptionDAO;
 import fr.medoc.dao.PriseDAO;
 import fr.medoc.dao.ProfilDAO;
 import fr.medoc.dao.RdvDAO;
-import fr.medoc.entities.Analyse;
-import fr.medoc.entities.Dose;
+import fr.medoc.entities.OrdoAnalyse;
 import fr.medoc.entities.Medecin;
-import fr.medoc.entities.Examen;
-import fr.medoc.entities.Prescription2;
+import fr.medoc.entities.Ordonnance;
+import fr.medoc.entities.OrdoExamen;
+import fr.medoc.entities.OrdoPrescription;
 import fr.medoc.entities.Prise;
 import fr.medoc.entities.Profil;
 import fr.medoc.entities.Rdv;
@@ -40,14 +40,15 @@ public class ModifUserProfilServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final String JSP_PAGE = "/WEB-INF/ModifUserProfil.jsp";
 	private DAOFactory daoFactory;
-	private Prescription2DAO prescriptionDao;
-	private AnalyseDAO analyseDao;
-	private ExamenDAO examenDao;
+	private OrdoPrescriptionDAO ordoPrescriptionDao;
+	private OrdoAnalyseDAO ordoAnalyseDao;
+	private OrdoExamenDAO ordoExamenDao;
 	private UtilisateurDAO utilisateurDao;
 	private PriseDAO priseDao;
 	private MedecinDAO medecinDao;
 	private RdvDAO rdvDao;
 	private ProfilDAO profilDao;
+	private OrdonnanceDAO ordonnanceDao;
 	private LocalDate dateDuJour = null;
 
 	@Override
@@ -55,14 +56,15 @@ public class ModifUserProfilServlet extends HttpServlet {
 		try {
 			dateDuJour = LocalDate.now();
 			daoFactory = DAOFactory.getInstance();
-			prescriptionDao = daoFactory.getPrescription2DAO();
-			analyseDao = daoFactory.getAnalyseDAO();
-			examenDao = daoFactory.getExamenDAO();
+			ordoPrescriptionDao = daoFactory.getOrdoPrescriptionDAO();
+			ordoAnalyseDao = daoFactory.getOrdoAnalyseDAO();
+			ordoExamenDao = daoFactory.getOrdoExamenDAO();
 			utilisateurDao = daoFactory.getUtilisateurDAO();
 			priseDao = daoFactory.getPriseDAO();
 			medecinDao = daoFactory.getMedecinDAO();
 			rdvDao = daoFactory.getRdvDAO();
 			profilDao = daoFactory.getProfilDAO();
+			ordonnanceDao = daoFactory.getOrdonnanceDAO();
 		} catch (DAOConfigurationException e) {
 			e.printStackTrace();
 		}
@@ -81,24 +83,26 @@ public class ModifUserProfilServlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		if (session.getAttribute("login") != null) {
-			ArrayList<Prescription2> listePrescriptions = null;
-			ArrayList<Examen> listeExamens = null;
-			ArrayList<Analyse> listeAnalyses = null;
+			ArrayList<OrdoPrescription> listeOrdoPrescriptions = null;
+			ArrayList<OrdoExamen> listeOrdoExamens = null;
+			ArrayList<OrdoAnalyse> listeOrdoAnalyses = null;
 			ArrayList<Prise> listePrises = null;
 			ArrayList<Medecin> listeMedecins = null;
 			ArrayList<Rdv> listeRdvs = null;
 			Utilisateur unUtilisateur = null;
 			ArrayList<Profil> listeProfils = null;
+			ArrayList<Ordonnance> listeOrdonnances = null;
 			Profil profilRecent=null;
 			try {
 				unUtilisateur = utilisateurDao.findByName((String) session.getAttribute("login"));
 				listeProfils = (ArrayList<Profil>) profilDao.findAllByUser(unUtilisateur.getId());
-				listeAnalyses = (ArrayList<Analyse>) analyseDao.findAllByUser(unUtilisateur.getId());
+				listeOrdoAnalyses = (ArrayList<OrdoAnalyse>) ordoAnalyseDao.findAllByUser(unUtilisateur.getId());
 				listeMedecins = (ArrayList<Medecin>) medecinDao.findAllByUser(unUtilisateur.getId());
 				listeRdvs = (ArrayList<Rdv>) rdvDao.findAllByUser(unUtilisateur.getId());
-				listePrescriptions = (ArrayList<Prescription2>) prescriptionDao.findAllByUser(unUtilisateur.getId());
-				listeExamens = (ArrayList<Examen>) examenDao.findAllByUser(unUtilisateur.getId());
+				listeOrdoPrescriptions = (ArrayList<OrdoPrescription>) ordoPrescriptionDao.findAllByUser(unUtilisateur.getId());
+				listeOrdoExamens = (ArrayList<OrdoExamen>) ordoExamenDao.findAllByUser(unUtilisateur.getId());
 				listePrises = (ArrayList<Prise>) priseDao.findAllByUser(unUtilisateur.getId());
+				listeOrdonnances = (ArrayList<Ordonnance>) ordonnanceDao.findAllByUser(unUtilisateur.getId());
 				if (listeProfils.size()>0) {
 					profilRecent=listeProfils.get(0);
 					for (Profil profilTemp : listeProfils) {
@@ -129,7 +133,7 @@ public class ModifUserProfilServlet extends HttpServlet {
 
 			//faire pareil pour examen et rdv puis modifier pour prescription
 			//trier analyse
-			ArrayList<Analyse> listeAnalysesTries = new ArrayList<Analyse>();
+			ArrayList<OrdoAnalyse> listeOrdoAnalysesTries = new ArrayList<OrdoAnalyse>();
 			DateTimeFormatter formatterDay = DateTimeFormatter.ofPattern("dd");
 			int formattedDay = Integer.parseInt(dateDuJour.format(formatterDay));
 			DateTimeFormatter formatterMonth = DateTimeFormatter.ofPattern("MM");
@@ -137,42 +141,41 @@ public class ModifUserProfilServlet extends HttpServlet {
 			DateTimeFormatter formatterYear = DateTimeFormatter.ofPattern("yyyy");
 			int formattedYear = Integer.parseInt(dateDuJour.format(formatterYear));
 
-			for (Analyse analyse : listeAnalyses) { 
-				int analyseJour = Integer.parseInt(analyse.getDate().substring(0, 2));
-				int analyseMois = Integer.parseInt(analyse.getDate().substring(3, 5));
-				int analyseAnnee = Integer.parseInt(analyse.getDate().substring(6, 10));
+			for (OrdoAnalyse ordoAnalyse : listeOrdoAnalyses) { 
+				int analyseJour = Integer.parseInt(ordoAnalyse.getDate().substring(0, 2));
+				int analyseMois = Integer.parseInt(ordoAnalyse.getDate().substring(3, 5));
+				int analyseAnnee = Integer.parseInt(ordoAnalyse.getDate().substring(6, 10));
 
 				if (analyseAnnee>formattedYear) {
 
-					listeAnalysesTries.add(analyse);
+					listeOrdoAnalysesTries.add(ordoAnalyse);
 				} else if (analyseAnnee==formattedYear) {
 					if (analyseMois>formattedMonth) {
 
-						listeAnalysesTries.add(analyse);
+						listeOrdoAnalysesTries.add(ordoAnalyse);
 					} else if (analyseMois==formattedMonth) {
 						if (analyseJour>=formattedDay) {
 
-							listeAnalysesTries.add(analyse);
+							listeOrdoAnalysesTries.add(ordoAnalyse);
 						}
 					}
 				}
-				System.out.println(listeAnalysesTries);
 			} 
 			//
 			//trier examen
-			ArrayList<Examen> listeExamensTries = new ArrayList<Examen>();
-			for (Examen examen : listeExamens) { 
-				int examenJour = Integer.parseInt(examen.getDate().substring(0, 2));
-				int examenMois = Integer.parseInt(examen.getDate().substring(3, 5));
-				int examenAnnee = Integer.parseInt(examen.getDate().substring(6, 10));
+			ArrayList<OrdoExamen> listeOrdoExamensTries = new ArrayList<OrdoExamen>();
+			for (OrdoExamen ordoExamen : listeOrdoExamens) { 
+				int examenJour = Integer.parseInt(ordoExamen.getDate().substring(0, 2));
+				int examenMois = Integer.parseInt(ordoExamen.getDate().substring(3, 5));
+				int examenAnnee = Integer.parseInt(ordoExamen.getDate().substring(6, 10));
 				if (examenAnnee>formattedYear) {
-					listeExamensTries.add(examen);
+					listeOrdoExamensTries.add(ordoExamen);
 				} else if (examenAnnee==formattedYear) {
 					if (examenMois>formattedMonth) {
-						listeExamensTries.add(examen);
+						listeOrdoExamensTries.add(ordoExamen);
 					} else if (examenMois==formattedMonth) {
 						if (examenJour>=formattedDay) {
-							listeExamensTries.add(examen);
+							listeOrdoExamensTries.add(ordoExamen);
 						}
 					}
 				}
@@ -197,49 +200,48 @@ public class ModifUserProfilServlet extends HttpServlet {
 				}
 			} 
 			//
-			//trier prescription
-			ArrayList<Prescription2> listePrescriptionsTries = new ArrayList<Prescription2>();
-			System.out.println("jour: "+formattedDay);
-			System.out.println("mois: "+formattedMonth);
-			System.out.println("annee: "+formattedYear);
-
-
-
-
-
-			for (Prescription2 prescription : listePrescriptions) { 
-				int prescriptionJour = Integer.parseInt(prescription.getDateFin().substring(0, 2));
-				int prescriptionMois = Integer.parseInt(prescription.getDateFin().substring(3, 5));
-				int prescriptionAnnee = Integer.parseInt(prescription.getDateFin().substring(6, 10));
-
-
-				System.out.println("jour2: "+prescription.getDateFin().substring(0, 2));
-				System.out.println("mois2: "+prescription.getDateFin().substring(3, 5));
-				System.out.println("annee2: "+prescription.getDateFin().substring(6, 10));
-				System.out.println("jour3: "+prescriptionJour);
-				System.out.println("mois3: "+prescriptionMois);
-				System.out.println("annee3: "+prescriptionAnnee);
-
-				if (prescriptionAnnee>formattedYear) {
-					System.out.println("ici1");
-					listePrescriptionsTries.add(prescription);
-				} else if (prescriptionAnnee==formattedYear) {
-					if (prescriptionMois>formattedMonth) {
-						System.out.println("ici2");
-						listePrescriptionsTries.add(prescription);
-					} else if (prescriptionMois==formattedMonth) {
-						if (prescriptionJour>=formattedDay) {
-							System.out.println("ici3");
-							listePrescriptionsTries.add(prescription);
+			//trier ordonnance
+			ArrayList<Ordonnance> listeOrdonnancesTries = new ArrayList<Ordonnance>();
+			for (Ordonnance ordonnance : listeOrdonnances) { 
+				int ordonnanceJour = Integer.parseInt(ordonnance.getDate().substring(0, 2));
+				int ordonnanceMois = Integer.parseInt(ordonnance.getDate().substring(3, 5));
+				int ordonnanceAnnee = Integer.parseInt(ordonnance.getDate().substring(6, 10));
+				if (ordonnanceAnnee>formattedYear) {
+					listeOrdonnancesTries.add(ordonnance);
+				} else if (ordonnanceAnnee==formattedYear) {
+					if (ordonnanceMois>formattedMonth) {
+						listeOrdonnancesTries.add(ordonnance);
+					} else if (ordonnanceMois==formattedMonth) {
+						if (ordonnanceJour>=formattedDay) {
+							listeOrdonnancesTries.add(ordonnance);
 						}
 					}
 				}
 			} 
 			//
-
-			request.setAttribute("listeAnalyses", listeAnalysesTries);
-			request.setAttribute("listePrescriptions", listePrescriptionsTries);
-			request.setAttribute("listeExamens", listeExamensTries);
+			//trier prescription
+			ArrayList<OrdoPrescription> listeOrdoPrescriptionsTries = new ArrayList<OrdoPrescription>();
+			for (OrdoPrescription prescription : listeOrdoPrescriptions) { 
+				int prescriptionJour = Integer.parseInt(prescription.getDateFin().substring(0, 2));
+				int prescriptionMois = Integer.parseInt(prescription.getDateFin().substring(3, 5));
+				int prescriptionAnnee = Integer.parseInt(prescription.getDateFin().substring(6, 10));
+				if (prescriptionAnnee>formattedYear) {
+					listeOrdoPrescriptionsTries.add(prescription);
+				} else if (prescriptionAnnee==formattedYear) {
+					if (prescriptionMois>formattedMonth) {
+						listeOrdoPrescriptionsTries.add(prescription);
+					} else if (prescriptionMois==formattedMonth) {
+						if (prescriptionJour>=formattedDay) {
+							listeOrdoPrescriptionsTries.add(prescription);
+						}
+					}
+				}
+			} 
+			//
+			request.setAttribute("listeOrdonnances", listeOrdonnancesTries);
+			request.setAttribute("listeOrdoAnalyses", listeOrdoAnalysesTries);
+			request.setAttribute("listeOrdoPrescriptions", listeOrdoPrescriptionsTries);
+			request.setAttribute("listeOrdoExamens", listeOrdoExamensTries);
 			request.setAttribute("profil", profilRecent);
 			request.setAttribute("listeMedecins", listeMedecins);
 			request.setAttribute("listeRdvs", listeRdvsTries);

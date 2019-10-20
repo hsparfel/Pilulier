@@ -94,7 +94,7 @@ $(document).ready(function() {
                     $('#imcComm').val("poids normal");
                 break;
                 default:
-                    $('#imcComm').val("sur-poids");
+                    $('#imcComm').val("surpoids");
                 }
             break;
             case age<19:

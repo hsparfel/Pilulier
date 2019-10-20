@@ -119,7 +119,6 @@ public class CabinetDAOImpl implements CabinetDAO {
 
 	@Override
 	public Cabinet findByName(String nom) throws DAOException {
-		System.out.println(nom);
 		Cabinet unCabinet = null;
 		Connection connexion = null;
 		try {

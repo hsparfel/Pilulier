@@ -49,7 +49,7 @@
 
 				<form action="ModifierProfilAction" method="post">
 					<!--  mettre en d-none -->
-					<div class="form-group row">
+					<div class="form-group row d-none">
 						<label for="pagePrecedente" class="col-2 col-form-label">Url</label>
 						<div class="col-6">
 							<input id="pagePrecedente" name="pagePrecedente" type="text"
@@ -66,7 +66,7 @@
 									</div>
 								</div>
 								<input id="dateDeNaissance" name="dateDeNaissance"
-									data-lang="fr" data-years="1900-2030" data-format="DD/MM/YYYY"
+									data-lang="fr" data-years="1950-2030" data-format="DD/MM/YYYY"
 									maxlength="10" type="text" class="form-control"
 									value=${utilisateur.dateDeNaissance}></input>
 							</div>
@@ -140,7 +140,7 @@
 									</div>
 								</div>
 								<input type="text" id="date" class="form-control" data-lang="fr"
-									data-years="2019-2030" data-format="DD/MM/YYYY" name="date"
+									data-years="1950-2030" data-format="DD/MM/YYYY" name="date"
 									maxlength="10" />
 							</div>
 							<span id="textHelpBlockDate" class="form-text text-muted d-none">ex:
@@ -152,7 +152,7 @@
 					<div class="form-group row">
 						<div class="offset-2 col-10">
 							<button name="submit" type="submit" class="btn btn-primary">Valider</button>
-							<a href="EnregistrerDose" id="cancel"
+							<a href="ModifUserProfil" id="cancel"
 								class="btn btn-outline-secondary">Annuler</a>
 
 						</div>

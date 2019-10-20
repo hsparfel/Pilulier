@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import fr.medoc.dao.PriseDAO;
 import fr.medoc.dao.DAOFactory;
-import fr.medoc.dao.Prescription2DAO;
+import fr.medoc.dao.OrdoPrescriptionDAO;
 import fr.medoc.entities.Prise;
-import fr.medoc.entities.Prescription2;
+import fr.medoc.entities.OrdoPrescription;
 import fr.medoc.exception.DAOConfigurationException;
 import fr.medoc.exception.DAOException;
 
@@ -21,14 +21,14 @@ public class EnregistrerPriseAction extends HttpServlet {
 
 	private DAOFactory daoFactory;
 	private PriseDAO priseDao;
-	private Prescription2DAO prescriptionDAO;
+	private OrdoPrescriptionDAO ordoPrescriptionDao;
 	
 	@Override
 	public void init() throws ServletException {
 		try {
 			daoFactory = DAOFactory.getInstance();
 			priseDao = daoFactory.getPriseDAO();
-			prescriptionDAO = daoFactory.getPrescription2DAO();
+			ordoPrescriptionDao = daoFactory.getOrdoPrescriptionDAO();
 			
 		} catch (DAOConfigurationException e) {
 			e.printStackTrace();
@@ -57,11 +57,11 @@ public class EnregistrerPriseAction extends HttpServlet {
 		
 		
 		
-		Prescription2 unePrescription = null;
+		OrdoPrescription unePrescription = null;
 
 		
 		try {
-			unePrescription = prescriptionDAO.findByRef(idPrise);
+			unePrescription = ordoPrescriptionDao.findByRef(idPrise);
 			
 			
 			Prise nouveauPrise = new Prise(unePrescription, date, heure);

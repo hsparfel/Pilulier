@@ -1,5 +1,7 @@
 package fr.medoc.persistence;
 
+import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,12 +21,12 @@ public class OrdonnanceDAOImpl implements OrdonnanceDAO {
 
 	private ArrayList<Ordonnance> listeOrdonnances;
 	
-	private final String ORDRE_INSERT = "insert into ordonnance(id_utilisateur,id_medecin,date,commentaire) values ";
-	private final String VALUES_INSERT = "(?,?,?,?)";
+	private final String ORDRE_INSERT = "insert into ordonnance(id_utilisateur,id_medecin,date,commentaire, fichier) values ";
+	private final String VALUES_INSERT = "(?,?,?,?,?)";
 	private final String ORDRE_FINDBYREF = "select * from ordonnance where Id = ?";
 	private final String ORDRE_FINDALLBYUSER = "select * from ordonnance AS o where o.id_utilisateur=?";
 	private final String ORDRE_DELETE = "delete from ordonnance where Id = ";
-	private final String ORDRE_UPDATE = "update ordonnance set id_utilisateur=?,id_medicament=?,date=?,commentaire=?  where id = ?";
+	private final String ORDRE_UPDATE = "update ordonnance set id_utilisateur=?,id_medicament=?,date=?,commentaire=?,fichier=?  where id = ?";
 
 	private DAOFactory daoFactory;
 
@@ -53,6 +55,9 @@ public class OrdonnanceDAOImpl implements OrdonnanceDAO {
 				uneOrdonnance.setMedecin(unMedecinDAO.findByRef(rs.getInt("id_medecin")));
 				uneOrdonnance.setDate(rs.getString("date"));
 				uneOrdonnance.setCommentaire(rs.getString("commentaire"));
+				Blob fichierBlob = rs.getBlob("fichier");
+				InputStream fichierIS = fichierBlob.getBinaryStream();
+				uneOrdonnance.setFichier(fichierIS);
 			} else {
 				throw new DAOException("Erreur recherche d'une ordonnance");
 			}
@@ -75,6 +80,8 @@ public class OrdonnanceDAOImpl implements OrdonnanceDAO {
 			pst.setInt(2, uneOrdonnance.getMedecin().getId());
 			pst.setString(3, uneOrdonnance.getDate());
 			pst.setString(4, uneOrdonnance.getCommentaire());
+			pst.setBlob(5, uneOrdonnance.getFichier());
+			pst.setInt(6, id);
 			pst.executeUpdate();
 			connexion.commit();
 			daoFactory.closeConnexion(connexion);
@@ -111,6 +118,7 @@ public class OrdonnanceDAOImpl implements OrdonnanceDAO {
 			pst.setInt(2, uneOrdonnance.getMedecin().getId());
 			pst.setString(3, uneOrdonnance.getDate());
 			pst.setString(4, uneOrdonnance.getCommentaire());
+			pst.setBlob(5, uneOrdonnance.getFichier());
 			pst.executeUpdate();
 			rs = pst.getGeneratedKeys();
 			if (rs.next()) {
@@ -161,6 +169,9 @@ public class OrdonnanceDAOImpl implements OrdonnanceDAO {
 			a.setMedecin(unMedecinDAO.findByRef(resultSet.getInt("id_medecin")));
 			a.setDate(resultSet.getString("date"));
 			a.setCommentaire(resultSet.getString("commentaire"));
+			Blob fichierBlob = resultSet.getBlob("fichier");
+			InputStream fichierIS = fichierBlob.getBinaryStream();
+			a.setFichier(fichierIS);
 			getListeOrdonnances().add(a);
 		}
 	}

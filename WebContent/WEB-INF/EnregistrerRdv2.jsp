@@ -51,13 +51,13 @@
 				</div>
 				<form action="EnregistrerRdvAction" method="post" autocomplete="off">
 				<!--  mettre en d-none -->
-					<div class="form-group row">
+				<!--	<div class="form-group row">
 						<label for="pagePrecedente" class="col-2 col-form-label">Url</label>
 						<div class="col-6">
 							<input id="pagePrecedente" name="pagePrecedente" type="text"
 								class="form-control" >
 						</div>
-					</div>
+					</div>-->
 					<div class="form-group row">
 						<label for="idMedecin" class="col-2 col-form-label">Medecin</label>
 						<div class="col-6">
@@ -93,7 +93,7 @@
 								</div>
 								<input type="text" value="" id="date" class="form-control"
 									data-lang="fr" data-years="2019-2030" data-format="DD/MM/YYYY"
-									required="required" name="date" placeholder="ex: 04/07/2019" maxlength="10" />
+									required="required" name="date" placeholder="Sélectionner" maxlength="10" />
 							</div>
 							<span id="textHelpBlockDate" class="form-text text-muted d-none">ex:
 								04/07/2019</span>

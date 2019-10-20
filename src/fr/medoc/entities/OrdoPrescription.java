@@ -6,7 +6,7 @@ import java.util.List;
 
 import fr.medoc.enumeration.EnumDuree;
 
-public class Prescription2 {
+public class OrdoPrescription {
 
 	private int id;
 	private Ordonnance ordonnance;
@@ -25,7 +25,7 @@ public class Prescription2 {
 	private String commentaire;
 
 
-	public Prescription2() {
+	public OrdoPrescription() {
 	}
 
 
@@ -82,28 +82,19 @@ public class Prescription2 {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 		LocalDate dateDebutParsedDate = LocalDate.parse(dateDebut, formatter);
-		System.out.println(duree.name());
 		LocalDate dateFinParsedDate = null;
 		switch (duree.name()) {
 		case "JOU":
 			dateFinParsedDate = dateDebutParsedDate.plusDays(nbDuree);
-			System.out.println("la1");
-			System.out.println(dateFinParsedDate);
 			break;
 		case "SEM":
 			dateFinParsedDate = dateDebutParsedDate.plusWeeks(nbDuree);
-			System.out.println("la2");
-			System.out.println(dateFinParsedDate);
 			break;
 		case "MOI":
 			dateFinParsedDate = dateDebutParsedDate.plusMonths(nbDuree);
-			System.out.println("la3");
-			System.out.println(dateFinParsedDate);
 			break;
 		default:
 			dateFinParsedDate = dateDebutParsedDate;
-			System.out.println("la4");
-			System.out.println(dateFinParsedDate);
 		}
 		String dateFin = dateFinParsedDate.format(formatter);
 		return dateFin;

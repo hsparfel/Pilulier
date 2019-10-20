@@ -102,8 +102,8 @@ public class DAOFactory {
     }
 
         
-    public Prescription2DAO getPrescription2DAO() {
-        return new Prescription2DAOImpl(this);
+    public OrdoPrescriptionDAO getOrdoPrescriptionDAO() {
+        return new OrdoPrescriptionDAOImpl(this);
     }
     
     public OrdonnanceDAO getOrdonnanceDAO() {
@@ -141,6 +141,14 @@ public class DAOFactory {
     
     public AnalyseDAO getAnalyseDAO() {
         return new AnalyseDAOImpl(this);
+    }
+    
+    public OrdoExamenDAO getOrdoExamenDAO() {
+        return new OrdoExamenDAOImpl(this);
+    }
+    
+    public OrdoAnalyseDAO getOrdoAnalyseDAO() {
+        return new OrdoAnalyseDAOImpl(this);
     }
     
     public PatientMedecinDAO getPatientMedecinDAO() {

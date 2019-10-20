@@ -39,11 +39,23 @@
 				id="navbarDropdownMenuLink" data-toggle="dropdown"
 				aria-haspopup="true" aria-expanded="false"> Medecin </a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-					<a class="dropdown-item enregistrer" href="EnregistrerMedecin">Enregistrer</a>
+					<a class="dropdown-item ajouter" href="EnregistrerMedecin">Ajouter</a>
 					<a class="dropdown-item associer" href="AssocierMedecin">Associer</a>
 					<a class="dropdown-item dissocier" href="DissocierMedecin">Dissocier</a>
 
 
+				</div></li>
+				<li class="nav-item dropdown"><a
+				class="nav-link dropdown-toggle" href="#"
+				id="navbarDropdownMenuLink" data-toggle="dropdown"
+				aria-haspopup="true" aria-expanded="false"> Ajouter </a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+					<a class="dropdown-item specialite" href="EnregistrerSpecialite">Specialite</a>
+					<a class="dropdown-item dose" href="EnregistrerDose">Dose</a>
+					<a class="dropdown-item cabinet" href="EnregistrerCabinet">Cabinet</a>
+					<a class="dropdown-item medicament" href="EnregistrerMedicament">Medicament</a>
+<a class="dropdown-item analyse" href="EnregistrerAnalyse">Analyse</a>
+<a class="dropdown-item examen" href="EnregistrerExamen">Examen</a>
 				</div></li>
 			<li class="nav-item"><a class="nav-link" href="Deconnexion"
 				id="logout">Logout</a></li>

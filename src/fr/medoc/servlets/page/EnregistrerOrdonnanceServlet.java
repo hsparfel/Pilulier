@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.medoc.dao.MedicamentDAO;
-import fr.medoc.dao.Prescription2DAO;
+import fr.medoc.dao.OrdoPrescriptionDAO;
 import fr.medoc.dao.UtilisateurDAO;
 import fr.medoc.dao.CabinetDAO;
 import fr.medoc.dao.DAOFactory;
@@ -23,9 +23,9 @@ import fr.medoc.entities.Medecin;
 import fr.medoc.entities.Medicament;
 
 import fr.medoc.entities.Utilisateur;
-import fr.medoc.enumeration.EnumAnalyse;
+import fr.medoc.enumeration.EnumAnalyse_old;
 import fr.medoc.enumeration.EnumDuree;
-import fr.medoc.enumeration.EnumExamen;
+import fr.medoc.enumeration.EnumExamen_old;
 import fr.medoc.exception.DAOConfigurationException;
 import fr.medoc.exception.DAOException;
 
@@ -35,7 +35,7 @@ public class EnregistrerOrdonnanceServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final String JSP_PAGE = "/WEB-INF/EnregistrerOrdonnance.jsp";
 	private DAOFactory daoFactory;
-	private Prescription2DAO prescriptionDao;
+	private OrdoPrescriptionDAO prescriptionDao;
 	private UtilisateurDAO utilisateurDao;
 	private DoseDAO doseDao;
 	private MedecinDAO medecinDao;
@@ -91,9 +91,9 @@ public class EnregistrerOrdonnanceServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-			EnumAnalyse[] listeAnalyses =  EnumAnalyse.values();
+			EnumAnalyse_old[] listeAnalyses =  EnumAnalyse_old.values();
 			EnumDuree[] listeDurees =  EnumDuree.values();
-			EnumExamen[] listeExamens =  EnumExamen.values();
+			EnumExamen_old[] listeExamens =  EnumExamen_old.values();
 			
 			request.setAttribute("listeExamens", listeExamens);
 			request.setAttribute("listeAnalyses", listeAnalyses);
